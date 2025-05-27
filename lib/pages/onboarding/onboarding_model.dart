@@ -14,18 +14,18 @@ class OnboardingModel {
   static List<OnboardingModel> getOnboardingList() {
     return [
       OnboardingModel(
-        imgPath: "Assets.images.png.onboardingImg1.path",
+        imgPath: "assets/images/png/onboard_img_1.png",
         title: "AppStrings.onboardingTitle1.tr",
         description: "AppStrings.onboardingDesc1.tr",
         isActive: true,
       ),
       OnboardingModel(
-        imgPath: "Assets.images.png.onboardingImg2.path",
+        imgPath: "assets/images/png/onboard_img_2.png",
         title: "AppStrings.onboardingTitle2.tr",
         description: "AppStrings.onboardingDesc2.tr",
       ),
       OnboardingModel(
-        imgPath: "Assets.images.png.onboardingImg3.path",
+        imgPath: "assets/images/png/onboard_img_3.png",
         title: "AppStrings.onboardingTitle3.tr",
         description: "AppStrings.onboardingDesc3.tr",
       ),

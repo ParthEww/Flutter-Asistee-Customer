@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../repository/local_repository/local_repository.dart';
+import '../../routes/app_pages.dart';
 import 'onboarding_model.dart';
 
 class OnboardingController extends GetxController {
@@ -33,5 +34,7 @@ class OnboardingController extends GetxController {
     }
   }
 
-  void onGetStarted() async {}
+  void onGetStarted() async {
+    Get.offAllNamed(Routes.login);
+  }
 }

@@ -48,11 +48,15 @@ class OnboardingPage extends GetView<OnboardingController> {
                   ),
 
                   // Image or Lottie Animation
-                  Expanded(
-                    child: Image.asset(
-                      "Assets.video.onboardingSlider.path",
-                      width: MediaQuery.of(context).size.width,
-                      fit: BoxFit.cover,
+                  Obx(
+                    () => Expanded(
+                      child: Image.asset(
+                        controller
+                            .onboardingModelList[controller.activeIndex.value]
+                            .imgPath,
+                        width: MediaQuery.of(context).size.width,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ],

@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:project_structure/pages/login/login_bindings.dart';
+import 'package:project_structure/pages/login/login_page.dart';
 
 import '../pages/onboarding/onboarding_bindings.dart';
 import '../pages/onboarding/onboarding_page.dart';
@@ -25,6 +27,13 @@ class AppPages {
       name: _Path.onboarding,
       page: () => const OnboardingPage(),
       binding: OnboardingBindings(),
+    ),
+
+    /// login page
+    GetPage(
+      name: _Path.login,
+      page: () => const LoginPage(),
+      binding: LoginBindings(),
     ),
   ];
 }
