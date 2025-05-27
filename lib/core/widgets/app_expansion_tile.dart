@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../gen/assets.gen.dart';
 import '../themes/app_colors.dart';
 
 class AppExpansionTile extends StatelessWidget {

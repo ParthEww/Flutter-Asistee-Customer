@@ -27,7 +27,7 @@ class LoadingDialog {
 class _LoadingDialogContent extends StatelessWidget {
   final String? feedback;
 
-  const _LoadingDialogContent({super.key, this.feedback});
+  const _LoadingDialogContent({this.feedback});
 
   @override
   Widget build(BuildContext context) {

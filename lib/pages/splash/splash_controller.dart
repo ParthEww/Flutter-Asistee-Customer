@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:store_redirect/store_redirect.dart';
+import 'package:url_launcher/url_launcher.dart';
+// import 'package:store_redirect/store_redirect.dart';
 
 import '../../api/api_constant.dart';
 import '../../core/enum/app_status.dart';
@@ -96,12 +98,8 @@ class SplashController extends GetxController {
           // UserModel? userModel = await _localRepository.getUserModel();
           int? userModel;
 
-          if (userModel == null) {
-            // todo: user not logged in
-          } else {
-            // todo: user logged in
-          }
-        }
+          // todo: user not logged in
+                }
       },
     );
   }
@@ -118,7 +116,7 @@ class SplashController extends GetxController {
       message: message,
       positiveText: AppStrings.upgrade.tr,
       onPositiveTap: () {
-        StoreRedirect.redirect(
+        redirectToStore(
           androidAppId: androidAppID,
           iOSAppId: iosAppID,
         );
@@ -142,5 +140,22 @@ class SplashController extends GetxController {
         Platform.isAndroid ? SystemNavigator.pop() : Get.back();
       },
     );
+  }
+
+  void redirectToStore({
+    required String androidAppId,
+    required String iOSAppId,
+  }) async {
+    final Uri storeUri = Uri.parse(
+      Theme.of(Get.context!).platform == TargetPlatform.android
+          ? "https://play.google.com/store/apps/details?id=$androidAppId"
+          : "https://apps.apple.com/app/id$iOSAppId",
+    );
+
+    if (await canLaunchUrl(storeUri)) {
+      await launchUrl(storeUri, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $storeUri';
+    }
   }
 }

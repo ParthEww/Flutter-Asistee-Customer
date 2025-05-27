@@ -1,6 +1,4 @@
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-import '../../localization/app_strings.dart';
 
 class AppValidator {
   static bool isEmpty(String? value) {

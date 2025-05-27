@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../localization/app_strings.dart';
-import '../enum/language_code.dart';
 import '../themes/app_colors.dart';
 import '../themes/text_styles.dart';
 
