@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:project_structure/core/themes/app_colors.dart';
 
@@ -18,10 +19,10 @@ class SplashPage extends GetView<SplashController> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset(
-                  'assets/images/png/asistee_logo_white_with_text.png',
-                  width: 180,
-                  height: 150,
+                SvgPicture.asset(
+                  'assets/images/svg/asistee_logo_white_with_text.svg',
+                  width: 160,
+                  height: 115,
                   fit: BoxFit.contain,
                 )
               ],

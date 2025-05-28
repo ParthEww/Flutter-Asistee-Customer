@@ -93,7 +93,7 @@ class SplashController extends GetxController {
                 true;
 
         if (showOnboarding) {
-          Get.offAllNamed(Routes.onboarding);
+          Get.offAllNamed(Routes.login);
         } else {
           // UserModel? userModel = await _localRepository.getUserModel();
           int? userModel;

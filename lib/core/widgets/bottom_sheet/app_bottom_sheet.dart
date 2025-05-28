@@ -72,7 +72,7 @@ class AppBottomSheet extends StatelessWidget {
 
               // divider
               Divider(
-                color: showDivider ? AppColors.grey100 : AppColors.transparent,
+                color: showDivider ? AppColors.gray100 : AppColors.transparent,
               ),
 
               // content

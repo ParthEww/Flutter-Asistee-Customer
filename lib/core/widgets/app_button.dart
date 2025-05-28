@@ -39,7 +39,7 @@ class AppButton extends StatefulWidget {
     this.textColor,
     this.textFontSize,
     this.textFontWeight,
-    this.textFontFamily = FontFamily.plusJakartaSans,
+    this.textFontFamily = FontFamily.lufga,
     this.buttonChild,
     this.icon,
     this.iconAlignment = IconAlignment.start,

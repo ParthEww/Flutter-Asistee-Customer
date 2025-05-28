@@ -18,7 +18,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(8),
         ),
         textStyle: const TextStyle(
-          fontFamily: FontFamily.plusJakartaSans,
+          fontFamily: FontFamily.lufga,
           fontSize: 16,
           fontWeight: FontWeight.w500,
         ),
@@ -46,7 +46,7 @@ class AppTheme {
       ),
       labelStyle: TextStyles.textMdRegular.copyWith(color: AppColors.black),
       floatingLabelStyle:
-          TextStyles.textXsRegular.copyWith(color: AppColors.grey100),
+          TextStyles.textXsRegular.copyWith(color: AppColors.gray100),
       errorStyle: TextStyles.textXsRegular.copyWith(color: AppColors.warning),
       enabledBorder: _getFieldInputBorder(
         borderColor: AppColors.primary,
@@ -57,7 +57,7 @@ class AppTheme {
       errorBorder: _getFieldInputBorder(borderColor: AppColors.warning),
       focusedErrorBorder: _getFieldInputBorder(borderColor: AppColors.warning),
       disabledBorder: _getFieldInputBorder(
-        borderColor: AppColors.grey100,
+        borderColor: AppColors.gray100,
       ),
     ),
   );

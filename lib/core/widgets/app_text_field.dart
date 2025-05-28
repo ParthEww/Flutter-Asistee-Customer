@@ -132,7 +132,7 @@ class AppTextField extends StatefulWidget {
     this.inputTextFontWeight,
     this.letterSpacing,
     this.wordSpacing,
-    this.fontFamily = FontFamily.plusJakartaSans,
+    this.fontFamily = FontFamily.lufga,
     // input decoration
     this.constraints,
     this.isDense,
@@ -310,7 +310,7 @@ class _AppTextFieldNewState extends State<AppTextField> {
             floatingLabelBehavior: widget.floatingLabelBehavior,
             alignLabelWithHint: widget.alignLabelWithHint,
             floatingLabelStyle:
-                widget.floatingLabelTextStyle?.copyWith(color: AppColors.black),
+                widget.floatingLabelTextStyle,
             counterText: widget.counterText,
             // counterStyle: widget.counterStyle,
             errorStyle: errorTextStyle,

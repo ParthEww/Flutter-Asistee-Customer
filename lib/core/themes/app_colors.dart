@@ -7,7 +7,8 @@ class AppColors {
 
   // Custom Color
   static const Color white = Color(0xFFFFFFFF);
-  static const Color grey100 = Color(0xffEDEDED);
+  static const Color gray100 = Color(0xffEDEDED);
+  static const Color mediumDarkGray = Color(0xff5E5E5E);
   static const Color black = Color(0xFF000000);
   static const Color transparent = Color(0x00000000);
 

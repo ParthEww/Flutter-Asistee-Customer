@@ -22,6 +22,12 @@ class LoginController extends GetxController {
   final _remoteRepository = Get.find<RemoteRepository>();
 
   AppStatus appStatus = AppStatus.normal;
+  // ----- [phone number] -----
+  FocusNode phoneNumberFocusNode = FocusNode();
+  final TextEditingController phoneNumberController = TextEditingController();
+  // ----- [password] -----
+  FocusNode passwordFocusNode = FocusNode();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   void onInit() {

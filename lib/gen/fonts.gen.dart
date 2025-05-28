@@ -10,6 +10,6 @@
 class FontFamily {
   FontFamily._();
 
-  /// Font family: Plus Jakarta Sans
-  static const String plusJakartaSans = 'Plus Jakarta Sans';
+  /// Font family: Lufga
+  static const String lufga = 'Lufga';
 }
