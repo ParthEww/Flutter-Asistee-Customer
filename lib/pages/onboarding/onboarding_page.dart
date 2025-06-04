@@ -39,7 +39,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                             onTap: () => controller.onGetStarted(),
                             child: Text(
                               AppStrings.skip.tr,
-                              style: TextStyles.textSmMedium,
+                              style: TextStyles.text12Medium,
                             ),
                           ),
                         ),
@@ -97,7 +97,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                       // Title
                       Text(
                         controller.onboardingModelList[index].title,
-                        style: TextStyles.displayXsMedium,
+                        style: TextStyles.text12Medium,
                       ),
 
                       const SizedBox(height: 16),
@@ -105,7 +105,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                       // Description
                       Text(
                         controller.onboardingModelList[index].description,
-                        style: TextStyles.textLgRegular.copyWith(
+                        style: TextStyles.text12Medium.copyWith(
                           color: AppColors.black,
                         ),
                       ),
@@ -151,7 +151,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                               controller.onboardingModelList.length - 1
                           ? Text(
                               "AppStrings.getStarted.tr",
-                              style: TextStyles.textMdMedium.copyWith(
+                              style: TextStyles.text12Medium.copyWith(
                                 color: AppColors.white,
                               ),
                             )

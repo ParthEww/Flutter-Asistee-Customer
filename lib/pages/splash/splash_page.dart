@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:project_structure/core/themes/app_colors.dart';
+import 'package:project_structure/gen/assets.gen.dart';
 
 import 'splash_controller.dart';
 
@@ -10,25 +11,30 @@ class SplashPage extends GetView<SplashController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.initScreenDimensions(context);
     return Scaffold(
-      backgroundColor: AppColors.primary,
       body: SafeArea(
-        child: Center(
-          child: Align(
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SvgPicture.asset(
-                  'assets/images/svg/asistee_logo_white_with_text.svg',
-                  width: 160,
-                  height: 115,
-                  fit: BoxFit.contain,
-                )
-              ],
+        child: Stack(children: [
+          // Background image
+          Positioned.fill(
+            child: Image.asset(
+              Assets.images.webp.splashScreenWeb.path, // Replace with your logo path
+              width: double.infinity,
+              fit: BoxFit.cover
             ),
           ),
-        ),
+          // Logo
+          Center(
+            child: Align(
+              alignment: Alignment.center,
+              child: SvgPicture.asset(
+                Assets.images.svg.appLogo.path,
+                width: 186,
+                height: 28,
+              ),
+            ),
+          ),
+        ]),
       ),
     );
   }

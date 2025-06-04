@@ -46,10 +46,10 @@ class AppDropdownWithSearch<T> extends StatelessWidget {
         if (showRequiredMark)
           Padding(
             padding: const EdgeInsetsDirectional.only(bottom: 6),
-            child: AppTextFieldLabel(
+            /*child: AppTextFieldLabel(
               label: labelText.toString(),
               showRequiredMark: showRequiredMark,
-            ),
+            ),*/
           ),
         DropdownButtonHideUnderline(
           child: DropdownButtonFormField2<T>(
@@ -106,7 +106,7 @@ class AppDropdownWithSearch<T> extends StatelessWidget {
                   value: item,
                   child: Text(
                     getTitle.call(item),
-                    style: TextStyles.textMdRegular,
+                    style: TextStyles.text12Medium,
                   ),
                 );
               },
@@ -119,7 +119,7 @@ class AppDropdownWithSearch<T> extends StatelessWidget {
               labelText:
                   (hintText.toString().isNotEmpty) ? hintText : labelText,
               labelStyle:
-                  TextStyles.textMdRegular.copyWith(color: AppColors.black),
+                  TextStyles.text12Medium.copyWith(color: AppColors.black),
               enabledBorder:
                   AppTheme.appTheme.inputDecorationTheme.enabledBorder,
               errorBorder: AppTheme.appTheme.inputDecorationTheme.errorBorder,
@@ -129,7 +129,7 @@ class AppDropdownWithSearch<T> extends StatelessWidget {
                   AppTheme.appTheme.inputDecorationTheme.focusedErrorBorder,
               floatingLabelBehavior: FloatingLabelBehavior.never,
               floatingLabelStyle:
-                  TextStyles.textXsRegular.copyWith(color: AppColors.black),
+                  TextStyles.text12Medium.copyWith(color: AppColors.black),
               filled: true,
               fillColor: AppColors.white,
             ),

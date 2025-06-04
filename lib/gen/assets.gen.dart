@@ -21,6 +21,9 @@ class $AssetsImagesGen {
   /// Directory path: assets/images/svg
   $AssetsImagesSvgGen get svg => const $AssetsImagesSvgGen();
 
+  /// Directory path: assets/images/webp
+  $AssetsImagesWebpGen get webp => const $AssetsImagesWebpGen();
+
   /// Directory path: assets/images
   String get path => 'assets/images';
 }
@@ -31,6 +34,10 @@ class $AssetsImagesPngGen {
   /// File path: assets/images/png/asistee_logo_white_with_text.png
   AssetGenImage get asisteeLogoWhiteWithText =>
       const AssetGenImage('assets/images/png/asistee_logo_white_with_text.png');
+
+  /// File path: assets/images/png/close_up_bus.png
+  AssetGenImage get closeUpBus =>
+      const AssetGenImage('assets/images/png/close_up_bus.png');
 
   /// File path: assets/images/png/onboard_img_1.png
   AssetGenImage get onboardImg1 =>
@@ -50,6 +57,7 @@ class $AssetsImagesPngGen {
   /// List of all assets
   List<AssetGenImage> get values => [
     asisteeLogoWhiteWithText,
+    closeUpBus,
     onboardImg1,
     onboardImg2,
     onboardImg3,
@@ -58,6 +66,18 @@ class $AssetsImagesPngGen {
 
 class $AssetsImagesSvgGen {
   const $AssetsImagesSvgGen();
+
+  /// File path: assets/images/svg/app-logo.svg
+  SvgGenImage get appLogo =>
+      const SvgGenImage('assets/images/svg/app-logo.svg');
+
+  /// File path: assets/images/svg/arrow-left.svg
+  SvgGenImage get arrowLeft =>
+      const SvgGenImage('assets/images/svg/arrow-left.svg');
+
+  /// File path: assets/images/svg/arrow-right-green.svg
+  SvgGenImage get arrowRightGreen =>
+      const SvgGenImage('assets/images/svg/arrow-right-green.svg');
 
   /// File path: assets/images/svg/arrow_down.svg
   SvgGenImage get arrowDown =>
@@ -74,9 +94,35 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/call.svg
   SvgGenImage get call => const SvgGenImage('assets/images/svg/call.svg');
 
+  /// File path: assets/images/svg/check-box-checked.svg
+  SvgGenImage get checkBoxChecked =>
+      const SvgGenImage('assets/images/svg/check-box-checked.svg');
+
+  /// File path: assets/images/svg/check-box-unchecked.svg
+  SvgGenImage get checkBoxUnchecked =>
+      const SvgGenImage('assets/images/svg/check-box-unchecked.svg');
+
+  /// File path: assets/images/svg/cpr.svg
+  SvgGenImage get cpr => const SvgGenImage('assets/images/svg/cpr.svg');
+
   /// File path: assets/images/svg/double_arrow_right.svg
   SvgGenImage get doubleArrowRight =>
       const SvgGenImage('assets/images/svg/double_arrow_right.svg');
+
+  /// File path: assets/images/svg/drop-down-arrow.svg
+  SvgGenImage get dropDownArrow =>
+      const SvgGenImage('assets/images/svg/drop-down-arrow.svg');
+
+  /// File path: assets/images/svg/ellipse-dot.svg
+  SvgGenImage get ellipseDot =>
+      const SvgGenImage('assets/images/svg/ellipse-dot.svg');
+
+  /// File path: assets/images/svg/ellipse-gradient.svg
+  SvgGenImage get ellipseGradient =>
+      const SvgGenImage('assets/images/svg/ellipse-gradient.svg');
+
+  /// File path: assets/images/svg/email.svg
+  SvgGenImage get email => const SvgGenImage('assets/images/svg/email.svg');
 
   /// File path: assets/images/svg/eye-slash.svg
   SvgGenImage get eyeSlash =>
@@ -85,24 +131,86 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/eye.svg
   SvgGenImage get eye => const SvgGenImage('assets/images/svg/eye.svg');
 
+  /// File path: assets/images/svg/full-name.svg
+  SvgGenImage get fullName =>
+      const SvgGenImage('assets/images/svg/full-name.svg');
+
+  /// File path: assets/images/svg/google_login.svg
+  SvgGenImage get googleLogin =>
+      const SvgGenImage('assets/images/svg/google_login.svg');
+
+  /// File path: assets/images/svg/line-2.svg
+  SvgGenImage get line2 => const SvgGenImage('assets/images/svg/line-2.svg');
+
+  /// File path: assets/images/svg/line_sign_in_continue_with.svg
+  SvgGenImage get lineSignInContinueWith =>
+      const SvgGenImage('assets/images/svg/line_sign_in_continue_with.svg');
+
   /// File path: assets/images/svg/password-check.svg
   SvgGenImage get passwordCheck =>
       const SvgGenImage('assets/images/svg/password-check.svg');
+
+  /// File path: assets/images/svg/rectangle.svg
+  SvgGenImage get rectangle =>
+      const SvgGenImage('assets/images/svg/rectangle.svg');
+
+  /// File path: assets/images/svg/upload-image-dialog.svg
+  SvgGenImage get uploadImageDialog =>
+      const SvgGenImage('assets/images/svg/upload-image-dialog.svg');
+
+  /// File path: assets/images/svg/upload-image.svg
+  SvgGenImage get uploadImage =>
+      const SvgGenImage('assets/images/svg/upload-image.svg');
 
   /// Directory path: assets/images/svg
   String get path => 'assets/images/svg';
 
   /// List of all assets
   List<SvgGenImage> get values => [
+    appLogo,
+    arrowLeft,
+    arrowRightGreen,
     arrowDown,
     asisteeLogoWhiteWithText,
     asisteeLogoWithText,
     call,
+    checkBoxChecked,
+    checkBoxUnchecked,
+    cpr,
     doubleArrowRight,
+    dropDownArrow,
+    ellipseDot,
+    ellipseGradient,
+    email,
     eyeSlash,
     eye,
+    fullName,
+    googleLogin,
+    line2,
+    lineSignInContinueWith,
     passwordCheck,
+    rectangle,
+    uploadImageDialog,
+    uploadImage,
   ];
+}
+
+class $AssetsImagesWebpGen {
+  const $AssetsImagesWebpGen();
+
+  /// File path: assets/images/webp/screen_bg.webp
+  AssetGenImage get screenBg =>
+      const AssetGenImage('assets/images/webp/screen_bg.webp');
+
+  /// File path: assets/images/webp/splash_screen_web.webp
+  AssetGenImage get splashScreenWeb =>
+      const AssetGenImage('assets/images/webp/splash_screen_web.webp');
+
+  /// Directory path: assets/images/webp
+  String get path => 'assets/images/webp';
+
+  /// List of all assets
+  List<AssetGenImage> get values => [screenBg, splashScreenWeb];
 }
 
 class Assets {

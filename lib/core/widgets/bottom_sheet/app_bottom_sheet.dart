@@ -50,7 +50,7 @@ class AppBottomSheet extends StatelessWidget {
                     // title
                     Text(
                       title,
-                      style: TextStyles.textXlMedium,
+                      style: TextStyles.text12Medium,
                     ),
 
                     // close icon

@@ -24,7 +24,7 @@ class CustomTagButton extends StatelessWidget {
         ),
         child: Row(mainAxisSize: MainAxisSize.min, children: [
           Text(text,
-              style: TextStyles.text2XsMedium.apply(color: AppColors.white)),
+              style: TextStyles.text12Medium.apply(color: AppColors.white)),
           const SizedBox(width: 7),
           SvgPicture.asset(Assets.images.svg.doubleArrowRight.path,
               fit: BoxFit.cover),

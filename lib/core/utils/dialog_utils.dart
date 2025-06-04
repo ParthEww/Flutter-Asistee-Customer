@@ -19,9 +19,9 @@ class DialogUtils {
   }) {
     Widget content = Text(
       message,
-      style: TextStyles.textMdRegular.copyWith(color: AppColors.black),
+      style: TextStyles.text12Medium.copyWith(color: AppColors.black),
     );
-    Widget title = Text(titleStr, style: TextStyles.displayXsMedium);
+    Widget title = Text(titleStr, style: TextStyles.text12Medium);
     final actions = <Widget>[
       if (negativeText != null) ...[
         TextButton(
@@ -31,7 +31,7 @@ class DialogUtils {
           },
           child: Text(
             negativeText,
-            style: TextStyles.textLgMedium.copyWith(color: AppColors.primary),
+            style: TextStyles.text12Medium.copyWith(color: AppColors.primary),
           ),
         ),
       ],
@@ -42,7 +42,7 @@ class DialogUtils {
         },
         child: Text(
           positiveText!,
-          style: TextStyles.textLgMedium.copyWith(color: AppColors.primary),
+          style: TextStyles.text12Medium.copyWith(color: AppColors.primary),
         ),
       ),
     ];
@@ -92,7 +92,7 @@ class DialogUtils {
               ),
               content: Text(
                 dialogErrorMsg,
-                style: TextStyles.textMdRegular,
+                style: TextStyles.text12Medium,
                 maxLines: 5,
               ),
               actions: [
@@ -111,7 +111,7 @@ class DialogUtils {
                   },
                   child: Text(
                     AppStrings.okay.tr,
-                    style: TextStyles.textSmBold,
+                    style: TextStyles.text12Medium,
                   ),
                 ),
               ],
@@ -152,7 +152,7 @@ class DialogUtils {
         snackStyle: SnackStyle.FLOATING,
         messageText: Text(
           message,
-          style: TextStyles.textMdRegular.copyWith(color: AppColors.white),
+          style: TextStyles.text12Medium.copyWith(color: AppColors.white),
         ),
         titleText: Container(),
         borderWidth: 1,

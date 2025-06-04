@@ -132,7 +132,7 @@ class AppTextField extends StatefulWidget {
     this.inputTextFontWeight,
     this.letterSpacing,
     this.wordSpacing,
-    this.fontFamily = FontFamily.lufga,
+    this.fontFamily = FontFamily.passengerSans,
     // input decoration
     this.constraints,
     this.isDense,
@@ -206,7 +206,7 @@ class _AppTextFieldNewState extends State<AppTextField> {
     InputDecorationTheme inputDecorationTheme = theme.inputDecorationTheme;
 
     // input text style
-    TextStyle inputTextStyle = TextStyles.textMdRegular.copyWith(
+    TextStyle inputTextStyle = TextStyles.text12Medium.copyWith(
       color: widget.inputTextColor ?? AppColors.black,
       fontSize: widget.inputTextFontSize,
       fontWeight: widget.inputTextFontWeight,
@@ -251,10 +251,10 @@ class _AppTextFieldNewState extends State<AppTextField> {
         if (widget.showRequiredMark)
           Padding(
             padding: const EdgeInsetsDirectional.only(bottom: 6),
-            child: AppTextFieldLabel(
+            /*child: AppTextFieldLabel(
               label: widget.labelText.toString(),
               showRequiredMark: widget.showRequiredMark,
-            ),
+            ),*/
           ),
         TextFormField(
           controller: widget.textEditingController,

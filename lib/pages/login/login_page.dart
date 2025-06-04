@@ -5,6 +5,9 @@ import 'package:project_structure/core/themes/app_colors.dart';
 import 'package:project_structure/core/themes/text_styles.dart';
 import 'package:project_structure/core/widgets/app_button.dart';
 import 'package:project_structure/core/widgets/app_text_field.dart';
+import 'package:project_structure/core/widgets/app_text_field_label.dart';
+import 'package:project_structure/core/widgets/custom/custom_back_button.dart';
+import 'package:project_structure/core/widgets/custom/custom_header_with_back_button.dart';
 import 'package:project_structure/core/widgets/custom/custom_tag_button.dart';
 import 'package:project_structure/core/widgets/custom/custom_text_filed.dart';
 import 'package:project_structure/gen/assets.gen.dart';
@@ -18,131 +21,125 @@ class LoginPage extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsetsDirectional.only(
-          top: 40,
-          bottom: 16,
-        ),
-        child: Column(children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: Stack(
-              alignment: Alignment.center,
+        child: Container(
+          // Full screen container with background image
+          height: Get.height,
+          width: Get.width,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(Assets.images.webp.screenBg.path),
+              fit: BoxFit.cover, // Ensures image covers entire space while maintaining aspect ratio
+            ),
+          ),
+          // Scrollable content area
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.only(top: 40, bottom: 20), // Top and bottom padding
+            child: Column(
               children: [
-                Center(
-                  child: SvgPicture.asset(
-                      Assets.images.svg.asisteeLogoWithText.path,
-                      width: 80,
-                      height: 58,
-                      fit: BoxFit.contain),
+                // Main content column with horizontal padding
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Header with back button and titles
+                      CustomHeaderWithBackButton(
+                        title: "Sign In",
+                        description: "Please provide us your basic details below\nand get into the system",
+                      ),
+                      const SizedBox(height: 80), // Spacer
+
+                      // Email/Phone input field
+                      CustomTextField(
+                        customTextFieldType: CustomTextFieldType.EMAIL_OR_PHONE_NUMBER,
+                        textEditingController: controller.emailOrPhoneNumberController,
+                        focusNode: controller.emailOrPhoneNumberFocusNode,
+                        nextFocusNode: controller.passwordFocusNode, // Moves to password field on next
+                        hintText: "Email / Phone",
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        suffixIcon: Assets.images.svg.email.path,
+                      ),
+                      const SizedBox(height: 18), // Spacer
+
+                      // Password input field
+                      CustomTextField(
+                        customTextFieldType: CustomTextFieldType.PASSWORD,
+                        textEditingController: controller.passwordController,
+                        focusNode: controller.passwordFocusNode,
+                        hintText: "Password",
+                        keyboardType: TextInputType.visiblePassword,
+                        textInputAction: TextInputAction.done,
+                        suffixIcon: Assets.images.svg.passwordCheck.path,
+                      ),
+                      const SizedBox(height: 32), // Spacer
+
+                      // Forgot password link
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: GestureDetector(
+                          onTap: controller.onGoToForgotPassword,
+                          child: Text(
+                            "Forgot Password?",
+                            style: TextStyles.text14Regular.copyWith(
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                Positioned(
-                    right: 0,
-                    child: CustomTagButton(
-                      text: "Guest User",
-                      onTap: () {},
-                    ))
+                const SizedBox(height: 74), // Large spacer
+
+                // Bus image decoration
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: Image.asset(
+                    Assets.images.png.closeUpBus.path,
+                    width: 70,
+                    height: 100,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+
+                // Bottom section with sign in button and registration link
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 46), // Spacer
+
+                      // Sign In button (implemented as a CustomTextField of type BUTTON)
+                      CustomTextField(
+                        customTextFieldType: CustomTextFieldType.BUTTON,
+                        textEditingController: TextEditingController(),
+                        focusNode: FocusNode(),
+                        hintText: "Sign In",
+                        keyboardType: TextInputType.visiblePassword,
+                        textInputAction: TextInputAction.done,
+                        suffixIcon: Assets.images.svg.arrowRightGreen.path,
+                        onPressed: () {}, // TODO: Add sign in functionality
+                      ),
+                      const SizedBox(height: 28), // Spacer
+
+                      // Registration prompt
+                      Center(
+                        child: AppTextFieldLabel(
+                          label: "New to Yay Ride?",
+                          clickableLabel: "Register",
+                          onTap: controller.onGoToRegister,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              children: [
-                const SizedBox(height: 50),
-                Text(
-                  "Sign In to Asistee",
-                  style: TextStyles.displayXsBold,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  textAlign: TextAlign.center,
-                  "Enter your Number below to get into the\nAsistee Customer app ",
-                  style: TextStyles.textSmRegular
-                      .copyWith(color: AppColors.secondary.withAlpha(153)),
-                ),
-                const SizedBox(height: 40),
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 13),
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(16)),
-                        border: Border.all(color: AppColors.primary, width: 1),
-                      ),
-                      child: Text(
-                        "+91",
-                        style: TextStyles.textSmMedium
-                            .copyWith(color: AppColors.primary),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                        child: CustomTextField(
-                      customTextFieldType: CustomTextFieldType.PHONE_NUMBER,
-                      textEditingController: controller.phoneNumberController,
-                      focusNode: controller.phoneNumberFocusNode,
-                      nextFocusNode: controller.passwordFocusNode,
-                      labelText: "Phone Number",
-                      keyboardType: TextInputType.phone,
-                      textInputAction: TextInputAction.next,
-                      suffixIcon: SvgPicture.asset(
-                        Assets.images.svg.call.path,
-                        width: 20,
-                        height: 20,
-                        fit: BoxFit.none,
-                      ),
-                    ))
-                  ],
-                ),
-                const SizedBox(height: 24),
-                CustomTextField(
-                  customTextFieldType: CustomTextFieldType.PASSWORD,
-                  textEditingController: controller.passwordController,
-                  focusNode: controller.passwordFocusNode,
-                  labelText: "Password",
-                  keyboardType: TextInputType.visiblePassword,
-                  textInputAction: TextInputAction.done,
-                  suffixIcon: SvgPicture.asset(
-                    Assets.images.svg.passwordCheck.path,
-                    width: 20,
-                    height: 20,
-                    fit: BoxFit.none,
-                  ),
-                  obscureText: true,
-                ),
-                const SizedBox(height: 24),
-                Container(
-                  alignment: Alignment.bottomRight,
-                  child: Text(
-                    "Forgot Password?",
-                    style: TextStyles.textSmRegular
-                        .copyWith(decoration: TextDecoration.underline),
-                  ),
-                ),
-                const SizedBox(height: 40),
-                AppButton(
-                  buttonText: "Sign In",
-                  onPressed: () {},
-                  buttonRadius: 16,
-                  buttonHeight: 56,
-                  buttonWidth: MediaQuery.of(context).size.width,
-                  buttonColor: AppColors.black,
-                  textColor: AppColors.white,
-                  textFontFamily: FontFamily.lufga,
-                  textFontSize: 16,
-                  textFontWeight: FontWeight.w700,
-                )
-              ],
-            ),
-          )
-        ]),
-      )),
+        ),
+      ),
     );
   }
 }

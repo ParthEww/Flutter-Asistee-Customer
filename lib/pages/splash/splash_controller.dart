@@ -22,11 +22,19 @@ class SplashController extends GetxController {
   final _remoteRepository = Get.find<RemoteRepository>();
 
   AppStatus appStatus = AppStatus.normal;
+  late double screenHeight;
+  late double screenWidth;
 
   @override
   void onInit() {
     callInitApi();
     super.onInit();
+  }
+
+  void initScreenDimensions(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    screenHeight = size.height;
+    screenWidth = size.width;
   }
 
   /// Init API call

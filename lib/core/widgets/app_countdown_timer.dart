@@ -103,7 +103,7 @@ class _AppCountDownTimerState extends State<AppCountDownTimer>
       builder: (_, Widget? child) {
         return Text(
           timerDisplayString,
-          style: TextStyles.textMdRegular.copyWith(
+          style: TextStyles.text12Medium.copyWith(
             color: AppColors.black,
           ),
         );

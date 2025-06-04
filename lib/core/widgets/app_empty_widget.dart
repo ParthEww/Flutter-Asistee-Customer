@@ -52,7 +52,7 @@ class AppEmptyWidget extends StatelessWidget {
               Text(
                 title,
                 textAlign: TextAlign.center,
-                style: TextStyles.displayXsMedium,
+                style: TextStyles.text12Medium,
               ),
 
               const SizedBox(height: 16),
@@ -63,7 +63,7 @@ class AppEmptyWidget extends StatelessWidget {
                 child: Text(
                   subtitle,
                   textAlign: TextAlign.center,
-                  style: TextStyles.textLgRegular.copyWith(
+                  style: TextStyles.text12Medium.copyWith(
                     color: AppColors.black,
                   ),
                 ),

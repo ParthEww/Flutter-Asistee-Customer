@@ -2,8 +2,12 @@ import 'package:get/get.dart';
 import 'package:project_structure/pages/login/login_bindings.dart';
 import 'package:project_structure/pages/login/login_page.dart';
 
+import '../pages/forgotpassword/forgot_password_bindings.dart';
+import '../pages/forgotpassword/forgot_password_page.dart';
 import '../pages/onboarding/onboarding_bindings.dart';
 import '../pages/onboarding/onboarding_page.dart';
+import '../pages/register/register_bindings.dart';
+import '../pages/register/register_page.dart';
 import '../pages/splash/splash_bindings.dart';
 import '../pages/splash/splash_page.dart';
 
@@ -34,6 +38,20 @@ class AppPages {
       name: _Path.login,
       page: () => const LoginPage(),
       binding: LoginBindings(),
+    ),
+
+    /// register page
+    GetPage(
+      name: _Path.register,
+      page: () => const RegisterPage(),
+      binding: RegisterBindings(),
+    ),
+
+    /// forgot password page
+    GetPage(
+      name: _Path.forgotPassword,
+      page: () => const ForgotPasswordPage(),
+      binding: ForgotPasswordBindings(),
     ),
   ];
 }

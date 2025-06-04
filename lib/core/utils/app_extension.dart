@@ -18,3 +18,11 @@ extension StringUtils on String? {
     return false;
   }
 }
+
+extension ColorExtensions on Color {
+  /// Creates a new color with the given opacity (0.0 to 1.0)
+  Color withOpacityPrecise(double opacity) {
+    assert(opacity >= 0.0 && opacity <= 1.0);
+    return withAlpha((opacity * 255).round());
+  }
+}

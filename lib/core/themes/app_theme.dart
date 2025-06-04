@@ -18,7 +18,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(8),
         ),
         textStyle: const TextStyle(
-          fontFamily: FontFamily.lufga,
+          fontFamily: FontFamily.passengerSans,
           fontSize: 16,
           fontWeight: FontWeight.w500,
         ),
@@ -44,10 +44,10 @@ class AppTheme {
         top: 10,
         bottom: 10,
       ),
-      labelStyle: TextStyles.textMdRegular.copyWith(color: AppColors.black),
+      labelStyle: TextStyles.text12Medium.copyWith(color: AppColors.black),
       floatingLabelStyle:
-          TextStyles.textXsRegular.copyWith(color: AppColors.gray100),
-      errorStyle: TextStyles.textXsRegular.copyWith(color: AppColors.warning),
+          TextStyles.text10Regular.copyWith(color: AppColors.gray100),
+      errorStyle: TextStyles.text10Regular.copyWith(color: AppColors.warning),
       enabledBorder: _getFieldInputBorder(
         borderColor: AppColors.primary,
       ),

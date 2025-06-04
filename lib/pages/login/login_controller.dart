@@ -23,8 +23,8 @@ class LoginController extends GetxController {
 
   AppStatus appStatus = AppStatus.normal;
   // ----- [phone number] -----
-  FocusNode phoneNumberFocusNode = FocusNode();
-  final TextEditingController phoneNumberController = TextEditingController();
+  FocusNode emailOrPhoneNumberFocusNode = FocusNode();
+  final TextEditingController emailOrPhoneNumberController = TextEditingController();
   // ----- [password] -----
   FocusNode passwordFocusNode = FocusNode();
   final TextEditingController passwordController = TextEditingController();
@@ -43,5 +43,13 @@ class LoginController extends GetxController {
     } catch (e) {
       logger.e("callInitApi: $e");
     }
+  }
+
+  void onGoToRegister() async {
+    Get.offAllNamed(Routes.register);
+  }
+
+  void onGoToForgotPassword() async {
+    Get.offAllNamed(Routes.forgotPassword);
   }
 }

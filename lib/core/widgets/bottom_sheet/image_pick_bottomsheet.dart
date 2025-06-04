@@ -37,7 +37,7 @@ class ImagePickSheet extends StatelessWidget {
           children: <Widget>[
             Text(
               AppStrings.selectUploadOption.tr,
-              style: TextStyles.displayXsMedium,
+              style: TextStyles.text12Medium,
             ),
             const SizedBox(height: 24),
             Row(

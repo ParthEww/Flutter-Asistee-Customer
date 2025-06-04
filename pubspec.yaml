@@ -77,29 +77,71 @@ flutter:
   assets:
     - assets/images/png/
     - assets/images/svg/
+    - assets/images/webp/
 
   fonts:
-    - family: Lufga
+    # Passenger Sans Family
+    - family: PassengerSans
       fonts:
-        - asset: assets/fonts/lufga_thin.ttf
-          weight: 100
-        - asset: assets/fonts/lufga_extra_light.ttf
-          weight: 200
-        - asset: assets/fonts/lufga_light.ttf
-          weight: 300
-        - asset: assets/fonts/lufga_regular.ttf
+        # Regular
+        - asset: assets/fonts/passenger_sans_regular.otf
           weight: 400
-        - asset: assets/fonts/lufga_italic.ttf
+        - asset: assets/fonts/passenger_sans_italic.otf
           weight: 400
           style: italic
-        - asset: assets/fonts/lufga_medium.ttf
+
+        # Thin (100)
+        - asset: assets/fonts/passenger_sans_thin.otf
+          weight: 100
+        - asset: assets/fonts/passenger_sans_thin_italic.otf
+          weight: 100
+          style: italic
+
+        # Extra Light (200)
+        - asset: assets/fonts/passenger_sans_extra_light.otf
+          weight: 200
+        - asset: assets/fonts/passenger_sans_extra_light_italic.otf
+          weight: 200
+          style: italic
+
+        # Light (300)
+        - asset: assets/fonts/passenger_sans_light.otf
+          weight: 300
+        - asset: assets/fonts/passenger_sans_light_italic.otf
+          weight: 300
+          style: italic
+
+        # Medium (500)
+        - asset: assets/fonts/passenger_sans_medium.otf
           weight: 500
-        - asset: assets/fonts/lufga_semi_bold.ttf
+        - asset: assets/fonts/passenger_sans_medium_italic.otf
+          weight: 500
+          style: italic
+
+        # Semi Bold (600)
+        - asset: assets/fonts/passenger_sans_semi_bold.otf
           weight: 600
-        - asset: assets/fonts/lufga_bold.ttf
+        - asset: assets/fonts/passenger_sans_semi_bold_italic.otf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/passenger_sans_semi_bold_ttf.ttf
+          weight: 600
+
+        # Bold (700)
+        - asset: assets/fonts/passenger_sans_bold.otf
           weight: 700
-        - asset: assets/fonts/lufga_extra_bold.ttf
+        - asset: assets/fonts/passenger_sans_bold_italic.otf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/passenger_sans_bold_ttf.ttf
+          weight: 700
+
+        # Black (800 or 900 - depends on your font's actual weight)
+        - asset: assets/fonts/passenger_sans_black.otf
           weight: 800
+        - asset: assets/fonts/passenger_sans_black_italic.otf
+          weight: 800
+          style: italic
 
 
 flutter_gen:

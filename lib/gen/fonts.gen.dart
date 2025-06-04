@@ -10,6 +10,6 @@
 class FontFamily {
   FontFamily._();
 
-  /// Font family: Lufga
-  static const String lufga = 'Lufga';
+  /// Font family: PassengerSans
+  static const String passengerSans = 'PassengerSans';
 }
