@@ -20,6 +20,7 @@ enum CustomTextFieldType {
   FIRST_NAME,
   LAST_NAME,
   BUTTON,
+  SEARCH_FIELD,
   NONE
 }
 
@@ -28,6 +29,7 @@ class CustomTextField extends StatefulWidget {
   final CustomTextFieldType customTextFieldType;
   final TextEditingController textEditingController;
   final VoidCallback? onPressed;
+  final ValueChanged<String>? onTextChanged;
 
   // Focus management
   final FocusNode focusNode;
@@ -44,6 +46,7 @@ class CustomTextField extends StatefulWidget {
     required this.customTextFieldType,
     required this.textEditingController,
     this.onPressed,
+    this.onTextChanged,
     // Focus
     required this.focusNode,
     this.nextFocusNode,
@@ -101,10 +104,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
       textInputAction: widget.textInputAction,
 
       // Behavior customization based on field type
-      readOnly: widget.customTextFieldType == CustomTextFieldType.BUTTON,
-      showCursor: widget.customTextFieldType != CustomTextFieldType.BUTTON,
+      readOnly: widget.customTextFieldType == CustomTextFieldType.BUTTON || widget.customTextFieldType == CustomTextFieldType.NATIONALITY,
+      showCursor: widget.customTextFieldType != CustomTextFieldType.BUTTON && widget.customTextFieldType != CustomTextFieldType.NATIONALITY,
       cursorColor: AppColors.deepNavy,
-      cursorHeight: TextStyles.text16Regular.height,
+      cursorHeight: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD ? TextStyles.text12Regular.height : TextStyles.text16Regular.height,
 
       // Field length constraints
       maxLength: widget.customTextFieldType == CustomTextFieldType.PHONE_NUMBER
@@ -113,12 +116,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
       cursorRadius: const Radius.circular(2),
 
       // Text styling
-      style: TextStyles.text16Regular.copyWith(color: AppColors.deepNavy),
+      style: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD ? TextStyles.text12Regular.copyWith(color: AppColors.deepNavy.withOpacityPrecise(0.5)) :TextStyles.text16Regular.copyWith(color: AppColors.deepNavy),
       obscureText: _obscureText,
 
       // Input decoration
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.only(left: 22, top: 18, bottom: 18),
+        contentPadding: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD? const EdgeInsets.only(left: 18, top: 11, bottom: 11) : const EdgeInsets.only(left: 22, top: 18, bottom: 18),
         counter: const SizedBox.shrink(), // Hide counter but keep space
         filled: true,
         fillColor: _getFillColor(),
@@ -130,20 +133,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
         suffixIcon: _buildSuffixIcon(),
       ),
       onTap: widget.onPressed != null ? () => widget.onPressed!() : null,
+      onChanged: (value) {
+        widget.onTextChanged?.call(value);
+      },
     );
   }
 
   // Helper method to get fill color based on field type
   Color _getFillColor() {
     return widget.customTextFieldType != CustomTextFieldType.BUTTON
-        ? AppColors.secondary.withOpacityPrecise(0.3)
+        ? widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD ? AppColors.lightBlue : AppColors.secondary.withOpacityPrecise(0.3)
         : AppColors.deepNavy;
   }
 
   // Helper method to get hint style based on field type
   TextStyle _getHintStyle() {
     return widget.customTextFieldType != CustomTextFieldType.BUTTON
-        ? TextStyles.text16Regular.copyWith(
+        ? widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD ? TextStyles.text12Regular.copyWith(color: AppColors.deepNavy.withOpacityPrecise(0.5)) : TextStyles.text16Regular.copyWith(
         color: AppColors.richBlack.withOpacityPrecise(0.5))
         : TextStyles.text18SemiBold.copyWith(color: AppColors.white);
   }
@@ -151,7 +157,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   // Helper method to create consistent border
   OutlineInputBorder _getBorder() {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(82),
+      borderRadius: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD ? BorderRadius.circular(40) : BorderRadius.circular(82),
       borderSide: BorderSide.none,
     );
   }
@@ -171,14 +177,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
   // Helper method to build the suffix icon
   Widget _buildSuffixIcon() {
     return Container(
-      margin: const EdgeInsets.only(right: 4),
+      margin: EdgeInsets.only(right: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD ? 11 : 4),
       width: widget.customTextFieldType != CustomTextFieldType.PHONE_NUMBER
-          ? 52
+          ? widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD ? 20 : 52
           : widget.textEditingController.text.isEmpty || widget.textEditingController.text.length < 8 ? 52 : 69,
-      height: 52,
+      height: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD ? 20 :52,
       decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(82),
+        color: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD ? null :AppColors.white,
+        borderRadius: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD ? null : BorderRadius.circular(82),
       ),
       child: _getSuffixChild(),
     );

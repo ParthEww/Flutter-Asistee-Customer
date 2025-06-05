@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 // import 'package:store_redirect/store_redirect.dart';
 
 import '../../api/api_constant.dart';
+import '../../api/model/dummy/dummy_cancellation_reason.dart';
 import '../../core/enum/app_status.dart';
 import '../../core/utils/app_logger.dart';
 
@@ -45,8 +46,6 @@ class RegisterController extends GetxController {
   final TextEditingController areaController = TextEditingController();
 
   RxBool isChecked = false.obs;
-  RxBool isImagePickerSheetVisible = false.obs;
-  final DraggableScrollableController imagePickerSheetController = DraggableScrollableController();
 
   @override
   void onInit() {
@@ -67,5 +66,44 @@ class RegisterController extends GetxController {
   void onGoToLogin() async {
     Get.offAllNamed(Routes.login);
   }
+
+  RxList<DummyCancellationReason> nationalityList = [
+    DummyCancellationReason(reasonName: "Afghan", isSelected: true),
+    DummyCancellationReason(reasonName: "Algerian"),
+    DummyCancellationReason(reasonName: "Angolan"),
+    DummyCancellationReason(reasonName: "Argentine"),
+    DummyCancellationReason(reasonName: "Austrian"),
+    DummyCancellationReason(reasonName: "Bangladeshi"),
+    DummyCancellationReason(reasonName: "Belgian"),
+    DummyCancellationReason(reasonName: "Brazilian"),
+    DummyCancellationReason(reasonName: "British"),
+    DummyCancellationReason(reasonName: "Bulgarian"),
+    DummyCancellationReason(reasonName: "Cameroonian"),
+    DummyCancellationReason(reasonName: "Canadian"),
+    DummyCancellationReason(reasonName: "Chilean"),
+    DummyCancellationReason(reasonName: "Chinese"),
+    DummyCancellationReason(reasonName: "Colombian"),
+    DummyCancellationReason(reasonName: "Croatian"),
+    DummyCancellationReason(reasonName: "Czech"),
+    DummyCancellationReason(reasonName: "Danish"),
+    DummyCancellationReason(reasonName: "Dutch"),
+    DummyCancellationReason(reasonName: "Egyptian"),
+    DummyCancellationReason(reasonName: "Ethiopian"),
+    DummyCancellationReason(reasonName: "Finnish"),
+    DummyCancellationReason(reasonName: "French"),
+    DummyCancellationReason(reasonName: "German"),
+    DummyCancellationReason(reasonName: "Greek"),
+    DummyCancellationReason(reasonName: "Hungarian"),
+    DummyCancellationReason(reasonName: "Indian"),
+    DummyCancellationReason(reasonName: "Indonesian"),
+    DummyCancellationReason(reasonName: "Iranian"),
+    DummyCancellationReason(reasonName: "Iraqi"),
+    DummyCancellationReason(reasonName: "Irish"),
+    DummyCancellationReason(reasonName: "Israeli"),
+    DummyCancellationReason(reasonName: "Italian"),
+    DummyCancellationReason(reasonName: "Japanese"),
+    DummyCancellationReason(reasonName: "Jordanian"),
+    DummyCancellationReason(reasonName: "Kenyan"),
+  ].obs;
 
 }

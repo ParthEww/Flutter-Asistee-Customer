@@ -1,8 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:project_structure/core/utils/app_extension.dart';
 
+import '../../gen/assets.gen.dart';
 import '../../localization/app_strings.dart';
 import '../themes/app_colors.dart';
 import '../themes/text_styles.dart';
@@ -185,6 +188,151 @@ class DialogUtils {
     }
     // }
   }
+
+  /// Shows a customizable bottom sheet for image/ file selection (Camera, Gallery, or Files).
+  ///
+  /// [context] - The BuildContext to show the bottom sheet.
+  /// [imagePickerType] - Determines if only photos (PHOTOS) or photos + files (FILE_AND_PHOTOS) are allowed.
+  static void showImagePickerSheet(BuildContext context,
+      {ImagePickerType imagePickerType = ImagePickerType.PHOTOS}) {
+
+    // ======================
+    // Helper Widget: Builds a clickable option card (Camera/Gallery/File)
+    // ======================
+    Widget buildOption(String icon, String text, VoidCallback onTap) {
+      return GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 18),
+          decoration: BoxDecoration(
+            color: AppColors.lightMint,
+            borderRadius: const BorderRadius.all(Radius.circular(24)),
+          ),
+          child: Column(
+            children: [
+              SvgPicture.asset(icon, fit: BoxFit.none), // Icon (SVG)
+              const SizedBox(height: 14),
+              Text(
+                text,
+                style: TextStyles.text12Regular.copyWith(
+                  color: AppColors.deepNavy.withOpacityPrecise(0.6),
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // ======================
+    // Bottom Sheet Implementation
+    // ======================
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent, // Transparent background for overlay effect
+      isScrollControlled: true, // Allows dynamic height
+      enableDrag: false,
+      builder: (context) => BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Container(
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              color: Theme.of(context).canvasColor, // Uses theme background
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(40),
+                topRight: Radius.circular(40),
+              ),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min, // Fits content height
+              children: [
+                // ======================
+                // Header Section (Title + Icon)
+                // ======================
+                Row(
+                  children: [
+                    // Circular Icon Container
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.deepNavy,
+                      ),
+                      child: SvgPicture.asset(
+                        Assets.images.svg.uploadImageDialog.path,
+                        fit: BoxFit.none,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    // Title Text
+                    Text(
+                      "Select Option to Upload",
+                      style: TextStyles.text14SemiBold,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
+
+                // ======================
+                // Options Grid (Camera/Gallery/File)
+                // ======================
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Camera Option
+                    Expanded(
+                      child: buildOption(
+                        Assets.images.svg.camera.path,
+                        "Camera",
+                            () {
+                          Navigator.pop(context);
+                          // TODO: Handle camera selection logic
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 9),
+
+                    // Gallery Option
+                    Expanded(
+                      child: buildOption(
+                        Assets.images.svg.gallery.path,
+                        "Gallery",
+                            () {
+                          Navigator.pop(context);
+                          // TODO: Handle gallery selection logic
+                        },
+                      ),
+                    ),
+
+                    // File Option (Conditional)
+                    if (imagePickerType == ImagePickerType.FILE_AND_PHOTOS) ...[
+                      const SizedBox(width: 9),
+                      Expanded(
+                        child: buildOption(
+                          Assets.images.svg.file.path,
+                          "Files",
+                              () {
+                            Navigator.pop(context);
+                            // TODO: Handle file selection logic
+                          },
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+                const SizedBox(height: 16),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
 }
 
 enum SnackbarType {
@@ -192,3 +340,5 @@ enum SnackbarType {
   failure,
   errorDialog,
 }
+
+enum ImagePickerType { PHOTOS, FILE_AND_PHOTOS }

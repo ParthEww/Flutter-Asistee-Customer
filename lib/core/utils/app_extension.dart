@@ -10,6 +10,7 @@ extension ContextUtil on BuildContext {
 }
 
 extension StringUtils on String? {
+  String orEmpty() => this ?? '';
   bool isNotNullOrEmpty() {
     String? value = this;
     if (value != null && value.isNotEmpty) {

@@ -6,6 +6,7 @@ class AppColors {
   static const Color secondary = Color(0xFFA8E2C1);
 
   // Custom Color
+  static const Color lightMint = Color(0xFFECFBF3);
   static const Color lightBlue = Color(0xFFCEDBF1);
   static const Color deepNavy = Color(0xFF03002F);
   static const Color richBlack = Color(0xFF1D1D1F);

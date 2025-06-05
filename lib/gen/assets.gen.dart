@@ -94,6 +94,9 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/call.svg
   SvgGenImage get call => const SvgGenImage('assets/images/svg/call.svg');
 
+  /// File path: assets/images/svg/camera.svg
+  SvgGenImage get camera => const SvgGenImage('assets/images/svg/camera.svg');
+
   /// File path: assets/images/svg/check-box-checked.svg
   SvgGenImage get checkBoxChecked =>
       const SvgGenImage('assets/images/svg/check-box-checked.svg');
@@ -131,9 +134,18 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/eye.svg
   SvgGenImage get eye => const SvgGenImage('assets/images/svg/eye.svg');
 
+  /// File path: assets/images/svg/file.svg
+  SvgGenImage get file => const SvgGenImage('assets/images/svg/file.svg');
+
+  /// File path: assets/images/svg/flag.svg
+  SvgGenImage get flag => const SvgGenImage('assets/images/svg/flag.svg');
+
   /// File path: assets/images/svg/full-name.svg
   SvgGenImage get fullName =>
       const SvgGenImage('assets/images/svg/full-name.svg');
+
+  /// File path: assets/images/svg/gallery.svg
+  SvgGenImage get gallery => const SvgGenImage('assets/images/svg/gallery.svg');
 
   /// File path: assets/images/svg/google_login.svg
   SvgGenImage get googleLogin =>
@@ -150,9 +162,20 @@ class $AssetsImagesSvgGen {
   SvgGenImage get passwordCheck =>
       const SvgGenImage('assets/images/svg/password-check.svg');
 
+  /// File path: assets/images/svg/radio-selected.svg
+  SvgGenImage get radioSelected =>
+      const SvgGenImage('assets/images/svg/radio-selected.svg');
+
+  /// File path: assets/images/svg/radio-unselected.svg
+  SvgGenImage get radioUnselected =>
+      const SvgGenImage('assets/images/svg/radio-unselected.svg');
+
   /// File path: assets/images/svg/rectangle.svg
   SvgGenImage get rectangle =>
       const SvgGenImage('assets/images/svg/rectangle.svg');
+
+  /// File path: assets/images/svg/search.svg
+  SvgGenImage get search => const SvgGenImage('assets/images/svg/search.svg');
 
   /// File path: assets/images/svg/upload-image-dialog.svg
   SvgGenImage get uploadImageDialog =>
@@ -174,6 +197,7 @@ class $AssetsImagesSvgGen {
     asisteeLogoWhiteWithText,
     asisteeLogoWithText,
     call,
+    camera,
     checkBoxChecked,
     checkBoxUnchecked,
     cpr,
@@ -184,12 +208,18 @@ class $AssetsImagesSvgGen {
     email,
     eyeSlash,
     eye,
+    file,
+    flag,
     fullName,
+    gallery,
     googleLogin,
     line2,
     lineSignInContinueWith,
     passwordCheck,
+    radioSelected,
+    radioUnselected,
     rectangle,
+    search,
     uploadImageDialog,
     uploadImage,
   ];
