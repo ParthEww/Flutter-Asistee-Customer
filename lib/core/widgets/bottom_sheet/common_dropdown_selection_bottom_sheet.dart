@@ -24,6 +24,8 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
     // Reactive display list
     RxList<DummyCancellationReason> allValueList = <DummyCancellationReason>[].obs;
     allValueList.value = List.from(commonList);
+    RxList<DummyCancellationReason> searchItemList = <DummyCancellationReason>[].obs;
+    searchItemList.value = List.from(commonList);
     // ----- [email] -----
     FocusNode emailFocusNode = FocusNode();
     final TextEditingController emailController = TextEditingController();
@@ -81,15 +83,7 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
                 textInputAction: TextInputAction.done,
                 suffixIcon: Assets.images.svg.search.path,
                 onTextChanged: (value){
-                  if(value.length > 1){
-                    allValueList.value = commonList
-                        .where((item) => item.reasonName.orEmpty()
-                        .toLowerCase()
-                        .contains(value.trim().toLowerCase()))
-                        .toList();
-                  }else if(value.isEmpty){
-                    allValueList.value = commonList;
-                  }
+
                 },
               ),
               const SizedBox(height: 18),
@@ -103,7 +97,9 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
                                   contentPadding: EdgeInsets.zero,
                                   title: GestureDetector(
                                     onTap: () {
-                                      final newList = allValueList.map((item) => item.copyWith(isSelected: false)).toList();
+                                      final item = allValueList[index];
+                                      final position = commonList.indexWhere((it) => it.id == item.id);
+                                      final newList = allValueList.map((bean) => bean.copyWith(isSelected: false)).toList();
                                       newList[index] = newList[index].copyWith(isSelected: true);
                                       allValueList.value = newList;
                                     },
@@ -156,14 +152,19 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
               const SizedBox(height: 18),
               Row(
                 children: [
-                  Container(
-                      width: 52,
-                      height: 52,
-                      padding: const EdgeInsets.all(14),
-                      decoration: BoxDecoration(
-                          color: AppColors.lightBlue, shape: BoxShape.circle),
-                      child: SvgPicture.asset(Assets.images.svg.arrowLeft.path,
-                          fit: BoxFit.none)),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                        width: 52,
+                        height: 52,
+                        padding: const EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                            color: AppColors.lightBlue, shape: BoxShape.circle),
+                        child: SvgPicture.asset(Assets.images.svg.arrowLeft.path,
+                            fit: BoxFit.none)),
+                  ),
                   const SizedBox(width: 6),
                   Expanded(
                     child: Container(

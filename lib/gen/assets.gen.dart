@@ -174,6 +174,10 @@ class $AssetsImagesSvgGen {
   SvgGenImage get rectangle =>
       const SvgGenImage('assets/images/svg/rectangle.svg');
 
+  /// File path: assets/images/svg/search-cancel.svg
+  SvgGenImage get searchCancel =>
+      const SvgGenImage('assets/images/svg/search-cancel.svg');
+
   /// File path: assets/images/svg/search.svg
   SvgGenImage get search => const SvgGenImage('assets/images/svg/search.svg');
 
@@ -219,6 +223,7 @@ class $AssetsImagesSvgGen {
     radioSelected,
     radioUnselected,
     rectangle,
+    searchCancel,
     search,
     uploadImageDialog,
     uploadImage,

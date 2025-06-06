@@ -124,7 +124,7 @@ class RegisterPage extends GetView<RegisterController> {
                       nextFocusNode: controller.passwordFocusNode,
                       // Moves to password field on next
                       hintText: "Email ID",
-                      keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
                       suffixIcon: Assets.images.svg.email.path,
                     ),
@@ -161,7 +161,6 @@ class RegisterPage extends GetView<RegisterController> {
                       customTextFieldType: CustomTextFieldType.NATIONALITY,
                       textEditingController: controller.nationalityController,
                       focusNode: controller.nationalityFocusNode,
-                      nextFocusNode: controller.areaFocusNode,
                       // Moves to area field on next
                       hintText: "Your Nationality",
                       keyboardType: TextInputType.text,
@@ -186,6 +185,13 @@ class RegisterPage extends GetView<RegisterController> {
                       keyboardType: TextInputType.text,
                       textInputAction: TextInputAction.done,
                       suffixIcon: Assets.images.svg.dropDownArrow.path,
+                      onPressed: () {
+                        CommonDropdownSelectionBottomSheet.showBottomSheet(
+                            dialogType:
+                            CommonDropdownSelectionBottomSheetDialogType
+                                .SELECT_AREA,
+                            commonList: controller.areaList);
+                      },
                     ),
                     const SizedBox(height: 36),
                     Row(
