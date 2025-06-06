@@ -31,4 +31,8 @@ class ForgotPasswordController extends GetxController {
     super.onInit();
   }
 
+  void onGoToOtpVerification() async {
+    Get.toNamed(Routes.otpVerification);
+  }
+
 }

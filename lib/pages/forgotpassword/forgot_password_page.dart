@@ -52,7 +52,7 @@ class ForgotPasswordPage extends GetView<ForgotPasswordController> {
                         description:
                             "Don't worry, Just enter your Number\nand will send you the password recovery link",
                         isShowBackButton: true,
-                        onBackButtonTap: (){ },
+                        onBackButtonTap: (){ Get.back(); },
                       ),
                       const SizedBox(height: 60), // Spacer
 
@@ -88,7 +88,9 @@ class ForgotPasswordPage extends GetView<ForgotPasswordController> {
                       keyboardType: TextInputType.visiblePassword,
                       textInputAction: TextInputAction.done,
                       suffixIcon: Assets.images.svg.arrowRightGreen.path,
-                      onPressed: () {}, // TODO: Add sign in functionality
+                      onPressed: () {
+                        controller.onGoToOtpVerification();
+                      }, // TODO: Add sign in functionality
                     )
                   ],
                 ),

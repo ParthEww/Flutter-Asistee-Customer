@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
 import 'package:project_structure/pages/login/login_bindings.dart';
 import 'package:project_structure/pages/login/login_page.dart';
+import 'package:project_structure/pages/otpverification/otp_verification_bindings.dart';
 
 import '../pages/forgotpassword/forgot_password_bindings.dart';
 import '../pages/forgotpassword/forgot_password_page.dart';
 import '../pages/onboarding/onboarding_bindings.dart';
 import '../pages/onboarding/onboarding_page.dart';
+import '../pages/otpverification/otp_verification_page.dart';
 import '../pages/register/register_bindings.dart';
 import '../pages/register/register_page.dart';
 import '../pages/splash/splash_bindings.dart';
@@ -52,6 +54,13 @@ class AppPages {
       name: _Path.forgotPassword,
       page: () => const ForgotPasswordPage(),
       binding: ForgotPasswordBindings(),
+    ),
+
+    /// otp verification page
+    GetPage(
+      name: _Path.otpVerification,
+      page: () => const OtpVerificationPage(),
+      binding: OtpVerificationBindings(),
     ),
   ];
 }

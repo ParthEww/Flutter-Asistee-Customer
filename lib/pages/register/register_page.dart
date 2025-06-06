@@ -114,6 +114,9 @@ class RegisterPage extends GetView<RegisterController> {
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
                       suffixIcon: Assets.images.svg.call.path,
+                      onPressed: (){
+                        controller.onGoToOtpVerification();
+                      },
                     ),
                     const SizedBox(height: 18),
                     // Email id input field
@@ -127,6 +130,9 @@ class RegisterPage extends GetView<RegisterController> {
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
                       suffixIcon: Assets.images.svg.email.path,
+                      onPressed: (){
+                        controller.onGoToOtpVerification();
+                      },
                     ),
                     const SizedBox(height: 18),
                     // Password input field
@@ -209,7 +215,7 @@ class RegisterPage extends GetView<RegisterController> {
                         AppTextFieldLabel(
                           label: "I hereby accept All the",
                           clickableLabel: "Terms and Conditions",
-                          onTap: () {},
+                          onTap: () {}, // TODO: Add terms and conditions functionality in web view screen
                         )
                       ],
                     ),
@@ -224,7 +230,9 @@ class RegisterPage extends GetView<RegisterController> {
                       keyboardType: TextInputType.visiblePassword,
                       textInputAction: TextInputAction.done,
                       suffixIcon: Assets.images.svg.arrowRightGreen.path,
-                      onPressed: () {}, // TODO: Add sign in functionality
+                      onPressed: () {
+                        Get.back();
+                      }, // TODO: Add sign in functionality
                     ),
                     const SizedBox(height: 28),
                     // Spacer
@@ -233,7 +241,9 @@ class RegisterPage extends GetView<RegisterController> {
                       child: AppTextFieldLabel(
                         label: "Already on Yay Ride?",
                         clickableLabel: "Sign In",
-                        onTap: () {},
+                        onTap: () {
+                          Get.back();
+                        },
                       ),
                     ),
                   ],

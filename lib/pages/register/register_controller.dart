@@ -63,8 +63,8 @@ class RegisterController extends GetxController {
     }
   }
 
-  void onGoToLogin() async {
-    Get.offAllNamed(Routes.login);
+  void onGoToOtpVerification() async {
+    Get.toNamed(Routes.otpVerification);
   }
 
   final RxList<DummyCancellationReason> nationalityList = <DummyCancellationReason>[

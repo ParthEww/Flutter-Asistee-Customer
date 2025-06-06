@@ -146,7 +146,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         prefix: _buildPrefix(),
         suffixIcon: _buildSuffixIcon(),
       ),
-      onTap: widget.onPressed != null ? () => widget.onPressed!() : null,
+      onTap: widget.customTextFieldType != CustomTextFieldType.PHONE_NUMBER && widget.customTextFieldType != CustomTextFieldType.EMAIL ? widget.onPressed != null ? () => widget.onPressed!() : null : null,
       onChanged: (value) {
         widget.textEditingController.addListener(() {
           setState(() {});
@@ -201,31 +201,46 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   // Helper method to build the suffix icon
   Widget _buildSuffixIcon() {
+    // Determine margin based on field type
+    final marginRight = widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
+        ? 11
+        : 4;
+
+    // Calculate width based on field type and content
+    double width;
+    if (widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD) {
+      width = 20;
+    } else if (widget.customTextFieldType == CustomTextFieldType.PHONE_NUMBER) {
+      width = widget.textEditingController.text.isEmpty ||
+          widget.textEditingController.text.length < 8
+          ? 52
+          : 69;
+    } else if (widget.customTextFieldType == CustomTextFieldType.EMAIL) {
+      width = widget.textEditingController.text.isEmail ? 69 : 52;
+    } else {
+      width = 52;
+    }
+
+    // Determine height based on field type
+    final height = widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
+        ? 20
+        : 52;
+
+    // Configure decoration based on field type
+    final decoration = BoxDecoration(
+      color: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
+          ? null
+          : AppColors.white,
+      borderRadius: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
+          ? null
+          : BorderRadius.circular(82),
+    );
+
     return Container(
-      margin: EdgeInsets.only(
-          right: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
-              ? 11
-              : 4),
-      width: widget.customTextFieldType != CustomTextFieldType.PHONE_NUMBER
-          ? widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
-              ? 20
-              : 52
-          : widget.textEditingController.text.isEmpty ||
-                  widget.textEditingController.text.length < 8
-              ? 52
-              : 69,
-      height: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
-          ? 20
-          : 52,
-      decoration: BoxDecoration(
-        color: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
-            ? null
-            : AppColors.white,
-        borderRadius:
-            widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
-                ? null
-                : BorderRadius.circular(82),
-      ),
+      margin: EdgeInsets.only(right: marginRight.toDouble()),
+      width: width,
+      height: height.toDouble(),
+      decoration: decoration,
       child: _getSuffixChild(),
     );
   }
@@ -276,36 +291,46 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   // Helper method to build phone number suffix (verify text or icon)
   Widget _buildPhoneNumberSuffix() {
-    return widget.textEditingController.text.length > 7
-        ? Center(
-            child: Text(
-              "Verify",
-              style: TextStyles.text12SemiBold,
+    if (widget.textEditingController.text.length > 7) {
+      return GestureDetector(
+        onTap: widget.onPressed != null ? () => widget.onPressed!() : null,
+        child: Center(
+              child: Text(
+                "Verify",
+                style: TextStyles.text12SemiBold,
+              ),
             ),
-          )
-        : SvgPicture.asset(
+      );
+    } else {
+      return SvgPicture.asset(
             widget.suffixIcon,
             width: 20,
             height: 20,
             fit: BoxFit.none,
           );
+    }
   }
 
   // Helper method to build email suffix (verify text or icon)
   Widget _buildEmailSuffix() {
-    return widget.textEditingController.text.isEmail
-        ? Center(
-            child: Text(
-              "Verify",
-              style: TextStyles.text12SemiBold,
+    if (widget.textEditingController.text.isEmail) {
+      return GestureDetector(
+        onTap: widget.onPressed != null ? () => widget.onPressed!() : null,
+        child: Center(
+              child: Text(
+                "Verify",
+                style: TextStyles.text12SemiBold,
+              ),
             ),
-          )
-        : SvgPicture.asset(
+      );
+    } else {
+      return SvgPicture.asset(
             widget.suffixIcon,
             width: 20,
             height: 20,
             fit: BoxFit.none,
           );
+    }
   }
 
   // Helper method to build search field suffix (icon)

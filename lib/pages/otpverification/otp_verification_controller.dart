@@ -17,7 +17,7 @@ import '../../repository/local_repository/local_repository.dart';
 import '../../repository/remote_repository/remote_repository.dart';
 import '../../routes/app_pages.dart';
 
-class LoginController extends GetxController {
+class OtpVerificationController extends GetxController {
   final _localRepository = Get.find<LocalRepository>();
   final _remoteRepository = Get.find<RemoteRepository>();
 
@@ -46,10 +46,10 @@ class LoginController extends GetxController {
   }
 
   void onGoToRegister() async {
-    Get.toNamed(Routes.register);
+    Get.offAllNamed(Routes.register);
   }
 
   void onGoToForgotPassword() async {
-    Get.toNamed(Routes.forgotPassword);
+    Get.offAllNamed(Routes.forgotPassword);
   }
 }
