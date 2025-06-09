@@ -27,3 +27,9 @@ extension ColorExtensions on Color {
     return withAlpha((opacity * 255).round());
   }
 }
+
+extension ListLastIndexExtension<T> on List<T> {
+  /// Returns the last valid index of the list, or `null` if the list is empty.
+  int? get lastIndex => isNotEmpty ? length - 1 : null;
+}
+

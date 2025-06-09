@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+import 'package:project_structure/pages/addnewaddress/add_new_address_bindings.dart';
 import 'package:project_structure/pages/login/login_bindings.dart';
 import 'package:project_structure/pages/login/login_page.dart';
 import 'package:project_structure/pages/otpverification/otp_verification_bindings.dart';
 
+import '../pages/addnewaddress/add_new_address_page.dart';
 import '../pages/forgotpassword/forgot_password_bindings.dart';
 import '../pages/forgotpassword/forgot_password_page.dart';
 import '../pages/onboarding/onboarding_bindings.dart';
@@ -17,8 +19,8 @@ part 'app_routes.dart';
 
 class AppPages {
   // initial route
-  static String initialRoute = _Path.splash;
-  static Bindings initialBinding = SplashBindings();
+  static String initialRoute = _Path.addNewAddress;
+  static Bindings initialBinding = AddNewAddressBindings();
 
   static final List<GetPage<dynamic>> pages = [
     /// splash page
@@ -61,6 +63,13 @@ class AppPages {
       name: _Path.otpVerification,
       page: () => const OtpVerificationPage(),
       binding: OtpVerificationBindings(),
+    ),
+
+    /// add new address page
+    GetPage(
+      name: _Path.addNewAddress,
+      page: () => const AddNewAddressPage(),
+      binding: AddNewAddressBindings(),
     ),
   ];
 }

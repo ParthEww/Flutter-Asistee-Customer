@@ -22,6 +22,7 @@ enum CustomTextFieldType {
   LAST_NAME,
   BUTTON,
   SEARCH_FIELD,
+  ADDRESS_FIELD,
   NONE
 }
 

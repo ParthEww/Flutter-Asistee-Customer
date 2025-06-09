@@ -39,6 +39,10 @@ class $AssetsImagesPngGen {
   AssetGenImage get closeUpBus =>
       const AssetGenImage('assets/images/png/close_up_bus.png');
 
+  /// File path: assets/images/png/map_view.png
+  AssetGenImage get mapView =>
+      const AssetGenImage('assets/images/png/map_view.png');
+
   /// File path: assets/images/png/onboard_img_1.png
   AssetGenImage get onboardImg1 =>
       const AssetGenImage('assets/images/png/onboard_img_1.png');
@@ -58,6 +62,7 @@ class $AssetsImagesPngGen {
   List<AssetGenImage> get values => [
     asisteeLogoWhiteWithText,
     closeUpBus,
+    mapView,
     onboardImg1,
     onboardImg2,
     onboardImg3,
@@ -66,6 +71,30 @@ class $AssetsImagesPngGen {
 
 class $AssetsImagesSvgGen {
   const $AssetsImagesSvgGen();
+
+  /// File path: assets/images/svg/address-field-block.svg
+  SvgGenImage get addressFieldBlock =>
+      const SvgGenImage('assets/images/svg/address-field-block.svg');
+
+  /// File path: assets/images/svg/address-field-building-name.svg
+  SvgGenImage get addressFieldBuildingName =>
+      const SvgGenImage('assets/images/svg/address-field-building-name.svg');
+
+  /// File path: assets/images/svg/address-field-description.svg
+  SvgGenImage get addressFieldDescription =>
+      const SvgGenImage('assets/images/svg/address-field-description.svg');
+
+  /// File path: assets/images/svg/address-type-home.svg
+  SvgGenImage get addressTypeHome =>
+      const SvgGenImage('assets/images/svg/address-type-home.svg');
+
+  /// File path: assets/images/svg/address-type-other.svg
+  SvgGenImage get addressTypeOther =>
+      const SvgGenImage('assets/images/svg/address-type-other.svg');
+
+  /// File path: assets/images/svg/address-type-work.svg
+  SvgGenImage get addressTypeWork =>
+      const SvgGenImage('assets/images/svg/address-type-work.svg');
 
   /// File path: assets/images/svg/app-logo.svg
   SvgGenImage get appLogo =>
@@ -194,6 +223,12 @@ class $AssetsImagesSvgGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+    addressFieldBlock,
+    addressFieldBuildingName,
+    addressFieldDescription,
+    addressTypeHome,
+    addressTypeOther,
+    addressTypeWork,
     appLogo,
     arrowLeft,
     arrowRightGreen,

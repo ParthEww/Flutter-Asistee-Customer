@@ -10,4 +10,12 @@ import UIKit
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
+
+  - (BOOL)application:(UIApplication *)application
+      didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [GMSServices provideAPIKey:@"AIzaSyBknhiuopRBBk7R18GqDHvMaWFM-zCQnS4"];
+    [GeneratedPluginRegistrant registerWithRegistry:self];
+    return [super application:application didFinishLaunchingWithOptions:launchOptions];
+  }
+  @end
 }

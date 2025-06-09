@@ -18,6 +18,7 @@ class AppStrings {
   static const String pleaseAllowThe = "please_allow_the";
   static const String camera = "camera";
   static const String gallery = "gallery";
+  static const String location = "location";
   static const String permissionFromSettings = "permission_from_the_setting";
   static const String settings = "settings";
   static const String selectUploadOption = "select_upload_option";
@@ -57,6 +58,7 @@ class StringConstants {
       AppStrings.pleaseAllowThe: 'Please allow the',
       AppStrings.camera: "Camera",
       AppStrings.gallery: "Gallery",
+      AppStrings.location: "Location",
       AppStrings.permissionFromSettings: 'permission from the settings',
       AppStrings.settings: 'Settings',
       AppStrings.selectUploadOption: "Select Upload Option",

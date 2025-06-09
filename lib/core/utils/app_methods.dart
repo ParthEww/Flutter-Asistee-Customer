@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -150,5 +152,19 @@ class AppMethods {
     } else {
       return false;
     }
+  }
+
+  // Set status bar color
+  static void updateStatusBar(Color backgroundColor) {
+    // Calculate if background is dark
+    final isDark = backgroundColor.computeLuminance() < 0.5;
+
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
+        statusBarBrightness: isDark ? Brightness.dark : Brightness.light,
+      ),
+    );
   }
 }
