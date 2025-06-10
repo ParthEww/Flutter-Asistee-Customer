@@ -9,6 +9,7 @@ class AppColors {
   static const Color lightMint = Color(0xFFECFBF3);
   static const Color mintMist = Color(0xFFE3F6EC);
   static const Color lightBlue = Color(0xFFCEDBF1);
+  static const Color lightSkyBlue = Color(0xFFD6E9ED);
   static const Color deepNavy = Color(0xFF03002F);
   static const Color richBlack = Color(0xFF1D1D1F);
   static const Color white = Color(0xFFFFFFFF);

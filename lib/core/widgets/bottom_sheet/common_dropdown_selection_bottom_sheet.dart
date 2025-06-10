@@ -74,7 +74,7 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               CustomTextField(
-                customTextFieldType: CustomTextFieldType.SEARCH_FIELD,
+                customTextFieldType: CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD,
                 textEditingController: emailController,
                 focusNode: emailFocusNode,
                 // Moves to password field on next

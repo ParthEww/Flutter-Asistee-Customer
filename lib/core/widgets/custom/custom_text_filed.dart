@@ -21,7 +21,8 @@ enum CustomTextFieldType {
   FIRST_NAME,
   LAST_NAME,
   BUTTON,
-  SEARCH_FIELD,
+  DROP_DOWN_SHEET_SEARCH_FIELD,
+  HOME_PAGE_SEARCH_FIELD,
   ADDRESS_FIELD,
   NONE
 }
@@ -92,8 +93,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   void dispose() {
     // Clean up focus node and controller
-    widget.focusNode.dispose();
-    widget.textEditingController.dispose();
+    // widget.focusNode.dispose();
+    // widget.textEditingController.dispose();
     super.dispose();
   }
 
@@ -114,9 +115,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
           widget.customTextFieldType != CustomTextFieldType.AREA,
       cursorColor: AppColors.deepNavy,
       cursorHeight:
-          widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
+          widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
               ? TextStyles.text12Regular.height
-              : TextStyles.text16Regular.height,
+              : widget.customTextFieldType == CustomTextFieldType.HOME_PAGE_SEARCH_FIELD ? TextStyles.text14Medium.height : TextStyles.text16Regular.height,
 
       // Field length constraints
       maxLength: widget.customTextFieldType == CustomTextFieldType.PHONE_NUMBER
@@ -125,15 +126,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
       cursorRadius: const Radius.circular(2),
 
       // Text styling
-      style: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
+      style: widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
           ? TextStyles.text12Regular.copyWith(color: AppColors.deepNavy)
-          : TextStyles.text16Regular.copyWith(color: AppColors.deepNavy),
+          : widget.customTextFieldType == CustomTextFieldType.HOME_PAGE_SEARCH_FIELD ? TextStyles.text14Medium.copyWith(color: AppColors.deepNavy) : TextStyles.text16Regular.copyWith(color: AppColors.deepNavy),
       obscureText: _obscureText,
 
       // Input decoration
       decoration: InputDecoration(
         contentPadding:
-            widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
+            widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
                 ? const EdgeInsets.only(left: 18, top: 11, bottom: 11)
                 : const EdgeInsets.only(left: 22, top: 18, bottom: 18),
         counter: const SizedBox.shrink(),
@@ -160,7 +161,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   // Helper method to get fill color based on field type
   Color _getFillColor() {
     return widget.customTextFieldType != CustomTextFieldType.BUTTON
-        ? widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
+        ? widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
             ? AppColors.lightBlue
             : AppColors.secondary.withOpacityPrecise(0.3)
         : AppColors.deepNavy;
@@ -169,10 +170,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
   // Helper method to get hint style based on field type
   TextStyle _getHintStyle() {
     return widget.customTextFieldType != CustomTextFieldType.BUTTON
-        ? widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
+        ? widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
             ? TextStyles.text12Regular
                 .copyWith(color: AppColors.deepNavy.withOpacityPrecise(0.5))
-            : TextStyles.text16Regular
+            : widget.customTextFieldType == CustomTextFieldType.HOME_PAGE_SEARCH_FIELD ? TextStyles.text14Medium
+        .copyWith(color: AppColors.richBlack.withOpacityPrecise(0.5)) : TextStyles.text16Regular
                 .copyWith(color: AppColors.richBlack.withOpacityPrecise(0.5))
         : TextStyles.text18SemiBold.copyWith(color: AppColors.white);
   }
@@ -181,7 +183,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   OutlineInputBorder _getBorder() {
     return OutlineInputBorder(
       borderRadius:
-          widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
+          widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
               ? BorderRadius.circular(40)
               : BorderRadius.circular(82),
       borderSide: BorderSide.none,
@@ -203,13 +205,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
   // Helper method to build the suffix icon
   Widget _buildSuffixIcon() {
     // Determine margin based on field type
-    final marginRight = widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
+    final marginRight = widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
         ? 11
         : 4;
 
     // Calculate width based on field type and content
     double width;
-    if (widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD) {
+    if (widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD) {
       width = 20;
     } else if (widget.customTextFieldType == CustomTextFieldType.PHONE_NUMBER) {
       width = widget.textEditingController.text.isEmpty ||
@@ -223,16 +225,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
     }
 
     // Determine height based on field type
-    final height = widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
+    final height = widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
         ? 20
         : 52;
 
     // Configure decoration based on field type
     final decoration = BoxDecoration(
-      color: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
+      color: widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
           ? null
           : AppColors.white,
-      borderRadius: widget.customTextFieldType == CustomTextFieldType.SEARCH_FIELD
+      borderRadius: widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
           ? null
           : BorderRadius.circular(82),
     );
@@ -255,7 +257,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         return _buildPhoneNumberSuffix();
       case CustomTextFieldType.EMAIL:
         return _buildEmailSuffix();
-      case CustomTextFieldType.SEARCH_FIELD:
+      case CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD:
         return _buildSearchFieldSuffix();
       default:
         return SvgPicture.asset(

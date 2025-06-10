@@ -136,6 +136,10 @@ class $AssetsImagesSvgGen {
   SvgGenImage get bnvSettings =>
       const SvgGenImage('assets/images/svg/bnv-settings.svg');
 
+  /// File path: assets/images/svg/calendar.svg
+  SvgGenImage get calendar =>
+      const SvgGenImage('assets/images/svg/calendar.svg');
+
   /// File path: assets/images/svg/call.svg
   SvgGenImage get call => const SvgGenImage('assets/images/svg/call.svg');
 
@@ -149,6 +153,9 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/check-box-unchecked.svg
   SvgGenImage get checkBoxUnchecked =>
       const SvgGenImage('assets/images/svg/check-box-unchecked.svg');
+
+  /// File path: assets/images/svg/clock.svg
+  SvgGenImage get clock => const SvgGenImage('assets/images/svg/clock.svg');
 
   /// File path: assets/images/svg/cpr.svg
   SvgGenImage get cpr => const SvgGenImage('assets/images/svg/cpr.svg');
@@ -182,6 +189,14 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/file.svg
   SvgGenImage get file => const SvgGenImage('assets/images/svg/file.svg');
 
+  /// File path: assets/images/svg/filter-selected.svg
+  SvgGenImage get filterSelected =>
+      const SvgGenImage('assets/images/svg/filter-selected.svg');
+
+  /// File path: assets/images/svg/filter-unselected.svg
+  SvgGenImage get filterUnselected =>
+      const SvgGenImage('assets/images/svg/filter-unselected.svg');
+
   /// File path: assets/images/svg/flag.svg
   SvgGenImage get flag => const SvgGenImage('assets/images/svg/flag.svg');
 
@@ -196,12 +211,23 @@ class $AssetsImagesSvgGen {
   SvgGenImage get googleLogin =>
       const SvgGenImage('assets/images/svg/google_login.svg');
 
+  /// File path: assets/images/svg/line-1.svg
+  SvgGenImage get line1 => const SvgGenImage('assets/images/svg/line-1.svg');
+
   /// File path: assets/images/svg/line-2.svg
   SvgGenImage get line2 => const SvgGenImage('assets/images/svg/line-2.svg');
 
   /// File path: assets/images/svg/line_sign_in_continue_with.svg
   SvgGenImage get lineSignInContinueWith =>
       const SvgGenImage('assets/images/svg/line_sign_in_continue_with.svg');
+
+  /// File path: assets/images/svg/location.svg
+  SvgGenImage get location =>
+      const SvgGenImage('assets/images/svg/location.svg');
+
+  /// File path: assets/images/svg/notification.svg
+  SvgGenImage get notification =>
+      const SvgGenImage('assets/images/svg/notification.svg');
 
   /// File path: assets/images/svg/password-check.svg
   SvgGenImage get passwordCheck =>
@@ -218,6 +244,17 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/rectangle.svg
   SvgGenImage get rectangle =>
       const SvgGenImage('assets/images/svg/rectangle.svg');
+
+  /// File path: assets/images/svg/repeat.svg
+  SvgGenImage get repeat => const SvgGenImage('assets/images/svg/repeat.svg');
+
+  /// File path: assets/images/svg/route-20.svg
+  SvgGenImage get route20 =>
+      const SvgGenImage('assets/images/svg/route-20.svg');
+
+  /// File path: assets/images/svg/search-24.svg
+  SvgGenImage get search24 =>
+      const SvgGenImage('assets/images/svg/search-24.svg');
 
   /// File path: assets/images/svg/search-cancel.svg
   SvgGenImage get searchCancel =>
@@ -255,10 +292,12 @@ class $AssetsImagesSvgGen {
     bnvMyBookings,
     bnvMyRoutes,
     bnvSettings,
+    calendar,
     call,
     camera,
     checkBoxChecked,
     checkBoxUnchecked,
+    clock,
     cpr,
     doubleArrowRight,
     dropDownArrow,
@@ -268,16 +307,24 @@ class $AssetsImagesSvgGen {
     eyeSlash,
     eye,
     file,
+    filterSelected,
+    filterUnselected,
     flag,
     fullName,
     gallery,
     googleLogin,
+    line1,
     line2,
     lineSignInContinueWith,
+    location,
+    notification,
     passwordCheck,
     radioSelected,
     radioUnselected,
     rectangle,
+    repeat,
+    route20,
+    search24,
     searchCancel,
     search,
     uploadImageDialog,
