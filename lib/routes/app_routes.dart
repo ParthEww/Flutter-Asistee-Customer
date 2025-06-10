@@ -7,6 +7,7 @@ abstract class Routes {
   static const String register = _Path.register;
   static const String forgotPassword = _Path.forgotPassword;
   static const String otpVerification = _Path.otpVerification;
+  static const String resetPassword = _Path.resetPassword;
   static const String addNewAddress = _Path.addNewAddress;
   static const String dashboard = _Path.dashboard;
 }
@@ -18,6 +19,7 @@ abstract class _Path {
   static const String register = "/register";
   static const String forgotPassword = "/forgotPassword";
   static const String otpVerification = "/otpVerification";
+  static const String resetPassword = "/resetPassword";
   static const String addNewAddress = "/addNewAddress";
   static const String dashboard = "/dashboard";
 }

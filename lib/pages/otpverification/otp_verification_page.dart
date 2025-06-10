@@ -71,7 +71,7 @@ class OtpVerificationPage extends GetView<OtpVerificationController> {
                     submittedPinTheme: _buildPinTheme().copyBorderWith(
                         border: Border.all(width: 0.5, color: AppColors.black)),
                     onCompleted: (pin) =>
-                        Get.back()
+                        controller.onGoToResetPassword()
                   ),
                 )
               ],

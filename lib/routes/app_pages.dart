@@ -14,6 +14,8 @@ import '../pages/onboarding/onboarding_page.dart';
 import '../pages/otpverification/otp_verification_page.dart';
 import '../pages/register/register_bindings.dart';
 import '../pages/register/register_page.dart';
+import '../pages/resetpassword/reset_password_bindings.dart';
+import '../pages/resetpassword/reset_password_page.dart';
 import '../pages/splash/splash_bindings.dart';
 import '../pages/splash/splash_page.dart';
 
@@ -21,8 +23,8 @@ part 'app_routes.dart';
 
 class AppPages {
   // initial route
-  static String initialRoute = _Path.dashboard;
-  static Bindings initialBinding = DashboardBindings();
+  static String initialRoute = _Path.splash;
+  static Bindings initialBinding = SplashBindings();
 
   static final List<GetPage<dynamic>> pages = [
     /// splash page
@@ -65,6 +67,13 @@ class AppPages {
       name: _Path.otpVerification,
       page: () => const OtpVerificationPage(),
       binding: OtpVerificationBindings(),
+    ),
+
+    /// reset password page
+    GetPage(
+      name: _Path.resetPassword,
+      page: () => const ResetPasswordPage(),
+      binding: ResetPasswordBindings(),
     ),
 
     /// add new address page
