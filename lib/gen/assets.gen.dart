@@ -120,6 +120,22 @@ class $AssetsImagesSvgGen {
   SvgGenImage get asisteeLogoWithText =>
       const SvgGenImage('assets/images/svg/asistee_logo_with_text.svg');
 
+  /// File path: assets/images/svg/bnv-home.svg
+  SvgGenImage get bnvHome =>
+      const SvgGenImage('assets/images/svg/bnv-home.svg');
+
+  /// File path: assets/images/svg/bnv-my-bookings.svg
+  SvgGenImage get bnvMyBookings =>
+      const SvgGenImage('assets/images/svg/bnv-my-bookings.svg');
+
+  /// File path: assets/images/svg/bnv-my-routes.svg
+  SvgGenImage get bnvMyRoutes =>
+      const SvgGenImage('assets/images/svg/bnv-my-routes.svg');
+
+  /// File path: assets/images/svg/bnv-settings.svg
+  SvgGenImage get bnvSettings =>
+      const SvgGenImage('assets/images/svg/bnv-settings.svg');
+
   /// File path: assets/images/svg/call.svg
   SvgGenImage get call => const SvgGenImage('assets/images/svg/call.svg');
 
@@ -235,6 +251,10 @@ class $AssetsImagesSvgGen {
     arrowDown,
     asisteeLogoWhiteWithText,
     asisteeLogoWithText,
+    bnvHome,
+    bnvMyBookings,
+    bnvMyRoutes,
+    bnvSettings,
     call,
     camera,
     checkBoxChecked,
