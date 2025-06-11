@@ -12,7 +12,7 @@ import 'package:project_structure/gen/assets.gen.dart';
 import 'package:project_structure/gen/fonts.gen.dart';
 import 'package:retrofit/http.dart';
 
-import '../../core/widgets/custom/custom_header_with_back_button.dart';
+import '../../core/widgets/custom/custom_auth_header_with_back_button.dart';
 import 'forgot_password_controller.dart';
 
 class ForgotPasswordPage extends GetView<ForgotPasswordController> {
@@ -47,7 +47,7 @@ class ForgotPasswordPage extends GetView<ForgotPasswordController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Header with back button and titles
-                      CustomHeaderWithBackButton(
+                      CustomAuthHeaderWithBackButton(
                         title: "Forgot Password",
                         description:
                             "Don't worry, Just enter your Number\nand will send you the password recovery link",

@@ -9,7 +9,7 @@ import 'package:project_structure/core/widgets/app_button.dart';
 import 'package:project_structure/core/widgets/app_text_field.dart';
 import 'package:project_structure/core/widgets/app_text_field_label.dart';
 import 'package:project_structure/core/widgets/custom/custom_back_button.dart';
-import 'package:project_structure/core/widgets/custom/custom_header_with_back_button.dart';
+import 'package:project_structure/core/widgets/custom/custom_auth_header_with_back_button.dart';
 import 'package:project_structure/core/widgets/custom/custom_tag_button.dart';
 import 'package:project_structure/core/widgets/custom/custom_text_filed.dart';
 import 'package:project_structure/gen/assets.gen.dart';
@@ -45,7 +45,7 @@ class OtpVerificationPage extends GetView<OtpVerificationController> {
               children: [
                 // Main content column with horizontal padding
                 // Header with back button and titles
-                CustomHeaderWithBackButton(
+                CustomAuthHeaderWithBackButton(
                   title: "Verification",
                   description:
                       "Enter the 6 Digit OTP received on your\nregistered Email or Phone.",

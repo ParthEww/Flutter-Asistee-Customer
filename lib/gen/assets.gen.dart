@@ -72,6 +72,9 @@ class $AssetsImagesPngGen {
 class $AssetsImagesSvgGen {
   const $AssetsImagesSvgGen();
 
+  /// File path: assets/images/svg/add.svg
+  SvgGenImage get add => const SvgGenImage('assets/images/svg/add.svg');
+
   /// File path: assets/images/svg/address-field-block.svg
   SvgGenImage get addressFieldBlock =>
       const SvgGenImage('assets/images/svg/address-field-block.svg');
@@ -135,6 +138,12 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/bnv-settings.svg
   SvgGenImage get bnvSettings =>
       const SvgGenImage('assets/images/svg/bnv-settings.svg');
+
+  /// File path: assets/images/svg/bus-18.svg
+  SvgGenImage get bus18 => const SvgGenImage('assets/images/svg/bus-18.svg');
+
+  /// File path: assets/images/svg/bus.svg
+  SvgGenImage get bus => const SvgGenImage('assets/images/svg/bus.svg');
 
   /// File path: assets/images/svg/calendar.svg
   SvgGenImage get calendar =>
@@ -217,6 +226,9 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/line-2.svg
   SvgGenImage get line2 => const SvgGenImage('assets/images/svg/line-2.svg');
 
+  /// File path: assets/images/svg/line-3.svg
+  SvgGenImage get line3 => const SvgGenImage('assets/images/svg/line-3.svg');
+
   /// File path: assets/images/svg/line_sign_in_continue_with.svg
   SvgGenImage get lineSignInContinueWith =>
       const SvgGenImage('assets/images/svg/line_sign_in_continue_with.svg');
@@ -252,6 +264,10 @@ class $AssetsImagesSvgGen {
   SvgGenImage get route20 =>
       const SvgGenImage('assets/images/svg/route-20.svg');
 
+  /// File path: assets/images/svg/route_16.svg
+  SvgGenImage get route16 =>
+      const SvgGenImage('assets/images/svg/route_16.svg');
+
   /// File path: assets/images/svg/search-24.svg
   SvgGenImage get search24 =>
       const SvgGenImage('assets/images/svg/search-24.svg');
@@ -276,6 +292,7 @@ class $AssetsImagesSvgGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+    add,
     addressFieldBlock,
     addressFieldBuildingName,
     addressFieldDescription,
@@ -292,6 +309,8 @@ class $AssetsImagesSvgGen {
     bnvMyBookings,
     bnvMyRoutes,
     bnvSettings,
+    bus18,
+    bus,
     calendar,
     call,
     camera,
@@ -315,6 +334,7 @@ class $AssetsImagesSvgGen {
     googleLogin,
     line1,
     line2,
+    line3,
     lineSignInContinueWith,
     location,
     notification,
@@ -324,6 +344,7 @@ class $AssetsImagesSvgGen {
     rectangle,
     repeat,
     route20,
+    route16,
     search24,
     searchCancel,
     search,

@@ -21,7 +21,7 @@ import 'package:project_structure/services/google_place/google_place_model.dart'
 import 'package:retrofit/http.dart';
 
 import '../../core/widgets/bottom_sheet/common_dropdown_selection_bottom_sheet.dart';
-import '../../core/widgets/custom/custom_header_with_back_button.dart';
+import '../../core/widgets/custom/custom_auth_header_with_back_button.dart';
 import 'add_new_address_controller.dart';
 
 class AddNewAddressPage extends GetView<AddNewAddressController> {

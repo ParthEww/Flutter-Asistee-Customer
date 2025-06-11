@@ -18,12 +18,14 @@ import '../../core/enum/app_status.dart';
 import '../../core/utils/app_logger.dart';
 
 import '../../core/utils/dialog_utils.dart';
+import '../../gen/assets.gen.dart';
 import '../../localization/app_strings.dart';
 import '../../repository/local_repository/local_repository.dart';
 import '../../repository/remote_repository/remote_repository.dart';
 import '../../routes/app_pages.dart';
 
-class DashboardController extends GetxController {
+class DashboardController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   final _localRepository = Get.find<LocalRepository>();
   final _remoteRepository = Get.find<RemoteRepository>();
 
@@ -32,8 +34,16 @@ class DashboardController extends GetxController {
   final TextEditingController searchController = TextEditingController();
 
   AppStatus appStatus = AppStatus.normal;
-  RxInt activeIndex = 0.obs;
-  RxList<Widget> dashboardPageList = <Widget>[const HomePage(), const MyBookingsPage(), const MyRoutesPage(), const SettingsPage()].obs;
+  RxInt activeBottomBarIndex = 1.obs;
+  RxList<Widget> dashboardPageList = <Widget>[
+    const HomePage(),
+    const MyBookingsPage(),
+    const MyRoutesPage(),
+    const SettingsPage()
+  ].obs;
+  Rx<BookingStatusType> activeTabBarBookingStatus = BookingStatusType.ONGOING.obs;
+  final List<BookingStatusType> myBookingsTabList = [BookingStatusType.ONGOING, BookingStatusType.UPCOMING, BookingStatusType.PAST];
+  final List<BookingStatusType> myRootsTabList = [BookingStatusType.REQUEST_ROUTE];
 
   @override
   void onInit() {
@@ -88,5 +98,26 @@ class DashboardController extends GetxController {
       isOnboard: true,
     ),
   ].obs;
+}
 
+// BookingStatusType class
+class BookingStatusType {
+  static final UPCOMING = BookingStatusType(id: 1, title: "Upcoming", apiStatus: "upcoming");
+  static final ONGOING = BookingStatusType(id: 1, title: "Ongoing", apiStatus: "ongoing");
+  static final COMPLETED = BookingStatusType(id: 1, title: "Completed", apiStatus: "completed");
+  static final CANCELLED = BookingStatusType(id: 1, title: "Cancelled", apiStatus: "cancelled");
+  static final PAST = BookingStatusType(id: 1, title: "Past", apiStatus: "completed");
+  static final REQUEST_ROUTE = BookingStatusType(id: 1, title: "Request Route", apiStatus: "pending", icon: Assets.images.svg.add.path);
+
+  final int id;
+  final String title;
+  final String apiStatus;
+  final String? icon;
+
+  const BookingStatusType({
+    required this.id,
+    required this.title,
+    required this.apiStatus,
+    this.icon,
+  });
 }

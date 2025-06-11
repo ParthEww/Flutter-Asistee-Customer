@@ -14,7 +14,7 @@ import 'package:project_structure/core/widgets/custom/custom_text_filed.dart';
 import 'package:project_structure/gen/assets.gen.dart';
 import 'package:project_structure/gen/fonts.gen.dart';
 
-import '../../core/widgets/custom/custom_header_with_back_button.dart';
+import '../../core/widgets/custom/custom_auth_header_with_back_button.dart';
 import 'register_controller.dart';
 
 class RegisterPage extends GetView<RegisterController> {
@@ -48,7 +48,7 @@ class RegisterPage extends GetView<RegisterController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Header with back button and titles
-                    CustomHeaderWithBackButton(
+                    CustomAuthHeaderWithBackButton(
                       title: "Register",
                       description:
                           "Please provide us your basic details below\nand get into the system",

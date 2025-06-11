@@ -7,7 +7,7 @@ import 'package:project_structure/core/widgets/app_button.dart';
 import 'package:project_structure/core/widgets/app_text_field.dart';
 import 'package:project_structure/core/widgets/app_text_field_label.dart';
 import 'package:project_structure/core/widgets/custom/custom_back_button.dart';
-import 'package:project_structure/core/widgets/custom/custom_header_with_back_button.dart';
+import 'package:project_structure/core/widgets/custom/custom_auth_header_with_back_button.dart';
 import 'package:project_structure/core/widgets/custom/custom_tag_button.dart';
 import 'package:project_structure/core/widgets/custom/custom_text_filed.dart';
 import 'package:project_structure/gen/assets.gen.dart';
@@ -44,7 +44,7 @@ class LoginPage extends GetView<LoginController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Header with back button and titles
-                      CustomHeaderWithBackButton(
+                      CustomAuthHeaderWithBackButton(
                         title: "Sign In",
                         description: "Please provide us your basic details below\nand get into the system",
                       ),

@@ -7,13 +7,13 @@ import '../../themes/app_colors.dart';
 import '../../themes/text_styles.dart';
 import 'custom_back_button.dart';
 
-class CustomHeaderWithBackButton extends StatelessWidget {
+class CustomAuthHeaderWithBackButton extends StatelessWidget {
   final String title;
   final String description;
   final bool isShowBackButton;
   final VoidCallback? onBackButtonTap;
 
-  const CustomHeaderWithBackButton(
+  const CustomAuthHeaderWithBackButton(
       {super.key,
       required this.title,
       required this.description,

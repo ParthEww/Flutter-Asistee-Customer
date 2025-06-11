@@ -12,7 +12,7 @@ import 'package:project_structure/gen/assets.gen.dart';
 import 'package:project_structure/gen/fonts.gen.dart';
 import 'package:retrofit/http.dart';
 
-import '../../core/widgets/custom/custom_header_with_back_button.dart';
+import '../../core/widgets/custom/custom_auth_header_with_back_button.dart';
 import 'dashboard_controller.dart';
 
 class DashboardPage extends GetView<DashboardController> {
@@ -23,7 +23,7 @@ class DashboardPage extends GetView<DashboardController> {
     return Obx(() => Scaffold(
           backgroundColor: AppColors.white,
           body: controller.dashboardPageList
-              .elementAt(controller.activeIndex.value),
+              .elementAt(controller.activeBottomBarIndex.value),
           bottomNavigationBar: buildBottomNavigationBar(),
         ));
   }
@@ -69,12 +69,12 @@ class DashboardPage extends GetView<DashboardController> {
   Widget buildNavigationItems({required int index, required String icon}) {
     return Obx(() => GestureDetector(
           onTap: () {
-            if (controller.activeIndex.value != index) {
-              controller.activeIndex.value = index;
+            if (controller.activeBottomBarIndex.value != index) {
+              controller.activeBottomBarIndex.value = index;
             }
           },
           child: Stack(alignment: Alignment.center, children: [
-            if (controller.activeIndex.value == index) ...[
+            if (controller.activeBottomBarIndex.value == index) ...[
               Container(
                 width: 52,
                 height: 52,
