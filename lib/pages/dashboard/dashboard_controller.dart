@@ -34,7 +34,7 @@ class DashboardController extends GetxController
   final TextEditingController searchController = TextEditingController();
 
   AppStatus appStatus = AppStatus.normal;
-  RxInt activeBottomBarIndex = 1.obs;
+  Rx<BottomNavigationScreenType> activeBottomNavigationScreenType = BottomNavigationScreenType.HOME.obs;
   RxList<Widget> dashboardPageList = <Widget>[
     const HomePage(),
     const MyBookingsPage(),
@@ -98,6 +98,17 @@ class DashboardController extends GetxController
       isOnboard: true,
     ),
   ].obs;
+}
+
+enum BottomNavigationScreenType {
+  HOME(page: 0),
+  MY_BOOKINGS(page: 1),
+  MY_ROUTES(page: 2),
+  SETTINGS(page: 3);
+
+  final int page;
+
+  const BottomNavigationScreenType({required this.page});
 }
 
 // BookingStatusType class

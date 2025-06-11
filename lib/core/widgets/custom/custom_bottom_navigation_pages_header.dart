@@ -25,7 +25,7 @@ class CustomBottomNavigationPagesHeader extends StatelessWidget {
           Positioned(
             right: 0,
             child: SvgPicture.asset(
-              Assets.images.svg.bus.path,
+              controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_BOOKINGS ? Assets.images.svg.bus.path : Assets.images.svg.route.path,
               fit: BoxFit.none,
             ),
           ),
@@ -35,11 +35,11 @@ class CustomBottomNavigationPagesHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  switch (controller.activeBottomBarIndex.value) {
-                    0 => "Home",
-                    1 => "My Bookings",
-                    2 => "My Routes",
-                    3 => "Settings",
+                  switch (controller.activeBottomNavigationScreenType.value) {
+                    BottomNavigationScreenType.HOME => "Home",
+                    BottomNavigationScreenType.MY_BOOKINGS => "My Bookings",
+                    BottomNavigationScreenType.MY_ROUTES => "My Routes",
+                    BottomNavigationScreenType.SETTINGS => "Settings",
                     _ => ""
                   },
                   style: TextStyles.text24SemiBold
@@ -67,11 +67,11 @@ class CustomBottomNavigationPagesHeader extends StatelessWidget {
                             ))),
                     child: Row(
                       children: List.generate(
-                        controller.activeBottomBarIndex.value == 1
+                        controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_BOOKINGS
                             ? controller.myBookingsTabList.length
                             : controller.myRootsTabList.length,
                         (index) => buildTabView(
-                            controller.activeBottomBarIndex.value == 1
+                            controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_BOOKINGS
                                 ? controller.myBookingsTabList[index]
                                 : controller.myRootsTabList[index]),
                       ),
@@ -89,14 +89,14 @@ class CustomBottomNavigationPagesHeader extends StatelessWidget {
       return Expanded(
         child: GestureDetector(
           onTap: () => {
-            if (controller.activeTabBarBookingStatus.value != type)
+            if (controller.activeTabBarBookingStatus.value != type && controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_BOOKINGS)
               {controller.activeTabBarBookingStatus.value = type}
           },
           child: Column(
             children: [
               const SizedBox(height: 15),
               Center(
-                child: controller.activeBottomBarIndex.value == 1
+                child: controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_BOOKINGS
                     ? Text(
                         type.title,
                         style: TextStyles.text16SemiBold.copyWith(
@@ -118,7 +118,7 @@ class CustomBottomNavigationPagesHeader extends StatelessWidget {
                                 color: AppColors.deepNavy.withOpacityPrecise(
                                     controller.activeTabBarBookingStatus
                                                 .value ==
-                                            type
+                                            type || controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_ROUTES
                                         ? 1
                                         : 0.6)),
                           ),
@@ -126,15 +126,17 @@ class CustomBottomNavigationPagesHeader extends StatelessWidget {
                       ),
               ),
               const SizedBox(height: 15),
-              Container(
-                height: 3,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(2),
-                  color: controller.activeTabBarBookingStatus.value == type
-                      ? AppColors.primary
-                      : AppColors.transparent,
-                ),
-              )
+              if(controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_BOOKINGS) ...[
+                Container(
+                  height: 3,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(2),
+                    color: controller.activeTabBarBookingStatus.value == type
+                        ? AppColors.primary
+                        : AppColors.transparent,
+                  ),
+                )
+              ]
             ],
           ),
         ),

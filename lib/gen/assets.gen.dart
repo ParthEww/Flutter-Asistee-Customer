@@ -264,6 +264,9 @@ class $AssetsImagesSvgGen {
   SvgGenImage get route20 =>
       const SvgGenImage('assets/images/svg/route-20.svg');
 
+  /// File path: assets/images/svg/route.svg
+  SvgGenImage get route => const SvgGenImage('assets/images/svg/route.svg');
+
   /// File path: assets/images/svg/route_16.svg
   SvgGenImage get route16 =>
       const SvgGenImage('assets/images/svg/route_16.svg');
@@ -344,6 +347,7 @@ class $AssetsImagesSvgGen {
     rectangle,
     repeat,
     route20,
+    route,
     route16,
     search24,
     searchCancel,

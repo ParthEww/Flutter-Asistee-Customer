@@ -23,7 +23,7 @@ class DashboardPage extends GetView<DashboardController> {
     return Obx(() => Scaffold(
           backgroundColor: AppColors.white,
           body: controller.dashboardPageList
-              .elementAt(controller.activeBottomBarIndex.value),
+              .elementAt(controller.activeBottomNavigationScreenType.value.page),
           bottomNavigationBar: buildBottomNavigationBar(),
         ));
   }
@@ -69,12 +69,12 @@ class DashboardPage extends GetView<DashboardController> {
   Widget buildNavigationItems({required int index, required String icon}) {
     return Obx(() => GestureDetector(
           onTap: () {
-            if (controller.activeBottomBarIndex.value != index) {
-              controller.activeBottomBarIndex.value = index;
+            if (controller.activeBottomNavigationScreenType.value.page != index) {
+              controller.activeBottomNavigationScreenType.value = BottomNavigationScreenType.values[index];
             }
           },
           child: Stack(alignment: Alignment.center, children: [
-            if (controller.activeBottomBarIndex.value == index) ...[
+            if (controller.activeBottomNavigationScreenType.value.page == index) ...[
               Container(
                 width: 52,
                 height: 52,
