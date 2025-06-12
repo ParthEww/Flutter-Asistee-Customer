@@ -16,39 +16,42 @@ class SettingsPage extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.primary,
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildHeaderSection(
-              onEditProfileCallBack: (){
-                controller.onGoToEditProfile();
-              }
-            ),
-            Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Column(
-                      children: [
-                        buildFirstSettingsSection(),
-                        const SizedBox(height: 16),
-                        buildSecondSettingsSection(),
-                        const SizedBox(height: 16),
-                        buildThirdSettingsSection(),
-                        const SizedBox(height: 32),
-                        Text(
-                          "App Version 1.0.0",
-                          style: TextStyles.text12SemiBold.copyWith(fontStyle: FontStyle.italic),
-                        ),
-                        const SizedBox(height: 18)
-                      ],
+        child: Container(
+          color: AppColors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              buildHeaderSection(
+                onEditProfileCallBack: (){
+                  controller.onGoToEditProfile();
+                }
+              ),
+              Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Column(
+                        children: [
+                          buildFirstSettingsSection(),
+                          const SizedBox(height: 16),
+                          buildSecondSettingsSection(),
+                          const SizedBox(height: 16),
+                          buildThirdSettingsSection(),
+                          const SizedBox(height: 32),
+                          Text(
+                            "App Version 1.0.0",
+                            style: TextStyles.text12SemiBold.copyWith(fontStyle: FontStyle.italic),
+                          ),
+                          const SizedBox(height: 18)
+                        ],
+                      ),
                     ),
-                  ),
-                )
-            )
-          ],
+                  )
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -25,135 +25,138 @@ class EditProfilePage extends GetView<EditProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.primary,
       body: SafeArea(
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              buildHeaderSection(),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Column(
-                      children: [
-                        // Full name input field
-                        CustomTextField(
-                          customTextFieldType: CustomTextFieldType.FULL_NAME,
-                          textEditingController: controller.fullNameController,
-                          focusNode: controller.fullNameFocusNode,
-                          nextFocusNode: controller.phoneNumberFocusNode,
-                          // Moves to phone number field on next
-                          hintText: "Full Name",
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
-                          suffixIcon: Assets.images.svg.fullName.path,
-                        ),
-                        const SizedBox(height: 18),
-                        // Phone number input field
-                        CustomTextField(
-                          customTextFieldType: CustomTextFieldType.PHONE_NUMBER,
-                          textEditingController: controller.phoneNumberController,
-                          focusNode: controller.phoneNumberFocusNode,
-                          nextFocusNode: controller.emailFocusNode,
-                          // Moves to email field on next
-                          hintText: "Phone Number",
-                          keyboardType: TextInputType.number,
-                          textInputAction: TextInputAction.next,
-                          suffixIcon: Assets.images.svg.call.path,
-                          onPressed: (){
-                            controller.onGoToOtpVerification();
-                          },
-                        ),
-                        const SizedBox(height: 18),
-                        // Email id input field
-                        CustomTextField(
-                          customTextFieldType: CustomTextFieldType.EMAIL,
-                          textEditingController: controller.emailController,
-                          focusNode: controller.emailFocusNode,
-                          nextFocusNode: controller.passwordFocusNode,
-                          // Moves to password field on next
-                          hintText: "Email ID",
-                          keyboardType: TextInputType.emailAddress,
-                          textInputAction: TextInputAction.next,
-                          suffixIcon: Assets.images.svg.email.path,
-                          onPressed: (){
-                            controller.onGoToOtpVerification();
-                          },
-                        ),
-                        const SizedBox(height: 18),
-                        // Password input field
-                        CustomTextField(
-                          customTextFieldType: CustomTextFieldType.PASSWORD,
-                          textEditingController: controller.passwordController,
-                          focusNode: controller.passwordFocusNode,
-                          nextFocusNode: controller.nationalIdFocusNode,
-                          // Moves to national id field on next
-                          hintText: "Password",
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
-                          suffixIcon: Assets.images.svg.passwordCheck.path,
-                        ),
-                        const SizedBox(height: 18),
-                        // Spacer
-                        // Nationality input field
-                        CustomTextField(
-                          customTextFieldType: CustomTextFieldType.NATIONALITY,
-                          textEditingController: controller.nationalityController,
-                          focusNode: controller.nationalityFocusNode,
-                          // Moves to area field on next
-                          hintText: "Your Nationality",
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
-                          suffixIcon: Assets.images.svg.dropDownArrow.path,
-                          onPressed: () {
-                            CommonDropdownSelectionBottomSheet.showBottomSheet(
-                                dialogType:
-                                CommonDropdownSelectionBottomSheetDialogType
-                                    .SELECT_NATIONALITY,
-                                commonList: controller.nationalityList);
-                          },
-                        ),
-                        const SizedBox(height: 18),
-                        // Spacer
-                        // Area input field
-                        CustomTextField(
-                          customTextFieldType: CustomTextFieldType.AREA,
-                          textEditingController: controller.areaController,
-                          focusNode: controller.areaFocusNode,
-                          hintText: "Area",
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.done,
-                          suffixIcon: Assets.images.svg.dropDownArrow.path,
-                          onPressed: () {
-                            CommonDropdownSelectionBottomSheet.showBottomSheet(
-                                dialogType:
-                                CommonDropdownSelectionBottomSheetDialogType
-                                    .SELECT_AREA,
-                                commonList: controller.areaList);
-                          },
-                        ),
-                      ],
+        child: Container(
+          color: AppColors.white,
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                buildHeaderSection(),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Column(
+                        children: [
+                          // Full name input field
+                          CustomTextField(
+                            customTextFieldType: CustomTextFieldType.FULL_NAME,
+                            textEditingController: controller.fullNameController,
+                            focusNode: controller.fullNameFocusNode,
+                            nextFocusNode: controller.phoneNumberFocusNode,
+                            // Moves to phone number field on next
+                            hintText: "Full Name",
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.next,
+                            suffixIcon: Assets.images.svg.fullName.path,
+                          ),
+                          const SizedBox(height: 18),
+                          // Phone number input field
+                          CustomTextField(
+                            customTextFieldType: CustomTextFieldType.PHONE_NUMBER,
+                            textEditingController: controller.phoneNumberController,
+                            focusNode: controller.phoneNumberFocusNode,
+                            nextFocusNode: controller.emailFocusNode,
+                            // Moves to email field on next
+                            hintText: "Phone Number",
+                            keyboardType: TextInputType.number,
+                            textInputAction: TextInputAction.next,
+                            suffixIcon: Assets.images.svg.call.path,
+                            onPressed: (){
+                              controller.onGoToOtpVerification();
+                            },
+                          ),
+                          const SizedBox(height: 18),
+                          // Email id input field
+                          CustomTextField(
+                            customTextFieldType: CustomTextFieldType.EMAIL,
+                            textEditingController: controller.emailController,
+                            focusNode: controller.emailFocusNode,
+                            nextFocusNode: controller.passwordFocusNode,
+                            // Moves to password field on next
+                            hintText: "Email ID",
+                            keyboardType: TextInputType.emailAddress,
+                            textInputAction: TextInputAction.next,
+                            suffixIcon: Assets.images.svg.email.path,
+                            onPressed: (){
+                              controller.onGoToOtpVerification();
+                            },
+                          ),
+                          const SizedBox(height: 18),
+                          // Password input field
+                          CustomTextField(
+                            customTextFieldType: CustomTextFieldType.PASSWORD,
+                            textEditingController: controller.passwordController,
+                            focusNode: controller.passwordFocusNode,
+                            nextFocusNode: controller.nationalIdFocusNode,
+                            // Moves to national id field on next
+                            hintText: "Password",
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.next,
+                            suffixIcon: Assets.images.svg.passwordCheck.path,
+                          ),
+                          const SizedBox(height: 18),
+                          // Spacer
+                          // Nationality input field
+                          CustomTextField(
+                            customTextFieldType: CustomTextFieldType.NATIONALITY,
+                            textEditingController: controller.nationalityController,
+                            focusNode: controller.nationalityFocusNode,
+                            // Moves to area field on next
+                            hintText: "Your Nationality",
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.next,
+                            suffixIcon: Assets.images.svg.dropDownArrow.path,
+                            onPressed: () {
+                              CommonDropdownSelectionBottomSheet.showBottomSheet(
+                                  dialogType:
+                                  CommonDropdownSelectionBottomSheetDialogType
+                                      .SELECT_NATIONALITY,
+                                  commonList: controller.nationalityList);
+                            },
+                          ),
+                          const SizedBox(height: 18),
+                          // Spacer
+                          // Area input field
+                          CustomTextField(
+                            customTextFieldType: CustomTextFieldType.AREA,
+                            textEditingController: controller.areaController,
+                            focusNode: controller.areaFocusNode,
+                            hintText: "Area",
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.done,
+                            suffixIcon: Assets.images.svg.dropDownArrow.path,
+                            onPressed: () {
+                              CommonDropdownSelectionBottomSheet.showBottomSheet(
+                                  dialogType:
+                                  CommonDropdownSelectionBottomSheetDialogType
+                                      .SELECT_AREA,
+                                  commonList: controller.areaList);
+                            },
+                          ),
+                        ],
+                      )
                     )
                   )
-                )
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: CustomTextField(
-                  customTextFieldType: CustomTextFieldType.BUTTON,
-                  textEditingController: TextEditingController(),
-                  focusNode: FocusNode(),
-                  hintText: "Register",
-                  keyboardType: TextInputType.visiblePassword,
-                  textInputAction: TextInputAction.done,
-                  suffixIcon: Assets.images.svg.arrowRightGreen.path,
-                  onPressed: () {
-                    Get.back();
-                  }, // TODO: Add sign in functionality
                 ),
-              ),
-            ]
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: CustomTextField(
+                    customTextFieldType: CustomTextFieldType.BUTTON,
+                    textEditingController: TextEditingController(),
+                    focusNode: FocusNode(),
+                    hintText: "Submit",
+                    keyboardType: TextInputType.visiblePassword,
+                    textInputAction: TextInputAction.done,
+                    suffixIcon: Assets.images.svg.arrowRightGreen.path,
+                    onPressed: () {
+                      Get.back();
+                    }, // TODO: Add sign in functionality
+                  ),
+                ),
+              ]
+          ),
         )
       ),
     );
