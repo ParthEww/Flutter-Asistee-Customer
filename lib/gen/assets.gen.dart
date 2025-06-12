@@ -39,6 +39,10 @@ class $AssetsImagesPngGen {
   AssetGenImage get closeUpBus =>
       const AssetGenImage('assets/images/png/close_up_bus.png');
 
+  /// File path: assets/images/png/dummy-profile-image.png
+  AssetGenImage get dummyProfileImage =>
+      const AssetGenImage('assets/images/png/dummy-profile-image.png');
+
   /// File path: assets/images/png/map_view.png
   AssetGenImage get mapView =>
       const AssetGenImage('assets/images/png/map_view.png');
@@ -62,6 +66,7 @@ class $AssetsImagesPngGen {
   List<AssetGenImage> get values => [
     asisteeLogoWhiteWithText,
     closeUpBus,
+    dummyProfileImage,
     mapView,
     onboardImg1,
     onboardImg2,
@@ -177,6 +182,10 @@ class $AssetsImagesSvgGen {
   SvgGenImage get dropDownArrow =>
       const SvgGenImage('assets/images/svg/drop-down-arrow.svg');
 
+  /// File path: assets/images/svg/edit-pen.svg
+  SvgGenImage get editPen =>
+      const SvgGenImage('assets/images/svg/edit-pen.svg');
+
   /// File path: assets/images/svg/ellipse-dot.svg
   SvgGenImage get ellipseDot =>
       const SvgGenImage('assets/images/svg/ellipse-dot.svg');
@@ -245,6 +254,10 @@ class $AssetsImagesSvgGen {
   SvgGenImage get passwordCheck =>
       const SvgGenImage('assets/images/svg/password-check.svg');
 
+  /// File path: assets/images/svg/profile-settings.svg
+  SvgGenImage get profileSettings =>
+      const SvgGenImage('assets/images/svg/profile-settings.svg');
+
   /// File path: assets/images/svg/radio-selected.svg
   SvgGenImage get radioSelected =>
       const SvgGenImage('assets/images/svg/radio-selected.svg');
@@ -281,6 +294,50 @@ class $AssetsImagesSvgGen {
 
   /// File path: assets/images/svg/search.svg
   SvgGenImage get search => const SvgGenImage('assets/images/svg/search.svg');
+
+  /// File path: assets/images/svg/settings-about-us.svg
+  SvgGenImage get settingsAboutUs =>
+      const SvgGenImage('assets/images/svg/settings-about-us.svg');
+
+  /// File path: assets/images/svg/settings-admin-chat.svg
+  SvgGenImage get settingsAdminChat =>
+      const SvgGenImage('assets/images/svg/settings-admin-chat.svg');
+
+  /// File path: assets/images/svg/settings-contact-us.svg
+  SvgGenImage get settingsContactUs =>
+      const SvgGenImage('assets/images/svg/settings-contact-us.svg');
+
+  /// File path: assets/images/svg/settings-delete-account.svg
+  SvgGenImage get settingsDeleteAccount =>
+      const SvgGenImage('assets/images/svg/settings-delete-account.svg');
+
+  /// File path: assets/images/svg/settings-faqs.svg
+  SvgGenImage get settingsFaqs =>
+      const SvgGenImage('assets/images/svg/settings-faqs.svg');
+
+  /// File path: assets/images/svg/settings-logout.svg
+  SvgGenImage get settingsLogout =>
+      const SvgGenImage('assets/images/svg/settings-logout.svg');
+
+  /// File path: assets/images/svg/settings-my-address.svg
+  SvgGenImage get settingsMyAddress =>
+      const SvgGenImage('assets/images/svg/settings-my-address.svg');
+
+  /// File path: assets/images/svg/settings-notifications.svg
+  SvgGenImage get settingsNotifications =>
+      const SvgGenImage('assets/images/svg/settings-notifications.svg');
+
+  /// File path: assets/images/svg/settings-privacy-policy.svg
+  SvgGenImage get settingsPrivacyPolicy =>
+      const SvgGenImage('assets/images/svg/settings-privacy-policy.svg');
+
+  /// File path: assets/images/svg/settings-terms-and-conditions.svg
+  SvgGenImage get settingsTermsAndConditions =>
+      const SvgGenImage('assets/images/svg/settings-terms-and-conditions.svg');
+
+  /// File path: assets/images/svg/settings-wallet.svg
+  SvgGenImage get settingsWallet =>
+      const SvgGenImage('assets/images/svg/settings-wallet.svg');
 
   /// File path: assets/images/svg/upload-image-dialog.svg
   SvgGenImage get uploadImageDialog =>
@@ -323,6 +380,7 @@ class $AssetsImagesSvgGen {
     cpr,
     doubleArrowRight,
     dropDownArrow,
+    editPen,
     ellipseDot,
     ellipseGradient,
     email,
@@ -342,6 +400,7 @@ class $AssetsImagesSvgGen {
     location,
     notification,
     passwordCheck,
+    profileSettings,
     radioSelected,
     radioUnselected,
     rectangle,
@@ -352,6 +411,17 @@ class $AssetsImagesSvgGen {
     search24,
     searchCancel,
     search,
+    settingsAboutUs,
+    settingsAdminChat,
+    settingsContactUs,
+    settingsDeleteAccount,
+    settingsFaqs,
+    settingsLogout,
+    settingsMyAddress,
+    settingsNotifications,
+    settingsPrivacyPolicy,
+    settingsTermsAndConditions,
+    settingsWallet,
     uploadImageDialog,
     uploadImage,
   ];

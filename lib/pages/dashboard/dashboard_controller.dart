@@ -34,7 +34,7 @@ class DashboardController extends GetxController
   final TextEditingController searchController = TextEditingController();
 
   AppStatus appStatus = AppStatus.normal;
-  Rx<BottomNavigationScreenType> activeBottomNavigationScreenType = BottomNavigationScreenType.HOME.obs;
+  Rx<BottomNavigationScreenType> activeBottomNavigationScreenType = BottomNavigationScreenType.SETTINGS.obs;
   RxList<Widget> dashboardPageList = <Widget>[
     const HomePage(),
     const MyBookingsPage(),
@@ -44,6 +44,23 @@ class DashboardController extends GetxController
   Rx<BookingStatusType> activeTabBarBookingStatus = BookingStatusType.ONGOING.obs;
   final List<BookingStatusType> myBookingsTabList = [BookingStatusType.ONGOING, BookingStatusType.UPCOMING, BookingStatusType.PAST];
   final List<BookingStatusType> myRootsTabList = [BookingStatusType.REQUEST_ROUTE];
+  final List<SettingFieldType> firstSettingsList = [
+    SettingFieldType.WALLET,
+    SettingFieldType.ADMIN_CHAT,
+    SettingFieldType.MY_ADDRESS,
+    SettingFieldType.NOTIFICATIONS,
+  ];
+  final List<SettingFieldType> secondSettingsList = [
+    SettingFieldType.ABOUT_US,
+    SettingFieldType.CONTACT_US,
+    SettingFieldType.FAQS,
+    SettingFieldType.TERMS_AND_CONDITIONS,
+    SettingFieldType.PRIVACY_POLICY,
+  ];
+  final List<SettingFieldType> thirdSettingsList = [
+    SettingFieldType.LOGOUT,
+    SettingFieldType.DELETE_ACCOUNT
+  ];
 
   @override
   void onInit() {
@@ -142,5 +159,28 @@ class BookingStatusType {
     required this.title,
     required this.apiStatus,
     this.icon,
+  });
+}
+
+// SettingFieldType class
+class SettingFieldType {
+  static final WALLET = SettingFieldType(icon: Assets.images.svg.settingsWallet.path, title: "Wallet");
+  static final ADMIN_CHAT = SettingFieldType(icon: Assets.images.svg.settingsAdminChat.path, title: "Admin Chat");
+  static final MY_ADDRESS = SettingFieldType(icon: Assets.images.svg.settingsMyAddress.path, title: "My Address");
+  static final NOTIFICATIONS = SettingFieldType(icon: Assets.images.svg.settingsNotifications.path, title: "Notifications");
+  static final ABOUT_US = SettingFieldType(icon: Assets.images.svg.settingsAboutUs.path, title: "About US");
+  static final CONTACT_US = SettingFieldType(icon: Assets.images.svg.settingsContactUs.path, title: "Contact Us");
+  static final FAQS = SettingFieldType(icon: Assets.images.svg.settingsFaqs.path, title: "FAQs");
+  static final TERMS_AND_CONDITIONS = SettingFieldType(icon: Assets.images.svg.settingsTermsAndConditions.path, title: "Terms & Conditions");
+  static final PRIVACY_POLICY = SettingFieldType(icon: Assets.images.svg.settingsPrivacyPolicy.path, title: "Privacy policy");
+  static final LOGOUT = SettingFieldType(icon: Assets.images.svg.settingsLogout.path, title: "Logout");
+  static final DELETE_ACCOUNT = SettingFieldType(icon: Assets.images.svg.settingsDeleteAccount.path, title: "Delete Account");
+
+  final String icon;
+  final String title;
+
+  const SettingFieldType({
+    required this.icon,
+    required this.title,
   });
 }
