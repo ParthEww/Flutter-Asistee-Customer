@@ -56,6 +56,7 @@ class HomePage extends GetView<DashboardController> {
                                 repeatText: "Weekly Recuring, Repeat after 2 weeks Weekly Recuring, Repeat after 2 weeks",
                                 distanceDuration: "60Km - 2:30 Hrs",
                                 routeNumber: "Route no. 12356",
+                                  requestType: controller.routeDataList[index].requestType.orEmpty(),
                                   bottomNavigationScreenType: controller.activeBottomNavigationScreenType.value,
                                 ),
                               )),

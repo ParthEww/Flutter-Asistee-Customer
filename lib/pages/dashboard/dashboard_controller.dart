@@ -62,6 +62,7 @@ class DashboardController extends GetxController
       endTime: '09:30 AM',
       approxDuration: '1.5 hours',
       approxDistance: '25 km',
+      requestType: "1",
       routeStops: [
         RouteStop(
           stopName: 'Central Station',
@@ -83,6 +84,7 @@ class DashboardController extends GetxController
       endTime: '07:00 PM',
       approxDuration: '1.5 hours',
       approxDistance: '25 km',
+      requestType: "2",
       routeStops: [
         RouteStop(
           stopName: 'Downtown Plaza',
@@ -109,6 +111,16 @@ enum BottomNavigationScreenType {
   final int page;
 
   const BottomNavigationScreenType({required this.page});
+}
+
+enum RouteRequestType {
+  ONE_TIME(id: "1", title: "One Time"),
+  RECURRING(id: "2", title: "Recurring");
+
+  final String id;
+  final String title;
+
+  const RouteRequestType({required this.id, required this.title});
 }
 
 // BookingStatusType class

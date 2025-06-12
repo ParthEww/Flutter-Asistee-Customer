@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:project_structure/core/themes/app_colors.dart';
@@ -20,12 +21,24 @@ class DashboardPage extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Scaffold(
-          backgroundColor: AppColors.white,
-          body: controller.dashboardPageList
-              .elementAt(controller.activeBottomNavigationScreenType.value.page),
-          bottomNavigationBar: buildBottomNavigationBar(),
-        ));
+    return Obx(() => PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) async{
+        if (!didPop) {
+          if(controller.activeBottomNavigationScreenType.value != BottomNavigationScreenType.HOME){
+              controller.activeBottomNavigationScreenType.value = BottomNavigationScreenType.HOME;
+          }else{
+            SystemNavigator.pop();
+          }
+        }
+      },
+      child: Scaffold(
+            backgroundColor: AppColors.white,
+            body: controller.dashboardPageList
+                .elementAt(controller.activeBottomNavigationScreenType.value.page),
+            bottomNavigationBar: buildBottomNavigationBar(),
+          ),
+    ));
   }
 
   Widget buildBottomNavigationBar() {

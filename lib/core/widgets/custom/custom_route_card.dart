@@ -17,6 +17,7 @@ class CustomRouteCard extends StatelessWidget {
   final String repeatText;
   final String distanceDuration;
   final String routeNumber;
+  final String requestType;
   final BottomNavigationScreenType bottomNavigationScreenType;
 
   const CustomRouteCard({
@@ -29,6 +30,7 @@ class CustomRouteCard extends StatelessWidget {
     required this.repeatText,
     required this.distanceDuration,
     required this.routeNumber,
+    required this.requestType,
     required this.bottomNavigationScreenType
   }) : super(key: key);
 
@@ -129,7 +131,7 @@ class CustomRouteCard extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 24),
-          child: SvgPicture.asset(Assets.images.svg.line1.path),
+          child: SvgPicture.asset(Assets.images.svg.line1.path, height: requestType == RouteRequestType.RECURRING.id ? 90 : 75),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 13, top: 13),
@@ -146,12 +148,14 @@ class CustomRouteCard extends StatelessWidget {
                 text: timeRange,
                 iconBgColor: AppColors.lightSkyBlue,
               ),
-              const SizedBox(height: 4),
-              _buildDetailRow(
-                iconPath: Assets.images.svg.repeat.path,
-                text: repeatText,
-                iconBgColor: AppColors.primary,
-              ),
+              if(requestType == RouteRequestType.RECURRING.id) ...[
+                const SizedBox(height: 4),
+                _buildDetailRow(
+                  iconPath: Assets.images.svg.repeat.path,
+                  text: repeatText,
+                  iconBgColor: AppColors.primary,
+                )
+              ]
             ],
           ),
         ),
