@@ -67,8 +67,8 @@ class DashboardController extends GetxController
     super.onInit();
   }
 
-  void onGoToOtpVerification() async {
-    Get.toNamed(Routes.otpVerification);
+  void onGoToEditProfile() async {
+    Get.toNamed(Routes.editProfile);
   }
 
   final RxList<RouteData> routeDataList = <RouteData>[

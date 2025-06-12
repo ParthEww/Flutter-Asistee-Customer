@@ -10,6 +10,7 @@ abstract class Routes {
   static const String resetPassword = _Path.resetPassword;
   static const String addNewAddress = _Path.addNewAddress;
   static const String dashboard = _Path.dashboard;
+  static const String editProfile = _Path.editProfile;
 }
 
 abstract class _Path {
@@ -22,4 +23,5 @@ abstract class _Path {
   static const String resetPassword = "/resetPassword";
   static const String addNewAddress = "/addNewAddress";
   static const String dashboard = "/dashboard";
+  static const String editProfile = "/editProfile";
 }

@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
 import 'package:project_structure/pages/addnewaddress/add_new_address_bindings.dart';
 import 'package:project_structure/pages/dashboard/dashboard_bindings.dart';
+import 'package:project_structure/pages/editprofile/edit_profile_bindings.dart';
 import 'package:project_structure/pages/login/login_bindings.dart';
 import 'package:project_structure/pages/login/login_page.dart';
 import 'package:project_structure/pages/otpverification/otp_verification_bindings.dart';
 
 import '../pages/addnewaddress/add_new_address_page.dart';
 import '../pages/dashboard/dashboard_page.dart';
+import '../pages/editprofile/edit_profile_page.dart';
 import '../pages/forgotpassword/forgot_password_bindings.dart';
 import '../pages/forgotpassword/forgot_password_page.dart';
 import '../pages/onboarding/onboarding_bindings.dart';
@@ -88,6 +90,13 @@ class AppPages {
       name: _Path.dashboard,
       page: () => const DashboardPage(),
       binding: DashboardBindings(),
+    ),
+
+    /// edit profile page
+    GetPage(
+      name: _Path.editProfile,
+      page: () => const EditProfilePage(),
+      binding: EditProfileBindings(),
     ),
   ];
 }

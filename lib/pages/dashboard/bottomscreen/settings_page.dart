@@ -19,9 +19,13 @@ class SettingsPage extends GetView<DashboardController> {
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            buildHeaderSection(),
+            buildHeaderSection(
+              onEditProfileCallBack: (){
+                controller.onGoToEditProfile();
+              }
+            ),
             Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
@@ -32,7 +36,13 @@ class SettingsPage extends GetView<DashboardController> {
                         const SizedBox(height: 16),
                         buildSecondSettingsSection(),
                         const SizedBox(height: 16),
-                        buildThirdSettingsSection()
+                        buildThirdSettingsSection(),
+                        const SizedBox(height: 32),
+                        Text(
+                          "App Version 1.0.0",
+                          style: TextStyles.text12SemiBold.copyWith(fontStyle: FontStyle.italic),
+                        ),
+                        const SizedBox(height: 18)
                       ],
                     ),
                   ),
@@ -44,7 +54,7 @@ class SettingsPage extends GetView<DashboardController> {
     );
   }
 
-  Widget buildHeaderSection(){
+  Widget buildHeaderSection({required VoidCallback onEditProfileCallBack}){
     return Container(
       height: Get.height * 0.35,
       color: AppColors.white,
@@ -54,7 +64,7 @@ class SettingsPage extends GetView<DashboardController> {
             Positioned(
               top: 0,
               width: Get.width,
-              height: Get.height * 0.3 * 0.6,
+              height: Get.height * 0.35 * 0.5,
               child: Container(
                 color: AppColors.primary,
                 child: Padding(
@@ -100,11 +110,13 @@ class SettingsPage extends GetView<DashboardController> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 24),
+              padding: const EdgeInsets.only(left: 24, right: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
+                    width: 100,
+                    height: 100,
                     decoration: BoxDecoration(
                         color: AppColors.lightBlue,
                         borderRadius: BorderRadius.circular(32),
@@ -114,6 +126,8 @@ class SettingsPage extends GetView<DashboardController> {
                         )
                     ),
                     child: Container(
+                      width: 100,
+                        height: 100,
                         padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(32),
@@ -134,28 +148,31 @@ class SettingsPage extends GetView<DashboardController> {
                             width: 6
                         )
                     ),
-                    child: Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.only(left: 4, top: 4, right: 12, bottom: 4),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(32),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomCircleIcon(
-                              iconPath: Assets.images.svg.editPen.path,
-                              padding: const EdgeInsets.only(left: 7, top: 7, right: 9, bottom: 9),
-                              backgroundColor: AppColors.white,
-                            ),
-                            const SizedBox(width: 8),
-                            Text(
-                              "Edit Profile",
-                              style: TextStyles.text12SemiBold,
-                            )
-                          ],
-                        )
+                    child: GestureDetector(
+                      onTap: onEditProfileCallBack,
+                      child: Container(
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.only(left: 4, top: 4, right: 12, bottom: 4),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(32),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomCircleIcon(
+                                iconPath: Assets.images.svg.editPen.path,
+                                padding: const EdgeInsets.only(left: 7, top: 7, right: 9, bottom: 9),
+                                backgroundColor: AppColors.white,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                "Edit Profile",
+                                style: TextStyles.text12SemiBold,
+                              )
+                            ],
+                          )
+                      ),
                     ),
                   )
                 ],
