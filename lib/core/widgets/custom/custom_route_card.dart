@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project_structure/core/themes/app_colors.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
+import 'package:project_structure/pages/dashboard/dashboard_controller.dart';
 
 import '../../../gen/assets.gen.dart';
 import '../../themes/text_styles.dart';
@@ -16,6 +17,7 @@ class CustomRouteCard extends StatelessWidget {
   final String repeatText;
   final String distanceDuration;
   final String routeNumber;
+  final BottomNavigationScreenType bottomNavigationScreenType;
 
   const CustomRouteCard({
     Key? key,
@@ -27,6 +29,7 @@ class CustomRouteCard extends StatelessWidget {
     required this.repeatText,
     required this.distanceDuration,
     required this.routeNumber,
+    required this.bottomNavigationScreenType
   }) : super(key: key);
 
   @override
@@ -181,7 +184,20 @@ class CustomRouteCard extends StatelessWidget {
   }
 
   Widget _buildFooterRow() {
-    return Row(
+    return bottomNavigationScreenType == BottomNavigationScreenType.MY_ROUTES ?
+    Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      decoration: BoxDecoration(
+        color: AppColors.lightBlue,
+        borderRadius: const BorderRadius.all(Radius.circular(51)),
+      ),
+      child: Text(
+        "Pending Approval",
+        style: TextStyles.text16Regular.copyWith(color: AppColors.deepNavy),
+      ),
+    ) :
+    Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
