@@ -136,7 +136,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         contentPadding:
             widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
                 ? const EdgeInsets.only(left: 18, top: 11, bottom: 11)
-                : const EdgeInsets.only(left: 22, top: 18, bottom: 18),
+                : EdgeInsets.only(left: widget.customTextFieldType != CustomTextFieldType.BUTTON ? 22 : 32, top: 18, bottom: 18),
         counter: const SizedBox.shrink(),
         // Hide counter but keep space
         filled: true,

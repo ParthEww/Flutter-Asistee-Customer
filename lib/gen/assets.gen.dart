@@ -153,6 +153,9 @@ class $AssetsImagesSvgGen {
   SvgGenImage get bnvSettings =>
       const SvgGenImage('assets/images/svg/bnv-settings.svg');
 
+  /// File path: assets/images/svg/bus-16.svg
+  SvgGenImage get bus16 => const SvgGenImage('assets/images/svg/bus-16.svg');
+
   /// File path: assets/images/svg/bus-18.svg
   SvgGenImage get bus18 => const SvgGenImage('assets/images/svg/bus-18.svg');
 
@@ -400,6 +403,7 @@ class $AssetsImagesSvgGen {
     bnvMyBookings,
     bnvMyRoutes,
     bnvSettings,
+    bus16,
     bus18,
     bus,
     calendar,

@@ -8,6 +8,8 @@ import 'package:project_structure/pages/otpverification/otp_verification_binding
 import 'package:project_structure/pages/pickupdropoff/pickup_drop_off_bindings.dart';
 
 import '../pages/addnewaddress/add_new_address_page.dart';
+import '../pages/bookingsummary/booking_summary_bindings.dart';
+import '../pages/bookingsummary/booking_summary_page.dart';
 import '../pages/dashboard/dashboard_page.dart';
 import '../pages/editprofile/edit_profile_page.dart';
 import '../pages/forgotpassword/forgot_password_bindings.dart';
@@ -29,8 +31,8 @@ part 'app_routes.dart';
 
 class AppPages {
   // initial route
-  static String initialRoute = _Path.pickupDropOff;
-  static Bindings initialBinding = PickupDropOffBindings();
+  static String initialRoute = _Path.bookingSummary;
+  static Bindings initialBinding = BookingSummaryBindings();
 
   static final List<GetPage<dynamic>> pages = [
     /// splash page
@@ -115,6 +117,13 @@ class AppPages {
       name: _Path.pickupDropOff,
       page: () => const PickupDropOffPage(),
       binding: PickupDropOffBindings(),
+    ),
+
+    /// booking summary page
+    GetPage(
+      name: _Path.bookingSummary,
+      page: () => const BookingSummaryPage(),
+      binding: BookingSummaryBindings(),
     ),
   ];
 }
