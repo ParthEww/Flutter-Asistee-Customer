@@ -478,7 +478,7 @@ class TripDetailPage extends GetView<TripDetailController> {
         customTextFieldType: CustomTextFieldType.BUTTON,
         textEditingController: TextEditingController(),
         focusNode: FocusNode(),
-        hintText: "Submit",
+        hintText: "Proceed",
         keyboardType: TextInputType.none,
         textInputAction: TextInputAction.done,
         suffixIcon: Assets.images.svg.arrowRightGreen.path,

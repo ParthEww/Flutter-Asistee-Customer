@@ -258,6 +258,9 @@ class $AssetsImagesSvgGen {
   SvgGenImage get location =>
       const SvgGenImage('assets/images/svg/location.svg');
 
+  /// File path: assets/images/svg/map.svg
+  SvgGenImage get map => const SvgGenImage('assets/images/svg/map.svg');
+
   /// File path: assets/images/svg/notification.svg
   SvgGenImage get notification =>
       const SvgGenImage('assets/images/svg/notification.svg');
@@ -427,6 +430,7 @@ class $AssetsImagesSvgGen {
     line4,
     lineSignInContinueWith,
     location,
+    map,
     notification,
     numberPlate,
     passwordCheck,
