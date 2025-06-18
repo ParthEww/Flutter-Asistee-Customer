@@ -4,7 +4,7 @@ import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
 
 import '../../../core/themes/app_colors.dart';
-import '../../../core/widgets/custom/custom_bottom_navigation_pages_header.dart';
+import '../../../core/widgets/custom/custom_header_with_tab.dart';
 import '../../../core/widgets/custom/custom_route_card.dart';
 import '../dashboard_controller.dart';
 
@@ -20,7 +20,7 @@ class MyRoutesPage extends GetView<DashboardController> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomBottomNavigationPagesHeader(controller: controller),
+            CustomHeaderWithTab(controller: controller, isBnvHeader: true),
             Expanded(
                 child: Container(
               color: AppColors.white,

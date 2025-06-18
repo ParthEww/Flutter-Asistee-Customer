@@ -13,20 +13,22 @@ class CustomHeader extends StatelessWidget {
   final String subTitle;
   final bool isShowBackButton;
   final bool isShowSubtitle;
+  final bool isHorizontalPaddingApply;
   final VoidCallback? onBackButtonTap;
 
   const CustomHeader(
       {super.key,
       required this.title,
-      required this.subTitle,
+      this.subTitle = "",
       this.isShowBackButton = false,
       this.isShowSubtitle = false,
+      this.isHorizontalPaddingApply = true,
       this.onBackButtonTap});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 24, top: 22, right: 24),
+      padding: EdgeInsets.only(left: isHorizontalPaddingApply ? 24 : 0, top: 22, right: isHorizontalPaddingApply ? 24 : 0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -7,8 +7,8 @@ import 'package:project_structure/core/utils/app_extension.dart';
 import 'package:project_structure/gen/assets.gen.dart';
 
 import '../../../core/themes/app_colors.dart';
-import '../../../core/widgets/custom/custom_bottom_navigation_pages_header.dart';
-import '../../../core/widgets/custom/custom_bottom_navigation_pages_header.dart';
+import '../../../core/widgets/custom/custom_header_with_tab.dart';
+import '../../../core/widgets/custom/custom_header_with_tab.dart';
 import '../../../core/widgets/custom/custom_ongoing_route_card.dart';
 import '../../../core/widgets/custom/custom_route_card.dart';
 import '../dashboard_controller.dart';
@@ -25,7 +25,7 @@ class MyBookingsPage extends GetView<DashboardController> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomBottomNavigationPagesHeader(controller: controller),
+            CustomHeaderWithTab(controller: controller, isBnvHeader: true),
             Expanded(
                 child: Container(
               color: AppColors.white,

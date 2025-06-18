@@ -65,6 +65,11 @@ class DashboardController extends GetxController
     BookingStatusType.REQUEST_ROUTE
   ];
 
+  final List<BookingStatusType> pickupDropOffTabList = [
+    BookingStatusType.PICK_UP,
+    BookingStatusType.DROP_OFF
+  ];
+
   // Settings sections
   final List<SettingFieldType> firstSettingsList = [
     SettingFieldType.WALLET,
@@ -210,6 +215,20 @@ class BookingStatusType {
       id: 1,
       title: "Request Route",
       apiStatus: "pending",
+      icon: Assets.images.svg.add.path
+  );
+
+  static final PICK_UP = BookingStatusType(
+      id: 1,
+      title: "Pickup",
+      apiStatus: "pickup",
+      icon: Assets.images.svg.add.path
+  );
+
+  static final DROP_OFF = BookingStatusType(
+      id: 1,
+      title: "Drop-off",
+      apiStatus: "drop-off",
       icon: Assets.images.svg.add.path
   );
 
