@@ -22,7 +22,7 @@ class CustomHeaderWithTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 24),
+      padding: EdgeInsets.only(top: isBnvHeader ? 24 : 0),
       child: Stack(
         children: [
           // Decorative background icon (changes based on active screen)
