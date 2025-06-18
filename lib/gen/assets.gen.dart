@@ -35,6 +35,10 @@ class $AssetsImagesPngGen {
   AssetGenImage get asisteeLogoWhiteWithText =>
       const AssetGenImage('assets/images/png/asistee_logo_white_with_text.png');
 
+  /// File path: assets/images/png/bus-in-trip-detail.png
+  AssetGenImage get busInTripDetail =>
+      const AssetGenImage('assets/images/png/bus-in-trip-detail.png');
+
   /// File path: assets/images/png/close_up_bus.png
   AssetGenImage get closeUpBus =>
       const AssetGenImage('assets/images/png/close_up_bus.png');
@@ -65,6 +69,7 @@ class $AssetsImagesPngGen {
   /// List of all assets
   List<AssetGenImage> get values => [
     asisteeLogoWhiteWithText,
+    busInTripDetail,
     closeUpBus,
     dummyProfileImage,
     mapView,
@@ -127,6 +132,10 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/asistee_logo_with_text.svg
   SvgGenImage get asisteeLogoWithText =>
       const SvgGenImage('assets/images/svg/asistee_logo_with_text.svg');
+
+  /// File path: assets/images/svg/available-seat.svg
+  SvgGenImage get availableSeat =>
+      const SvgGenImage('assets/images/svg/available-seat.svg');
 
   /// File path: assets/images/svg/bnv-home.svg
   SvgGenImage get bnvHome =>
@@ -238,6 +247,9 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/line-3.svg
   SvgGenImage get line3 => const SvgGenImage('assets/images/svg/line-3.svg');
 
+  /// File path: assets/images/svg/line-4.svg
+  SvgGenImage get line4 => const SvgGenImage('assets/images/svg/line-4.svg');
+
   /// File path: assets/images/svg/line_sign_in_continue_with.svg
   SvgGenImage get lineSignInContinueWith =>
       const SvgGenImage('assets/images/svg/line_sign_in_continue_with.svg');
@@ -249,6 +261,10 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/notification.svg
   SvgGenImage get notification =>
       const SvgGenImage('assets/images/svg/notification.svg');
+
+  /// File path: assets/images/svg/number-plate.svg
+  SvgGenImage get numberPlate =>
+      const SvgGenImage('assets/images/svg/number-plate.svg');
 
   /// File path: assets/images/svg/password-check.svg
   SvgGenImage get passwordCheck =>
@@ -272,6 +288,14 @@ class $AssetsImagesSvgGen {
 
   /// File path: assets/images/svg/repeat.svg
   SvgGenImage get repeat => const SvgGenImage('assets/images/svg/repeat.svg');
+
+  /// File path: assets/images/svg/reserved-seat.svg
+  SvgGenImage get reservedSeat =>
+      const SvgGenImage('assets/images/svg/reserved-seat.svg');
+
+  /// File path: assets/images/svg/right-arrow-blue.svg
+  SvgGenImage get rightArrowBlue =>
+      const SvgGenImage('assets/images/svg/right-arrow-blue.svg');
 
   /// File path: assets/images/svg/route-20.svg
   SvgGenImage get route20 =>
@@ -339,6 +363,9 @@ class $AssetsImagesSvgGen {
   SvgGenImage get settingsWallet =>
       const SvgGenImage('assets/images/svg/settings-wallet.svg');
 
+  /// File path: assets/images/svg/smiley.svg
+  SvgGenImage get smiley => const SvgGenImage('assets/images/svg/smiley.svg');
+
   /// File path: assets/images/svg/upload-image-dialog.svg
   SvgGenImage get uploadImageDialog =>
       const SvgGenImage('assets/images/svg/upload-image-dialog.svg');
@@ -365,6 +392,7 @@ class $AssetsImagesSvgGen {
     arrowDown,
     asisteeLogoWhiteWithText,
     asisteeLogoWithText,
+    availableSeat,
     bnvHome,
     bnvMyBookings,
     bnvMyRoutes,
@@ -396,15 +424,19 @@ class $AssetsImagesSvgGen {
     line1,
     line2,
     line3,
+    line4,
     lineSignInContinueWith,
     location,
     notification,
+    numberPlate,
     passwordCheck,
     profileSettings,
     radioSelected,
     radioUnselected,
     rectangle,
     repeat,
+    reservedSeat,
+    rightArrowBlue,
     route20,
     route,
     route16,
@@ -422,6 +454,7 @@ class $AssetsImagesSvgGen {
     settingsPrivacyPolicy,
     settingsTermsAndConditions,
     settingsWallet,
+    smiley,
     uploadImageDialog,
     uploadImage,
   ];

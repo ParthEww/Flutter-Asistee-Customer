@@ -24,32 +24,55 @@ import '../../repository/local_repository/local_repository.dart';
 import '../../repository/remote_repository/remote_repository.dart';
 import '../../routes/app_pages.dart';
 
+/// Main controller for dashboard functionality
+/// Handles navigation state, tab management, and data for dashboard screens
 class DashboardController extends GetxController
     with GetSingleTickerProviderStateMixin {
+  // Dependencies
   final _localRepository = Get.find<LocalRepository>();
   final _remoteRepository = Get.find<RemoteRepository>();
 
-  // ----- [search] -----
+  // Search functionality
   FocusNode searchFocusNode = FocusNode();
   final TextEditingController searchController = TextEditingController();
 
+  // App state
   AppStatus appStatus = AppStatus.normal;
-  Rx<BottomNavigationScreenType> activeBottomNavigationScreenType = BottomNavigationScreenType.SETTINGS.obs;
+
+  // Navigation state
+  Rx<BottomNavigationScreenType> activeBottomNavigationScreenType =
+      BottomNavigationScreenType.HOME.obs;
+
+  // Dashboard pages
   RxList<Widget> dashboardPageList = <Widget>[
     const HomePage(),
     const MyBookingsPage(),
     const MyRoutesPage(),
     const SettingsPage()
   ].obs;
+
+  // Booking status tabs
   Rx<BookingStatusType> activeTabBarBookingStatus = BookingStatusType.ONGOING.obs;
-  final List<BookingStatusType> myBookingsTabList = [BookingStatusType.ONGOING, BookingStatusType.UPCOMING, BookingStatusType.PAST];
-  final List<BookingStatusType> myRootsTabList = [BookingStatusType.REQUEST_ROUTE];
+
+  // Tab lists
+  final List<BookingStatusType> myBookingsTabList = [
+    BookingStatusType.ONGOING,
+    BookingStatusType.UPCOMING,
+    BookingStatusType.PAST
+  ];
+
+  final List<BookingStatusType> myRootsTabList = [
+    BookingStatusType.REQUEST_ROUTE
+  ];
+
+  // Settings sections
   final List<SettingFieldType> firstSettingsList = [
     SettingFieldType.WALLET,
     SettingFieldType.ADMIN_CHAT,
     SettingFieldType.MY_ADDRESS,
     SettingFieldType.NOTIFICATIONS,
   ];
+
   final List<SettingFieldType> secondSettingsList = [
     SettingFieldType.ABOUT_US,
     SettingFieldType.CONTACT_US,
@@ -57,20 +80,13 @@ class DashboardController extends GetxController
     SettingFieldType.TERMS_AND_CONDITIONS,
     SettingFieldType.PRIVACY_POLICY,
   ];
+
   final List<SettingFieldType> thirdSettingsList = [
     SettingFieldType.LOGOUT,
     SettingFieldType.DELETE_ACCOUNT
   ];
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  void onGoToEditProfile() async {
-    Get.toNamed(Routes.editProfile);
-  }
-
+  // Sample route data
   final RxList<RouteData> routeDataList = <RouteData>[
     RouteData(
       routeName: 'Morning Commute',
@@ -117,8 +133,20 @@ class DashboardController extends GetxController
       isOnboard: true,
     ),
   ].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Initialize any required data
+  }
+
+  /// Navigates to edit profile screen
+  void onGoToEditProfile() async {
+    Get.toNamed(Routes.editProfile);
+  }
 }
 
+/// Enum for bottom navigation tabs
 enum BottomNavigationScreenType {
   HOME(page: 0),
   MY_BOOKINGS(page: 1),
@@ -130,6 +158,7 @@ enum BottomNavigationScreenType {
   const BottomNavigationScreenType({required this.page});
 }
 
+/// Enum for route request types
 enum RouteRequestType {
   ONE_TIME(id: "1", title: "One Time"),
   RECURRING(id: "2", title: "Recurring");
@@ -140,14 +169,44 @@ enum RouteRequestType {
   const RouteRequestType({required this.id, required this.title});
 }
 
-// BookingStatusType class
+/// Represents different booking status types
 class BookingStatusType {
-  static final UPCOMING = BookingStatusType(id: 1, title: "Upcoming", apiStatus: "upcoming");
-  static final ONGOING = BookingStatusType(id: 1, title: "Ongoing", apiStatus: "ongoing");
-  static final COMPLETED = BookingStatusType(id: 1, title: "Completed", apiStatus: "completed");
-  static final CANCELLED = BookingStatusType(id: 1, title: "Cancelled", apiStatus: "cancelled");
-  static final PAST = BookingStatusType(id: 1, title: "Past", apiStatus: "completed");
-  static final REQUEST_ROUTE = BookingStatusType(id: 1, title: "Request Route", apiStatus: "pending", icon: Assets.images.svg.add.path);
+  static final UPCOMING = BookingStatusType(
+      id: 1,
+      title: "Upcoming",
+      apiStatus: "upcoming"
+  );
+
+  static final ONGOING = BookingStatusType(
+      id: 1,
+      title: "Ongoing",
+      apiStatus: "ongoing"
+  );
+
+  static final COMPLETED = BookingStatusType(
+      id: 1,
+      title: "Completed",
+      apiStatus: "completed"
+  );
+
+  static final CANCELLED = BookingStatusType(
+      id: 1,
+      title: "Cancelled",
+      apiStatus: "cancelled"
+  );
+
+  static final PAST = BookingStatusType(
+      id: 1,
+      title: "Past",
+      apiStatus: "completed"
+  );
+
+  static final REQUEST_ROUTE = BookingStatusType(
+      id: 1,
+      title: "Request Route",
+      apiStatus: "pending",
+      icon: Assets.images.svg.add.path
+  );
 
   final int id;
   final String title;
@@ -162,19 +221,62 @@ class BookingStatusType {
   });
 }
 
-// SettingFieldType class
+/// Represents different settings fields
 class SettingFieldType {
-  static final WALLET = SettingFieldType(icon: Assets.images.svg.settingsWallet.path, title: "Wallet");
-  static final ADMIN_CHAT = SettingFieldType(icon: Assets.images.svg.settingsAdminChat.path, title: "Admin Chat");
-  static final MY_ADDRESS = SettingFieldType(icon: Assets.images.svg.settingsMyAddress.path, title: "My Address");
-  static final NOTIFICATIONS = SettingFieldType(icon: Assets.images.svg.settingsNotifications.path, title: "Notifications");
-  static final ABOUT_US = SettingFieldType(icon: Assets.images.svg.settingsAboutUs.path, title: "About US");
-  static final CONTACT_US = SettingFieldType(icon: Assets.images.svg.settingsContactUs.path, title: "Contact Us");
-  static final FAQS = SettingFieldType(icon: Assets.images.svg.settingsFaqs.path, title: "FAQs");
-  static final TERMS_AND_CONDITIONS = SettingFieldType(icon: Assets.images.svg.settingsTermsAndConditions.path, title: "Terms & Conditions");
-  static final PRIVACY_POLICY = SettingFieldType(icon: Assets.images.svg.settingsPrivacyPolicy.path, title: "Privacy policy");
-  static final LOGOUT = SettingFieldType(icon: Assets.images.svg.settingsLogout.path, title: "Logout");
-  static final DELETE_ACCOUNT = SettingFieldType(icon: Assets.images.svg.settingsDeleteAccount.path, title: "Delete Account");
+  static final WALLET = SettingFieldType(
+      icon: Assets.images.svg.settingsWallet.path,
+      title: "Wallet"
+  );
+
+  static final ADMIN_CHAT = SettingFieldType(
+      icon: Assets.images.svg.settingsAdminChat.path,
+      title: "Admin Chat"
+  );
+
+  static final MY_ADDRESS = SettingFieldType(
+      icon: Assets.images.svg.settingsMyAddress.path,
+      title: "My Address"
+  );
+
+  static final NOTIFICATIONS = SettingFieldType(
+      icon: Assets.images.svg.settingsNotifications.path,
+      title: "Notifications"
+  );
+
+  static final ABOUT_US = SettingFieldType(
+      icon: Assets.images.svg.settingsAboutUs.path,
+      title: "About US"
+  );
+
+  static final CONTACT_US = SettingFieldType(
+      icon: Assets.images.svg.settingsContactUs.path,
+      title: "Contact Us"
+  );
+
+  static final FAQS = SettingFieldType(
+      icon: Assets.images.svg.settingsFaqs.path,
+      title: "FAQs"
+  );
+
+  static final TERMS_AND_CONDITIONS = SettingFieldType(
+      icon: Assets.images.svg.settingsTermsAndConditions.path,
+      title: "Terms & Conditions"
+  );
+
+  static final PRIVACY_POLICY = SettingFieldType(
+      icon: Assets.images.svg.settingsPrivacyPolicy.path,
+      title: "Privacy policy"
+  );
+
+  static final LOGOUT = SettingFieldType(
+      icon: Assets.images.svg.settingsLogout.path,
+      title: "Logout"
+  );
+
+  static final DELETE_ACCOUNT = SettingFieldType(
+      icon: Assets.images.svg.settingsDeleteAccount.path,
+      title: "Delete Account"
+  );
 
   final String icon;
   final String title;

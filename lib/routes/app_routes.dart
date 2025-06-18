@@ -11,6 +11,7 @@ abstract class Routes {
   static const String addNewAddress = _Path.addNewAddress;
   static const String dashboard = _Path.dashboard;
   static const String editProfile = _Path.editProfile;
+  static const String tripDetail = _Path.tripDetail;
 }
 
 abstract class _Path {
@@ -24,4 +25,5 @@ abstract class _Path {
   static const String addNewAddress = "/addNewAddress";
   static const String dashboard = "/dashboard";
   static const String editProfile = "/editProfile";
+  static const String tripDetail = "/tripDetail";
 }

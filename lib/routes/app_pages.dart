@@ -20,13 +20,15 @@ import '../pages/resetpassword/reset_password_bindings.dart';
 import '../pages/resetpassword/reset_password_page.dart';
 import '../pages/splash/splash_bindings.dart';
 import '../pages/splash/splash_page.dart';
+import '../pages/tripdetail/trip_detail_bindings.dart';
+import '../pages/tripdetail/trip_detail_page.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   // initial route
-  static String initialRoute = _Path.dashboard;
-  static Bindings initialBinding = DashboardBindings();
+  static String initialRoute = _Path.splash;
+  static Bindings initialBinding = SplashBindings();
 
   static final List<GetPage<dynamic>> pages = [
     /// splash page
@@ -97,6 +99,13 @@ class AppPages {
       name: _Path.editProfile,
       page: () => const EditProfilePage(),
       binding: EditProfileBindings(),
+    ),
+
+    /// trip detail page
+    GetPage(
+      name: _Path.tripDetail,
+      page: () => const TripDetailPage(),
+      binding: TripDetailBindings(),
     ),
   ];
 }

@@ -227,7 +227,7 @@ class RegisterPage extends GetView<RegisterController> {
                       textEditingController: TextEditingController(),
                       focusNode: FocusNode(),
                       hintText: "Register",
-                      keyboardType: TextInputType.visiblePassword,
+                      keyboardType: TextInputType.none,
                       textInputAction: TextInputAction.done,
                       suffixIcon: Assets.images.svg.arrowRightGreen.path,
                       onPressed: () {

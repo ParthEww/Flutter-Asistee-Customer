@@ -120,7 +120,9 @@ class LoginPage extends GetView<LoginController> {
                         keyboardType: TextInputType.visiblePassword,
                         textInputAction: TextInputAction.done,
                         suffixIcon: Assets.images.svg.arrowRightGreen.path,
-                        onPressed: () {}, // TODO: Add sign in functionality
+                        onPressed: () {
+                          controller.onGoToDashboard();
+                        }, // TODO: Add sign in functionality
                       ),
                       const SizedBox(height: 28), // Spacer
 

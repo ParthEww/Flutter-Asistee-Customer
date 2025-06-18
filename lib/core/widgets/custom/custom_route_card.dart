@@ -9,6 +9,7 @@ import '../../themes/text_styles.dart';
 import 'custom_circle_icon.dart';
 
 class CustomRouteCard extends StatelessWidget {
+  // Card properties
   final String startLocation;
   final String endLocation;
   final String viaText;
@@ -31,45 +32,47 @@ class CustomRouteCard extends StatelessWidget {
     required this.distanceDuration,
     required this.routeNumber,
     required this.requestType,
-    required this.bottomNavigationScreenType
+    required this.bottomNavigationScreenType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.lightMint,
-        borderRadius: const BorderRadius.all(Radius.circular(24)),
-      ),
+          color: AppColors.lightMint,
+          borderRadius: const BorderRadius.all(Radius.circular(24))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Main content padding
           Padding(
             padding:
                 const EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Header Row with locations
+                // Header with start and end locations
                 _buildLocationRow(),
                 const SizedBox(height: 7),
-                // Details Stack with timeline
+                // Timeline with route details
                 _buildDetailsStack(),
               ],
             ),
           ),
-          // Footer with distance and route number
+          // Footer section with distance and route number
           _buildFooterRow(),
         ],
       ),
     );
   }
 
+  /// Builds the row containing start and end locations with route icon
   Widget _buildLocationRow() {
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        // Route icon
         CustomCircleIcon(
           iconPath: Assets.images.svg.route20.path,
           padding: const EdgeInsets.all(14),
@@ -81,6 +84,7 @@ class CustomRouteCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Start and end location with arrow
               Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -113,6 +117,7 @@ class CustomRouteCard extends StatelessWidget {
                   ),
                 ],
               ),
+              // Via text (intermediate stops)
               Text(
                 viaText,
                 style: TextStyles.text12Regular.copyWith(
@@ -126,29 +131,36 @@ class CustomRouteCard extends StatelessWidget {
     );
   }
 
+  /// Builds the vertical timeline with route details (date, time, repeat)
   Widget _buildDetailsStack() {
     return Stack(
       children: [
+        // Vertical line decoration
         Padding(
           padding: const EdgeInsets.only(left: 24),
-          child: SvgPicture.asset(Assets.images.svg.line1.path, height: requestType == RouteRequestType.RECURRING.id ? 90 : 75),
+          child: SvgPicture.asset(Assets.images.svg.line1.path,
+              height: requestType == RouteRequestType.RECURRING.id ? 90 : 75),
         ),
+        // Route details items
         Padding(
           padding: const EdgeInsets.only(left: 13, top: 13),
           child: Column(
             children: [
+              // Date range
               _buildDetailRow(
                 iconPath: Assets.images.svg.calendar.path,
                 text: dateRange,
                 iconBgColor: AppColors.lightSkyBlue,
               ),
               const SizedBox(height: 4),
+              // Time range
               _buildDetailRow(
                 iconPath: Assets.images.svg.clock.path,
                 text: timeRange,
                 iconBgColor: AppColors.lightSkyBlue,
               ),
-              if(requestType == RouteRequestType.RECURRING.id) ...[
+              // Repeat information (only for recurring routes)
+              if (requestType == RouteRequestType.RECURRING.id) ...[
                 const SizedBox(height: 4),
                 _buildDetailRow(
                   iconPath: Assets.images.svg.repeat.path,
@@ -163,6 +175,7 @@ class CustomRouteCard extends StatelessWidget {
     );
   }
 
+  /// Builds a single detail row with icon and text
   Widget _buildDetailRow({
     required String iconPath,
     required String text,
@@ -170,12 +183,14 @@ class CustomRouteCard extends StatelessWidget {
   }) {
     return Row(
       children: [
+        // Circular icon
         CustomCircleIcon(
           iconPath: iconPath,
           padding: const EdgeInsets.all(6),
           backgroundColor: iconBgColor,
         ),
         const SizedBox(width: 10),
+        // Detail text
         Expanded(
           child: Text(
             text,
@@ -187,52 +202,62 @@ class CustomRouteCard extends StatelessWidget {
     );
   }
 
+  /// Builds the footer section with different layouts based on screen type
   Widget _buildFooterRow() {
-    return bottomNavigationScreenType == BottomNavigationScreenType.MY_ROUTES ?
-    Container(
-      alignment: Alignment.center,
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      decoration: BoxDecoration(
-        color: AppColors.lightBlue,
-        borderRadius: const BorderRadius.all(Radius.circular(51)),
-      ),
-      child: Text(
-        "Pending Approval",
-        style: TextStyles.text16Regular.copyWith(color: AppColors.deepNavy),
-      ),
-    ) :
-    Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-            child: Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          decoration: BoxDecoration(
-            color: AppColors.lightBlue,
-            borderRadius: const BorderRadius.all(Radius.circular(24)),
-          ),
-          child: Text(
-            distanceDuration,
-            style: TextStyles.text16Regular.copyWith(color: AppColors.deepNavy),
-          ),
-        )),
-        const SizedBox(width: 8),
-        Expanded(
-          child: Container(
+    return bottomNavigationScreenType == BottomNavigationScreenType.MY_ROUTES
+        ?
+        // My Routes screen version (single centered text)
+        Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
-                color: AppColors.lightBlue,
-                borderRadius: const BorderRadius.all(Radius.circular(21))),
-            child: Text(
-              "Route no. $routeNumber",
-              style: TextStyles.text12SemiBold
-                  .copyWith(fontStyle: FontStyle.italic),
+              color: AppColors.lightBlue,
+              borderRadius: const BorderRadius.all(Radius.circular(51)),
             ),
-          ),
-        ),
-      ],
-    );
+            child: Text(
+              "Pending Approval",
+              style:
+                  TextStyles.text16Regular.copyWith(color: AppColors.deepNavy),
+            ),
+          )
+        :
+        // Other screens version (split between distance and route number)
+        Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Distance and duration
+              Expanded(
+                  child: Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                decoration: BoxDecoration(
+                  color: AppColors.lightBlue,
+                  borderRadius: const BorderRadius.all(Radius.circular(24)),
+                ),
+                child: Text(
+                  distanceDuration,
+                  style: TextStyles.text16Regular
+                      .copyWith(color: AppColors.deepNavy),
+                ),
+              )),
+              const SizedBox(width: 8),
+              // Route number
+              Expanded(
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  decoration: BoxDecoration(
+                      color: AppColors.lightBlue,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(21))),
+                  child: Text(
+                    "Route no. $routeNumber",
+                    style: TextStyles.text12SemiBold
+                        .copyWith(fontStyle: FontStyle.italic),
+                  ),
+                ),
+              ),
+            ],
+          );
   }
 }

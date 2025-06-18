@@ -22,18 +22,24 @@ class CustomBottomNavigationPagesHeader extends StatelessWidget {
       padding: const EdgeInsets.only(top: 24),
       child: Stack(
         children: [
+          // Decorative background icon (changes based on active screen)
           Positioned(
             right: 0,
             child: SvgPicture.asset(
-              controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_BOOKINGS ? Assets.images.svg.bus.path : Assets.images.svg.route.path,
+              controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_BOOKINGS
+                  ? Assets.images.svg.bus.path
+                  : Assets.images.svg.route.path,
               fit: BoxFit.none,
             ),
           ),
+
+          // Main content with title and tab bar
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Screen title (changes based on active screen)
                 Text(
                   switch (controller.activeBottomNavigationScreenType.value) {
                     BottomNavigationScreenType.HOME => "Home",
@@ -42,35 +48,28 @@ class CustomBottomNavigationPagesHeader extends StatelessWidget {
                     BottomNavigationScreenType.SETTINGS => "Settings",
                     _ => ""
                   },
-                  style: TextStyles.text24SemiBold
-                      .copyWith(color: AppColors.white),
+                  style: TextStyles.text24SemiBold.copyWith(color: AppColors.white),
                 ),
                 const SizedBox(height: 28),
+
+                // Tab bar container with custom border styling
                 Container(
                     decoration: BoxDecoration(
                         color: AppColors.lightBlue,
                         borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(38),
                             topRight: Radius.circular(38)),
-                        border: Border(
-                            left: BorderSide(
-                              color: AppColors.white,
-                              width: 6,
-                            ),
-                            top: BorderSide(
-                              color: AppColors.white,
-                              width: 6,
-                            ),
-                            right: BorderSide(
-                              color: AppColors.white,
-                              width: 6,
-                            ))),
+                        border: Border.all(
+                          color: AppColors.white,
+                          width: 6,
+                        )),
                     child: Row(
                       children: List.generate(
+                        // Generate tabs based on current screen type
                         controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_BOOKINGS
                             ? controller.myBookingsTabList.length
                             : controller.myRootsTabList.length,
-                        (index) => buildTabView(
+                            (index) => buildTabView(
                             controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_BOOKINGS
                                 ? controller.myBookingsTabList[index]
                                 : controller.myRootsTabList[index]),
@@ -84,12 +83,15 @@ class CustomBottomNavigationPagesHeader extends StatelessWidget {
     );
   }
 
+  /// Builds an individual tab view item with interactive styling
   Widget buildTabView(BookingStatusType type) {
     return Obx(() {
       return Expanded(
         child: GestureDetector(
           onTap: () => {
-            if (controller.activeTabBarBookingStatus.value != type && controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_BOOKINGS)
+            // Update active tab only for My Bookings screen
+            if (controller.activeTabBarBookingStatus.value != type &&
+                controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_BOOKINGS)
               {controller.activeTabBarBookingStatus.value = type}
           },
           child: Column(
@@ -97,35 +99,35 @@ class CustomBottomNavigationPagesHeader extends StatelessWidget {
               const SizedBox(height: 15),
               Center(
                 child: controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_BOOKINGS
-                    ? Text(
-                        type.title,
-                        style: TextStyles.text16SemiBold.copyWith(
-                            color: AppColors.deepNavy.withOpacityPrecise(
-                                controller.activeTabBarBookingStatus.value ==
-                                        type
-                                    ? 1
-                                    : 0.6)),
-                      )
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (type.icon != null) SvgPicture.asset(type.icon!),
-                          const SizedBox(width: 12),
-                          Text(
-                            type.title,
-                            style: TextStyles.text16SemiBold.copyWith(
-                                color: AppColors.deepNavy.withOpacityPrecise(
-                                    controller.activeTabBarBookingStatus
-                                                .value ==
-                                            type || controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_ROUTES
-                                        ? 1
-                                        : 0.6)),
-                          ),
-                        ],
-                      ),
+                    ? // Text-only tab for My Bookings
+                Text(
+                  type.title,
+                  style: TextStyles.text16SemiBold.copyWith(
+                      color: AppColors.deepNavy.withOpacityPrecise(
+                          controller.activeTabBarBookingStatus.value == type ? 1 : 0.6)),
+                )
+                    : // Icon + Text tab for other screens
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (type.icon != null) SvgPicture.asset(type.icon!),
+                    const SizedBox(width: 12),
+                    Text(
+                      type.title,
+                      style: TextStyles.text16SemiBold.copyWith(
+                          color: AppColors.deepNavy.withOpacityPrecise(
+                              controller.activeTabBarBookingStatus.value == type ||
+                                  controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_ROUTES
+                                  ? 1
+                                  : 0.6)),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 15),
+
+              // Active tab indicator (only for My Bookings screen)
               if(controller.activeBottomNavigationScreenType.value == BottomNavigationScreenType.MY_BOOKINGS) ...[
                 Container(
                   height: 3,
