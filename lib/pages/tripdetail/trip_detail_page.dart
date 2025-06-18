@@ -10,6 +10,7 @@ import 'package:project_structure/core/widgets/app_button.dart';
 import 'package:project_structure/core/widgets/app_text_field.dart';
 import 'package:project_structure/core/widgets/app_text_field_label.dart';
 import 'package:project_structure/core/widgets/app_text_field_required_label.dart';
+import 'package:project_structure/core/widgets/custom/custom_header.dart';
 import 'package:project_structure/core/widgets/custom/custom_tag_button.dart';
 import 'package:project_structure/core/widgets/custom/custom_text_filed.dart';
 import 'package:project_structure/gen/assets.gen.dart';
@@ -78,34 +79,14 @@ class TripDetailPage extends GetView<TripDetailController> {
   Widget _buildAppBar() {
     return Container(
       color: AppColors.primary,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 24, top: 22, right: 24),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomBackButton(onBackButtonTap: Get.back),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    "Trip Route Detail",
-                    style: TextStyles.text18SemiBold
-                        .copyWith(color: AppColors.white),
-                  ),
-                  Text(
-                    "Route no. 12356",
-                    style: TextStyles.text12SemiBold.copyWith(
-                      color: AppColors.white.withOpacityPrecise(0.6),
-                      fontStyle: FontStyle.italic,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
+      child: CustomHeader(
+        title: "Trip Details",
+        subTitle: "Route no. 123456",
+        isShowSubtitle: true,
+        isShowBackButton: true,
+        onBackButtonTap: () {
+          Get.back();
+        }
       ),
     );
   }
