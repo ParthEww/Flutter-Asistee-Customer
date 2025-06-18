@@ -144,6 +144,11 @@ class DashboardController extends GetxController
   void onGoToEditProfile() async {
     Get.toNamed(Routes.editProfile);
   }
+
+  /// Navigates to trip detail screen
+  void onGoToTripDetail() async {
+    Get.toNamed(Routes.tripDetail);
+  }
 }
 
 /// Enum for bottom navigation tabs

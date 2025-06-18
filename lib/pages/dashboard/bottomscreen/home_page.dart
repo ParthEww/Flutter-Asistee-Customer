@@ -74,6 +74,9 @@ class HomePage extends GetView<DashboardController> {
                                       bottomNavigationScreenType: controller
                                           .activeBottomNavigationScreenType
                                           .value,
+                                      onTap: () {
+                                        controller.onGoToTripDetail();
+                                      }
                                     ),
                                   )),
                               childCount: controller.routeDataList.length,

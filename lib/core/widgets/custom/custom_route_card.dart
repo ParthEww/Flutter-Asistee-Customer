@@ -20,6 +20,7 @@ class CustomRouteCard extends StatelessWidget {
   final String routeNumber;
   final String requestType;
   final BottomNavigationScreenType bottomNavigationScreenType;
+  final VoidCallback onTap;
 
   const CustomRouteCard({
     Key? key,
@@ -33,35 +34,39 @@ class CustomRouteCard extends StatelessWidget {
     required this.routeNumber,
     required this.requestType,
     required this.bottomNavigationScreenType,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: AppColors.lightMint,
-          borderRadius: const BorderRadius.all(Radius.circular(24))),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Main content padding
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Header with start and end locations
-                _buildLocationRow(),
-                const SizedBox(height: 7),
-                // Timeline with route details
-                _buildDetailsStack(),
-              ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+            color: AppColors.lightMint,
+            borderRadius: const BorderRadius.all(Radius.circular(24))),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Main content padding
+            Padding(
+              padding:
+                  const EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Header with start and end locations
+                  _buildLocationRow(),
+                  const SizedBox(height: 7),
+                  // Timeline with route details
+                  _buildDetailsStack(),
+                ],
+              ),
             ),
-          ),
-          // Footer section with distance and route number
-          _buildFooterRow(),
-        ],
+            // Footer section with distance and route number
+            _buildFooterRow(),
+          ],
+        ),
       ),
     );
   }

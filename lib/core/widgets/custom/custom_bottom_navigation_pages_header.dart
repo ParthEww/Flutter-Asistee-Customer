@@ -59,10 +59,19 @@ class CustomBottomNavigationPagesHeader extends StatelessWidget {
                         borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(38),
                             topRight: Radius.circular(38)),
-                        border: Border.all(
-                          color: AppColors.white,
-                          width: 6,
-                        )),
+                        border: Border(
+                            left: BorderSide(
+                              color: AppColors.white,
+                              width: 6,
+                            ),
+                            top: BorderSide(
+                              color: AppColors.white,
+                              width: 6,
+                            ),
+                            right: BorderSide(
+                              color: AppColors.white,
+                              width: 6,
+                            ))),
                     child: Row(
                       children: List.generate(
                         // Generate tabs based on current screen type
