@@ -3,9 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:project_structure/core/themes/app_colors.dart';
 import 'package:project_structure/core/themes/text_styles.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
+import 'package:project_structure/core/utils/app_methods.dart';
 import 'package:project_structure/core/widgets/app_button.dart';
 import 'package:project_structure/core/widgets/app_text_field.dart';
 import 'package:project_structure/core/widgets/app_text_field_label.dart';
@@ -16,6 +18,7 @@ import 'package:project_structure/core/widgets/custom/custom_text_filed.dart';
 import 'package:project_structure/gen/assets.gen.dart';
 import 'package:project_structure/gen/fonts.gen.dart';
 import 'package:retrofit/http.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 import '../../api/model/static/address_type.dart';
 import '../../core/widgets/custom/custom_auth_header_with_back_button.dart';
@@ -92,29 +95,32 @@ class BookingSummaryPage extends GetView<BookingSummaryController> {
   /// Builds the main scrollable content
   Widget _buildScrollableContent() {
     return Padding(
-      padding: const EdgeInsets.only(top: 30),
+      padding: const EdgeInsets.only(left: 24, top: 30, right: 24),
       child: SingleChildScrollView(
         child: Column(
           children: [
             // Bus details card
             _buildBusDetailsCard(),
-
             const SizedBox(height: 18),
-
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Container(
-                    width: Get.width,
-                    padding: const EdgeInsets.only(
-                        left: 24, top: 8, right: 8, bottom: 8),
-                    decoration: BoxDecoration(
-                      color: AppColors.lightMint,
-                      borderRadius: BorderRadius.circular(82),
-                    ))),
-            // Seat selection card
-            _buildSeatSelectionCard(),
-
-            const SizedBox(height: 14),
+            // number of seat card
+            _buildNumberOfSeatsCard(),
+            const SizedBox(height: 18),
+            // Booking type and calendar preview card
+            _buildBookingTypeWithCalendarPreview(),
+            const SizedBox(height: 18),
+            // Promo code car
+            _buildPromoCodeCard(),
+            const SizedBox(height: 18),
+            // Price detail card
+            _buildPriceDetailCard(),
+            const SizedBox(height: 36),
+            Text(
+              "The total booking amount will be deducted from your walled after completion of the Trip.",
+              style: TextStyles.text12Regular.copyWith(
+                  color: AppColors.primary.withOpacityPrecise(0.6),
+                  fontStyle: FontStyle.italic),
+            ),
+            const SizedBox(height: 12),
           ],
         ),
       ),
@@ -123,497 +129,172 @@ class BookingSummaryPage extends GetView<BookingSummaryController> {
 
   /// Builds the bus details section with white card
   Widget _buildBusDetailsCard() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Container(
-        width: Get.width,
-        decoration: BoxDecoration(
-          color: AppColors.lightBlue,
-          borderRadius: BorderRadius.circular(32),
-          border: Border.all(color: AppColors.white, width: 6),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 18),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Bus info section
-              // _buildBusInfoSection(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomCircleIcon(
-                        iconPath: Assets.images.svg.calendar.path,
-                        padding: const EdgeInsets.all(6),
-                        backgroundColor: AppColors.lightMint,
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Text(
-                          "4th July 2024",
-                          style: TextStyles.text12SemiBold.copyWith(
-                              color:
-                                  AppColors.deepNavy.withOpacityPrecise(0.6)),
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 6, horizontal: 14),
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(21)),
-                        ),
-                        child: Text(
-                          "BD 30/-",
-                          style: TextStyles.text12SemiBold,
-                        ),
-                      )
-                    ]),
-              ),
-              const SizedBox(height: 24),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
-                child: SvgPicture.asset(
-                    width: Get.width, Assets.images.svg.line4.path),
-              ),
-              const SizedBox(height: 32),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
-                child: Row(
+    return Container(
+      width: Get.width,
+      decoration: BoxDecoration(
+        color: AppColors.lightBlue,
+        borderRadius: BorderRadius.circular(32),
+        border: Border.all(color: AppColors.white, width: 6),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Bus info section
+            // _buildBusInfoSection(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    CustomCircleIcon(
+                      iconPath: Assets.images.svg.calendar.path,
+                      padding: const EdgeInsets.all(6),
+                      backgroundColor: AppColors.lightMint,
+                    ),
+                    const SizedBox(width: 10),
                     Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Manama",
-                            maxLines: 2,
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyles.text18SemiBold
-                                .copyWith(color: AppColors.deepNavy),
-                          ),
-                          Text(
-                            "10:00 AM",
-                            style: TextStyles.text12Regular
-                                .copyWith(fontStyle: FontStyle.italic),
-                          )
-                        ],
+                      child: Text(
+                        "4th July 2024",
+                        style: TextStyles.text12SemiBold.copyWith(
+                            color: AppColors.deepNavy.withOpacityPrecise(0.6)),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Column(
-                        children: [
-                          Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              SvgPicture.asset(Assets.images.svg.line3.path),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 6, horizontal: 12),
-                                decoration: BoxDecoration(
-                                    color: AppColors.lightBlue,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(51)),
-                                    border: Border.all(
-                                        color: AppColors.white, width: 1)),
-                                child: Text(
-                                  "2:30 Hrs",
-                                  style: TextStyles.text12SemiBold,
-                                ),
-                              )
-                            ],
-                          ),
-                          const SizedBox(height: 5),
-                          SvgPicture.asset(Assets.images.svg.bus16.path)
-                        ],
+                    Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 6, horizontal: 14),
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(21)),
                       ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            "Budaiya",
-                            maxLines: 2,
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyles.text18SemiBold
-                                .copyWith(color: AppColors.deepNavy),
-                          ),
-                          Text(
-                            "12:30 PM",
-                            style: TextStyles.text12Regular
-                                .copyWith(fontStyle: FontStyle.italic),
-                          )
-                        ],
+                      child: Text(
+                        "BD 30/-",
+                        style: TextStyles.text12SemiBold,
                       ),
                     )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 24),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 18, vertical: 24),
-                decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacityPrecise(0.14),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(28),
-                      bottomRight: Radius.circular(28)),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
+                  ]),
+            ),
+            const SizedBox(height: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child: SvgPicture.asset(
+                  width: Get.width, Assets.images.svg.line4.path),
+            ),
+            const SizedBox(height: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "eCitaro eCitaro",
+                          "Manama",
+                          maxLines: 2,
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyles.text18SemiBold
                               .copyWith(color: AppColors.deepNavy),
                         ),
-                        const SizedBox(height: 2),
                         Text(
-                          "Blue, GLS BUS",
-                          style: TextStyles.text12Medium,
+                          "10:00 AM",
+                          style: TextStyles.text12Regular
+                              .copyWith(fontStyle: FontStyle.italic),
                         )
                       ],
                     ),
-                    const SizedBox(height: 12),
-                    _buildBusNumberChip(),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  /// Builds the bus information section
-  Widget _buildBusInfoSection() {
-    return Container(
-      padding: const EdgeInsets.only(left: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "eCitaro eCitaro",
-            style:
-                TextStyles.text18SemiBold.copyWith(color: AppColors.deepNavy),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            "Blue, GLS BUS",
-            style: TextStyles.text12Medium,
-          ),
-          const SizedBox(height: 12),
-          _buildBusNumberChip(),
-        ],
-      ),
-    );
-  }
-
-  /// Builds the seats availability row
-  Widget _buildSeatsAvailability() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          buildSeatsView(
-            title: "Available Seats",
-            icon: Assets.images.svg.availableSeat.path,
-            seatCount: "12",
-          ),
-          buildSeatsView(
-            title: "Reserved Seats",
-            icon: Assets.images.svg.reservedSeat.path,
-            seatCount: "16",
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// Builds the reservation notice text
-  Widget _buildReservationNotice() {
-    return Center(
-      child: AppTextFieldRequiredLabel(
-        label: "20 reservation required to Start the Trip",
-        showRequiredMark: true,
-      ),
-    );
-  }
-
-  /// Builds the custom divider line
-  Widget _buildDividerLine() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Container(
-          width: 12,
-          height: 24,
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(12),
-              topRight: Radius.circular(12),
-            ),
-          ),
-        ),
-        Expanded(
-          child: SvgPicture.asset(Assets.images.svg.line4.path),
-        ),
-        Transform.rotate(
-          angle: pi,
-          child: Container(
-            width: 12,
-            height: 24,
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(12),
-                topRight: Radius.circular(12),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  /// Builds the driver details section
-  Widget _buildDriverDetails() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Container(
-              width: 16,
-              height: 11,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    AppColors.primary,
-                    AppColors.lightBlue.withOpacityPrecise(0.0),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(width: 8),
-            Text(
-              "Driver Details",
-              style:
-                  TextStyles.text14SemiBold.copyWith(color: AppColors.deepNavy),
-            ),
-          ],
-        ),
-        const SizedBox(height: 18),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: AppColors.softBlueGray,
-              borderRadius: BorderRadius.circular(18),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Driver avatar
-                Container(
-                  width: 70,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Image.asset(
-                    Assets.images.png.dummyProfileImage.path,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const SizedBox(width: 24),
-
-                // Driver info
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Ibrahim Abbas",
-                        style: TextStyles.text16Medium,
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        "Bahrain Public Transport",
-                        style: TextStyles.text10Regular.copyWith(
-                          color: AppColors.deepNavy.withOpacityPrecise(0.6),
-                          fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                      const SizedBox(height: 14),
-
-                      // Rating chip
-                      Container(
-                        padding: const EdgeInsets.only(
-                            left: 4, top: 4, right: 6, bottom: 4),
-                        decoration: BoxDecoration(
-                          color: AppColors.lightMint,
-                          borderRadius: BorderRadius.circular(45),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      children: [
+                        Stack(
+                          alignment: Alignment.center,
                           children: [
-                            SvgPicture.asset(Assets.images.svg.smiley.path),
-                            const SizedBox(width: 4),
-                            Text(
-                              "4.5",
-                              style: TextStyles.text12SemiBold
-                                  .copyWith(color: AppColors.deepNavy),
-                            ),
-                            const SizedBox(width: 6),
+                            SvgPicture.asset(Assets.images.svg.line3.path),
                             Container(
-                              color: AppColors.green,
-                              height: 7,
-                              width: 1,
-                            ),
-                            const SizedBox(width: 6),
-                            Text(
-                              "125 Review",
-                              style: TextStyles.text12Regular.copyWith(
-                                  color: AppColors.deepNavy
-                                      .withOpacityPrecise(0.6)),
-                            ),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 6, horizontal: 12),
+                              decoration: BoxDecoration(
+                                  color: AppColors.lightBlue,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(51)),
+                                  border: Border.all(
+                                      color: AppColors.white, width: 1)),
+                              child: Text(
+                                "2:30 Hrs",
+                                style: TextStyles.text12SemiBold,
+                              ),
+                            )
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  /// Builds the seat selection card
-  Widget _buildSeatSelectionCard() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Container(
-        width: Get.width,
-        padding: const EdgeInsets.all(18),
-        decoration: BoxDecoration(
-          color: AppColors.lightMint,
-          borderRadius: BorderRadius.circular(32),
-          border: Border.all(color: AppColors.white, width: 6),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Header
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.deepNavy,
-                  ),
-                  child: SvgPicture.asset(
-                    Assets.images.svg.availableSeat.path,
-                    fit: BoxFit.none,
-                    colorFilter: ColorFilter.mode(
-                      Colors.white,
-                      BlendMode.srcIn,
+                        const SizedBox(height: 5),
+                        SvgPicture.asset(Assets.images.svg.bus16.path)
+                      ],
                     ),
                   ),
-                ),
-                const SizedBox(width: 12),
-                Text(
-                  "Seat Selection",
-                  style: TextStyles.text14SemiBold,
-                ),
-              ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Budaiya",
+                          maxLines: 2,
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyles.text18SemiBold
+                              .copyWith(color: AppColors.deepNavy),
+                        ),
+                        Text(
+                          "12:30 PM",
+                          style: TextStyles.text12Regular
+                              .copyWith(fontStyle: FontStyle.italic),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-
             const SizedBox(height: 24),
-
-            // Multiple seats option
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 18),
+              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 24),
               decoration: BoxDecoration(
                 color: AppColors.primary.withOpacityPrecise(0.14),
-                borderRadius: BorderRadius.circular(32),
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(28),
+                    bottomRight: Radius.circular(28)),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Add Multiple Seats",
-                    style: TextStyles.text12SemiBold,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "eCitaro eCitaro",
+                        style: TextStyles.text18SemiBold
+                            .copyWith(color: AppColors.deepNavy),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        "Blue, GLS BUS",
+                        style: TextStyles.text12Medium,
+                      )
+                    ],
                   ),
-                  Obx(() => GestureDetector(
-                        onTap: () {
-                          controller.isChecked.value =
-                              !controller.isChecked.value;
-                        },
-                        child: SvgPicture.asset(
-                          controller.isChecked.value
-                              ? Assets.images.svg.checkBoxChecked.path
-                              : Assets.images.svg.checkBoxUnchecked.path,
-                        ),
-                      )),
+                  const SizedBox(height: 12),
+                  _buildBusNumberChip(),
                 ],
               ),
-            ),
-
-            const SizedBox(height: 14),
-
-            // Helper text
-            Padding(
-              padding: const EdgeInsets.only(left: 6),
-              child: Text(
-                "Check this box If In Case you are booking seats\nfor your guest too.",
-                style: TextStyles.text12Regular.copyWith(
-                  color: AppColors.primary.withOpacityPrecise(0.6),
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-            ),
+            )
           ],
         ),
-      ),
-    );
-  }
-
-  /// Builds the submit button
-  Widget _buildSubmitButton() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: CustomTextField(
-        customTextFieldType: CustomTextFieldType.BUTTON,
-        textEditingController: TextEditingController(),
-        focusNode: FocusNode(),
-        hintText: "Join Now",
-        keyboardType: TextInputType.none,
-        textInputAction: TextInputAction.done,
-        suffixIcon: Assets.images.svg.arrowRightGreen.path,
-        onPressed: () {
-          Get.back();
-        },
       ),
     );
   }
@@ -644,99 +325,402 @@ class BookingSummaryPage extends GetView<BookingSummaryController> {
     );
   }
 
-  /// Helper widget for route view
-  Widget _buildRouteView() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Container(
-        padding: const EdgeInsets.only(left: 16, top: 4, right: 4, bottom: 4),
-        decoration: BoxDecoration(
-          color: AppColors.softBlueGray,
-          borderRadius: BorderRadius.circular(45),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: Text(
-                "Zallaq",
-                maxLines: 2,
-                softWrap: true,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyles.text14SemiBold
-                    .copyWith(color: AppColors.deepNavy),
-              ),
-            ),
-            const SizedBox(width: 8),
-            SvgPicture.asset(
-              Assets.images.svg.rightArrowBlue.path,
-              fit: BoxFit.none,
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                "Northern City",
-                maxLines: 2,
-                softWrap: true,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyles.text14SemiBold
-                    .copyWith(color: AppColors.deepNavy),
-              ),
-            ),
-            CustomCircleIcon(
-              iconPath: Assets.images.svg.route16.path,
-              padding: const EdgeInsets.all(8),
-              backgroundColor: AppColors.deepNavy,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /// Helper widget for seats view
-  Widget buildSeatsView({
-    required String title,
-    required String icon,
-    required String seatCount,
-  }) {
+  /// Build number of seats card
+  Widget _buildNumberOfSeatsCard() {
     return Container(
-      alignment: Alignment.center,
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 27),
+      width: Get.width,
+      padding: const EdgeInsets.only(left: 24, top: 8, right: 8, bottom: 8),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: const BorderRadius.all(Radius.circular(24)),
+        color: AppColors.lightMint,
+        borderRadius: BorderRadius.circular(82),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            title,
-            style: TextStyles.text12Regular.copyWith(
-              color: AppColors.deepNavy.withOpacityPrecise(0.6),
-              fontStyle: FontStyle.italic,
+            "No. of Seat",
+            style: TextStyles.text16SemiBold,
+          ),
+          Container(
+            width: 100,
+            padding: const EdgeInsets.all(13),
+            decoration: BoxDecoration(
+              color: AppColors.primary,
+              borderRadius: BorderRadius.circular(26),
             ),
-          ),
-          const SizedBox(height: 14),
-          Row(
-            children: [
-              SvgPicture.asset(icon, fit: BoxFit.none),
-              const SizedBox(width: 10),
-              Container(
-                color: AppColors.green,
-                height: 10,
-                width: 1,
-              ),
-              const SizedBox(width: 10),
-              Text(
-                seatCount,
-                style: TextStyles.text16SemiBold
-                    .copyWith(color: AppColors.deepNavy),
-              ),
-            ],
-          ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SvgPicture.asset(
+                  Assets.images.svg.minus.path,
+                  fit: BoxFit.none,
+                ),
+                Text(
+                  "3",
+                  style: TextStyles.text14SemiBold.copyWith(
+                      color: AppColors.white,
+                      decoration: TextDecoration.underline,
+                      decorationColor: AppColors.white,
+                      decorationStyle: TextDecorationStyle.solid),
+                ),
+                SvgPicture.asset(
+                  Assets.images.svg.plus.path,
+                  fit: BoxFit.none,
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
   }
+
+  /// Build booking type and calendar preview view
+  Widget _buildBookingTypeWithCalendarPreview() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+            width: Get.width,
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              color: AppColors.lightMint,
+              borderRadius: BorderRadius.circular(32),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomCircleIcon(
+                  iconPath: Assets.images.svg.repeat22.path,
+                  padding: const EdgeInsets.all(8.75),
+                  backgroundColor: AppColors.deepNavy,
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                      Text(
+                        "Weekly, Repeat after 2 weeks",
+                        style: TextStyles.text14Medium,
+                      ),
+                      Text(
+                        "On Monday, Wednesday, Thursday, Friday, Saturday, Sunday",
+                        maxLines: 2,
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyles.text10Regular.copyWith(
+                            color: AppColors.deepNavy.withOpacityPrecise(0.6)),
+                      )
+                    ])),
+                Transform.rotate(
+                  angle: 0, // 0 or pi(180)
+                  child: SvgPicture.asset(Assets.images.svg.arrowUp.path),
+                )
+              ],
+            )),
+        const SizedBox(height: 8),
+        Container(
+            width: Get.width,
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              color: AppColors.lightMint,
+              borderRadius: BorderRadius.circular(32),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Header
+                Row(
+                  children: [
+                    CustomCircleIcon(
+                      iconPath: Assets.images.svg.calendar16.path,
+                      padding: const EdgeInsets.all(8),
+                      backgroundColor: AppColors.deepNavy,
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      "Schedule Preview",
+                      style: TextStyles.text14SemiBold
+                          .copyWith(color: AppColors.deepNavy),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                TableCalendar(
+                  firstDay: DateTime.utc(2010, 10, 16),
+                  lastDay: DateTime.utc(2030, 3, 14),
+                  focusedDay: DateTime.now(),
+                  headerVisible: true,
+                  headerStyle: HeaderStyle(
+                      formatButtonVisible: false,
+                      leftChevronVisible: false,
+                      rightChevronVisible: false,
+                      headerPadding: EdgeInsets.only(bottom: 24)),
+                  calendarStyle: CalendarStyle(
+                    outsideDaysVisible: false,
+                    isTodayHighlighted: false,
+                  ),
+                  rowHeight: 42,
+                  calendarBuilders:
+                      CalendarBuilders(
+                        headerTitleBuilder: (context, day) {
+                    return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: AppColors.lightBlue,
+                                borderRadius: BorderRadius.circular(21),
+                              ),
+                              child: Text(
+                                AppMethods.convertDateTimeToString(
+                                    day, AppMethods.FORMAT_MMMM_YYYY),
+                                style: TextStyles.text14SemiBold,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          Container(
+                            padding: const EdgeInsets.all(4),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: AppColors.lightBlue,
+                              borderRadius: BorderRadius.circular(21),
+                            ),
+                            child: Row(
+                              children: [
+                                Transform.rotate(
+                                  angle: pi, // 0 or pi(180)
+                                  child: CustomCircleIcon(
+                                    iconPath:
+                                        Assets.images.svg.arrowRight18.path,
+                                    padding: const EdgeInsets.all(7),
+                                    backgroundColor: AppColors.white,
+                                  ),
+                                ),
+                                const SizedBox(width: 6),
+                                CustomCircleIcon(
+                                  iconPath: Assets.images.svg.arrowRight18.path,
+                                  padding: const EdgeInsets.all(7),
+                                  backgroundColor: AppColors.white,
+                                )
+                              ],
+                            ),
+                          )
+                        ]);
+                  },
+                        defaultBuilder: (context, day, focusedDay) {
+                          // Compare dates without time components
+                          final isSelected = controller.selectedDaysList.any(
+                                  (selectedDay) =>
+                              selectedDay.year == day.year &&
+                                  selectedDay.month == day.month &&
+                                  selectedDay.day == day.day
+                          );
+                          return Container(
+                            width: 32,
+                            height: 32,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: isSelected ? AppColors.primary : AppColors.primary.withOpacityPrecise(0.08),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                                "${day.day}",
+                              style: isSelected ? TextStyles.text14Regular.copyWith(color: AppColors.white) : TextStyles.text14Regular.copyWith(color: AppColors.deepNavy),
+                            ),
+                          );
+                        },
+                  ),
+                  daysOfWeekStyle: DaysOfWeekStyle(
+                      weekdayStyle: TextStyles.text12Medium.copyWith(
+                          color: AppColors.primary.withOpacityPrecise(0.4)),
+                      weekendStyle: TextStyles.text12Medium.copyWith(
+                          color: AppColors.primary.withOpacityPrecise(0.4))),
+                  onDaySelected: (selectedDay, focusedDay) {
+                    print("day tap");
+                  },
+                )
+              ],
+            ))
+      ],
+    );
+  }
+
+  /// Build promo code card
+  Widget _buildPromoCodeCard() {
+    return Container(
+        width: Get.width,
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: AppColors.lightMint,
+          borderRadius: BorderRadius.circular(32),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header
+            Row(
+              children: [
+                CustomCircleIcon(
+                  iconPath: Assets.images.svg.promoCode.path,
+                  padding: const EdgeInsets.all(7),
+                  backgroundColor: AppColors.deepNavy,
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  "Promo Code",
+                  style: TextStyles.text14SemiBold
+                      .copyWith(color: AppColors.deepNavy),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 11, horizontal: 18),
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(82),
+                        border: Border.all(color: AppColors.primary, width: 1),
+                      ),
+                      child: Text(
+                        "Apply Promo Code",
+                        style: TextStyles.text14Regular.copyWith(
+                            color: AppColors.deepNavy.withOpacityPrecise(0.4)),
+                      )),
+                ),
+                const SizedBox(width: 6),
+                CustomCircleIcon(
+                  iconPath: Assets.images.svg.arrowRight24.path,
+                  padding: const EdgeInsets.all(9),
+                  backgroundColor: AppColors.primary,
+                ),
+                /* const SizedBox(width: 12),
+                        Text(
+                          "Promo Code",
+                          style: TextStyles.text14SemiBold.copyWith(color: AppColors.deepNavy),
+                        ),*/
+              ],
+            )
+          ],
+        ));
+  }
+
+  /// Build price detail card
+  Widget _buildPriceDetailCard() {
+    return Container(
+        width: Get.width,
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: AppColors.lightMint,
+          borderRadius: BorderRadius.circular(32),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header
+            Row(
+              children: [
+                CustomCircleIcon(
+                  iconPath: Assets.images.svg.money.path,
+                  padding: const EdgeInsets.all(8),
+                  backgroundColor: AppColors.deepNavy,
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  "Price Details",
+                  style: TextStyles.text14SemiBold
+                      .copyWith(color: AppColors.deepNavy),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildPriceBreakDown(PriceBreakDownType.BUS_FARE, "30"),
+                const SizedBox(height: 10),
+                _buildPriceBreakDown(
+                    PriceBreakDownType.PROMO_CODE_DISCOUNT, "5"),
+                const SizedBox(height: 10),
+                _buildPriceBreakDown(PriceBreakDownType.TAX_AND_CHARGES, "5"),
+                const SizedBox(height: 20),
+                SizedBox(
+                    width: Get.width,
+                    child: SvgPicture.asset(Assets.images.svg.line5.path,
+                        fit: BoxFit.fill)),
+                const SizedBox(height: 20),
+                _buildPriceBreakDown(PriceBreakDownType.TOTAL_PAY, "30"),
+              ],
+            )
+          ],
+        ));
+  }
+
+  /// Builds price detail break down row
+  Widget _buildPriceBreakDown(
+      PriceBreakDownType priceBreakDownType, String price) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          priceBreakDownType.label,
+          style: TextStyles.text14Regular
+              .copyWith(color: AppColors.deepNavy.withOpacityPrecise(0.4)),
+        ),
+        Text(
+          "${priceBreakDownType == PriceBreakDownType.PROMO_CODE_DISCOUNT ? "-" : ""}BD $price",
+          style: switch (priceBreakDownType) {
+            PriceBreakDownType.PROMO_CODE_DISCOUNT => TextStyles.text14Regular
+                .copyWith(
+                    color: AppColors.deepNavy, fontStyle: FontStyle.italic),
+            PriceBreakDownType.TOTAL_PAY => TextStyles.text14SemiBold,
+            _ => TextStyles.text14Regular.copyWith(color: AppColors.deepNavy),
+          },
+        ),
+      ],
+    );
+  }
+
+  /// Builds the submit button
+  Widget _buildSubmitButton() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: CustomTextField(
+        customTextFieldType: CustomTextFieldType.BUTTON,
+        textEditingController: TextEditingController(),
+        focusNode: FocusNode(),
+        hintText: "Join Now",
+        keyboardType: TextInputType.none,
+        textInputAction: TextInputAction.done,
+        suffixIcon: Assets.images.svg.arrowRightGreen.path,
+        onPressed: () {
+          controller.onGoToDashboard();
+        },
+      ),
+    );
+  }
+}
+
+/// enum for price break down
+enum PriceBreakDownType {
+  BUS_FARE("Bus Fare"),
+  PROMO_CODE_DISCOUNT("Promo Code Discount"),
+  TAX_AND_CHARGES("Tax & Charges"),
+  TOTAL_PAY("Total Pay");
+
+  final String label;
+
+  const PriceBreakDownType(this.label);
 }

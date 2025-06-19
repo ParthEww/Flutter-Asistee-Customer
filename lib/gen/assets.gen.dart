@@ -117,9 +117,21 @@ class $AssetsImagesSvgGen {
   SvgGenImage get arrowLeft =>
       const SvgGenImage('assets/images/svg/arrow-left.svg');
 
+  /// File path: assets/images/svg/arrow-right-18.svg
+  SvgGenImage get arrowRight18 =>
+      const SvgGenImage('assets/images/svg/arrow-right-18.svg');
+
+  /// File path: assets/images/svg/arrow-right-24.svg
+  SvgGenImage get arrowRight24 =>
+      const SvgGenImage('assets/images/svg/arrow-right-24.svg');
+
   /// File path: assets/images/svg/arrow-right-green.svg
   SvgGenImage get arrowRightGreen =>
       const SvgGenImage('assets/images/svg/arrow-right-green.svg');
+
+  /// File path: assets/images/svg/arrow-up.svg
+  SvgGenImage get arrowUp =>
+      const SvgGenImage('assets/images/svg/arrow-up.svg');
 
   /// File path: assets/images/svg/arrow_down.svg
   SvgGenImage get arrowDown =>
@@ -161,6 +173,10 @@ class $AssetsImagesSvgGen {
 
   /// File path: assets/images/svg/bus.svg
   SvgGenImage get bus => const SvgGenImage('assets/images/svg/bus.svg');
+
+  /// File path: assets/images/svg/calendar-16.svg
+  SvgGenImage get calendar16 =>
+      const SvgGenImage('assets/images/svg/calendar-16.svg');
 
   /// File path: assets/images/svg/calendar.svg
   SvgGenImage get calendar =>
@@ -253,6 +269,9 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/line-4.svg
   SvgGenImage get line4 => const SvgGenImage('assets/images/svg/line-4.svg');
 
+  /// File path: assets/images/svg/line-5.svg
+  SvgGenImage get line5 => const SvgGenImage('assets/images/svg/line-5.svg');
+
   /// File path: assets/images/svg/line_sign_in_continue_with.svg
   SvgGenImage get lineSignInContinueWith =>
       const SvgGenImage('assets/images/svg/line_sign_in_continue_with.svg');
@@ -263,6 +282,12 @@ class $AssetsImagesSvgGen {
 
   /// File path: assets/images/svg/map.svg
   SvgGenImage get map => const SvgGenImage('assets/images/svg/map.svg');
+
+  /// File path: assets/images/svg/minus.svg
+  SvgGenImage get minus => const SvgGenImage('assets/images/svg/minus.svg');
+
+  /// File path: assets/images/svg/money.svg
+  SvgGenImage get money => const SvgGenImage('assets/images/svg/money.svg');
 
   /// File path: assets/images/svg/notification.svg
   SvgGenImage get notification =>
@@ -276,9 +301,16 @@ class $AssetsImagesSvgGen {
   SvgGenImage get passwordCheck =>
       const SvgGenImage('assets/images/svg/password-check.svg');
 
+  /// File path: assets/images/svg/plus.svg
+  SvgGenImage get plus => const SvgGenImage('assets/images/svg/plus.svg');
+
   /// File path: assets/images/svg/profile-settings.svg
   SvgGenImage get profileSettings =>
       const SvgGenImage('assets/images/svg/profile-settings.svg');
+
+  /// File path: assets/images/svg/promo-code.svg
+  SvgGenImage get promoCode =>
+      const SvgGenImage('assets/images/svg/promo-code.svg');
 
   /// File path: assets/images/svg/radio-selected.svg
   SvgGenImage get radioSelected =>
@@ -291,6 +323,10 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/rectangle.svg
   SvgGenImage get rectangle =>
       const SvgGenImage('assets/images/svg/rectangle.svg');
+
+  /// File path: assets/images/svg/repeat-22.svg
+  SvgGenImage get repeat22 =>
+      const SvgGenImage('assets/images/svg/repeat-22.svg');
 
   /// File path: assets/images/svg/repeat.svg
   SvgGenImage get repeat => const SvgGenImage('assets/images/svg/repeat.svg');
@@ -394,7 +430,10 @@ class $AssetsImagesSvgGen {
     addressTypeWork,
     appLogo,
     arrowLeft,
+    arrowRight18,
+    arrowRight24,
     arrowRightGreen,
+    arrowUp,
     arrowDown,
     asisteeLogoWhiteWithText,
     asisteeLogoWithText,
@@ -406,6 +445,7 @@ class $AssetsImagesSvgGen {
     bus16,
     bus18,
     bus,
+    calendar16,
     calendar,
     call,
     camera,
@@ -432,16 +472,22 @@ class $AssetsImagesSvgGen {
     line2,
     line3,
     line4,
+    line5,
     lineSignInContinueWith,
     location,
     map,
+    minus,
+    money,
     notification,
     numberPlate,
     passwordCheck,
+    plus,
     profileSettings,
+    promoCode,
     radioSelected,
     radioUnselected,
     rectangle,
+    repeat22,
     repeat,
     reservedSeat,
     rightArrowBlue,

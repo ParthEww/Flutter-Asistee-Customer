@@ -22,15 +22,16 @@ class BookingSummaryController extends GetxController {
   final _remoteRepository = Get.find<RemoteRepository>();
 
   AppStatus appStatus = AppStatus.normal;
-  RxBool isChecked = false.obs;
+
+  RxList<DateTime> selectedDaysList = [DateTime(2025, 6, 2), DateTime(2025, 6, 10), DateTime(2025, 6, 18), DateTime(2025, 6, 26), DateTime(2025, 6, 30)].obs;
 
   @override
   void onInit() {
     super.onInit();
   }
 
-  void onGoToOtpVerification() async {
-    Get.toNamed(Routes.otpVerification);
+  void onGoToDashboard() async {
+    Get.offAllNamed(Routes.dashboard);
   }
 
 }

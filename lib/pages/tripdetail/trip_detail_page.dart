@@ -483,7 +483,7 @@ class TripDetailPage extends GetView<TripDetailController> {
         textInputAction: TextInputAction.done,
         suffixIcon: Assets.images.svg.arrowRightGreen.path,
         onPressed: () {
-          Get.back();
+          controller.onGoToPickupDropOfScreen();
         },
       ),
     );

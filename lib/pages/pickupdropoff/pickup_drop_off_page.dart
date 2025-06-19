@@ -92,7 +92,11 @@ class PickupDropOffPage extends GetView<DashboardController> {
             textInputAction: TextInputAction.done,
             suffixIcon: Assets.images.svg.arrowRightGreen.path,
             onPressed: () {
-              Get.back();
+              if (controller.activeTabBarBookingStatus.value == BookingStatusType.PICK_UP){
+                controller.activeTabBarBookingStatus.value = BookingStatusType.DROP_OFF;
+                return;
+              }
+              controller.onGoToBookingSummary();
             },
           ),
         )
