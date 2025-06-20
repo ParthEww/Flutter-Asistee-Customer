@@ -18,6 +18,8 @@ import '../pages/onboarding/onboarding_bindings.dart';
 import '../pages/onboarding/onboarding_page.dart';
 import '../pages/otpverification/otp_verification_page.dart';
 import '../pages/pickupdropoff/pickup_drop_off_page.dart';
+import '../pages/promocodes/promo_codes_bindings.dart';
+import '../pages/promocodes/promo_codes_page.dart';
 import '../pages/register/register_bindings.dart';
 import '../pages/register/register_page.dart';
 import '../pages/resetpassword/reset_password_bindings.dart';
@@ -31,8 +33,8 @@ part 'app_routes.dart';
 
 class AppPages {
   // initial route
-  static String initialRoute = _Path.splash;
-  static Bindings initialBinding = SplashBindings();
+  static String initialRoute = _Path.promoCodes;
+  static Bindings initialBinding = PromoCodesBindings();
 
   static final List<GetPage<dynamic>> pages = [
     /// splash page
@@ -124,6 +126,13 @@ class AppPages {
       name: _Path.bookingSummary,
       page: () => const BookingSummaryPage(),
       binding: BookingSummaryBindings(),
+    ),
+
+    /// promo codes page
+    GetPage(
+      name: _Path.promoCodes,
+      page: () => const PromoCodesPage(),
+      binding: PromoCodesBindings(),
     ),
   ];
 }

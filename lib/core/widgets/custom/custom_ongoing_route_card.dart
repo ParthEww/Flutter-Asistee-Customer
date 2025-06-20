@@ -84,9 +84,6 @@ class CustomOngoingRouteCard extends StatelessWidget {
                     children: [
                       Text(
                         startLocation,
-                        maxLines: 2,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
                         style: TextStyles.text18SemiBold
                             .copyWith(color: AppColors.deepNavy),
                       ),

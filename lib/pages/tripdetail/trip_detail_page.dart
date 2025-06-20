@@ -226,6 +226,7 @@ class TripDetailPage extends GetView<TripDetailController> {
       child: AppTextFieldRequiredLabel(
         label: "20 reservation required to Start the Trip",
         showRequiredMark: true,
+        labelColor: AppColors.deepNavy.withOpacityPrecise(0.4),
       ),
     );
   }

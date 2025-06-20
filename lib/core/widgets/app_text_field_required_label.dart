@@ -6,11 +6,19 @@ import '../themes/text_styles.dart';
 class AppTextFieldRequiredLabel extends StatelessWidget {
   final String label;
   final bool showRequiredMark;
+  final bool showRequiredMarkOnFront;
+  final bool showUnderLine;
+  final Color labelColor;
+  final Color requireLabelColor;
 
   const AppTextFieldRequiredLabel({
     super.key,
     required this.label,
     this.showRequiredMark = false,
+    this.showRequiredMarkOnFront = true,
+    this.showUnderLine = false,
+    this.labelColor = AppColors.deepNavy,
+    this.requireLabelColor = AppColors.primary,
   });
 
   @override
@@ -19,20 +27,28 @@ class AppTextFieldRequiredLabel extends StatelessWidget {
       textAlign: TextAlign.center,
       text: TextSpan(
         children: [
-          if (showRequiredMark) ...[
+          if (showRequiredMark && showRequiredMarkOnFront) ...[
             TextSpan(
               text: '*',
               style: TextStyles.text12SemiBold.copyWith(
-                color: AppColors.primary,
+                color: requireLabelColor,
               ),
             )
           ],
           TextSpan(
             text: label,
             style: TextStyles.text12SemiBold.copyWith(
-              color: AppColors.deepNavy.withOpacityPrecise(0.4),
-            ),
+                color: labelColor,
+                decoration: showUnderLine ? TextDecoration.underline : null),
           ),
+          if (showRequiredMark && !showRequiredMarkOnFront) ...[
+            TextSpan(
+              text: '*',
+              style: TextStyles.text12SemiBold.copyWith(
+                color: requireLabelColor,
+              ),
+            )
+          ]
         ],
       ),
     );
