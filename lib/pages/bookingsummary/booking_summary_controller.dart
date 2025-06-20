@@ -34,4 +34,8 @@ class BookingSummaryController extends GetxController {
     Get.offAllNamed(Routes.dashboard);
   }
 
+  void onGoToPromoCode() async {
+    Get.toNamed(Routes.promoCodes);
+  }
+
 }

@@ -205,15 +205,20 @@ class TripDetailPage extends GetView<TripDetailController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          buildSeatsView(
-            title: "Available Seats",
-            icon: Assets.images.svg.availableSeat.path,
-            seatCount: "12",
+          Expanded(
+            child: buildSeatsView(
+              title: "Available Seats",
+              icon: Assets.images.svg.availableSeat.path,
+              seatCount: "12",
+            ),
           ),
-          buildSeatsView(
-            title: "Reserved Seats",
-            icon: Assets.images.svg.reservedSeat.path,
-            seatCount: "16",
+          const SizedBox(width: 11),
+          Expanded(
+            child: buildSeatsView(
+              title: "Reserved Seats",
+              icon: Assets.images.svg.reservedSeat.path,
+              seatCount: "16",
+            ),
           ),
         ],
       ),
@@ -582,6 +587,7 @@ class TripDetailPage extends GetView<TripDetailController> {
         children: [
           Text(
             title,
+            textAlign: TextAlign.center,
             style: TextStyles.text12Regular.copyWith(
               color: AppColors.deepNavy.withOpacityPrecise(0.6),
               fontStyle: FontStyle.italic,

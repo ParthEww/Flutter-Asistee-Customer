@@ -581,36 +581,39 @@ class BookingSummaryPage extends GetView<BookingSummaryController> {
               ],
             ),
             const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 11, horizontal: 18),
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(82),
-                        border: Border.all(color: AppColors.primary, width: 1),
-                      ),
-                      child: Text(
-                        "Apply Promo Code",
-                        style: TextStyles.text14Regular.copyWith(
-                            color: AppColors.deepNavy.withOpacityPrecise(0.4)),
-                      )),
-                ),
-                const SizedBox(width: 6),
-                CustomCircleIcon(
-                  iconPath: Assets.images.svg.arrowRight24.path,
-                  padding: const EdgeInsets.all(9),
-                  backgroundColor: AppColors.primary,
-                ),
-                /* const SizedBox(width: 12),
-                        Text(
-                          "Promo Code",
-                          style: TextStyles.text14SemiBold.copyWith(color: AppColors.deepNavy),
-                        ),*/
-              ],
+            GestureDetector(
+              onTap: () { controller.onGoToPromoCode(); },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 11, horizontal: 18),
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(82),
+                          border: Border.all(color: AppColors.primary, width: 1),
+                        ),
+                        child: Text(
+                          "Apply Promo Code",
+                          style: TextStyles.text14Regular.copyWith(
+                              color: AppColors.deepNavy.withOpacityPrecise(0.4)),
+                        )),
+                  ),
+                  const SizedBox(width: 6),
+                  CustomCircleIcon(
+                    iconPath: Assets.images.svg.arrowRight24.path,
+                    padding: const EdgeInsets.all(9),
+                    backgroundColor: AppColors.primary,
+                  ),
+                  /* const SizedBox(width: 12),
+                          Text(
+                            "Promo Code",
+                            style: TextStyles.text14SemiBold.copyWith(color: AppColors.deepNavy),
+                          ),*/
+                ],
+              ),
             )
           ],
         ));
