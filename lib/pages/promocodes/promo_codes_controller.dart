@@ -22,6 +22,7 @@ class PromoCodesController extends GetxController {
   final _remoteRepository = Get.find<RemoteRepository>();
 
   AppStatus appStatus = AppStatus.normal;
+  Rx<bool> isTermsAndConditionsChecked = false.obs;
   // ----- [promo code] -----
   FocusNode promoCodeFocusNode = FocusNode();
   final TextEditingController promoCodeController = TextEditingController();

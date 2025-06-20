@@ -164,14 +164,11 @@ class PromoCodesPage extends GetView<PromoCodesController> {
             child: ListView.separated(
               shrinkWrap: true,
               physics: BouncingScrollPhysics(),
-              itemCount:
-              5,
-              itemBuilder:
-                  (BuildContext context, int index) {
+              itemCount: 5,
+              itemBuilder: (BuildContext context, int index) {
                 return _buildPromoCodeItem();
               },
-              separatorBuilder:
-                  (BuildContext context, int index) {
+              separatorBuilder: (BuildContext context, int index) {
                 return SizedBox(height: 18);
               },
             ),
@@ -181,7 +178,7 @@ class PromoCodesPage extends GetView<PromoCodesController> {
     );
   }
 
-  Widget _buildPromoCodeItem(){
+  Widget _buildPromoCodeItem() {
     return Container(
         padding: const EdgeInsets.only(top: 18),
         decoration: BoxDecoration(
@@ -190,53 +187,64 @@ class PromoCodesPage extends GetView<PromoCodesController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Row(children: [
-                  CustomCircleIcon(
-                    iconPath: Assets.images.svg.promoCode.path,
-                    padding: const EdgeInsets.all(7),
-                    backgroundColor: AppColors.deepNavy,
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      "FIRSTRIP",
-                      maxLines: 2,
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyles.text18SemiBold
-                          .copyWith(color: AppColors.deepNavy),
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 9, horizontal: 19),
-                    decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(82))),
-                    child: Text(
-                      "Apply",
-                      style: TextStyles.text14SemiBold
-                          .copyWith(color: AppColors.white),
-                    ),
-                  )
-                ])),
+            _buildItemHeader(),
             const SizedBox(height: 14),
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: IntrinsicHeight(
+            _buildItemBody(),
+            const SizedBox(height: 12),
+            _buildItemFooter()
+          ],
+        ));
+  }
+
+  Widget _buildItemHeader() {
+    return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Row(children: [
+          CustomCircleIcon(
+            iconPath: Assets.images.svg.promoCode.path,
+            padding: const EdgeInsets.all(7),
+            backgroundColor: AppColors.deepNavy,
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              "FIRSTRIP",
+              maxLines: 2,
+              softWrap: true,
+              overflow: TextOverflow.ellipsis,
+              style:
+                  TextStyles.text18SemiBold.copyWith(color: AppColors.deepNavy),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 19),
+            decoration: BoxDecoration(
+                color: AppColors.primary,
+                borderRadius: BorderRadius.all(Radius.circular(82))),
+            child: Text(
+              "Apply",
+              style: TextStyles.text14SemiBold.copyWith(color: AppColors.white),
+            ),
+          )
+        ]));
+  }
+
+  Widget _buildItemBody() {
+    return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Obx(() {
+          return controller.isTermsAndConditionsChecked.value
+              ? _buildTermsAndConditionsOfPromoCode()
+              : IntrinsicHeight(
                   child: Row(
                     children: [
                       Expanded(
                         child: AppStyledCurrencyText(
                             text:
-                            "Save BHD 10.00 on this and following 3 booking",
-                            defaultStyle: TextStyles.text14Regular
-                                .copyWith(
-                                color: AppColors.primary
-                                    .withOpacityPrecise(0.4),
+                                "Save BHD 10.00 on this and following 3 booking",
+                            defaultStyle: TextStyles.text14Regular.copyWith(
+                                color:
+                                    AppColors.primary.withOpacityPrecise(0.4),
                                 fontStyle: FontStyle.italic),
                             currencyStyle: TextStyles.text14Regular),
                       ),
@@ -244,66 +252,145 @@ class PromoCodesPage extends GetView<PromoCodesController> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          AppTextFieldRequiredLabel(
-                            label: "T&C",
-                            showRequiredMark: true,
-                            showRequiredMarkOnFront: false,
-                            showUnderLine: true,
-                            labelColor: AppColors.deepNavy.withOpacityPrecise(0.6),
-                            requireLabelColor: AppColors.deepNavy.withOpacityPrecise(0.6),
+                          GestureDetector(
+                            onTap: () {
+                              controller.isTermsAndConditionsChecked.value =
+                                  true;
+                            },
+                            child: AppTextFieldRequiredLabel(
+                              label: "T&C",
+                              showRequiredMark: true,
+                              showRequiredMarkOnFront: false,
+                              showUnderLine: true,
+                              labelColor:
+                                  AppColors.deepNavy.withOpacityPrecise(0.6),
+                              requireLabelColor:
+                                  AppColors.deepNavy.withOpacityPrecise(0.6),
+                            ),
                           )
                         ],
                       )
                     ],
                   ),
-                )),
-            const SizedBox(height: 12),
-            Container(
-              height: 40,
-              decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(24), bottomRight: Radius.circular(24))
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 2),
-                    child: Container(
-                      width: 12,
-                      height: 24,
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(12),
-                          topRight: Radius.circular(12),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(child: Center(child: Text("60% OFF", style: TextStyles.text18Bold.copyWith(color: AppColors.mintCream)))),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 2),
-                    child: Transform.rotate(
-                      angle: pi,
-                      child: Container(
-                        width: 12,
-                        height: 24,
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(12),
-                            topRight: Radius.circular(12),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
+                );
+        }));
+  }
+
+  Widget _buildTermsAndConditionsOfPromoCode() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                controller.isTermsAndConditionsChecked.value = false;
+              },
+              child: Transform.rotate(
+                  angle: pi,
+                  child: SvgPicture.asset(Assets.images.svg.arrowRight18.path)),
+            ),
+            const SizedBox(width: 4),
+            Expanded(
+              child: Text(
+                "Terms & Conditions",
+                style: TextStyles.text14SemiBold
+                    .copyWith(fontStyle: FontStyle.italic),
               ),
             )
           ],
-        ));
+        ),
+        const SizedBox(height: 14),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: ListView.separated(
+            shrinkWrap: true,
+            physics: BouncingScrollPhysics(),
+            itemCount: 5,
+            itemBuilder: (BuildContext context, int index) {
+              return IntrinsicHeight(
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Column(
+                    children: [
+                      Text(
+                        "•",
+                        style: TextStyles.text14Regular.copyWith(
+                            color: AppColors.deepNavy.withOpacityPrecise(0.4)),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 4),
+                  Expanded(
+                      child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                        style: TextStyles.text14Regular.copyWith(
+                            color: AppColors.deepNavy.withOpacityPrecise(0.4))),
+                  ))
+                ]),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return SizedBox(height: 12);
+            },
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildItemFooter() {
+    return Container(
+      height: 40,
+      decoration: BoxDecoration(
+          color: AppColors.primary,
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(24),
+              bottomRight: Radius.circular(24))),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 2),
+            child: Container(
+              width: 9,
+              height: 18,
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(9),
+                  topRight: Radius.circular(9),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+              child: Center(
+                  child: Text("60% OFF",
+                      style: TextStyles.text18Bold
+                          .copyWith(color: AppColors.mintCream)))),
+          Padding(
+            padding: const EdgeInsets.only(top: 2),
+            child: Transform.rotate(
+              angle: pi,
+              child: Container(
+                width: 9,
+                height: 18,
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(9),
+                    topRight: Radius.circular(9),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
