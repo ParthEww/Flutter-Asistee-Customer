@@ -6,6 +6,7 @@ import 'package:project_structure/pages/login/login_bindings.dart';
 import 'package:project_structure/pages/login/login_page.dart';
 import 'package:project_structure/pages/otpverification/otp_verification_bindings.dart';
 import 'package:project_structure/pages/pickupdropoff/pickup_drop_off_bindings.dart';
+import 'package:project_structure/pages/routesummary/route_summary_bindings.dart';
 
 import '../pages/addnewaddress/add_new_address_page.dart';
 import '../pages/bookingsummary/booking_summary_bindings.dart';
@@ -24,6 +25,7 @@ import '../pages/register/register_bindings.dart';
 import '../pages/register/register_page.dart';
 import '../pages/resetpassword/reset_password_bindings.dart';
 import '../pages/resetpassword/reset_password_page.dart';
+import '../pages/routesummary/route_summary_page.dart';
 import '../pages/splash/splash_bindings.dart';
 import '../pages/splash/splash_page.dart';
 import '../pages/tripdetail/trip_detail_bindings.dart';
@@ -33,8 +35,8 @@ part 'app_routes.dart';
 
 class AppPages {
   // initial route
-  static String initialRoute = _Path.splash;
-  static Bindings initialBinding = SplashBindings();
+  static String initialRoute = _Path.routeSummary;
+  static Bindings initialBinding = RouteSummaryBindings();
 
   static final List<GetPage<dynamic>> pages = [
     /// splash page
@@ -133,6 +135,13 @@ class AppPages {
       name: _Path.promoCodes,
       page: () => const PromoCodesPage(),
       binding: PromoCodesBindings(),
+    ),
+
+    /// route summary page
+    GetPage(
+      name: _Path.routeSummary,
+      page: () => const RouteSummaryPage(),
+      binding: RouteSummaryBindings(),
     ),
   ];
 }

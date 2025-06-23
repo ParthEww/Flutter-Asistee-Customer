@@ -73,66 +73,72 @@ class CustomRouteCard extends StatelessWidget {
 
   /// Builds the row containing start and end locations with route icon
   Widget _buildLocationRow() {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        // Route icon
-        CustomCircleIcon(
-          iconPath: Assets.images.svg.route20.path,
-          padding: const EdgeInsets.all(14),
-          backgroundColor: AppColors.deepNavy,
-        ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return IntrinsicHeight(
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Route icon
+          Column(
             children: [
-              // Start and end location with arrow
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      startLocation,
-                      maxLines: 2,
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyles.text16SemiBold
-                          .copyWith(color: AppColors.deepNavy),
-                    ),
-                  ),
-                  const SizedBox(width: 6),
-                  SvgPicture.asset(
-                    Assets.images.svg.arrowRightGreen.path,
-                    fit: BoxFit.none,
-                  ),
-                  const SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      endLocation,
-                      maxLines: 2,
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyles.text16SemiBold
-                          .copyWith(color: AppColors.deepNavy),
-                    ),
-                  ),
-                ],
-              ),
-              // Via text (intermediate stops)
-              Text(
-                viaText,
-                style: TextStyles.text12Regular.copyWith(
-                    color: AppColors.primary.withOpacityPrecise(0.6),
-                    fontStyle: FontStyle.italic),
+              CustomCircleIcon(
+                iconPath: Assets.images.svg.route20.path,
+                padding: const EdgeInsets.all(14),
+                backgroundColor: AppColors.deepNavy,
               ),
             ],
           ),
-        ),
-      ],
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Start and end location with arrow
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        startLocation,
+                        maxLines: 2,
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyles.text16SemiBold
+                            .copyWith(color: AppColors.deepNavy),
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    SvgPicture.asset(
+                      Assets.images.svg.arrowRightGreen.path,
+                      fit: BoxFit.none,
+                    ),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        endLocation,
+                        maxLines: 2,
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyles.text16SemiBold
+                            .copyWith(color: AppColors.deepNavy),
+                      ),
+                    ),
+                  ],
+                ),
+                // Via text (intermediate stops)
+                Text(
+                  viaText,
+                  style: TextStyles.text12Regular.copyWith(
+                      color: AppColors.primary.withOpacityPrecise(0.6),
+                      fontStyle: FontStyle.italic),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 

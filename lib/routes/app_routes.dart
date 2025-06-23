@@ -15,6 +15,7 @@ abstract class Routes {
   static const String pickupDropOff = _Path.pickupDropOff;
   static const String bookingSummary = _Path.bookingSummary;
   static const String promoCodes = _Path.promoCodes;
+  static const String routeSummary = _Path.routeSummary;
 }
 
 abstract class _Path {
@@ -32,4 +33,5 @@ abstract class _Path {
   static const String pickupDropOff = "/pickupDropOff";
   static const String bookingSummary = "/bookingSummary";
   static const String promoCodes = "/promoCodes";
+  static const String routeSummary = "/routeSummary";
 }
