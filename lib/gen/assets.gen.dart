@@ -145,6 +145,10 @@ class $AssetsImagesSvgGen {
   SvgGenImage get asisteeLogoWithText =>
       const SvgGenImage('assets/images/svg/asistee_logo_with_text.svg');
 
+  /// File path: assets/images/svg/available-seat-16.svg
+  SvgGenImage get availableSeat16 =>
+      const SvgGenImage('assets/images/svg/available-seat-16.svg');
+
   /// File path: assets/images/svg/available-seat.svg
   SvgGenImage get availableSeat =>
       const SvgGenImage('assets/images/svg/available-seat.svg');
@@ -437,6 +441,7 @@ class $AssetsImagesSvgGen {
     arrowDown,
     asisteeLogoWhiteWithText,
     asisteeLogoWithText,
+    availableSeat16,
     availableSeat,
     bnvHome,
     bnvMyBookings,

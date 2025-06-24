@@ -175,13 +175,14 @@ enum BottomNavigationScreenType {
 
 /// Enum for route request types
 enum RouteRequestType {
-  ONE_TIME(id: "1", title: "One Time"),
-  RECURRING(id: "2", title: "Recurring");
+  ONE_TIME(id: "1", title: "One Time", isSelected: true),
+  RECURRING(id: "2", title: "Recurring", isSelected: false);
 
   final String id;
   final String title;
+  final bool isSelected;
 
-  const RouteRequestType({required this.id, required this.title});
+  const RouteRequestType({required this.id, required this.title, this.isSelected = false});
 }
 
 /// Represents different booking status types

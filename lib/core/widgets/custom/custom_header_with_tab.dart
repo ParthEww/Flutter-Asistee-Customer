@@ -15,9 +15,10 @@ import 'custom_back_button.dart';
 class CustomHeaderWithTab extends StatelessWidget {
   final DashboardController controller;
   final bool isBnvHeader;
+  final VoidCallback? onTap;
 
   const CustomHeaderWithTab(
-      {super.key, required this.controller, required this.isBnvHeader});
+      {super.key, required this.controller, required this.isBnvHeader, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +125,7 @@ class CustomHeaderWithTab extends StatelessWidget {
       return Expanded(
         child: GestureDetector(
           onTap: () => {
+            onTap?.call(),
             // Update active tab only for My Bookings screen
             if (isBnvHeader)
               {

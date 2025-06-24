@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
 
+import '../../../api/model/static/route_request_type.dart';
 import '../../../core/themes/app_colors.dart';
+import '../../../core/widgets/bottom_sheet/common_dropdown_selection_bottom_sheet.dart';
 import '../../../core/widgets/custom/custom_header_with_tab.dart';
 import '../../../core/widgets/custom/custom_route_card.dart';
 import '../dashboard_controller.dart';
@@ -20,7 +23,13 @@ class MyRoutesPage extends GetView<DashboardController> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomHeaderWithTab(controller: controller, isBnvHeader: true),
+            CustomHeaderWithTab(
+                controller: controller, isBnvHeader: true, onTap: () {
+              CommonDropdownSelectionBottomSheet.showBottomSheet(
+                commonList: routeRequestTypeList,
+                dialogType: CommonDropdownSelectionBottomSheetDialogType.SELECT_ROUTE_BOOKING_TYPE,
+              );
+            }),
             Expanded(
                 child: Container(
               color: AppColors.white,

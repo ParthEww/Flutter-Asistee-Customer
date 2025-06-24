@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:project_structure/api/model/dummy/dummy_cancellation_reason.dart';
 import 'package:project_structure/core/themes/app_colors.dart';
 import 'package:project_structure/core/themes/text_styles.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
@@ -10,6 +11,7 @@ import 'package:project_structure/core/widgets/app_button.dart';
 import 'package:project_structure/core/widgets/app_text_field.dart';
 import 'package:project_structure/core/widgets/app_text_field_label.dart';
 import 'package:project_structure/core/widgets/app_text_field_required_label.dart';
+import 'package:project_structure/core/widgets/bottom_sheet/common_dropdown_selection_bottom_sheet.dart';
 import 'package:project_structure/core/widgets/custom/custom_header.dart';
 import 'package:project_structure/core/widgets/custom/custom_tag_button.dart';
 import 'package:project_structure/core/widgets/custom/custom_text_filed.dart';
@@ -489,7 +491,17 @@ class TripDetailPage extends GetView<TripDetailController> {
         textInputAction: TextInputAction.done,
         suffixIcon: Assets.images.svg.arrowRightGreen.path,
         onPressed: () {
-          controller.onGoToPickupDropOfScreen();
+          if(controller.isChecked.value){
+           CommonDropdownSelectionBottomSheet.showBottomSheet(
+              commonList: <DummyCancellationReason>[].obs,
+              dialogType: CommonDropdownSelectionBottomSheetDialogType.SELECT_SEAT_SELECTION,
+              onTap: () {
+                controller.onGoToPickupDropOfScreen();
+              }
+           );
+          }else {
+            controller.onGoToPickupDropOfScreen();
+          }
         },
       ),
     );
