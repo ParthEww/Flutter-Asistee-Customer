@@ -169,6 +169,10 @@ class $AssetsImagesSvgGen {
   SvgGenImage get bnvSettings =>
       const SvgGenImage('assets/images/svg/bnv-settings.svg');
 
+  /// File path: assets/images/svg/boarding-point.svg
+  SvgGenImage get boardingPoint =>
+      const SvgGenImage('assets/images/svg/boarding-point.svg');
+
   /// File path: assets/images/svg/bus-16.svg
   SvgGenImage get bus16 => const SvgGenImage('assets/images/svg/bus-16.svg');
 
@@ -200,6 +204,10 @@ class $AssetsImagesSvgGen {
   SvgGenImage get checkBoxUnchecked =>
       const SvgGenImage('assets/images/svg/check-box-unchecked.svg');
 
+  /// File path: assets/images/svg/clock-18.svg
+  SvgGenImage get clock18 =>
+      const SvgGenImage('assets/images/svg/clock-18.svg');
+
   /// File path: assets/images/svg/clock.svg
   SvgGenImage get clock => const SvgGenImage('assets/images/svg/clock.svg');
 
@@ -213,6 +221,10 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/drop-down-arrow.svg
   SvgGenImage get dropDownArrow =>
       const SvgGenImage('assets/images/svg/drop-down-arrow.svg');
+
+  /// File path: assets/images/svg/dropoff-point.svg
+  SvgGenImage get dropoffPoint =>
+      const SvgGenImage('assets/images/svg/dropoff-point.svg');
 
   /// File path: assets/images/svg/edit-pen.svg
   SvgGenImage get editPen =>
@@ -347,6 +359,10 @@ class $AssetsImagesSvgGen {
   SvgGenImage get route20 =>
       const SvgGenImage('assets/images/svg/route-20.svg');
 
+  /// File path: assets/images/svg/route-name.svg
+  SvgGenImage get routeName =>
+      const SvgGenImage('assets/images/svg/route-name.svg');
+
   /// File path: assets/images/svg/route.svg
   SvgGenImage get route => const SvgGenImage('assets/images/svg/route.svg');
 
@@ -447,6 +463,7 @@ class $AssetsImagesSvgGen {
     bnvMyBookings,
     bnvMyRoutes,
     bnvSettings,
+    boardingPoint,
     bus16,
     bus18,
     bus,
@@ -456,10 +473,12 @@ class $AssetsImagesSvgGen {
     camera,
     checkBoxChecked,
     checkBoxUnchecked,
+    clock18,
     clock,
     cpr,
     doubleArrowRight,
     dropDownArrow,
+    dropoffPoint,
     editPen,
     ellipseDot,
     ellipseGradient,
@@ -497,6 +516,7 @@ class $AssetsImagesSvgGen {
     reservedSeat,
     rightArrowBlue,
     route20,
+    routeName,
     route,
     route16,
     search24,

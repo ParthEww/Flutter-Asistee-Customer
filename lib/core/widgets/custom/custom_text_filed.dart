@@ -11,6 +11,10 @@ import '../../themes/text_styles.dart';
 // Enum defining all possible text field types
 enum CustomTextFieldType {
   FULL_NAME,
+  ROUTE_NAME,
+  BOARDING_POINT,
+  DROPOFF_POINT,
+  START_TIME,
   EMAIL_OR_PHONE_NUMBER,
   EMAIL,
   PHONE_NUMBER,
@@ -108,16 +112,33 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
       // Behavior customization based on field type
       readOnly: widget.customTextFieldType == CustomTextFieldType.BUTTON ||
-          widget.customTextFieldType == CustomTextFieldType.NATIONALITY||
-          widget.customTextFieldType == CustomTextFieldType.AREA,
+          widget.customTextFieldType == CustomTextFieldType.NATIONALITY ||
+          widget.customTextFieldType == CustomTextFieldType.AREA ||
+          widget.customTextFieldType == CustomTextFieldType.BOARDING_POINT ||
+          widget.customTextFieldType == CustomTextFieldType.DROPOFF_POINT ||
+          widget.customTextFieldType == CustomTextFieldType.START_TIME,
       showCursor: widget.customTextFieldType != CustomTextFieldType.BUTTON &&
-          widget.customTextFieldType != CustomTextFieldType.NATIONALITY&&
-          widget.customTextFieldType != CustomTextFieldType.AREA,
+              widget.customTextFieldType != CustomTextFieldType.NATIONALITY &&
+              widget.customTextFieldType != CustomTextFieldType.AREA &&
+          widget.customTextFieldType != CustomTextFieldType.BOARDING_POINT &&
+          widget.customTextFieldType != CustomTextFieldType.DROPOFF_POINT &&
+          widget.customTextFieldType != CustomTextFieldType.START_TIME,
       cursorColor: AppColors.deepNavy,
-      cursorHeight:
-          widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
-              ? TextStyles.text12Regular.height
-              : widget.customTextFieldType == CustomTextFieldType.HOME_PAGE_SEARCH_FIELD ? TextStyles.text14Medium.height : TextStyles.text16Regular.height,
+      cursorHeight: widget.customTextFieldType ==
+              CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
+          ? TextStyles.text12Regular.height
+          : widget.customTextFieldType ==
+                  CustomTextFieldType.HOME_PAGE_SEARCH_FIELD
+              ? TextStyles.text14Medium.height
+              : (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME ||
+                      widget.customTextFieldType ==
+                          CustomTextFieldType.BOARDING_POINT ||
+                      widget.customTextFieldType ==
+                          CustomTextFieldType.DROPOFF_POINT ||
+                      widget.customTextFieldType ==
+                          CustomTextFieldType.START_TIME)
+                  ? TextStyles.text14Regular.height
+                  : TextStyles.text16Regular.height,
 
       // Field length constraints
       maxLength: widget.customTextFieldType == CustomTextFieldType.PHONE_NUMBER
@@ -126,17 +147,62 @@ class _CustomTextFieldState extends State<CustomTextField> {
       cursorRadius: const Radius.circular(2),
 
       // Text styling
-      style: widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
+      style: widget.customTextFieldType ==
+              CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
           ? TextStyles.text12Regular.copyWith(color: AppColors.deepNavy)
-          : widget.customTextFieldType == CustomTextFieldType.HOME_PAGE_SEARCH_FIELD ? TextStyles.text14Medium.copyWith(color: AppColors.deepNavy) : TextStyles.text16Regular.copyWith(color: AppColors.deepNavy),
+          : widget.customTextFieldType ==
+                  CustomTextFieldType.HOME_PAGE_SEARCH_FIELD
+              ? TextStyles.text14Medium.copyWith(color: AppColors.deepNavy)
+              : (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME ||
+                      widget.customTextFieldType ==
+                          CustomTextFieldType.BOARDING_POINT ||
+                      widget.customTextFieldType ==
+                          CustomTextFieldType.DROPOFF_POINT ||
+                      widget.customTextFieldType ==
+                          CustomTextFieldType.START_TIME)
+                  ? TextStyles.text14Regular.copyWith(color: AppColors.deepNavy)
+                  : TextStyles.text16Regular
+                      .copyWith(color: AppColors.deepNavy),
       obscureText: _obscureText,
 
       // Input decoration
       decoration: InputDecoration(
-        contentPadding:
-            widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
-                ? const EdgeInsets.only(left: 18, top: 11, bottom: 11)
-                : EdgeInsets.only(left: widget.customTextFieldType != CustomTextFieldType.BUTTON ? 22 : 32, top: 18, bottom: 18),
+        contentPadding: widget.customTextFieldType ==
+                CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
+            ? const EdgeInsets.only(left: 18, top: 11, bottom: 11)
+            : EdgeInsets.only(
+                left: widget.customTextFieldType != CustomTextFieldType.BUTTON
+                    ? (widget.customTextFieldType ==
+                                CustomTextFieldType.ROUTE_NAME ||
+                            widget.customTextFieldType ==
+                                CustomTextFieldType.BOARDING_POINT ||
+                            widget.customTextFieldType ==
+                                CustomTextFieldType.DROPOFF_POINT ||
+                            widget.customTextFieldType ==
+                                CustomTextFieldType.START_TIME)
+                        ? 24
+                        : 22
+                    : 32,
+                top: (widget.customTextFieldType ==
+                            CustomTextFieldType.ROUTE_NAME ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.BOARDING_POINT ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.DROPOFF_POINT ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.START_TIME)
+                    ? 17
+                    : 18,
+                bottom: (widget.customTextFieldType ==
+                            CustomTextFieldType.ROUTE_NAME ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.BOARDING_POINT ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.DROPOFF_POINT ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.START_TIME)
+                    ? 17
+                    : 18),
         counter: const SizedBox.shrink(),
         // Hide counter but keep space
         filled: true,
@@ -148,7 +214,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
         prefix: _buildPrefix(),
         suffixIcon: _buildSuffixIcon(),
       ),
-      onTap: widget.customTextFieldType != CustomTextFieldType.PHONE_NUMBER && widget.customTextFieldType != CustomTextFieldType.EMAIL ? widget.onPressed != null ? () => widget.onPressed!() : null : null,
+      onTap: widget.customTextFieldType != CustomTextFieldType.PHONE_NUMBER &&
+              widget.customTextFieldType != CustomTextFieldType.EMAIL
+          ? widget.onPressed != null
+              ? () => widget.onPressed!()
+              : null
+          : null,
       onChanged: (value) {
         widget.textEditingController.addListener(() {
           setState(() {});
@@ -161,31 +232,54 @@ class _CustomTextFieldState extends State<CustomTextField> {
   // Helper method to get fill color based on field type
   Color _getFillColor() {
     return widget.customTextFieldType != CustomTextFieldType.BUTTON
-        ? widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
+        ? widget.customTextFieldType ==
+                CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
             ? AppColors.lightBlue
-            : AppColors.secondary.withOpacityPrecise(0.3)
+            : (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME ||
+                    widget.customTextFieldType ==
+                        CustomTextFieldType.BOARDING_POINT ||
+                    widget.customTextFieldType ==
+                        CustomTextFieldType.DROPOFF_POINT ||
+                    widget.customTextFieldType ==
+                        CustomTextFieldType.START_TIME)
+                ? AppColors.white
+                : AppColors.secondary.withOpacityPrecise(0.3)
         : AppColors.deepNavy;
   }
 
   // Helper method to get hint style based on field type
   TextStyle _getHintStyle() {
     return widget.customTextFieldType != CustomTextFieldType.BUTTON
-        ? widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
+        ? widget.customTextFieldType ==
+                CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
             ? TextStyles.text12Regular
                 .copyWith(color: AppColors.deepNavy.withOpacityPrecise(0.5))
-            : widget.customTextFieldType == CustomTextFieldType.HOME_PAGE_SEARCH_FIELD ? TextStyles.text14Medium
-        .copyWith(color: AppColors.richBlack.withOpacityPrecise(0.5)) : TextStyles.text16Regular
-                .copyWith(color: AppColors.richBlack.withOpacityPrecise(0.5))
+            : widget.customTextFieldType ==
+                    CustomTextFieldType.HOME_PAGE_SEARCH_FIELD
+                ? TextStyles.text14Medium.copyWith(
+                    color: AppColors.richBlack.withOpacityPrecise(0.5))
+                : (widget.customTextFieldType ==
+                            CustomTextFieldType.ROUTE_NAME ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.BOARDING_POINT ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.DROPOFF_POINT ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.START_TIME)
+                    ? TextStyles.text14Regular.copyWith(
+                        color: AppColors.deepNavy.withOpacityPrecise(0.5))
+                    : TextStyles.text16Regular.copyWith(
+                        color: AppColors.richBlack.withOpacityPrecise(0.5))
         : TextStyles.text18SemiBold.copyWith(color: AppColors.white);
   }
 
   // Helper method to create consistent border
   OutlineInputBorder _getBorder() {
     return OutlineInputBorder(
-      borderRadius:
-          widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
-              ? BorderRadius.circular(40)
-              : BorderRadius.circular(82),
+      borderRadius: widget.customTextFieldType ==
+              CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
+          ? BorderRadius.circular(40)
+          : BorderRadius.circular(82),
       borderSide: BorderSide.none,
     );
   }
@@ -205,39 +299,72 @@ class _CustomTextFieldState extends State<CustomTextField> {
   // Helper method to build the suffix icon
   Widget _buildSuffixIcon() {
     // Determine margin based on field type
-    final marginRight = widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
+    final marginRight = widget.customTextFieldType ==
+            CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
         ? 11
         : 4;
 
     // Calculate width based on field type and content
     double width;
-    if (widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD) {
+    if (widget.customTextFieldType ==
+        CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD) {
       width = 20;
     } else if (widget.customTextFieldType == CustomTextFieldType.PHONE_NUMBER) {
       width = widget.textEditingController.text.isEmpty ||
-          widget.textEditingController.text.length < 8
+              widget.textEditingController.text.length < 8
           ? 52
           : 69;
     } else if (widget.customTextFieldType == CustomTextFieldType.EMAIL) {
       width = widget.textEditingController.text.isEmail ? 69 : 52;
+    } else if (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME ||
+        widget.customTextFieldType == CustomTextFieldType.BOARDING_POINT ||
+        widget.customTextFieldType == CustomTextFieldType.DROPOFF_POINT ||
+        widget.customTextFieldType == CustomTextFieldType.START_TIME) {
+      width = 44;
     } else {
       width = 52;
     }
-
     // Determine height based on field type
-    final height = widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
+    final height = widget.customTextFieldType ==
+            CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
         ? 20
-        : 52;
+        : (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME ||
+                widget.customTextFieldType ==
+                    CustomTextFieldType.BOARDING_POINT ||
+                widget.customTextFieldType ==
+                    CustomTextFieldType.DROPOFF_POINT ||
+                widget.customTextFieldType == CustomTextFieldType.START_TIME)
+            ? 44
+            : 52;
+    print("width: $width");
+    print("height: $height");
 
     // Configure decoration based on field type
-    final decoration = BoxDecoration(
-      color: widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
-          ? null
-          : AppColors.white,
-      borderRadius: widget.customTextFieldType == CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
-          ? null
-          : BorderRadius.circular(82),
-    );
+    final decoration = (widget.customTextFieldType ==
+                CustomTextFieldType.ROUTE_NAME ||
+            widget.customTextFieldType == CustomTextFieldType.BOARDING_POINT ||
+            widget.customTextFieldType == CustomTextFieldType.DROPOFF_POINT ||
+            widget.customTextFieldType == CustomTextFieldType.START_TIME)
+        ? BoxDecoration(color: AppColors.primary, shape: BoxShape.circle)
+        : BoxDecoration(
+            color: widget.customTextFieldType ==
+                    CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
+                ? null
+                : (widget.customTextFieldType ==
+                            CustomTextFieldType.ROUTE_NAME ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.BOARDING_POINT ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.DROPOFF_POINT ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.START_TIME)
+                    ? AppColors.primary
+                    : AppColors.white,
+            borderRadius: widget.customTextFieldType ==
+                    CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
+                ? null
+                : BorderRadius.circular(82),
+          );
 
     return Container(
       margin: EdgeInsets.only(right: marginRight.toDouble()),
@@ -262,8 +389,24 @@ class _CustomTextFieldState extends State<CustomTextField> {
       default:
         return SvgPicture.asset(
           widget.suffixIcon,
-          width: 20,
-          height: 20,
+          width: (widget.customTextFieldType ==
+                      CustomTextFieldType.ROUTE_NAME ||
+                  widget.customTextFieldType ==
+                      CustomTextFieldType.BOARDING_POINT ||
+                  widget.customTextFieldType ==
+                      CustomTextFieldType.DROPOFF_POINT ||
+                  widget.customTextFieldType == CustomTextFieldType.START_TIME)
+              ? 18
+              : 20,
+          height: (widget.customTextFieldType ==
+                      CustomTextFieldType.ROUTE_NAME ||
+                  widget.customTextFieldType ==
+                      CustomTextFieldType.BOARDING_POINT ||
+                  widget.customTextFieldType ==
+                      CustomTextFieldType.DROPOFF_POINT ||
+                  widget.customTextFieldType == CustomTextFieldType.START_TIME)
+              ? 18
+              : 20,
           fit: BoxFit.none,
         );
     }
@@ -298,19 +441,19 @@ class _CustomTextFieldState extends State<CustomTextField> {
       return GestureDetector(
         onTap: widget.onPressed != null ? () => widget.onPressed!() : null,
         child: Center(
-              child: Text(
-                "Verify",
-                style: TextStyles.text12SemiBold,
-              ),
-            ),
+          child: Text(
+            "Verify",
+            style: TextStyles.text12SemiBold,
+          ),
+        ),
       );
     } else {
       return SvgPicture.asset(
-            widget.suffixIcon,
-            width: 20,
-            height: 20,
-            fit: BoxFit.none,
-          );
+        widget.suffixIcon,
+        width: 20,
+        height: 20,
+        fit: BoxFit.none,
+      );
     }
   }
 
@@ -320,34 +463,36 @@ class _CustomTextFieldState extends State<CustomTextField> {
       return GestureDetector(
         onTap: widget.onPressed != null ? () => widget.onPressed!() : null,
         child: Center(
-              child: Text(
-                "Verify",
-                style: TextStyles.text12SemiBold,
-              ),
-            ),
+          child: Text(
+            "Verify",
+            style: TextStyles.text12SemiBold,
+          ),
+        ),
       );
     } else {
       return SvgPicture.asset(
-            widget.suffixIcon,
-            width: 20,
-            height: 20,
-            fit: BoxFit.none,
-          );
+        widget.suffixIcon,
+        width: 20,
+        height: 20,
+        fit: BoxFit.none,
+      );
     }
   }
 
   // Helper method to build search field suffix (icon)
   Widget _buildSearchFieldSuffix() {
-    return widget.textEditingController.text.isEmpty ? SvgPicture.asset(
-      widget.suffixIcon,
-      width: 20,
-      height: 20,
-      fit: BoxFit.none,
-    ) : SvgPicture.asset(
-      Assets.images.svg.searchCancel.path,
-      width: 20,
-      height: 20,
-      fit: BoxFit.none,
-    );
+    return widget.textEditingController.text.isEmpty
+        ? SvgPicture.asset(
+            widget.suffixIcon,
+            width: 20,
+            height: 20,
+            fit: BoxFit.none,
+          )
+        : SvgPicture.asset(
+            Assets.images.svg.searchCancel.path,
+            width: 20,
+            height: 20,
+            fit: BoxFit.none,
+          );
   }
 }
