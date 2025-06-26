@@ -89,8 +89,8 @@ class DefineBookingRuleController extends GetxController {
     super.onInit();
   }
 
-  void onGoToPickupDropOfScreen() async {
-    Get.toNamed(Routes.pickupDropOff);
+  void onGoToBookingSummary() async {
+    Get.toNamed(Routes.bookingSummary);
   }
 
 }

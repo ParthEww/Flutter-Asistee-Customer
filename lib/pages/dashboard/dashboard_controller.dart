@@ -159,6 +159,11 @@ class DashboardController extends GetxController
   void onGoToBookingSummary() async {
     Get.toNamed(Routes.bookingSummary);
   }
+
+  /// Navigates to route request screen
+  void onGoToRouteRequest() async {
+    Get.toNamed(Routes.routeRequest);
+  }
 }
 
 /// Enum for bottom navigation tabs

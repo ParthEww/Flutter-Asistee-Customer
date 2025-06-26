@@ -28,6 +28,9 @@ class MyRoutesPage extends GetView<DashboardController> {
               CommonDropdownSelectionBottomSheet.showBottomSheet(
                 commonList: routeRequestTypeList,
                 dialogType: CommonDropdownSelectionBottomSheetDialogType.SELECT_ROUTE_BOOKING_TYPE,
+                onTap: (){
+                  controller.onGoToRouteRequest();
+                }
               );
             }),
             Expanded(

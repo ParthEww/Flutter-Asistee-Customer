@@ -89,8 +89,8 @@ class RouteRequestController extends GetxController {
     super.onInit();
   }
 
-  void onGoToPickupDropOfScreen() async {
-    Get.toNamed(Routes.pickupDropOff);
+  void onGoToDefineRule() async {
+    Get.toNamed(Routes.defineBookingRule);
   }
 
 }

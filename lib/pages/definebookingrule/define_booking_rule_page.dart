@@ -208,7 +208,7 @@ class DefineBookingRulePage extends GetView<DefineBookingRuleController> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: AppButton(
-                onPressed: () {},
+                onPressed: () {controller.onGoToBookingSummary();},
                 buttonText: "Next",
                 buttonRadius: 82,
                 buttonColor: AppColors.lightBlue,

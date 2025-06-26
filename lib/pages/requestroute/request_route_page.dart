@@ -208,7 +208,7 @@ class RouteRequestPage extends GetView<RouteRequestController> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: AppButton(
-                onPressed: () {},
+                onPressed: () {controller.onGoToDefineRule();},
                 buttonText: "Next",
                 buttonRadius: 82,
                 buttonColor: AppColors.lightBlue,
