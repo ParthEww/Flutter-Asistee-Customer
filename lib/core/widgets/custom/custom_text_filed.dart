@@ -15,6 +15,10 @@ enum CustomTextFieldType {
   BOARDING_POINT,
   DROPOFF_POINT,
   START_TIME,
+  FREQUENCY,
+  REPEAT_AFTER,
+  START_DATE,
+  END_DATE,
   EMAIL_OR_PHONE_NUMBER,
   EMAIL,
   PHONE_NUMBER,
@@ -116,13 +120,21 @@ class _CustomTextFieldState extends State<CustomTextField> {
           widget.customTextFieldType == CustomTextFieldType.AREA ||
           widget.customTextFieldType == CustomTextFieldType.BOARDING_POINT ||
           widget.customTextFieldType == CustomTextFieldType.DROPOFF_POINT ||
-          widget.customTextFieldType == CustomTextFieldType.START_TIME,
+          widget.customTextFieldType == CustomTextFieldType.START_TIME ||
+          widget.customTextFieldType == CustomTextFieldType.FREQUENCY ||
+          widget.customTextFieldType == CustomTextFieldType.REPEAT_AFTER ||
+          widget.customTextFieldType == CustomTextFieldType.START_DATE ||
+          widget.customTextFieldType == CustomTextFieldType.END_DATE,
       showCursor: widget.customTextFieldType != CustomTextFieldType.BUTTON &&
-              widget.customTextFieldType != CustomTextFieldType.NATIONALITY &&
-              widget.customTextFieldType != CustomTextFieldType.AREA &&
+          widget.customTextFieldType != CustomTextFieldType.NATIONALITY &&
+          widget.customTextFieldType != CustomTextFieldType.AREA &&
           widget.customTextFieldType != CustomTextFieldType.BOARDING_POINT &&
           widget.customTextFieldType != CustomTextFieldType.DROPOFF_POINT &&
-          widget.customTextFieldType != CustomTextFieldType.START_TIME,
+          widget.customTextFieldType != CustomTextFieldType.START_TIME &&
+          widget.customTextFieldType != CustomTextFieldType.FREQUENCY &&
+          widget.customTextFieldType != CustomTextFieldType.REPEAT_AFTER &&
+          widget.customTextFieldType != CustomTextFieldType.START_DATE &&
+          widget.customTextFieldType != CustomTextFieldType.END_DATE,
       cursorColor: AppColors.deepNavy,
       cursorHeight: widget.customTextFieldType ==
               CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
@@ -136,7 +148,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       widget.customTextFieldType ==
                           CustomTextFieldType.DROPOFF_POINT ||
                       widget.customTextFieldType ==
-                          CustomTextFieldType.START_TIME)
+                          CustomTextFieldType.START_TIME ||
+                      widget.customTextFieldType ==
+                          CustomTextFieldType.FREQUENCY ||
+                      widget.customTextFieldType ==
+                          CustomTextFieldType.REPEAT_AFTER ||
+                      widget.customTextFieldType ==
+                          CustomTextFieldType.START_DATE ||
+                      widget.customTextFieldType ==
+                          CustomTextFieldType.END_DATE)
                   ? TextStyles.text14Regular.height
                   : TextStyles.text16Regular.height,
 
@@ -159,7 +179,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       widget.customTextFieldType ==
                           CustomTextFieldType.DROPOFF_POINT ||
                       widget.customTextFieldType ==
-                          CustomTextFieldType.START_TIME)
+                          CustomTextFieldType.START_TIME ||
+                      widget.customTextFieldType ==
+                          CustomTextFieldType.FREQUENCY ||
+                      widget.customTextFieldType ==
+                          CustomTextFieldType.REPEAT_AFTER ||
+                      widget.customTextFieldType ==
+                          CustomTextFieldType.START_DATE ||
+                      widget.customTextFieldType ==
+                          CustomTextFieldType.END_DATE)
                   ? TextStyles.text14Regular.copyWith(color: AppColors.deepNavy)
                   : TextStyles.text16Regular
                       .copyWith(color: AppColors.deepNavy),
@@ -172,25 +200,39 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ? const EdgeInsets.only(left: 18, top: 11, bottom: 11)
             : EdgeInsets.only(
                 left: widget.customTextFieldType != CustomTextFieldType.BUTTON
-                    ? (widget.customTextFieldType ==
-                                CustomTextFieldType.ROUTE_NAME ||
+                    ? (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME ||
                             widget.customTextFieldType ==
                                 CustomTextFieldType.BOARDING_POINT ||
                             widget.customTextFieldType ==
                                 CustomTextFieldType.DROPOFF_POINT ||
                             widget.customTextFieldType ==
-                                CustomTextFieldType.START_TIME)
+                                CustomTextFieldType.START_TIME ||
+                            widget.customTextFieldType ==
+                                CustomTextFieldType.FREQUENCY ||
+                            widget.customTextFieldType ==
+                                CustomTextFieldType.REPEAT_AFTER ||
+                            widget.customTextFieldType ==
+                                CustomTextFieldType.START_DATE ||
+                            widget.customTextFieldType ==
+                                CustomTextFieldType.END_DATE)
                         ? 24
                         : 22
                     : 32,
-                top: (widget.customTextFieldType ==
-                            CustomTextFieldType.ROUTE_NAME ||
+                top: (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME ||
                         widget.customTextFieldType ==
                             CustomTextFieldType.BOARDING_POINT ||
                         widget.customTextFieldType ==
                             CustomTextFieldType.DROPOFF_POINT ||
                         widget.customTextFieldType ==
-                            CustomTextFieldType.START_TIME)
+                            CustomTextFieldType.START_TIME ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.FREQUENCY ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.REPEAT_AFTER ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.START_DATE ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.END_DATE)
                     ? 17
                     : 18,
                 bottom: (widget.customTextFieldType ==
@@ -200,7 +242,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         widget.customTextFieldType ==
                             CustomTextFieldType.DROPOFF_POINT ||
                         widget.customTextFieldType ==
-                            CustomTextFieldType.START_TIME)
+                            CustomTextFieldType.START_TIME ||
+                        widget.customTextFieldType == CustomTextFieldType.FREQUENCY ||
+                        widget.customTextFieldType == CustomTextFieldType.REPEAT_AFTER ||
+                        widget.customTextFieldType == CustomTextFieldType.START_DATE ||
+                        widget.customTextFieldType == CustomTextFieldType.END_DATE)
                     ? 17
                     : 18),
         counter: const SizedBox.shrink(),
@@ -241,7 +287,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     widget.customTextFieldType ==
                         CustomTextFieldType.DROPOFF_POINT ||
                     widget.customTextFieldType ==
-                        CustomTextFieldType.START_TIME)
+                        CustomTextFieldType.START_TIME ||
+                    widget.customTextFieldType ==
+                        CustomTextFieldType.FREQUENCY ||
+                    widget.customTextFieldType ==
+                        CustomTextFieldType.REPEAT_AFTER ||
+                    widget.customTextFieldType ==
+                        CustomTextFieldType.START_DATE ||
+                    widget.customTextFieldType == CustomTextFieldType.END_DATE)
                 ? AppColors.white
                 : AppColors.secondary.withOpacityPrecise(0.3)
         : AppColors.deepNavy;
@@ -265,9 +318,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         widget.customTextFieldType ==
                             CustomTextFieldType.DROPOFF_POINT ||
                         widget.customTextFieldType ==
-                            CustomTextFieldType.START_TIME)
+                            CustomTextFieldType.START_TIME ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.FREQUENCY ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.REPEAT_AFTER ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.START_DATE ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.END_DATE)
                     ? TextStyles.text14Regular.copyWith(
-                        color: AppColors.deepNavy.withOpacityPrecise(0.5))
+                        color: AppColors.deepNavy.withOpacityPrecise(
+                            (widget.customTextFieldType ==
+                                        CustomTextFieldType.FREQUENCY ||
+                                    widget.customTextFieldType ==
+                                        CustomTextFieldType.REPEAT_AFTER)
+                                ? 1
+                                : 0.5))
                     : TextStyles.text16Regular.copyWith(
                         color: AppColors.richBlack.withOpacityPrecise(0.5))
         : TextStyles.text18SemiBold.copyWith(color: AppColors.white);
@@ -319,9 +386,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
     } else if (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME ||
         widget.customTextFieldType == CustomTextFieldType.BOARDING_POINT ||
         widget.customTextFieldType == CustomTextFieldType.DROPOFF_POINT ||
-        widget.customTextFieldType == CustomTextFieldType.START_TIME) {
+        widget.customTextFieldType == CustomTextFieldType.START_TIME ||
+        widget.customTextFieldType == CustomTextFieldType.FREQUENCY ||
+        widget.customTextFieldType == CustomTextFieldType.START_DATE ||
+        widget.customTextFieldType == CustomTextFieldType.END_DATE) {
       width = 44;
-    } else {
+    } else if (widget.customTextFieldType == CustomTextFieldType.REPEAT_AFTER){
+      width = 100;
+    }else {
       width = 52;
     }
     // Determine height based on field type
@@ -333,7 +405,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     CustomTextFieldType.BOARDING_POINT ||
                 widget.customTextFieldType ==
                     CustomTextFieldType.DROPOFF_POINT ||
-                widget.customTextFieldType == CustomTextFieldType.START_TIME)
+                widget.customTextFieldType == CustomTextFieldType.START_TIME ||
+                widget.customTextFieldType == CustomTextFieldType.FREQUENCY ||
+                widget.customTextFieldType ==
+                    CustomTextFieldType.REPEAT_AFTER ||
+                widget.customTextFieldType == CustomTextFieldType.START_DATE ||
+                widget.customTextFieldType == CustomTextFieldType.END_DATE)
             ? 44
             : 52;
     print("width: $width");
@@ -344,7 +421,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 CustomTextFieldType.ROUTE_NAME ||
             widget.customTextFieldType == CustomTextFieldType.BOARDING_POINT ||
             widget.customTextFieldType == CustomTextFieldType.DROPOFF_POINT ||
-            widget.customTextFieldType == CustomTextFieldType.START_TIME)
+            widget.customTextFieldType == CustomTextFieldType.START_TIME ||
+            widget.customTextFieldType == CustomTextFieldType.FREQUENCY ||
+            widget.customTextFieldType == CustomTextFieldType.REPEAT_AFTER ||
+            widget.customTextFieldType == CustomTextFieldType.START_DATE ||
+            widget.customTextFieldType == CustomTextFieldType.END_DATE)
         ? BoxDecoration(color: AppColors.primary, shape: BoxShape.circle)
         : BoxDecoration(
             color: widget.customTextFieldType ==
@@ -357,7 +438,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         widget.customTextFieldType ==
                             CustomTextFieldType.DROPOFF_POINT ||
                         widget.customTextFieldType ==
-                            CustomTextFieldType.START_TIME)
+                            CustomTextFieldType.START_TIME ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.FREQUENCY ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.REPEAT_AFTER ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.START_DATE ||
+                        widget.customTextFieldType ==
+                            CustomTextFieldType.END_DATE)
                     ? AppColors.primary
                     : AppColors.white,
             borderRadius: widget.customTextFieldType ==
@@ -386,6 +475,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
         return _buildEmailSuffix();
       case CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD:
         return _buildSearchFieldSuffix();
+      case CustomTextFieldType.REPEAT_AFTER:
+        return _buildRepeatAfterSuffix();
       default:
         return SvgPicture.asset(
           widget.suffixIcon,
@@ -395,7 +486,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       CustomTextFieldType.BOARDING_POINT ||
                   widget.customTextFieldType ==
                       CustomTextFieldType.DROPOFF_POINT ||
-                  widget.customTextFieldType == CustomTextFieldType.START_TIME)
+                  widget.customTextFieldType ==
+                      CustomTextFieldType.START_TIME ||
+                  widget.customTextFieldType == CustomTextFieldType.FREQUENCY ||
+                  widget.customTextFieldType ==
+                      CustomTextFieldType.REPEAT_AFTER ||
+                  widget.customTextFieldType ==
+                      CustomTextFieldType.START_DATE ||
+                  widget.customTextFieldType == CustomTextFieldType.END_DATE)
               ? 18
               : 20,
           height: (widget.customTextFieldType ==
@@ -404,7 +502,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       CustomTextFieldType.BOARDING_POINT ||
                   widget.customTextFieldType ==
                       CustomTextFieldType.DROPOFF_POINT ||
-                  widget.customTextFieldType == CustomTextFieldType.START_TIME)
+                  widget.customTextFieldType ==
+                      CustomTextFieldType.START_TIME ||
+                  widget.customTextFieldType == CustomTextFieldType.FREQUENCY ||
+                  widget.customTextFieldType ==
+                      CustomTextFieldType.REPEAT_AFTER ||
+                  widget.customTextFieldType ==
+                      CustomTextFieldType.START_DATE ||
+                  widget.customTextFieldType == CustomTextFieldType.END_DATE)
               ? 18
               : 20,
           fit: BoxFit.none,
@@ -494,5 +599,38 @@ class _CustomTextFieldState extends State<CustomTextField> {
             height: 20,
             fit: BoxFit.none,
           );
+  }
+
+  Widget _buildRepeatAfterSuffix(){
+    return Container(
+      width: 100,
+      padding: const EdgeInsets.all(13),
+      decoration: BoxDecoration(
+        color: AppColors.primary,
+        borderRadius: BorderRadius.circular(26),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SvgPicture.asset(
+            Assets.images.svg.minus.path,
+            fit: BoxFit.none,
+          ),
+          Text(
+            "3",
+            style: TextStyles.text14SemiBold.copyWith(
+                color: AppColors.white,
+                decoration: TextDecoration.underline,
+                decorationColor: AppColors.white,
+                decorationStyle: TextDecorationStyle.solid),
+          ),
+          SvgPicture.asset(
+            Assets.images.svg.plus.path,
+            fit: BoxFit.none,
+          )
+        ],
+      ),
+    );
   }
 }

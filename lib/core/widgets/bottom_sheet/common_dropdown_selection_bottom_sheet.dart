@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -6,11 +7,14 @@ import 'package:get/get.dart';
 import 'package:project_structure/api/model/dummy/dummy_cancellation_reason.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
 import 'package:project_structure/pages/register/register_controller.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 import '../../../api/model/static/route_request_type.dart';
 import '../../../gen/assets.gen.dart';
 import '../../themes/app_colors.dart';
 import '../../themes/text_styles.dart';
+import '../../utils/app_methods.dart';
+import '../custom/custom_circle_icon.dart';
 import '../custom/custom_text_filed.dart';
 
 class CommonDropdownSelectionBottomSheet extends StatelessWidget {
@@ -48,7 +52,11 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
                           CommonDropdownSelectionBottomSheetDialogType
                               .SELECT_ROUTE_BOOKING_TYPE
                       ? 0.4
-                      : 0.7),
+                      : (dialogType ==
+                  CommonDropdownSelectionBottomSheetDialogType
+                      .START_DATE || dialogType ==
+                  CommonDropdownSelectionBottomSheetDialogType
+                      .END_DATE) ? 0.65 : 0.7),
           // 70% of screen height
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
@@ -105,8 +113,12 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
                   ),
                 )
               ] else if (dialogType ==
-                  CommonDropdownSelectionBottomSheetDialogType.SELECT_AREA) ...[
-                Text("data")
+                      CommonDropdownSelectionBottomSheetDialogType.START_DATE ||
+                  dialogType ==
+                      CommonDropdownSelectionBottomSheetDialogType
+                          .END_DATE) ...[
+                _buildCalendar(),
+                const SizedBox(height: 22),
               ] else ...[
                 if (commonList.length > 10) ...[
                   CustomTextField(
@@ -196,7 +208,7 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      onTap?.call();
+                      Get.back();
                     },
                     child: Container(
                         width: 52,
@@ -210,15 +222,20 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
                   ),
                   const SizedBox(width: 6),
                   Expanded(
-                    child: Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(vertical: 17),
-                        decoration: BoxDecoration(
-                            color: AppColors.deepNavy,
-                            borderRadius: BorderRadius.circular(82)),
-                        child: Text(dialogType.buttonText,
-                            style: TextStyles.text16SemiBold
-                                .copyWith(color: AppColors.white))),
+                    child: GestureDetector(
+                      onTap: () {
+                        onTap?.call();
+                      },
+                      child: Container(
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric(vertical: 17),
+                          decoration: BoxDecoration(
+                              color: AppColors.deepNavy,
+                              borderRadius: BorderRadius.circular(82)),
+                          child: Text(dialogType.buttonText,
+                              style: TextStyles.text16SemiBold
+                                  .copyWith(color: AppColors.white))),
+                    ),
                   )
                 ],
               )
@@ -316,6 +333,107 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
       return (item as DummyCancellationReason).reasonName.orEmpty();
     }
   }
+
+  Widget _buildCalendar() {
+    return Container(
+      width: Get.width,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: AppColors.lightMint,
+        borderRadius: BorderRadius.circular(32),
+      ),
+      child: TableCalendar(
+        firstDay: DateTime.utc(2010, 10, 16),
+        lastDay: DateTime.utc(2030, 3, 14),
+        focusedDay: DateTime.now(),
+        headerVisible: true,
+        headerStyle: HeaderStyle(
+            formatButtonVisible: false,
+            leftChevronVisible: false,
+            rightChevronVisible: false,
+            headerPadding: EdgeInsets.only(bottom: 24)),
+        calendarStyle: CalendarStyle(
+          outsideDaysVisible: false,
+          isTodayHighlighted: false,
+        ),
+        rowHeight: 42,
+        calendarBuilders: CalendarBuilders(
+          headerTitleBuilder: (context, day) {
+            return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppColors.lightBlue,
+                        borderRadius: BorderRadius.circular(21),
+                      ),
+                      child: Text(
+                        AppMethods.convertDateTimeToString(
+                            day, AppMethods.FORMAT_MMMM_YYYY),
+                        style: TextStyles.text14SemiBold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Container(
+                    padding: const EdgeInsets.all(4),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: AppColors.lightBlue,
+                      borderRadius: BorderRadius.circular(21),
+                    ),
+                    child: Row(
+                      children: [
+                        Transform.rotate(
+                          angle: pi, // 0 or pi(180)
+                          child: CustomCircleIcon(
+                            iconPath: Assets.images.svg.arrowRight18.path,
+                            padding: const EdgeInsets.all(7),
+                            backgroundColor: AppColors.white,
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        CustomCircleIcon(
+                          iconPath: Assets.images.svg.arrowRight18.path,
+                          padding: const EdgeInsets.all(7),
+                          backgroundColor: AppColors.white,
+                        )
+                      ],
+                    ),
+                  )
+                ]);
+          },
+          defaultBuilder: (context, day, focusedDay) {
+            return Container(
+              width: 32,
+              height: 32,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: AppColors.primary.withOpacityPrecise(0.08),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                "${day.day}",
+                style: TextStyles.text14Regular
+                    .copyWith(color: AppColors.deepNavy),
+              ),
+            );
+          },
+        ),
+        daysOfWeekStyle: DaysOfWeekStyle(
+            weekdayStyle: TextStyles.text12Medium
+                .copyWith(color: AppColors.primary.withOpacityPrecise(0.4)),
+            weekendStyle: TextStyles.text12Medium
+                .copyWith(color: AppColors.primary.withOpacityPrecise(0.4))),
+        onDaySelected: (selectedDay, focusedDay) {
+          print("day tap");
+        },
+      ),
+    );
+  }
 }
 
 // CommonDropdownSelectionBottomSheetDialogType class
@@ -401,6 +519,22 @@ class CommonDropdownSelectionBottomSheetDialogType {
     dialogTitleIcon: Assets.images.svg.availableSeat16.path,
     searchHint: "Search for seat selection",
     buttonText: "Proceed",
+  );
+
+  static final START_DATE = CommonDropdownSelectionBottomSheetDialogType(
+    type: "Seat Start Date",
+    dialogTitle: "Seat Start Date",
+    dialogTitleIcon: Assets.images.svg.calendar16.path,
+    searchHint: "Search for start date",
+    buttonText: "Select",
+  );
+
+  static final END_DATE = CommonDropdownSelectionBottomSheetDialogType(
+    type: "Seat End Date",
+    dialogTitle: "Seat End Date",
+    dialogTitleIcon: Assets.images.svg.calendar16.path,
+    searchHint: "Search for end date",
+    buttonText: "Select",
   );
 
 // Helper to get all values (optional)

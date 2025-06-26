@@ -186,6 +186,10 @@ class $AssetsImagesSvgGen {
   SvgGenImage get calendar16 =>
       const SvgGenImage('assets/images/svg/calendar-16.svg');
 
+  /// File path: assets/images/svg/calendar-18.svg
+  SvgGenImage get calendar18 =>
+      const SvgGenImage('assets/images/svg/calendar-18.svg');
+
   /// File path: assets/images/svg/calendar.svg
   SvgGenImage get calendar =>
       const SvgGenImage('assets/images/svg/calendar.svg');
@@ -217,6 +221,10 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/double_arrow_right.svg
   SvgGenImage get doubleArrowRight =>
       const SvgGenImage('assets/images/svg/double_arrow_right.svg');
+
+  /// File path: assets/images/svg/drop-down-arrow-white.svg
+  SvgGenImage get dropDownArrowWhite =>
+      const SvgGenImage('assets/images/svg/drop-down-arrow-white.svg');
 
   /// File path: assets/images/svg/drop-down-arrow.svg
   SvgGenImage get dropDownArrow =>
@@ -468,6 +476,7 @@ class $AssetsImagesSvgGen {
     bus18,
     bus,
     calendar16,
+    calendar18,
     calendar,
     call,
     camera,
@@ -477,6 +486,7 @@ class $AssetsImagesSvgGen {
     clock,
     cpr,
     doubleArrowRight,
+    dropDownArrowWhite,
     dropDownArrow,
     dropoffPoint,
     editPen,
