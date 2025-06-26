@@ -15,6 +15,7 @@ import 'package:project_structure/core/widgets/bottom_sheet/common_dropdown_sele
 import 'package:project_structure/core/widgets/custom/custom_header.dart';
 import 'package:project_structure/core/widgets/custom/custom_tag_button.dart';
 import 'package:project_structure/core/widgets/custom/custom_text_filed.dart';
+import 'package:project_structure/core/widgets/custom/custom_time_wheel_picker.dart';
 import 'package:project_structure/gen/assets.gen.dart';
 import 'package:project_structure/gen/fonts.gen.dart';
 import 'package:retrofit/http.dart';
@@ -25,8 +26,8 @@ import '../../core/widgets/custom/custom_back_button.dart';
 import '../../core/widgets/custom/custom_circle_icon.dart';
 import 'request_route_controller.dart';
 
-class RouteRequestPage extends GetView<RouteRequestController> {
-  const RouteRequestPage({super.key});
+class RequestRoutePage extends GetView<RequestRouteController> {
+  const RequestRoutePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -197,18 +198,25 @@ class RouteRequestPage extends GetView<RouteRequestController> {
                       CommonDropdownSelectionBottomSheet.showBottomSheet(
                           dialogType:
                           CommonDropdownSelectionBottomSheetDialogType
-                              .SELECT_NATIONALITY,
+                              .START_TIME,
                           commonList: controller.nationalityList);
                     },
                   ),
                 ],
               ),
             ),
+            // Display selected hour
+            // Wheel picker
+            // CustomTimeWheelPicker(wheelPickerType: WheelPickerType.HOUR),
+            // CustomTimeWheelPicker(wheelPickerType: WheelPickerType.MINUTE),
+            // CustomTimeWheelPicker(wheelPickerType: WheelPickerType.AM_PM),
             Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: AppButton(
-                onPressed: () {controller.onGoToDefineRule();},
+                onPressed: () {
+                  controller.onGoToDefineRule();
+                },
                 buttonText: "Next",
                 buttonRadius: 82,
                 buttonColor: AppColors.lightBlue,

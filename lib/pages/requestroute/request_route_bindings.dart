@@ -2,9 +2,9 @@ import 'package:get/get.dart';
 
 import 'request_route_controller.dart';
 
-class RouteRequestBindings extends Bindings {
+class RequestRouteBindings extends Bindings {
   @override
   void dependencies() {
-    Get.put(RouteRequestController());
+    Get.put(RequestRouteController());
   }
 }

@@ -16,7 +16,7 @@ abstract class Routes {
   static const String bookingSummary = _Path.bookingSummary;
   static const String promoCodes = _Path.promoCodes;
   static const String routeSummary = _Path.routeSummary;
-  static const String routeRequest = _Path.routeRequest;
+  static const String requestRoute = _Path.requestRoute;
   static const String defineBookingRule = _Path.defineBookingRule;
 }
 
@@ -36,6 +36,6 @@ abstract class _Path {
   static const String bookingSummary = "/bookingSummary";
   static const String promoCodes = "/promoCodes";
   static const String routeSummary = "/routeSummary";
-  static const String routeRequest = "/routeRequest";
+  static const String requestRoute = "/requestRoute";
   static const String defineBookingRule = "/defineBookingRule";
 }

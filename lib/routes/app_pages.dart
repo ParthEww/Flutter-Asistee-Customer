@@ -39,8 +39,8 @@ part 'app_routes.dart';
 
 class AppPages {
   // initial route
-  static String initialRoute = _Path.splash;
-  static Bindings initialBinding = SplashBindings();
+  static String initialRoute = _Path.requestRoute;
+  static Bindings initialBinding = RequestRouteBindings();
 
   static final List<GetPage<dynamic>> pages = [
     /// splash page
@@ -150,9 +150,9 @@ class AppPages {
 
     /// route request page
     GetPage(
-      name: _Path.routeRequest,
-      page: () => const RouteRequestPage(),
-      binding: RouteRequestBindings(),
+      name: _Path.requestRoute,
+      page: () => const RequestRoutePage(),
+      binding: RequestRouteBindings(),
     ),
 
     /// define booking rule page

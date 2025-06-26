@@ -162,7 +162,7 @@ class DashboardController extends GetxController
 
   /// Navigates to route request screen
   void onGoToRouteRequest() async {
-    Get.toNamed(Routes.routeRequest);
+    Get.toNamed(Routes.requestRoute);
   }
 }
 

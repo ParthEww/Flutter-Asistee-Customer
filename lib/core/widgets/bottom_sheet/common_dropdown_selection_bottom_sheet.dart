@@ -16,6 +16,7 @@ import '../../themes/text_styles.dart';
 import '../../utils/app_methods.dart';
 import '../custom/custom_circle_icon.dart';
 import '../custom/custom_text_filed.dart';
+import '../custom/custom_time_wheel_picker.dart';
 
 class CommonDropdownSelectionBottomSheet extends StatelessWidget {
   final RxList<dynamic> commonList;
@@ -52,11 +53,18 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
                           CommonDropdownSelectionBottomSheetDialogType
                               .SELECT_ROUTE_BOOKING_TYPE
                       ? 0.4
-                      : (dialogType ==
-                  CommonDropdownSelectionBottomSheetDialogType
-                      .START_DATE || dialogType ==
-                  CommonDropdownSelectionBottomSheetDialogType
-                      .END_DATE) ? 0.65 : 0.7),
+                      : dialogType ==
+                              CommonDropdownSelectionBottomSheetDialogType
+                                  .START_TIME
+                          ? 0.55
+                          : (dialogType ==
+                                      CommonDropdownSelectionBottomSheetDialogType
+                                          .START_DATE ||
+                                  dialogType ==
+                                      CommonDropdownSelectionBottomSheetDialogType
+                                          .END_DATE)
+                              ? 0.65
+                              : 0.7),
           // 70% of screen height
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
@@ -118,6 +126,10 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
                       CommonDropdownSelectionBottomSheetDialogType
                           .END_DATE) ...[
                 _buildCalendar(),
+                const SizedBox(height: 22),
+              ] else if (dialogType ==
+                  CommonDropdownSelectionBottomSheetDialogType.START_TIME) ...[
+                _buildTimeWheelPicker(),
                 const SizedBox(height: 22),
               ] else ...[
                 if (commonList.length > 10) ...[
@@ -434,6 +446,82 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildTimeWheelPicker() {
+    return Expanded(
+      child: Container(
+        width: Get.width,
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: AppColors.lightMint,
+          borderRadius: BorderRadius.circular(32),
+        ),
+        child: Stack(
+          children: [
+            Center(
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Container(
+                      width: 90,
+                      height: 50,
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      decoration: BoxDecoration(
+                        color: AppColors.lightBlue,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Flexible(
+                    child: Container(
+                      width: 90,
+                      height: 50,
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      decoration: BoxDecoration(
+                        color: AppColors.lightBlue,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Flexible(
+                    child: Container(
+                      width: 90,
+                      height: 50,
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      decoration: BoxDecoration(
+                        color: AppColors.lightBlue,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Row(children: [
+              Flexible(
+                  child: CustomTimeWheelPicker(
+                      wheelPickerType: WheelPickerType.HOUR)),
+              const SizedBox(width: 6),
+              Text(":", style: TextStyles.text14Regular),
+              const SizedBox(width: 6),
+              Flexible(
+                  child: CustomTimeWheelPicker(
+                      wheelPickerType: WheelPickerType.MINUTE)),
+              const SizedBox(width: 12),
+              Flexible(
+                  child: CustomTimeWheelPicker(
+                      wheelPickerType: WheelPickerType.AM_PM))
+            ]),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 // CommonDropdownSelectionBottomSheetDialogType class
@@ -522,18 +610,26 @@ class CommonDropdownSelectionBottomSheetDialogType {
   );
 
   static final START_DATE = CommonDropdownSelectionBottomSheetDialogType(
-    type: "Seat Start Date",
-    dialogTitle: "Seat Start Date",
+    type: "Select Start Date",
+    dialogTitle: "Select Start Date",
     dialogTitleIcon: Assets.images.svg.calendar16.path,
     searchHint: "Search for start date",
     buttonText: "Select",
   );
 
   static final END_DATE = CommonDropdownSelectionBottomSheetDialogType(
-    type: "Seat End Date",
-    dialogTitle: "Seat End Date",
+    type: "Select End Date",
+    dialogTitle: "Select End Date",
     dialogTitleIcon: Assets.images.svg.calendar16.path,
     searchHint: "Search for end date",
+    buttonText: "Select",
+  );
+
+  static final START_TIME = CommonDropdownSelectionBottomSheetDialogType(
+    type: "Select Start Time",
+    dialogTitle: "Select Start Time",
+    dialogTitleIcon: Assets.images.svg.calendar16.path,
+    searchHint: "Search for start time",
     buttonText: "Select",
   );
 

@@ -18,7 +18,7 @@ import '../../repository/local_repository/local_repository.dart';
 import '../../repository/remote_repository/remote_repository.dart';
 import '../../routes/app_pages.dart';
 
-class RouteRequestController extends GetxController {
+class RequestRouteController extends GetxController {
   final _localRepository = Get.find<LocalRepository>();
   final _remoteRepository = Get.find<RemoteRepository>();
 
@@ -41,9 +41,11 @@ class RouteRequestController extends GetxController {
   FocusNode startTimeFocusNode = FocusNode();
   final TextEditingController startTimeController = TextEditingController();
 
-  final FixedExtentScrollController hourController = FixedExtentScrollController();
-  List<String> hours = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+  late FixedExtentScrollController hourController;
+  List<int> hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   RxInt selectedHourIndex = 0.obs;
+  late final List<int> extendedItems;
+  static const int repeatFactor = 1000;
 
   final RxList<DummyCancellationReason> nationalityList = <DummyCancellationReason>[
     DummyCancellationReason(id: '1', reasonName: "Afghan", isSelected: true),
@@ -87,6 +89,17 @@ class RouteRequestController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
+    // Repeat the list to simulate infinite scroll
+    extendedItems = List.generate(
+      hours.length * repeatFactor,
+          (index) => hours[index % hours.length],
+    );
+
+    // Start somewhere in the middle so user can scroll up/down
+    hourController = FixedExtentScrollController(
+      initialItem: extendedItems.length ~/ 2,
+    );
   }
 
   void onGoToDefineRule() async {
