@@ -228,7 +228,7 @@ class DefineBookingRulePage extends GetView<RouteSummaryController> {
                                   .DAYS_DATES,
                           commonList: controller.daysOfTheWeekList,
                           onTap: (dialogType, selectedItemIndex) {
-                            controller.dialogType.value = dialogType;
+                            controller.dialogType.value = null;
                             controller.selectedItemIndex.value =
                                 selectedItemIndex;
                           });

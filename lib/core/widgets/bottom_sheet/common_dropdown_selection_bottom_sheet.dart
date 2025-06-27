@@ -230,7 +230,7 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
           Expanded(
             child: Obx(() {
               return isDaysTypeSelected.value == DaysDatesType.DAYS
-                  ? _buildDaysList(allValueList)
+                  ? _buildScrollableList(allValueList)
                   : _buildCalendar();
             }),
           ),
@@ -269,21 +269,6 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
 
   /// Builds a scrollable list of items
   Widget _buildScrollableList(RxList<dynamic> allValueList) {
-    return CustomScrollView(
-      physics: const BouncingScrollPhysics(),
-      slivers: [
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-                (_, index) => _buildListItem(allValueList[index], allValueList),
-            childCount: allValueList.length,
-          ),
-        ),
-      ],
-    );
-  }
-
-  /// Builds a scrollable list of days
-  Widget _buildDaysList(RxList<dynamic> allValueList) {
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),
       slivers: [
