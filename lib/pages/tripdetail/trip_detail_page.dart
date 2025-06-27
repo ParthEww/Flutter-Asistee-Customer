@@ -495,7 +495,7 @@ class TripDetailPage extends GetView<TripDetailController> {
            CommonDropdownSelectionBottomSheet.showBottomSheet(
               commonList: <DummyCancellationReason>[].obs,
               dialogType: CommonDropdownSelectionBottomSheetDialogType.SELECT_SEAT_SELECTION,
-              onTap: () {
+              onTap: (dialogType, selectedItemIndex) {
                 controller.onGoToPickupDropOfScreen();
               }
            );

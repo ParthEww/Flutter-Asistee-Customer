@@ -1,31 +1,17 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:project_structure/api/model/dummy/dummy_cancellation_reason.dart';
 import 'package:project_structure/core/themes/app_colors.dart';
 import 'package:project_structure/core/themes/text_styles.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
 import 'package:project_structure/core/widgets/app_button.dart';
-import 'package:project_structure/core/widgets/app_text_field.dart';
-import 'package:project_structure/core/widgets/app_text_field_label.dart';
-import 'package:project_structure/core/widgets/app_text_field_required_label.dart';
 import 'package:project_structure/core/widgets/bottom_sheet/common_dropdown_selection_bottom_sheet.dart';
 import 'package:project_structure/core/widgets/custom/custom_header.dart';
-import 'package:project_structure/core/widgets/custom/custom_tag_button.dart';
 import 'package:project_structure/core/widgets/custom/custom_text_filed.dart';
 import 'package:project_structure/gen/assets.gen.dart';
 import 'package:project_structure/gen/fonts.gen.dart';
-import 'package:retrofit/http.dart';
+import 'package:project_structure/pages/routesummary/route_summary_controller.dart';
 
-import '../../api/model/static/address_type.dart';
-import '../../core/widgets/custom/custom_auth_header_with_back_button.dart';
-import '../../core/widgets/custom/custom_back_button.dart';
-import '../../core/widgets/custom/custom_circle_icon.dart';
-import 'define_booking_rule_controller.dart';
-
-class DefineBookingRulePage extends GetView<DefineBookingRuleController> {
+class DefineBookingRulePage extends GetView<RouteSummaryController> {
   const DefineBookingRulePage({super.key});
 
   @override
@@ -133,82 +119,124 @@ class DefineBookingRulePage extends GetView<DefineBookingRuleController> {
               ],
             ),
             const SizedBox(height: 40),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: Column(
-                children: [
-                  // Route name input field
-                  CustomTextField(
-                    customTextFieldType: CustomTextFieldType.FREQUENCY,
-                    textEditingController: controller.routeNameController,
-                    focusNode: controller.routeNameFocusNode,
-                    hintText: "Select Frequency",
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.done,
-                    suffixIcon: Assets.images.svg.dropDownArrowWhite.path,
-                    onPressed: () {
-                      CommonDropdownSelectionBottomSheet.showBottomSheet(
-                          dialogType:
-                          CommonDropdownSelectionBottomSheetDialogType
-                              .SELECT_NATIONALITY,
-                          commonList: controller.nationalityList);
-                    },
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18),
+                  child: Column(
+                    children: [
+                      // Route name input field
+                      CustomTextField(
+                        customTextFieldType: CustomTextFieldType.FREQUENCY,
+                        textEditingController: TextEditingController(),
+                        focusNode: FocusNode(),
+                        hintText: "Select Frequency",
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.done,
+                        suffixIcon: Assets.images.svg.dropDownArrowWhite.path,
+                        onPressed: () {
+                          CommonDropdownSelectionBottomSheet.showBottomSheet(
+                              dialogType:
+                                  CommonDropdownSelectionBottomSheetDialogType
+                                      .SELECT_FREQUENCY,
+                              commonList: controller.frequencyList,
+                              onTap: (dialogType, selectedItemIndex) {
+                                controller.dialogType.value = dialogType;
+                                controller.selectedItemIndex.value =
+                                    selectedItemIndex;
+                              });
+                        },
+                      ),
+                      const SizedBox(height: 14),
+                      // Boarding Point input field
+                      CustomTextField(
+                        customTextFieldType: CustomTextFieldType.REPEAT_AFTER,
+                        textEditingController: TextEditingController(),
+                        focusNode: FocusNode(),
+                        hintText: "Repeat After Every",
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        suffixIcon: Assets.images.svg.boardingPoint.path,
+                      ),
+                      const SizedBox(height: 14),
+                      // Drop off Point input field
+                      CustomTextField(
+                        customTextFieldType: CustomTextFieldType.START_DATE,
+                        textEditingController: TextEditingController(),
+                        focusNode: FocusNode(),
+                        hintText: "Start Date",
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        suffixIcon: Assets.images.svg.calendar18.path,
+                        onPressed: () {
+                          CommonDropdownSelectionBottomSheet.showBottomSheet(
+                              dialogType:
+                                  CommonDropdownSelectionBottomSheetDialogType
+                                      .START_DATE,
+                              commonList: controller.frequencyList);
+                        },
+                      ),
+                      const SizedBox(height: 14),
+                      // start time input field
+                      CustomTextField(
+                        customTextFieldType: CustomTextFieldType.END_DATE,
+                        textEditingController: TextEditingController(),
+                        focusNode: FocusNode(),
+                        hintText: "End Date",
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        suffixIcon: Assets.images.svg.calendar18.path,
+                        onPressed: () {
+                          CommonDropdownSelectionBottomSheet.showBottomSheet(
+                              dialogType:
+                                  CommonDropdownSelectionBottomSheetDialogType
+                                      .END_DATE,
+                              commonList: controller.frequencyList);
+                        },
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 14),
-                  // Boarding Point input field
-                  CustomTextField(
-                    customTextFieldType: CustomTextFieldType.REPEAT_AFTER,
-                    textEditingController: controller.boardingPointController,
-                    focusNode: controller.boardingPointFocusNode,
-                    hintText: "Repeat After Every",
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                    suffixIcon: Assets.images.svg.boardingPoint.path,
-                  ),
-                  const SizedBox(height: 14),
-                  // Drop off Point input field
-                  CustomTextField(
-                    customTextFieldType: CustomTextFieldType.START_DATE,
-                    textEditingController: controller.dropOffPointController,
-                    focusNode: controller.dropOffPointFocusNode,
-                    hintText: "Start Date",
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                    suffixIcon: Assets.images.svg.calendar18.path,
-                    onPressed: () {
-                      CommonDropdownSelectionBottomSheet.showBottomSheet(
-                          dialogType:
-                          CommonDropdownSelectionBottomSheetDialogType
-                              .START_DATE,
-                          commonList: controller.nationalityList);
-                    },
-                  ),
-                  const SizedBox(height: 14),
-                  // start time input field
-                  CustomTextField(
-                    customTextFieldType: CustomTextFieldType.END_DATE,
-                    textEditingController: controller.startTimeController,
-                    focusNode: controller.startTimeFocusNode,
-                    hintText: "End Date",
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                    suffixIcon: Assets.images.svg.calendar18.path,
-                    onPressed: () {
-                      CommonDropdownSelectionBottomSheet.showBottomSheet(
-                          dialogType:
-                          CommonDropdownSelectionBottomSheetDialogType
-                              .END_DATE,
-                          commonList: controller.nationalityList);
-                    },
-                  ),
-                ],
+                ),
               ),
             ),
-            Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: AppButton(
-                onPressed: () {controller.onGoToBookingSummary();},
+                onPressed: () {
+                  if (controller.dialogType.value != null) {
+                    if (controller.dialogType.value ==
+                            CommonDropdownSelectionBottomSheetDialogType
+                                .SELECT_FREQUENCY &&
+                        controller.selectedItemIndex.value != -1) {
+                      CommonDropdownSelectionBottomSheet.showBottomSheet(
+                          dialogType:
+                              CommonDropdownSelectionBottomSheetDialogType
+                                  .DAYS_OF_THE_WEEK,
+                          commonList: controller.daysOfTheWeekList,
+                          onTap: (dialogType, selectedItemIndex) {
+                            controller.dialogType.value = dialogType;
+                            controller.selectedItemIndex.value =
+                                selectedItemIndex;
+                          });
+                    } else if (controller.dialogType.value ==
+                            CommonDropdownSelectionBottomSheetDialogType
+                                .DAYS_OF_THE_WEEK &&
+                        controller.selectedItemIndex.value != -1) {
+                      CommonDropdownSelectionBottomSheet.showBottomSheet(
+                          dialogType:
+                              CommonDropdownSelectionBottomSheetDialogType
+                                  .DAYS_DATES,
+                          commonList: controller.daysOfTheWeekList,
+                          onTap: (dialogType, selectedItemIndex) {
+                            controller.dialogType.value = dialogType;
+                            controller.selectedItemIndex.value =
+                                selectedItemIndex;
+                          });
+                    }
+                  } else {
+                    controller.onGoToRouteSummary();
+                  }
+                },
                 buttonText: "Next",
                 buttonRadius: 82,
                 buttonColor: AppColors.lightBlue,

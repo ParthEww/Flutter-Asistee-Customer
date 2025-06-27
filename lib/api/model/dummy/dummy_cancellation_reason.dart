@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 class DummyCancellationReason {
-  final String? id;
+  final int? id;
   final String? reasonName;
   bool isSelected;
 
@@ -13,7 +13,7 @@ class DummyCancellationReason {
 
   // Manual copyWith implementation
   DummyCancellationReason copyWith({
-    String? id,
+    int? id,
     String? reasonName,
     bool? isSelected,
   }) {

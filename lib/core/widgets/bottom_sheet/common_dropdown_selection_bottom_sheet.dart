@@ -6,7 +6,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:project_structure/api/model/dummy/dummy_cancellation_reason.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
-import 'package:project_structure/pages/register/register_controller.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../api/model/static/route_request_type.dart';
@@ -18,10 +17,20 @@ import '../custom/custom_circle_icon.dart';
 import '../custom/custom_text_filed.dart';
 import '../custom/custom_time_wheel_picker.dart';
 
+enum DaysDatesType {
+  DAYS(title: "Repeat on Days", isSelected: true),
+  DATES(title: "Repeat on Dates", isSelected: false);
+
+  final String title;
+  final bool isSelected;
+
+  const DaysDatesType({required this.title, required this.isSelected});
+}
+
 class CommonDropdownSelectionBottomSheet extends StatelessWidget {
   final RxList<dynamic> commonList;
   final CommonDropdownSelectionBottomSheetDialogType dialogType;
-  final VoidCallback? onTap;
+  final Function(CommonDropdownSelectionBottomSheetDialogType, int)? onTap;
 
   const CommonDropdownSelectionBottomSheet(
       {super.key,
@@ -36,6 +45,8 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
     allValueList.value = List.from(commonList);
     RxList<dynamic> searchItemList = <dynamic>[].obs;
     searchItemList.value = List.from(commonList);
+    Rx<DaysDatesType> isDaysTypeSelected = DaysDatesType.DAYS.obs;
+
     // ----- [email] -----
     FocusNode emailFocusNode = FocusNode();
     final TextEditingController emailController = TextEditingController();
@@ -75,7 +86,7 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
             ),
           ),
           child: Column(
-            // mainAxisSize: MainAxisSize.min, // Fits content height
+            mainAxisSize: MainAxisSize.min, // Fits content height
             children: [
               // ======================
               // Header Section (Title + Icon)
@@ -131,6 +142,122 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
                   CommonDropdownSelectionBottomSheetDialogType.START_TIME) ...[
                 _buildTimeWheelPicker(),
                 const SizedBox(height: 22),
+              ] else if (dialogType ==
+                  CommonDropdownSelectionBottomSheetDialogType.DAYS_DATES) ...[
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _buildRepeatOnView(
+                              daysDatesType: DaysDatesType.DAYS,
+                              selectedDayDateType: isDaysTypeSelected),
+                          const SizedBox(width: 12),
+                          _buildRepeatOnView(
+                              daysDatesType: DaysDatesType.DATES,
+                              selectedDayDateType: isDaysTypeSelected)
+                        ],
+                      ),
+                      const SizedBox(height: 18),
+                      Expanded(
+                        child: Obx(() {
+                          return isDaysTypeSelected.value == DaysDatesType.DAYS
+                              ? CustomScrollView(
+                                  physics: const BouncingScrollPhysics(),
+                                  slivers: [
+                                      SliverList(
+                                        delegate: SliverChildBuilderDelegate(
+                                          (_, index) => ListTile(
+                                              contentPadding: EdgeInsets.zero,
+                                              title: GestureDetector(
+                                                onTap: () {
+                                                  final item =
+                                                      allValueList[index];
+                                                  final position = commonList
+                                                      .indexWhere((it) =>
+                                                          it.id == item.id);
+                                                  final newList = allValueList
+                                                      .map((bean) =>
+                                                          bean.copyWith(
+                                                              isSelected:
+                                                                  false))
+                                                      .toList();
+                                                  newList[index] =
+                                                      newList[index].copyWith(
+                                                          isSelected: true);
+                                                  allValueList.value = newList;
+                                                },
+                                                child: Container(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 24,
+                                                            right: 4,
+                                                            top: 4,
+                                                            bottom: 4),
+                                                    decoration: BoxDecoration(
+                                                      color: AppColors.lightMint
+                                                          .withOpacityPrecise(
+                                                              0.8),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              64),
+                                                    ),
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                            child: Text(
+                                                          _getDisplayText(
+                                                              allValueList[
+                                                                  index]),
+                                                          style: TextStyles
+                                                              .text14SemiBold,
+                                                        )),
+                                                        Container(
+                                                          width: 44,
+                                                          height: 44,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                                  color:
+                                                                      AppColors
+                                                                          .white,
+                                                                  shape: BoxShape
+                                                                      .circle),
+                                                          child:
+                                                              SvgPicture.asset(
+                                                            dialogType ==
+                                                                    allValueList[
+                                                                            index]
+                                                                        .isSelected
+                                                                ? Assets
+                                                                    .images
+                                                                    .svg
+                                                                    .radioSelected
+                                                                    .path
+                                                                : Assets
+                                                                    .images
+                                                                    .svg
+                                                                    .radioUnselected
+                                                                    .path,
+                                                            width: 20,
+                                                            height: 20,
+                                                            fit: BoxFit.none,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    )),
+                                              )),
+                                          childCount: allValueList.length,
+                                        ),
+                                      )
+                                    ])
+                              : _buildCalendar();
+                        }),
+                      )
+                    ],
+                  ),
+                )
               ] else ...[
                 if (commonList.length > 10) ...[
                   CustomTextField(
@@ -196,11 +323,33 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
                                                     color: AppColors.white,
                                                     shape: BoxShape.circle),
                                                 child: SvgPicture.asset(
-                                                  allValueList[index].isSelected
-                                                      ? Assets.images.svg
-                                                          .radioSelected.path
-                                                      : Assets.images.svg
-                                                          .radioUnselected.path,
+                                                  dialogType ==
+                                                          CommonDropdownSelectionBottomSheetDialogType
+                                                              .DAYS_OF_THE_WEEK
+                                                      ? allValueList[index]
+                                                              .isSelected
+                                                          ? Assets
+                                                              .images
+                                                              .svg
+                                                              .checkBoxChecked
+                                                              .path
+                                                          : Assets
+                                                              .images
+                                                              .svg
+                                                              .checkBoxUnchecked
+                                                              .path
+                                                      : allValueList[index]
+                                                              .isSelected
+                                                          ? Assets
+                                                              .images
+                                                              .svg
+                                                              .radioSelected
+                                                              .path
+                                                          : Assets
+                                                              .images
+                                                              .svg
+                                                              .radioUnselected
+                                                              .path,
                                                   width: 20,
                                                   height: 20,
                                                   fit: BoxFit.none,
@@ -236,7 +385,16 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        onTap?.call();
+                        print(allValueList
+                            .firstWhereOrNull((element) => element.isSelected)
+                            ?.id);
+                        onTap?.call(
+                            dialogType,
+                            allValueList
+                                .firstWhereOrNull(
+                                    (element) => element.isSelected)
+                                ?.id);
+                        Get.back();
                       },
                       child: Container(
                           alignment: Alignment.center,
@@ -262,7 +420,7 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
   static void showBottomSheet({
     required CommonDropdownSelectionBottomSheetDialogType dialogType,
     required RxList<dynamic> commonList,
-    VoidCallback? onTap,
+    Function(CommonDropdownSelectionBottomSheetDialogType, int)? onTap,
   }) {
     showModalBottomSheet(
       context: Get.context!,
@@ -522,6 +680,34 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildRepeatOnView(
+      {required DaysDatesType daysDatesType,
+      required Rx<DaysDatesType> selectedDayDateType}) {
+    return Obx(() => Expanded(
+          child: GestureDetector(
+            onTap: () {
+              selectedDayDateType.value = daysDatesType;
+            },
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(vertical: 13),
+              decoration: BoxDecoration(
+                color: selectedDayDateType.value == daysDatesType
+                    ? AppColors.primary
+                    : AppColors.lightBlue,
+                borderRadius: BorderRadius.circular(40),
+              ),
+              child: Text(daysDatesType.title,
+                  style: selectedDayDateType.value == daysDatesType
+                      ? TextStyles.text12SemiBold
+                          .copyWith(color: AppColors.white)
+                      : TextStyles.text12Regular.copyWith(
+                          color: AppColors.deepNavy.withOpacityPrecise(0.5))),
+            ),
+          ),
+        ));
+  }
 }
 
 // CommonDropdownSelectionBottomSheetDialogType class
@@ -559,10 +745,10 @@ class CommonDropdownSelectionBottomSheetDialogType {
   );
 
   static final SELECT_FREQUENCY = CommonDropdownSelectionBottomSheetDialogType(
-    type: "Select Nationality in Profile Setup screen",
-    dialogTitle: "Select Nationality",
-    dialogTitleIcon: Assets.images.svg.uploadImageDialog.path,
-    searchHint: "Search for nationality",
+    type: "Select Frequency in Define Booking Rule screen",
+    dialogTitle: "Select Frequency",
+    dialogTitleIcon: Assets.images.svg.calendar16.path,
+    searchHint: "Search for frequency",
     buttonText: "Select",
   );
 
@@ -633,15 +819,19 @@ class CommonDropdownSelectionBottomSheetDialogType {
     buttonText: "Select",
   );
 
-// Helper to get all values (optional)
-  static List<CommonDropdownSelectionBottomSheetDialogType> get values => [
-        SELECT_NATIONALITY,
-        SELECT_AREA,
-        SELECT_FREQUENCY,
-        SELECT_YEAR,
-        SELECT_SUBJECT,
-        CANCELATION_REASON,
-        SELECT_ROUTE_BOOKING_TYPE,
-        SELECT_SEAT_SELECTION
-      ];
+  static final DAYS_OF_THE_WEEK = CommonDropdownSelectionBottomSheetDialogType(
+    type: "Select Days of the Week",
+    dialogTitle: "Select Days of the Week",
+    dialogTitleIcon: Assets.images.svg.calendar16.path,
+    searchHint: "Search for days of the week",
+    buttonText: "Next",
+  );
+
+  static final DAYS_DATES = CommonDropdownSelectionBottomSheetDialogType(
+    type: "Select Days/Dates",
+    dialogTitle: "Select Days/Dates",
+    dialogTitleIcon: Assets.images.svg.calendar16.path,
+    searchHint: "Search for days/dates",
+    buttonText: "Next",
+  );
 }

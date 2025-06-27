@@ -1,32 +1,18 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:project_structure/api/model/dummy/dummy_cancellation_reason.dart';
 import 'package:project_structure/core/themes/app_colors.dart';
 import 'package:project_structure/core/themes/text_styles.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
 import 'package:project_structure/core/widgets/app_button.dart';
-import 'package:project_structure/core/widgets/app_text_field.dart';
-import 'package:project_structure/core/widgets/app_text_field_label.dart';
-import 'package:project_structure/core/widgets/app_text_field_required_label.dart';
 import 'package:project_structure/core/widgets/bottom_sheet/common_dropdown_selection_bottom_sheet.dart';
 import 'package:project_structure/core/widgets/custom/custom_header.dart';
-import 'package:project_structure/core/widgets/custom/custom_tag_button.dart';
 import 'package:project_structure/core/widgets/custom/custom_text_filed.dart';
-import 'package:project_structure/core/widgets/custom/custom_time_wheel_picker.dart';
 import 'package:project_structure/gen/assets.gen.dart';
 import 'package:project_structure/gen/fonts.gen.dart';
-import 'package:retrofit/http.dart';
 
-import '../../api/model/static/address_type.dart';
-import '../../core/widgets/custom/custom_auth_header_with_back_button.dart';
-import '../../core/widgets/custom/custom_back_button.dart';
-import '../../core/widgets/custom/custom_circle_icon.dart';
-import 'request_route_controller.dart';
+import '../routesummary/route_summary_controller.dart';
 
-class RequestRoutePage extends GetView<RequestRouteController> {
+class RequestRoutePage extends GetView<RouteSummaryController> {
   const RequestRoutePage({super.key});
 
   @override
@@ -134,83 +120,83 @@ class RequestRoutePage extends GetView<RequestRouteController> {
               ],
             ),
             const SizedBox(height: 40),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: Column(
-                children: [
-                  // Route name input field
-                  CustomTextField(
-                    customTextFieldType: CustomTextFieldType.ROUTE_NAME,
-                    textEditingController: controller.routeNameController,
-                    focusNode: controller.routeNameFocusNode,
-                    hintText: "Route Name",
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.done,
-                    suffixIcon: Assets.images.svg.routeName.path,
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18),
+                  child: Column(
+                    children: [
+                      // Route name input field
+                      CustomTextField(
+                        customTextFieldType: CustomTextFieldType.ROUTE_NAME,
+                        textEditingController: controller.routeNameController,
+                        focusNode: controller.routeNameFocusNode,
+                        hintText: "Route Name",
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.done,
+                        suffixIcon: Assets.images.svg.routeName.path,
+                      ),
+                      const SizedBox(height: 14),
+                      // Boarding Point input field
+                      CustomTextField(
+                        customTextFieldType: CustomTextFieldType.BOARDING_POINT,
+                        textEditingController: TextEditingController(),
+                        focusNode: FocusNode(),
+                        hintText: "Boarding Point",
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        suffixIcon: Assets.images.svg.boardingPoint.path,
+                        onPressed: () {
+                          CommonDropdownSelectionBottomSheet.showBottomSheet(
+                              dialogType:
+                                  CommonDropdownSelectionBottomSheetDialogType
+                                      .SELECT_NATIONALITY,
+                              commonList: controller.nationalityList, onTap: (dialogType, selectedItemIndex){
+
+                          });
+                        },
+                      ),
+                      const SizedBox(height: 14),
+                      // Drop off Point input field
+                      CustomTextField(
+                        customTextFieldType: CustomTextFieldType.DROPOFF_POINT,
+                        textEditingController: TextEditingController(),
+                        focusNode: FocusNode(),
+                        hintText: "Drop-Off Point",
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        suffixIcon: Assets.images.svg.dropoffPoint.path,
+                        onPressed: () {
+                          CommonDropdownSelectionBottomSheet.showBottomSheet(
+                              dialogType:
+                                  CommonDropdownSelectionBottomSheetDialogType
+                                      .SELECT_NATIONALITY,
+                              commonList: controller.nationalityList);
+                        },
+                      ),
+                      const SizedBox(height: 14),
+                      // start time input field
+                      CustomTextField(
+                        customTextFieldType: CustomTextFieldType.START_TIME,
+                        textEditingController: TextEditingController(),
+                        focusNode: FocusNode(),
+                        hintText: "Start Time",
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        suffixIcon: Assets.images.svg.clock18.path,
+                        onPressed: () {
+                          CommonDropdownSelectionBottomSheet.showBottomSheet(
+                              dialogType:
+                                  CommonDropdownSelectionBottomSheetDialogType
+                                      .START_TIME,
+                              commonList: controller.nationalityList);
+                        },
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 14),
-                  // Boarding Point input field
-                  CustomTextField(
-                    customTextFieldType: CustomTextFieldType.BOARDING_POINT,
-                    textEditingController: controller.boardingPointController,
-                    focusNode: controller.boardingPointFocusNode,
-                    hintText: "Boarding Point",
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                    suffixIcon: Assets.images.svg.boardingPoint.path,
-                    onPressed: () {
-                      CommonDropdownSelectionBottomSheet.showBottomSheet(
-                          dialogType:
-                          CommonDropdownSelectionBottomSheetDialogType
-                              .SELECT_NATIONALITY,
-                          commonList: controller.nationalityList);
-                    },
-                  ),
-                  const SizedBox(height: 14),
-                  // Drop off Point input field
-                  CustomTextField(
-                    customTextFieldType: CustomTextFieldType.DROPOFF_POINT,
-                    textEditingController: controller.dropOffPointController,
-                    focusNode: controller.dropOffPointFocusNode,
-                    hintText: "Drop-Off Point",
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                    suffixIcon: Assets.images.svg.dropoffPoint.path,
-                    onPressed: () {
-                      CommonDropdownSelectionBottomSheet.showBottomSheet(
-                          dialogType:
-                          CommonDropdownSelectionBottomSheetDialogType
-                              .SELECT_NATIONALITY,
-                          commonList: controller.nationalityList);
-                    },
-                  ),
-                  const SizedBox(height: 14),
-                  // start time input field
-                  CustomTextField(
-                    customTextFieldType: CustomTextFieldType.START_TIME,
-                    textEditingController: controller.startTimeController,
-                    focusNode: controller.startTimeFocusNode,
-                    hintText: "Start Time",
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                    suffixIcon: Assets.images.svg.clock18.path,
-                    onPressed: () {
-                      CommonDropdownSelectionBottomSheet.showBottomSheet(
-                          dialogType:
-                          CommonDropdownSelectionBottomSheetDialogType
-                              .START_TIME,
-                          commonList: controller.nationalityList);
-                    },
-                  ),
-                ],
+                ),
               ),
             ),
-            // Display selected hour
-            // Wheel picker
-            // CustomTimeWheelPicker(wheelPickerType: WheelPickerType.HOUR),
-            // CustomTimeWheelPicker(wheelPickerType: WheelPickerType.MINUTE),
-            // CustomTimeWheelPicker(wheelPickerType: WheelPickerType.AM_PM),
-            Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: AppButton(

@@ -3,29 +3,17 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:project_structure/core/themes/app_colors.dart';
 import 'package:project_structure/core/themes/text_styles.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
 import 'package:project_structure/core/utils/app_methods.dart';
 import 'package:project_structure/core/widgets/app_button.dart';
-import 'package:project_structure/core/widgets/app_text_field.dart';
-import 'package:project_structure/core/widgets/app_text_field_label.dart';
-import 'package:project_structure/core/widgets/app_text_field_required_label.dart';
 import 'package:project_structure/core/widgets/custom/custom_header.dart';
-import 'package:project_structure/core/widgets/custom/custom_tag_button.dart';
-import 'package:project_structure/core/widgets/custom/custom_text_filed.dart';
 import 'package:project_structure/gen/assets.gen.dart';
 import 'package:project_structure/gen/fonts.gen.dart';
-import 'package:retrofit/http.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../api/model/static/address_type.dart';
-import '../../core/widgets/custom/custom_auth_header_with_back_button.dart';
-import '../../core/widgets/custom/custom_back_button.dart';
 import '../../core/widgets/custom/custom_circle_icon.dart';
-import '../../core/widgets/custom/custom_route_card.dart';
-import '../dashboard/dashboard_controller.dart';
 import 'route_summary_controller.dart';
 
 class RouteSummaryPage extends GetView<RouteSummaryController> {

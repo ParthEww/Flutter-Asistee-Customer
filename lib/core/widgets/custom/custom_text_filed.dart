@@ -35,6 +35,24 @@ enum CustomTextFieldType {
   NONE
 }
 
+// Create extension methods for cleaner type checking
+extension CustomTextFieldTypeExtensions on CustomTextFieldType {
+  bool get isReadOnly => [
+    CustomTextFieldType.BUTTON,
+    CustomTextFieldType.NATIONALITY,
+    CustomTextFieldType.AREA,
+    CustomTextFieldType.BOARDING_POINT,
+    CustomTextFieldType.DROPOFF_POINT,
+    CustomTextFieldType.START_TIME,
+    CustomTextFieldType.FREQUENCY,
+    CustomTextFieldType.REPEAT_AFTER,
+    CustomTextFieldType.START_DATE,
+    CustomTextFieldType.END_DATE,
+  ].contains(this);
+
+  bool get shouldShowCursor => !isReadOnly;
+}
+
 // A customizable text field widget that handles various input types
 class CustomTextField extends StatefulWidget {
   final CustomTextFieldType customTextFieldType;
@@ -108,6 +126,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
+    print("type: ${widget.customTextFieldType}");
+    print("showCursor: ${widget.customTextFieldType != CustomTextFieldType.BUTTON &&
+        widget.customTextFieldType != CustomTextFieldType.NATIONALITY &&
+        widget.customTextFieldType != CustomTextFieldType.AREA &&
+        widget.customTextFieldType != CustomTextFieldType.BOARDING_POINT &&
+        widget.customTextFieldType != CustomTextFieldType.DROPOFF_POINT &&
+        widget.customTextFieldType != CustomTextFieldType.START_TIME &&
+        widget.customTextFieldType != CustomTextFieldType.FREQUENCY &&
+        widget.customTextFieldType != CustomTextFieldType.REPEAT_AFTER &&
+        widget.customTextFieldType != CustomTextFieldType.START_DATE &&
+        widget.customTextFieldType != CustomTextFieldType.END_DATE}");
     return TextFormField(
       controller: widget.textEditingController,
       focusNode: widget.focusNode,
@@ -115,26 +144,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
       textInputAction: widget.textInputAction,
 
       // Behavior customization based on field type
-      readOnly: widget.customTextFieldType == CustomTextFieldType.BUTTON ||
-          widget.customTextFieldType == CustomTextFieldType.NATIONALITY ||
-          widget.customTextFieldType == CustomTextFieldType.AREA ||
-          widget.customTextFieldType == CustomTextFieldType.BOARDING_POINT ||
-          widget.customTextFieldType == CustomTextFieldType.DROPOFF_POINT ||
-          widget.customTextFieldType == CustomTextFieldType.START_TIME ||
-          widget.customTextFieldType == CustomTextFieldType.FREQUENCY ||
-          widget.customTextFieldType == CustomTextFieldType.REPEAT_AFTER ||
-          widget.customTextFieldType == CustomTextFieldType.START_DATE ||
-          widget.customTextFieldType == CustomTextFieldType.END_DATE,
-      showCursor: widget.customTextFieldType != CustomTextFieldType.BUTTON &&
-          widget.customTextFieldType != CustomTextFieldType.NATIONALITY &&
-          widget.customTextFieldType != CustomTextFieldType.AREA &&
-          widget.customTextFieldType != CustomTextFieldType.BOARDING_POINT &&
-          widget.customTextFieldType != CustomTextFieldType.DROPOFF_POINT &&
-          widget.customTextFieldType != CustomTextFieldType.START_TIME &&
-          widget.customTextFieldType != CustomTextFieldType.FREQUENCY &&
-          widget.customTextFieldType != CustomTextFieldType.REPEAT_AFTER &&
-          widget.customTextFieldType != CustomTextFieldType.START_DATE &&
-          widget.customTextFieldType != CustomTextFieldType.END_DATE,
+      readOnly: widget.customTextFieldType.isReadOnly,
+      showCursor: widget.customTextFieldType.shouldShowCursor,
       cursorColor: AppColors.deepNavy,
       cursorHeight: widget.customTextFieldType ==
               CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
@@ -413,8 +424,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 widget.customTextFieldType == CustomTextFieldType.END_DATE)
             ? 44
             : 52;
-    print("width: $width");
-    print("height: $height");
 
     // Configure decoration based on field type
     final decoration = (widget.customTextFieldType ==

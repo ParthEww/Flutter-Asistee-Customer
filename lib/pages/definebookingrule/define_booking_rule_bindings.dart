@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 
-import 'define_booking_rule_controller.dart';
+import '../routesummary/route_summary_controller.dart';
 
 class DefineBookingRuleBindings extends Bindings {
   @override
   void dependencies() {
-    Get.put(DefineBookingRuleController());
+    Get.put(RouteSummaryController());
   }
 }
