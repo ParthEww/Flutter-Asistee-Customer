@@ -33,6 +33,10 @@ class PickupDropOffPage extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     controller.activeTabBarBookingStatus.value = BookingStatusType.PICK_UP;
+    controller.commonTabList = [
+      BookingStatusType.PICK_UP,
+      BookingStatusType.DROP_OFF
+    ];
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: SafeArea(

@@ -16,6 +16,10 @@ class MyRoutesPage extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.activeTabBarBookingStatus.value = BookingStatusType.REQUEST_ROUTE;
+    controller.commonTabList = [
+      BookingStatusType.REQUEST_ROUTE
+    ];
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: SafeArea(

@@ -18,7 +18,10 @@ class CustomHeaderWithTab extends StatelessWidget {
   final VoidCallback? onTap;
 
   const CustomHeaderWithTab(
-      {super.key, required this.controller, required this.isBnvHeader, this.onTap});
+      {super.key,
+      required this.controller,
+      required this.isBnvHeader,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +62,13 @@ class CustomHeaderWithTab extends StatelessWidget {
                     style: TextStyles.text24SemiBold
                         .copyWith(color: AppColors.white),
                   )
-                ]else ...[
+                ] else ...[
                   CustomHeader(
                     title: "Pickup & Dropoff",
                     isShowSubtitle: false,
                     isShowBackButton: true,
                     isHorizontalPaddingApply: false,
-                    onBackButtonTap: (){
+                    onBackButtonTap: () {
                       Get.back;
                     },
                   )
@@ -95,20 +98,9 @@ class CustomHeaderWithTab extends StatelessWidget {
                     child: Row(
                       children: List.generate(
                         // Generate tabs based on current screen type
-                        isBnvHeader
-                            ? controller.activeBottomNavigationScreenType
-                                        .value ==
-                                    BottomNavigationScreenType.MY_BOOKINGS
-                                ? controller.myBookingsTabList.length
-                                : controller.myRootsTabList.length
-                            : controller.pickupDropOffTabList.length,
-                        (index) => buildTabView(isBnvHeader
-                            ? controller.activeBottomNavigationScreenType
-                                        .value ==
-                                    BottomNavigationScreenType.MY_BOOKINGS
-                                ? controller.myBookingsTabList[index]
-                                : controller.myRootsTabList[index]
-                            : controller.pickupDropOffTabList[index]),
+                        controller.commonTabList.length,
+                        (index) =>
+                            buildTabView(controller.commonTabList[index]),
                       ),
                     ))
               ],
@@ -144,8 +136,7 @@ class CustomHeaderWithTab extends StatelessWidget {
             children: [
               const SizedBox(height: 15),
               Center(
-                child: controller.activeBottomNavigationScreenType.value ==
-                        BottomNavigationScreenType.MY_BOOKINGS || !isBnvHeader
+                child: controller.commonTabList.length > 1
                     ? // Text-only tab for My Bookings
                     Text(
                         type.title,
@@ -184,8 +175,10 @@ class CustomHeaderWithTab extends StatelessWidget {
               const SizedBox(height: 15),
 
               // Active tab indicator (only for My Bookings screen)
-              if (controller.activeBottomNavigationScreenType.value ==
-                  BottomNavigationScreenType.MY_BOOKINGS || !isBnvHeader) ...[
+              if (controller.commonTabList.length > 1 &&
+                  (controller.activeBottomNavigationScreenType.value ==
+                          BottomNavigationScreenType.MY_BOOKINGS ||
+                      !isBnvHeader)) ...[
                 Container(
                   height: 3,
                   decoration: BoxDecoration(

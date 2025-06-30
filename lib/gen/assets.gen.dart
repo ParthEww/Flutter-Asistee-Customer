@@ -179,6 +179,10 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/bus-18.svg
   SvgGenImage get bus18 => const SvgGenImage('assets/images/svg/bus-18.svg');
 
+  /// File path: assets/images/svg/bus-primary-18.svg
+  SvgGenImage get busPrimary18 =>
+      const SvgGenImage('assets/images/svg/bus-primary-18.svg');
+
   /// File path: assets/images/svg/bus.svg
   SvgGenImage get bus => const SvgGenImage('assets/images/svg/bus.svg');
 
@@ -193,6 +197,10 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/calendar.svg
   SvgGenImage get calendar =>
       const SvgGenImage('assets/images/svg/calendar.svg');
+
+  /// File path: assets/images/svg/call-black.svg
+  SvgGenImage get callBlack =>
+      const SvgGenImage('assets/images/svg/call-black.svg');
 
   /// File path: assets/images/svg/call.svg
   SvgGenImage get call => const SvgGenImage('assets/images/svg/call.svg');
@@ -478,10 +486,12 @@ class $AssetsImagesSvgGen {
     boardingPoint,
     bus16,
     bus18,
+    busPrimary18,
     bus,
     calendar16,
     calendar18,
     calendar,
+    callBlack,
     call,
     camera,
     checkBoxChecked,

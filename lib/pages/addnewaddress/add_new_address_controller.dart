@@ -107,17 +107,6 @@ class AddNewAddressController extends GetxController {
     }
   }
 
-  // Call this when the map is created
-  void onMapCreated(GoogleMapController controller) {
-    mapController.value = controller;
-    // If we already have location, move to it
-    if (currentLocation.value != null) {
-      controller.animateCamera(
-        CameraUpdate.newLatLng(currentLocation.value!),
-      );
-    }
-  }
-
   void onGoToOtpVerification() async {
     Get.toNamed(Routes.otpVerification);
   }

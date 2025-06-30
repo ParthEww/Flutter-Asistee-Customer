@@ -2,8 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:project_structure/pages/dashboard/bottomscreen/home_page.dart';
 import 'package:project_structure/pages/dashboard/bottomscreen/my_bookings_page.dart';
 import 'package:project_structure/pages/dashboard/bottomscreen/my_routes_page.dart';
@@ -17,6 +20,7 @@ import '../../api/model/response/route_stop.dart';
 import '../../core/enum/app_status.dart';
 import '../../core/utils/app_logger.dart';
 
+import '../../core/utils/app_methods.dart';
 import '../../core/utils/dialog_utils.dart';
 import '../../gen/assets.gen.dart';
 import '../../localization/app_strings.dart';
@@ -52,23 +56,10 @@ class DashboardController extends GetxController
   ].obs;
 
   // Booking status tabs
-  Rx<BookingStatusType> activeTabBarBookingStatus = BookingStatusType.ONGOING.obs;
+  late Rx<BookingStatusType> activeTabBarBookingStatus = BookingStatusType.ONGOING.obs;
 
   // Tab lists
-  final List<BookingStatusType> myBookingsTabList = [
-    BookingStatusType.ONGOING,
-    BookingStatusType.UPCOMING,
-    BookingStatusType.PAST
-  ];
-
-  final List<BookingStatusType> myRootsTabList = [
-    BookingStatusType.REQUEST_ROUTE
-  ];
-
-  final List<BookingStatusType> pickupDropOffTabList = [
-    BookingStatusType.PICK_UP,
-    BookingStatusType.DROP_OFF
-  ];
+  late List<BookingStatusType> commonTabList;
 
   // Settings sections
   final List<SettingFieldType> firstSettingsList = [
@@ -139,10 +130,46 @@ class DashboardController extends GetxController
     ),
   ].obs;
 
+  final RxBool hasLocationPermission = false.obs;
+  final Rx<CameraPosition?> cameraPosition = Rx<CameraPosition?>(null);
+  final Rx<LatLng?> currentLocation = Rx<LatLng?>(null);
+  final Rx<GoogleMapController?> mapController = Rx<GoogleMapController?>(null);
+
   @override
   void onInit() {
     super.onInit();
-    // Initialize any required data
+    // Then check for permission
+    checkLocationPermission();
+  }
+
+  Future<void> checkLocationPermission() async {
+    hasLocationPermission.value = await Permission.location.isGranted;
+    // If not granted, request permission
+    if (!hasLocationPermission.value) {
+      currentLocation.value = LatLng(26.2233381, 50.5849251);
+      cameraPosition.value = CameraPosition(
+        target: currentLocation.value!,
+        zoom: 15,
+      );
+      hasLocationPermission.value = await AppMethods.askPermission(
+        permission: Permission.location,
+        whichPermission: AppStrings.location.tr,
+      );
+    }
+    if (hasLocationPermission.value) {
+      final position = await Geolocator.getCurrentPosition();
+      currentLocation.value = LatLng(position.latitude, position.longitude);
+      cameraPosition.value = CameraPosition(
+        target: currentLocation.value!,
+        zoom: 15,
+      );
+      // If map controller is available, animate to new location
+      if (mapController.value != null) {
+        mapController.value!.animateCamera(
+          CameraUpdate.newLatLng(currentLocation.value!),
+        );
+      }
+    }
   }
 
   /// Navigates to edit profile screen
@@ -241,6 +268,13 @@ class BookingStatusType {
       title: "Drop-off",
       apiStatus: "drop-off",
       icon: Assets.images.svg.add.path
+  );
+
+  static final LIVE_TRACKING = BookingStatusType(
+      id: 1,
+      title: "Trip Started",
+      apiStatus: "trip started",
+      icon: Assets.images.svg.busPrimary18.path
   );
 
   final int id;

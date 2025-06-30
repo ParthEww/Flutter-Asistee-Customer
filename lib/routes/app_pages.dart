@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:project_structure/pages/addnewaddress/add_new_address_bindings.dart';
 import 'package:project_structure/pages/dashboard/dashboard_bindings.dart';
 import 'package:project_structure/pages/editprofile/edit_profile_bindings.dart';
+import 'package:project_structure/pages/livetracking/live_tracking_bindings.dart';
 import 'package:project_structure/pages/login/login_bindings.dart';
 import 'package:project_structure/pages/login/login_page.dart';
 import 'package:project_structure/pages/otpverification/otp_verification_bindings.dart';
@@ -17,6 +18,7 @@ import '../pages/definebookingrule/define_booking_rule_page.dart';
 import '../pages/editprofile/edit_profile_page.dart';
 import '../pages/forgotpassword/forgot_password_bindings.dart';
 import '../pages/forgotpassword/forgot_password_page.dart';
+import '../pages/livetracking/live_tracking_page.dart';
 import '../pages/onboarding/onboarding_bindings.dart';
 import '../pages/onboarding/onboarding_page.dart';
 import '../pages/otpverification/otp_verification_page.dart';
@@ -39,8 +41,8 @@ part 'app_routes.dart';
 
 class AppPages {
   // initial route
-  static String initialRoute = _Path.splash;
-  static Bindings initialBinding = SplashBindings();
+  static String initialRoute = _Path.liveTracking;
+  static Bindings initialBinding = LiveTrackingBindings();
 
   static final List<GetPage<dynamic>> pages = [
     /// splash page
@@ -160,6 +162,13 @@ class AppPages {
       name: _Path.defineBookingRule,
       page: () => const DefineBookingRulePage(),
       binding: DefineBookingRuleBindings(),
+    ),
+
+    /// live tracking page
+    GetPage(
+      name: _Path.liveTracking,
+      page: () => const LiveTrackingPage(),
+      binding: LiveTrackingBindings(),
     ),
   ];
 }
