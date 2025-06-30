@@ -669,16 +669,11 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
 
   /// Handles proceed button tap
   void _handleProceedButton(RxList<dynamic> allValueList) {
-    print(allValueList
-        .firstWhereOrNull((element) => element.isSelected)
-        ?.id);
-    onTap?.call(
-      dialogType,
-      allValueList
-          .firstWhereOrNull((element) => element.isSelected)
-          ?.id,
-    );
+    final selectedItem = allValueList.firstWhereOrNull((element) => element.isSelected);
     Get.back();
+    if (selectedItem != null) {
+      onTap?.call(dialogType, selectedItem.id);
+    }
   }
 
   // ========================================================================

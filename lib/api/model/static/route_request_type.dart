@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class RouteRequestType {
-  final String id;
+  final int id;
   final String title;
   final bool isSelected;
 
@@ -12,7 +12,7 @@ class RouteRequestType {
 
   // Manual copyWith implementation
   RouteRequestType copyWith({
-    String? id,
+    int? id,
     String? title,
     bool? isSelected,
   }) {
@@ -25,6 +25,6 @@ class RouteRequestType {
 }
 
 final RxList<RouteRequestType> routeRequestTypeList = [
-  RouteRequestType(id: "2", title: "Recurring Booking", isSelected: true),
-  RouteRequestType(id: "1", title: "One Time Booking", isSelected: false)
+  RouteRequestType(id: 2, title: "Recurring Booking", isSelected: true),
+  RouteRequestType(id: 1, title: "One Time Booking", isSelected: false)
 ].obs;
