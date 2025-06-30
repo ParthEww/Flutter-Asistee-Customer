@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_structure/core/widgets/bottom_sheet/common_dropdown_selection_bottom_sheet.dart';
+import 'package:project_structure/pages/routesummary/route_summary_page.dart';
 
 import '../../api/model/dummy/dummy_cancellation_reason.dart';
 import '../../core/enum/app_status.dart';
@@ -97,7 +98,7 @@ class RouteSummaryController extends GetxController {
   }
 
   void onGoToRouteSummary() async {
-    Get.toNamed(Routes.routeSummary);
+    Get.toNamed(Routes.routeSummary, arguments: RouteSummaryFlowType.ROUTE_REQUEST_FLOW);
   }
 
   void onGoToDashboard() async {

@@ -16,6 +16,8 @@ import 'package:table_calendar/table_calendar.dart';
 import '../../core/widgets/custom/custom_circle_icon.dart';
 import 'route_summary_controller.dart';
 
+enum RouteSummaryFlowType { NORMAL_FLOW, ROUTE_REQUEST_FLOW }
+
 class RouteSummaryPage extends GetView<RouteSummaryController> {
   const RouteSummaryPage({super.key});
 
@@ -206,6 +208,19 @@ class RouteSummaryPage extends GetView<RouteSummaryController> {
               ],
             ),
           ),
+          if ((Get.arguments as RouteSummaryFlowType) ==
+              RouteSummaryFlowType.ROUTE_REQUEST_FLOW) ...[
+            Column(
+              children: [
+                CustomCircleIcon(
+                  iconPath: Assets.images.svg.editPen.path,
+                  padding:
+                  const EdgeInsets.only(left: 7, top: 7, right: 9, bottom: 9),
+                  backgroundColor: AppColors.white,
+                ),
+              ],
+            )
+          ]
         ],
       ),
     );
@@ -376,6 +391,7 @@ class RouteSummaryPage extends GetView<RouteSummaryController> {
               children: [
                 // Header
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomCircleIcon(
                       iconPath: Assets.images.svg.calendar16.path,
@@ -383,11 +399,22 @@ class RouteSummaryPage extends GetView<RouteSummaryController> {
                       backgroundColor: AppColors.deepNavy,
                     ),
                     const SizedBox(width: 12),
-                    Text(
-                      "Schedule Preview",
-                      style: TextStyles.text14SemiBold
-                          .copyWith(color: AppColors.deepNavy),
+                    Expanded(
+                      child: Text(
+                        "Schedule Preview",
+                        style: TextStyles.text14SemiBold
+                            .copyWith(color: AppColors.deepNavy),
+                      ),
                     ),
+                    if ((Get.arguments as RouteSummaryFlowType) ==
+                        RouteSummaryFlowType.ROUTE_REQUEST_FLOW) ...[
+                      CustomCircleIcon(
+                        iconPath: Assets.images.svg.editPenWhite.path,
+                        padding: const EdgeInsets.only(
+                            left: 7, top: 7, right: 9, bottom: 9),
+                        backgroundColor: AppColors.primary,
+                      )
+                    ],
                   ],
                 ),
                 const SizedBox(height: 24),

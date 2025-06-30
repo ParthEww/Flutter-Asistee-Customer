@@ -234,6 +234,10 @@ class $AssetsImagesSvgGen {
   SvgGenImage get dropoffPoint =>
       const SvgGenImage('assets/images/svg/dropoff-point.svg');
 
+  /// File path: assets/images/svg/edit-pen-white.svg
+  SvgGenImage get editPenWhite =>
+      const SvgGenImage('assets/images/svg/edit-pen-white.svg');
+
   /// File path: assets/images/svg/edit-pen.svg
   SvgGenImage get editPen =>
       const SvgGenImage('assets/images/svg/edit-pen.svg');
@@ -489,6 +493,7 @@ class $AssetsImagesSvgGen {
     dropDownArrowWhite,
     dropDownArrow,
     dropoffPoint,
+    editPenWhite,
     editPen,
     ellipseDot,
     ellipseGradient,
