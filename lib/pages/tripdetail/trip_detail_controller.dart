@@ -23,6 +23,7 @@ class TripDetailController extends GetxController {
 
   AppStatus appStatus = AppStatus.normal;
   RxBool isChecked = false.obs;
+  RxList<DateTime> selectedDaysList = [DateTime(2025, 6, 2), DateTime(2025, 6, 10), DateTime(2025, 6, 18), DateTime(2025, 6, 26), DateTime(2025, 6, 30)].obs;
 
   @override
   void onInit() {

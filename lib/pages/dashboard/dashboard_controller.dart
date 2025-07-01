@@ -11,6 +11,7 @@ import 'package:project_structure/pages/dashboard/bottomscreen/home_page.dart';
 import 'package:project_structure/pages/dashboard/bottomscreen/my_bookings_page.dart';
 import 'package:project_structure/pages/dashboard/bottomscreen/my_routes_page.dart';
 import 'package:project_structure/pages/dashboard/bottomscreen/settings_page.dart';
+import 'package:project_structure/pages/tripdetail/trip_detail_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 // import 'package:store_redirect/store_redirect.dart';
 
@@ -56,7 +57,8 @@ class DashboardController extends GetxController
   ].obs;
 
   // Booking status tabs
-  late Rx<BookingStatusType> activeTabBarBookingStatus = BookingStatusType.ONGOING.obs;
+  late Rx<BookingStatusType> activeTabBarBookingStatus =
+      BookingStatusType.ONGOING.obs;
 
   // Tab lists
   late List<BookingStatusType> commonTabList;
@@ -179,7 +181,11 @@ class DashboardController extends GetxController
 
   /// Navigates to trip detail screen
   void onGoToTripDetail() async {
-    Get.toNamed(Routes.tripDetail);
+    Get.toNamed(Routes.tripDetail,
+        arguments: activeBottomNavigationScreenType.value ==
+                BottomNavigationScreenType.HOME
+            ? TripDetailFlowType.ROUTE_REQUEST_FLOW
+            : TripDetailFlowType.NORMAL_FLOW);
   }
 
   /// Navigates to booking summary screen
@@ -214,68 +220,50 @@ enum RouteRequestType {
   final String title;
   final bool isSelected;
 
-  const RouteRequestType({required this.id, required this.title, this.isSelected = false});
+  const RouteRequestType(
+      {required this.id, required this.title, this.isSelected = false});
 }
 
 /// Represents different booking status types
 class BookingStatusType {
-  static final UPCOMING = BookingStatusType(
-      id: 1,
-      title: "Upcoming",
-      apiStatus: "upcoming"
-  );
+  static final UPCOMING =
+      BookingStatusType(id: 1, title: "Upcoming", apiStatus: "upcoming");
 
-  static final ONGOING = BookingStatusType(
-      id: 1,
-      title: "Ongoing",
-      apiStatus: "ongoing"
-  );
+  static final ONGOING =
+      BookingStatusType(id: 1, title: "Ongoing", apiStatus: "ongoing");
 
-  static final COMPLETED = BookingStatusType(
-      id: 1,
-      title: "Completed",
-      apiStatus: "completed"
-  );
+  static final COMPLETED =
+      BookingStatusType(id: 1, title: "Completed", apiStatus: "completed");
 
-  static final CANCELLED = BookingStatusType(
-      id: 1,
-      title: "Cancelled",
-      apiStatus: "cancelled"
-  );
+  static final CANCELLED =
+      BookingStatusType(id: 1, title: "Cancelled", apiStatus: "cancelled");
 
-  static final PAST = BookingStatusType(
-      id: 1,
-      title: "Past",
-      apiStatus: "completed"
-  );
+  static final PAST =
+      BookingStatusType(id: 1, title: "Past", apiStatus: "completed");
 
   static final REQUEST_ROUTE = BookingStatusType(
       id: 1,
       title: "Request Route",
       apiStatus: "pending",
-      icon: Assets.images.svg.add.path
-  );
+      icon: Assets.images.svg.add.path);
 
   static final PICK_UP = BookingStatusType(
       id: 1,
       title: "Pickup",
       apiStatus: "pickup",
-      icon: Assets.images.svg.add.path
-  );
+      icon: Assets.images.svg.add.path);
 
   static final DROP_OFF = BookingStatusType(
       id: 1,
       title: "Drop-off",
       apiStatus: "drop-off",
-      icon: Assets.images.svg.add.path
-  );
+      icon: Assets.images.svg.add.path);
 
   static final LIVE_TRACKING = BookingStatusType(
       id: 1,
       title: "Trip Started",
       apiStatus: "trip started",
-      icon: Assets.images.svg.busPrimary18.path
-  );
+      icon: Assets.images.svg.busPrimary18.path);
 
   final int id;
   final String title;
@@ -293,59 +281,41 @@ class BookingStatusType {
 /// Represents different settings fields
 class SettingFieldType {
   static final WALLET = SettingFieldType(
-      icon: Assets.images.svg.settingsWallet.path,
-      title: "Wallet"
-  );
+      icon: Assets.images.svg.settingsWallet.path, title: "Wallet");
 
   static final ADMIN_CHAT = SettingFieldType(
-      icon: Assets.images.svg.settingsAdminChat.path,
-      title: "Admin Chat"
-  );
+      icon: Assets.images.svg.settingsAdminChat.path, title: "Admin Chat");
 
   static final MY_ADDRESS = SettingFieldType(
-      icon: Assets.images.svg.settingsMyAddress.path,
-      title: "My Address"
-  );
+      icon: Assets.images.svg.settingsMyAddress.path, title: "My Address");
 
   static final NOTIFICATIONS = SettingFieldType(
       icon: Assets.images.svg.settingsNotifications.path,
-      title: "Notifications"
-  );
+      title: "Notifications");
 
   static final ABOUT_US = SettingFieldType(
-      icon: Assets.images.svg.settingsAboutUs.path,
-      title: "About US"
-  );
+      icon: Assets.images.svg.settingsAboutUs.path, title: "About US");
 
   static final CONTACT_US = SettingFieldType(
-      icon: Assets.images.svg.settingsContactUs.path,
-      title: "Contact Us"
-  );
+      icon: Assets.images.svg.settingsContactUs.path, title: "Contact Us");
 
   static final FAQS = SettingFieldType(
-      icon: Assets.images.svg.settingsFaqs.path,
-      title: "FAQs"
-  );
+      icon: Assets.images.svg.settingsFaqs.path, title: "FAQs");
 
   static final TERMS_AND_CONDITIONS = SettingFieldType(
       icon: Assets.images.svg.settingsTermsAndConditions.path,
-      title: "Terms & Conditions"
-  );
+      title: "Terms & Conditions");
 
   static final PRIVACY_POLICY = SettingFieldType(
       icon: Assets.images.svg.settingsPrivacyPolicy.path,
-      title: "Privacy policy"
-  );
+      title: "Privacy policy");
 
   static final LOGOUT = SettingFieldType(
-      icon: Assets.images.svg.settingsLogout.path,
-      title: "Logout"
-  );
+      icon: Assets.images.svg.settingsLogout.path, title: "Logout");
 
   static final DELETE_ACCOUNT = SettingFieldType(
       icon: Assets.images.svg.settingsDeleteAccount.path,
-      title: "Delete Account"
-  );
+      title: "Delete Account");
 
   final String icon;
   final String title;
