@@ -19,6 +19,7 @@ abstract class Routes {
   static const String requestRoute = _Path.requestRoute;
   static const String defineBookingRule = _Path.defineBookingRule;
   static const String liveTracking = _Path.liveTracking;
+  static const String wallet = _Path.wallet;
 }
 
 abstract class _Path {
@@ -40,4 +41,5 @@ abstract class _Path {
   static const String requestRoute = "/requestRoute";
   static const String defineBookingRule = "/defineBookingRule";
   static const String liveTracking = "/liveTracking";
+  static const String wallet = "/wallet";
 }

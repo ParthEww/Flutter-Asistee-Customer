@@ -82,6 +82,14 @@ class $AssetsImagesPngGen {
 class $AssetsImagesSvgGen {
   const $AssetsImagesSvgGen();
 
+  /// File path: assets/images/svg/add-to-wallet-white.svg
+  SvgGenImage get addToWalletWhite =>
+      const SvgGenImage('assets/images/svg/add-to-wallet-white.svg');
+
+  /// File path: assets/images/svg/add-to-wallet.svg
+  SvgGenImage get addToWallet =>
+      const SvgGenImage('assets/images/svg/add-to-wallet.svg');
+
   /// File path: assets/images/svg/add.svg
   SvgGenImage get add => const SvgGenImage('assets/images/svg/add.svg');
 
@@ -152,6 +160,9 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/available-seat.svg
   SvgGenImage get availableSeat =>
       const SvgGenImage('assets/images/svg/available-seat.svg');
+
+  /// File path: assets/images/svg/bd.svg
+  SvgGenImage get bd => const SvgGenImage('assets/images/svg/bd.svg');
 
   /// File path: assets/images/svg/bnv-home.svg
   SvgGenImage get bnvHome =>
@@ -322,6 +333,10 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/minus.svg
   SvgGenImage get minus => const SvgGenImage('assets/images/svg/minus.svg');
 
+  /// File path: assets/images/svg/money-credit-arrow.svg
+  SvgGenImage get moneyCreditArrow =>
+      const SvgGenImage('assets/images/svg/money-credit-arrow.svg');
+
   /// File path: assets/images/svg/money.svg
   SvgGenImage get money => const SvgGenImage('assets/images/svg/money.svg');
 
@@ -456,11 +471,16 @@ class $AssetsImagesSvgGen {
   SvgGenImage get uploadImage =>
       const SvgGenImage('assets/images/svg/upload-image.svg');
 
+  /// File path: assets/images/svg/wallet.svg
+  SvgGenImage get wallet => const SvgGenImage('assets/images/svg/wallet.svg');
+
   /// Directory path: assets/images/svg
   String get path => 'assets/images/svg';
 
   /// List of all assets
   List<SvgGenImage> get values => [
+    addToWalletWhite,
+    addToWallet,
     add,
     addressFieldBlock,
     addressFieldBuildingName,
@@ -479,6 +499,7 @@ class $AssetsImagesSvgGen {
     asisteeLogoWithText,
     availableSeat16,
     availableSeat,
+    bd,
     bnvHome,
     bnvMyBookings,
     bnvMyRoutes,
@@ -526,6 +547,7 @@ class $AssetsImagesSvgGen {
     location,
     map,
     minus,
+    moneyCreditArrow,
     money,
     notification,
     numberPlate,
@@ -561,6 +583,7 @@ class $AssetsImagesSvgGen {
     smiley,
     uploadImageDialog,
     uploadImage,
+    wallet,
   ];
 }
 

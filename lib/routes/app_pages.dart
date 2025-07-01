@@ -36,13 +36,15 @@ import '../pages/splash/splash_bindings.dart';
 import '../pages/splash/splash_page.dart';
 import '../pages/tripdetail/trip_detail_bindings.dart';
 import '../pages/tripdetail/trip_detail_page.dart';
+import '../pages/wallet/wallet_bindings.dart';
+import '../pages/wallet/wallet_page.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   // initial route
-  static String initialRoute = _Path.splash;
-  static Bindings initialBinding = SplashBindings();
+  static String initialRoute = _Path.wallet;
+  static Bindings initialBinding = WalletBindings();
 
   static final List<GetPage<dynamic>> pages = [
     /// splash page
@@ -169,6 +171,13 @@ class AppPages {
       name: _Path.liveTracking,
       page: () => const LiveTrackingPage(),
       binding: LiveTrackingBindings(),
+    ),
+
+    /// wallet page
+    GetPage(
+      name: _Path.wallet,
+      page: () => const WalletPage(),
+      binding: WalletBindings(),
     ),
   ];
 }

@@ -110,7 +110,7 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
   double _calculateDialogHeight(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     if (dialogType ==
-        CommonDropdownSelectionBottomSheetDialogType.SELECT_SEAT_SELECTION) {
+        CommonDropdownSelectionBottomSheetDialogType.SELECT_SEAT_SELECTION || dialogType == CommonDropdownSelectionBottomSheetDialogType.ADD_FUNDS_TO_WALLET) {
       return screenHeight * 0.37;
     } else if (dialogType ==
         CommonDropdownSelectionBottomSheetDialogType
@@ -148,7 +148,7 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
         // Title Text
         Text(
           dialogType.dialogTitle,
-          style: TextStyles.text14SemiBold,
+          style: TextStyles.text14SemiBold.copyWith(color: dialogType == CommonDropdownSelectionBottomSheetDialogType.ADD_FUNDS_TO_WALLET ? AppColors.deepNavy : AppColors.primary),
         ),
       ],
     );
@@ -181,6 +181,8 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
       );
     } else if (dialogType == CommonDropdownSelectionBottomSheetDialogType.DAYS_DATES) {
       return _buildDaysDatesContent(allValueList, isDaysTypeSelected);
+    }  else if (dialogType == CommonDropdownSelectionBottomSheetDialogType.ADD_FUNDS_TO_WALLET) {
+      return _buildAddFundsToTheWallet();
     } else {
       return _buildDefaultListContent(allValueList, emailController, emailFocusNode);
     }
@@ -328,9 +330,64 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
     );
   }
 
+  /// Builds add funds to the wallet view
+  Widget _buildAddFundsToTheWallet() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomTextField(
+          customTextFieldType: CustomTextFieldType.AMOUNT,
+          textEditingController: TextEditingController(),
+          focusNode: FocusNode(),
+          hintText: dialogType.searchHint,
+          keyboardType: TextInputType.number,
+          textInputAction: TextInputAction.done,
+          suffixIcon: Assets.images.svg.bd.path,
+          onTextChanged: (value) {},
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            _buildAmountChipView("+BD 10"),
+            const SizedBox(width: 8),
+            _buildAmountChipView("+BD 50"),
+            const SizedBox(width: 8),
+            _buildAmountChipView("+BD 100"),
+          ],
+        )
+      ],
+    );
+  }
+
+  ///Builds amount chip view
+  Widget _buildAmountChipView(String amount){
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+      decoration: BoxDecoration(
+        color: AppColors.lightBlue,
+        borderRadius: BorderRadius.circular(58),
+      ),
+      child: Text(
+        amount,
+        style: TextStyles.text12SemiBold,
+      ),
+    );
+  }
+
   /// Builds the footer buttons (back and proceed)
   Widget _buildFooterButtons(RxList<dynamic> allValueList) {
-    return Row(
+    return dialogType == CommonDropdownSelectionBottomSheetDialogType.ADD_FUNDS_TO_WALLET ? CustomTextField(
+      customTextFieldType: CustomTextFieldType.BUTTON,
+      textEditingController: TextEditingController(),
+      focusNode: FocusNode(),
+      hintText: dialogType.buttonText,
+      keyboardType: TextInputType.none,
+      textInputAction: TextInputAction.done,
+      suffixIcon: Assets.images.svg.arrowRightGreen.path,
+      onPressed: () {
+        _handleProceedButton(allValueList);
+      },
+    ) : Row(
       children: [
         // Back button
         GestureDetector(
@@ -824,5 +881,13 @@ class CommonDropdownSelectionBottomSheetDialogType {
     dialogTitleIcon: Assets.images.svg.calendar16.path,
     searchHint: "Search for days/dates",
     buttonText: "Next",
+  );
+
+  static final ADD_FUNDS_TO_WALLET = CommonDropdownSelectionBottomSheetDialogType(
+    type: "Add Funds to Wallet",
+    dialogTitle: "Add Funds to Wallet",
+    dialogTitleIcon: Assets.images.svg.addToWalletWhite.path,
+    searchHint: "Enter Amount",
+    buttonText: "Add Funds",
   );
 }

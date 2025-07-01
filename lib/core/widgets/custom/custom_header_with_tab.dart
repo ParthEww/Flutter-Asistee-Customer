@@ -175,10 +175,7 @@ class CustomHeaderWithTab extends StatelessWidget {
               const SizedBox(height: 15),
 
               // Active tab indicator (only for My Bookings screen)
-              if (controller.commonTabList.length > 1 &&
-                  (controller.activeBottomNavigationScreenType.value ==
-                          BottomNavigationScreenType.MY_BOOKINGS ||
-                      !isBnvHeader)) ...[
+              if (controller.commonTabList.length > 1 && isBnvHeader) ...[
                 Container(
                   height: 3,
                   decoration: BoxDecoration(
