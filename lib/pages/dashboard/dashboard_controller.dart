@@ -188,6 +188,11 @@ class DashboardController extends GetxController
             : TripDetailFlowType.NORMAL_FLOW);
   }
 
+  /// Navigates to live tracking screen
+  void onGoToLiveTracking() async {
+    Get.toNamed(Routes.liveTracking);
+  }
+
   /// Navigates to booking summary screen
   void onGoToBookingSummary() async {
     Get.toNamed(Routes.bookingSummary);

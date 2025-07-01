@@ -67,6 +67,9 @@ class MyBookingsPage extends GetView<DashboardController> {
                                                 .routeDataList[index]
                                                 .isOnboard ??
                                             false,
+                                        onTap: (){
+                                          controller.onGoToLiveTracking();
+                                        },
                                       )
                                     : CustomRouteCard(
                                         startLocation:

@@ -95,7 +95,8 @@ class TripDetailPage extends GetView<TripDetailController> {
       child: CustomHeader(
           title: "Trip Details",
           subTitle: "Route no. 123456",
-          isShowSubtitle: true,
+          isShowSubtitle: (Get.arguments as TripDetailFlowType) ==
+              TripDetailFlowType.ROUTE_REQUEST_FLOW,
           isShowBackButton: true,
           onBackButtonTap: () {
             Get.back();
