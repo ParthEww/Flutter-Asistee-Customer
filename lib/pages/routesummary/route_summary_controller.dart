@@ -70,6 +70,30 @@ class RouteSummaryController extends GetxController {
     DummyCancellationReason(id: 4, reasonName: "Yearly")
   ].obs;
 
+  final RxList<DummyCancellationReason> yearList =
+      <DummyCancellationReason>[
+    DummyCancellationReason(id: 1, reasonName: "2025", isSelected: true),
+    DummyCancellationReason(id: 2, reasonName: "2026"),
+    DummyCancellationReason(id: 3, reasonName: "2027"),
+    DummyCancellationReason(id: 4, reasonName: "2028"),
+    DummyCancellationReason(id: 5, reasonName: "2029")
+  ].obs;
+
+  final RxList<DummyCancellationReason> monthList = <DummyCancellationReason>[
+    DummyCancellationReason(id: 1, reasonName: "January", isSelected: true),
+    DummyCancellationReason(id: 2, reasonName: "February"),
+    DummyCancellationReason(id: 3, reasonName: "March"),
+    DummyCancellationReason(id: 4, reasonName: "April"),
+    DummyCancellationReason(id: 5, reasonName: "May"),
+    DummyCancellationReason(id: 6, reasonName: "June"),
+    DummyCancellationReason(id: 7, reasonName: "July"),
+    DummyCancellationReason(id: 8, reasonName: "August"),
+    DummyCancellationReason(id: 9, reasonName: "September"),
+    DummyCancellationReason(id: 10, reasonName: "October"),
+    DummyCancellationReason(id: 11, reasonName: "November"),
+    DummyCancellationReason(id: 12, reasonName: "December"),
+  ].obs;
+
   final RxList<DummyCancellationReason> daysOfTheWeekList =
       <DummyCancellationReason>[
     DummyCancellationReason(id: 1, reasonName: "Sunday", isSelected: true),

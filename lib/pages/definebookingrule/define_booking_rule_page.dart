@@ -120,8 +120,12 @@ class DefineBookingRulePage extends GetView<RouteSummaryController> {
             ),
             const SizedBox(height: 40),
             Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
+              child: Obx(() {
+                for (var item in controller.frequencyList) {
+                  print(
+                      'Element: ${item.id} - ${item.reasonName} (Selected: ${item.isSelected})');
+                }
+                return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18),
                   child: Column(
                     children: [
@@ -144,60 +148,97 @@ class DefineBookingRulePage extends GetView<RouteSummaryController> {
                                 controller.dialogType.value = dialogType;
                                 controller.selectedItemIndex.value =
                                     selectedItemIndex;
+                                for (var element in controller.frequencyList) {
+                                  element.isSelected =
+                                      controller.selectedItemIndex.value ==
+                                          element.id;
+                                }
+                                controller.frequencyList.refresh();
                               });
                         },
                       ),
                       const SizedBox(height: 14),
-                      // Boarding Point input field
-                      CustomTextField(
-                        customTextFieldType: CustomTextFieldType.REPEAT_AFTER,
-                        textEditingController: TextEditingController(),
-                        focusNode: FocusNode(),
-                        hintText: "Repeat After Every",
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.next,
-                        suffixIcon: Assets.images.svg.boardingPoint.path,
-                      ),
-                      const SizedBox(height: 14),
-                      // Drop off Point input field
-                      CustomTextField(
-                        customTextFieldType: CustomTextFieldType.START_DATE,
-                        textEditingController: TextEditingController(),
-                        focusNode: FocusNode(),
-                        hintText: "Start Date",
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.next,
-                        suffixIcon: Assets.images.svg.calendar18.path,
-                        onPressed: () {
-                          CommonDropdownSelectionBottomSheet.showBottomSheet(
-                              dialogType:
-                                  CommonDropdownSelectionBottomSheetDialogType
-                                      .START_DATE,
-                              commonList: controller.frequencyList);
-                        },
-                      ),
-                      const SizedBox(height: 14),
-                      // start time input field
-                      CustomTextField(
-                        customTextFieldType: CustomTextFieldType.END_DATE,
-                        textEditingController: TextEditingController(),
-                        focusNode: FocusNode(),
-                        hintText: "End Date",
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.next,
-                        suffixIcon: Assets.images.svg.calendar18.path,
-                        onPressed: () {
-                          CommonDropdownSelectionBottomSheet.showBottomSheet(
-                              dialogType:
-                                  CommonDropdownSelectionBottomSheetDialogType
-                                      .END_DATE,
-                              commonList: controller.frequencyList);
-                        },
-                      ),
+                      if (controller.frequencyList
+                              .firstWhere((element) => element.isSelected)
+                              .id ==
+                          4) ...[
+                        CustomTextField(
+                          customTextFieldType: CustomTextFieldType.YEAR,
+                          textEditingController: TextEditingController(),
+                          focusNode: FocusNode(),
+                          hintText: "Select Year",
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.done,
+                          suffixIcon: Assets.images.svg.dropDownArrowWhite.path,
+                          onPressed: () {
+                            CommonDropdownSelectionBottomSheet.showBottomSheet(
+                                dialogType:
+                                    CommonDropdownSelectionBottomSheetDialogType
+                                        .SELECT_YEAR,
+                                commonList: controller.yearList,
+                                onTap: (dialogType, selectedItemIndex) {
+                                  controller.dialogType.value = dialogType;
+                                  controller.selectedItemIndex.value =
+                                      selectedItemIndex;
+                                  for (var element in controller.yearList) {
+                                    element.isSelected =
+                                        controller.selectedItemIndex.value ==
+                                            element.id;
+                                  }
+                                });
+                          },
+                        )
+                      ] else ...[
+                        CustomTextField(
+                          customTextFieldType: CustomTextFieldType.REPEAT_AFTER,
+                          textEditingController: TextEditingController(),
+                          focusNode: FocusNode(),
+                          hintText: "Repeat After Every",
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.next,
+                          suffixIcon: Assets.images.svg.boardingPoint.path,
+                        ),
+                        const SizedBox(height: 14),
+                        // Drop off Point input field
+                        CustomTextField(
+                          customTextFieldType: CustomTextFieldType.START_DATE,
+                          textEditingController: TextEditingController(),
+                          focusNode: FocusNode(),
+                          hintText: "Start Date",
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.next,
+                          suffixIcon: Assets.images.svg.calendar18.path,
+                          onPressed: () {
+                            CommonDropdownSelectionBottomSheet.showBottomSheet(
+                                dialogType:
+                                    CommonDropdownSelectionBottomSheetDialogType
+                                        .START_DATE,
+                                commonList: controller.frequencyList);
+                          },
+                        ),
+                        const SizedBox(height: 14),
+                        // start time input field
+                        CustomTextField(
+                          customTextFieldType: CustomTextFieldType.END_DATE,
+                          textEditingController: TextEditingController(),
+                          focusNode: FocusNode(),
+                          hintText: "End Date",
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.next,
+                          suffixIcon: Assets.images.svg.calendar18.path,
+                          onPressed: () {
+                            CommonDropdownSelectionBottomSheet.showBottomSheet(
+                                dialogType:
+                                    CommonDropdownSelectionBottomSheetDialogType
+                                        .END_DATE,
+                                commonList: controller.frequencyList);
+                          },
+                        ),
+                      ]
                     ],
                   ),
-                ),
-              ),
+                );
+              }),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -218,9 +259,12 @@ class DefineBookingRulePage extends GetView<RouteSummaryController> {
                             controller.selectedItemIndex.value =
                                 selectedItemIndex;
                           });
-                    } else if (controller.dialogType.value ==
-                            CommonDropdownSelectionBottomSheetDialogType
-                                .DAYS_OF_THE_WEEK &&
+                    } else if ((controller.dialogType.value ==
+                                CommonDropdownSelectionBottomSheetDialogType
+                                    .DAYS_OF_THE_WEEK ||
+                            controller.dialogType.value ==
+                                CommonDropdownSelectionBottomSheetDialogType
+                                    .SELECT_MONTH) &&
                         controller.selectedItemIndex.value != -1) {
                       CommonDropdownSelectionBottomSheet.showBottomSheet(
                           dialogType:
@@ -231,6 +275,25 @@ class DefineBookingRulePage extends GetView<RouteSummaryController> {
                             controller.dialogType.value = null;
                             controller.selectedItemIndex.value =
                                 selectedItemIndex;
+                          });
+                    } else if (controller.dialogType.value ==
+                            CommonDropdownSelectionBottomSheetDialogType
+                                .SELECT_YEAR &&
+                        controller.selectedItemIndex.value != -1) {
+                      CommonDropdownSelectionBottomSheet.showBottomSheet(
+                          dialogType:
+                              CommonDropdownSelectionBottomSheetDialogType
+                                  .SELECT_MONTH,
+                          commonList: controller.monthList,
+                          onTap: (dialogType, selectedItemIndex) {
+                            controller.dialogType.value = dialogType;
+                            controller.selectedItemIndex.value =
+                                selectedItemIndex;
+                            for (var element in controller.monthList) {
+                              element.isSelected =
+                                  controller.selectedItemIndex.value ==
+                                      element.id;
+                            }
                           });
                     }
                   } else {

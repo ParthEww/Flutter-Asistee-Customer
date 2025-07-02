@@ -181,6 +181,8 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
       );
     } else if (dialogType == CommonDropdownSelectionBottomSheetDialogType.DAYS_DATES) {
       return _buildDaysDatesContent(allValueList, isDaysTypeSelected);
+    } else if (dialogType == CommonDropdownSelectionBottomSheetDialogType.SELECT_MONTH) {
+      return _buildDaysDatesContent(allValueList, isDaysTypeSelected);
     }  else if (dialogType == CommonDropdownSelectionBottomSheetDialogType.ADD_FUNDS_TO_WALLET) {
       return _buildAddFundsToTheWallet();
     } else {
@@ -214,26 +216,32 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildRepeatOnView(
-                daysDatesType: DaysDatesType.DAYS,
-                selectedDayDateType: isDaysTypeSelected,
-              ),
-              const SizedBox(width: 12),
-              _buildRepeatOnView(
-                daysDatesType: DaysDatesType.DATES,
-                selectedDayDateType: isDaysTypeSelected,
-              ),
-            ],
-          ),
-          const SizedBox(height: 18),
+          if (dialogType !=
+              CommonDropdownSelectionBottomSheetDialogType.SELECT_MONTH) ...[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildRepeatOnView(
+                  daysDatesType: DaysDatesType.DAYS,
+                  selectedDayDateType: isDaysTypeSelected,
+                ),
+                const SizedBox(width: 12),
+                _buildRepeatOnView(
+                  daysDatesType: DaysDatesType.DATES,
+                  selectedDayDateType: isDaysTypeSelected,
+                ),
+              ],
+            ),
+            const SizedBox(height: 18)
+          ],
           Expanded(
             child: Obx(() {
-              return isDaysTypeSelected.value == DaysDatesType.DAYS
+              return dialogType ==
+                      CommonDropdownSelectionBottomSheetDialogType.SELECT_MONTH
                   ? _buildScrollableList(allValueList)
-                  : _buildCalendar();
+                  : isDaysTypeSelected.value == DaysDatesType.DAYS
+                      ? _buildScrollableList(allValueList)
+                      : _buildCalendar();
             }),
           ),
         ],
@@ -274,7 +282,19 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),
       slivers: [
-        SliverList(
+        dialogType == CommonDropdownSelectionBottomSheetDialogType.SELECT_MONTH ? SliverGrid(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // 2 columns
+                  crossAxisSpacing: 7, // Horizontal spacing
+                  mainAxisSpacing: 12, // Vertical spacing
+                  childAspectRatio: 2.5, // Square items (adjust as needed)
+                ),
+                delegate: SliverChildBuilderDelegate(
+                  (_, index) =>
+                      _buildListItem(allValueList[index], allValueList),
+                  childCount: allValueList.length,
+                ))
+            : SliverList(
           delegate: SliverChildBuilderDelegate(
                 (_, index) => _buildListItem(allValueList[index], allValueList),
             childCount: allValueList.length,
@@ -290,7 +310,18 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       title: GestureDetector(
         onTap: () => _handleItemSelection(item, allValueList),
-        child: Container(
+        child: dialogType == CommonDropdownSelectionBottomSheetDialogType.SELECT_MONTH ? Container(
+          padding: const EdgeInsets.symmetric(vertical: 18),
+          decoration: BoxDecoration(
+            color: item.isSelected ? AppColors.primary : AppColors.lightMint,
+            borderRadius: BorderRadius.circular(64),
+          ),
+          child: Text(
+            textAlign: TextAlign.center,
+            _getDisplayText(item),
+            style: item.isSelected ? TextStyles.text14SemiBold.copyWith(color: AppColors.white) : TextStyles.text14SemiBold,
+          ),
+        ) : Container(
           padding: const EdgeInsets.only(left: 24, right: 4, top: 4, bottom: 4),
           decoration: BoxDecoration(
             color: AppColors.lightMint.withOpacityPrecise(0.8),
@@ -716,12 +747,21 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
 
   /// Handles item selection
   void _handleItemSelection(dynamic item, RxList<dynamic> allValueList) {
-    final position = commonList.indexWhere((it) => it.id == item.id);
-    final newList = allValueList
-        .map((bean) => bean.copyWith(isSelected: false))
-        .toList();
-    newList[position] = newList[position].copyWith(isSelected: true);
-    allValueList.value = newList;
+    if (dialogType ==
+        CommonDropdownSelectionBottomSheetDialogType.SELECT_MONTH) {
+      final index = allValueList.indexWhere((it) => it.id == item.id);
+      if (index != -1) {
+        allValueList[index] = allValueList[index].copyWith(
+          isSelected: !allValueList[index].isSelected, // Toggle selection
+        );
+      }
+    } else {
+      final position = commonList.indexWhere((it) => it.id == item.id);
+      final newList =
+          allValueList.map((bean) => bean.copyWith(isSelected: false)).toList();
+      newList[position] = newList[position].copyWith(isSelected: true);
+      allValueList.value = newList;
+    }
   }
 
   /// Handles proceed button tap
@@ -804,11 +844,19 @@ class CommonDropdownSelectionBottomSheetDialogType {
   );
 
   static final SELECT_YEAR = CommonDropdownSelectionBottomSheetDialogType(
-    type: "Select Nationality in Profile Setup screen",
-    dialogTitle: "Select Nationality",
-    dialogTitleIcon: Assets.images.svg.uploadImageDialog.path,
-    searchHint: "Search for nationality",
+    type: "Select Year in Define Booking Rule screen",
+    dialogTitle: "Select Year",
+    dialogTitleIcon: Assets.images.svg.calendar16.path,
+    searchHint: "Search for year",
     buttonText: "Select",
+  );
+
+  static final SELECT_MONTH = CommonDropdownSelectionBottomSheetDialogType(
+    type: "Select Month in Define Booking Rule screen",
+    dialogTitle: "Select Month Of The Year",
+    dialogTitleIcon: Assets.images.svg.calendar16.path,
+    searchHint: "Search for month",
+    buttonText: "Next",
   );
 
   static final SELECT_SUBJECT = CommonDropdownSelectionBottomSheetDialogType(

@@ -37,6 +37,7 @@ enum CustomTextFieldType {
   BOOKING_ID,
   SUBJECT,
   ADDITIONAL_NOTE,
+  YEAR,
   NONE
 }
 
@@ -50,6 +51,7 @@ extension CustomTextFieldTypeExtensions on CustomTextFieldType {
         CustomTextFieldType.DROPOFF_POINT,
         CustomTextFieldType.START_TIME,
         CustomTextFieldType.FREQUENCY,
+        CustomTextFieldType.YEAR,
         CustomTextFieldType.REPEAT_AFTER,
         CustomTextFieldType.START_DATE,
         CustomTextFieldType.END_DATE,
@@ -63,6 +65,7 @@ extension CustomTextFieldTypeExtensions on CustomTextFieldType {
         CustomTextFieldType.DROPOFF_POINT,
         CustomTextFieldType.START_TIME,
         CustomTextFieldType.FREQUENCY,
+        CustomTextFieldType.YEAR,
         CustomTextFieldType.REPEAT_AFTER,
         CustomTextFieldType.START_DATE,
         CustomTextFieldType.END_DATE,
@@ -207,7 +210,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     top: (widget.customTextFieldType.requiresExtendedInputFeatures)
                         ? 17
                         : 18,
-                    bottom: (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME || widget.customTextFieldType == CustomTextFieldType.BOARDING_POINT || widget.customTextFieldType == CustomTextFieldType.DROPOFF_POINT || widget.customTextFieldType == CustomTextFieldType.START_TIME || widget.customTextFieldType == CustomTextFieldType.FREQUENCY || widget.customTextFieldType == CustomTextFieldType.REPEAT_AFTER || widget.customTextFieldType == CustomTextFieldType.START_DATE || widget.customTextFieldType == CustomTextFieldType.END_DATE || widget.customTextFieldType == CustomTextFieldType.BOOKING_ID || widget.customTextFieldType == CustomTextFieldType.CONTACT_US_EMAIL_OR_PHONE_NUMBER || widget.customTextFieldType == CustomTextFieldType.SUBJECT || widget.customTextFieldType == CustomTextFieldType.ADDITIONAL_NOTE) ? 17 : 18),
+                    bottom: (widget.customTextFieldType.requiresExtendedInputFeatures) ? 17 : 18),
             counter: const SizedBox.shrink(),
             // Hide counter but keep space
             filled: true,
@@ -261,7 +264,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     ? TextStyles.text14Regular.copyWith(
                         color: AppColors.deepNavy.withOpacityPrecise(
                             (widget.customTextFieldType ==
-                                        CustomTextFieldType.FREQUENCY ||
+                                        CustomTextFieldType.FREQUENCY ||widget.customTextFieldType ==
+                                        CustomTextFieldType.YEAR ||
                                     widget.customTextFieldType ==
                                         CustomTextFieldType.REPEAT_AFTER)
                                 ? 1
@@ -316,10 +320,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
           : 69;
     } else if (widget.customTextFieldType == CustomTextFieldType.EMAIL) {
       width = widget.textEditingController.text.isEmail ? 69 : 52;
-    } else if (widget.customTextFieldType.requiresExtendedInputFeatures) {
-      width = 44;
     } else if (widget.customTextFieldType == CustomTextFieldType.REPEAT_AFTER) {
       width = 100;
+    } else if (widget.customTextFieldType.requiresExtendedInputFeatures) {
+      width = 44;
     } else {
       width = 52;
     }
@@ -332,8 +336,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             : 52;
 
     // Configure decoration based on field type
-    final decoration = (widget.customTextFieldType ==
-                CustomTextFieldType.ROUTE_NAME.requiresExtendedInputFeatures)
+    final decoration = (widget.customTextFieldType.requiresExtendedInputFeatures)
         ? BoxDecoration(color: AppColors.primary, shape: BoxShape.circle)
         : BoxDecoration(
             color: widget.customTextFieldType ==

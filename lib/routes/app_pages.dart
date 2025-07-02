@@ -45,8 +45,8 @@ part 'app_routes.dart';
 
 class AppPages {
   // initial route
-  static String initialRoute = _Path.contactUs;
-  static Bindings initialBinding = ContactUsBindings();
+  static String initialRoute = _Path.defineBookingRule;
+  static Bindings initialBinding = DefineBookingRuleBindings();
 
   static final List<GetPage<dynamic>> pages = [
     /// splash page
