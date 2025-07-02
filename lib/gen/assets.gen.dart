@@ -231,6 +231,9 @@ class $AssetsImagesSvgGen {
   SvgGenImage get checkBoxUnchecked =>
       const SvgGenImage('assets/images/svg/check-box-unchecked.svg');
 
+  /// File path: assets/images/svg/clean.svg
+  SvgGenImage get clean => const SvgGenImage('assets/images/svg/clean.svg');
+
   /// File path: assets/images/svg/clock-18.svg
   SvgGenImage get clock18 =>
       const SvgGenImage('assets/images/svg/clock-18.svg');
@@ -533,6 +536,7 @@ class $AssetsImagesSvgGen {
     camera,
     checkBoxChecked,
     checkBoxUnchecked,
+    clean,
     clock18,
     clock,
     cprWhite,
