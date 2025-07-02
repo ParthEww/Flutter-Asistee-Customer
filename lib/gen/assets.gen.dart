@@ -234,6 +234,10 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/clock.svg
   SvgGenImage get clock => const SvgGenImage('assets/images/svg/clock.svg');
 
+  /// File path: assets/images/svg/cpr-white.svg
+  SvgGenImage get cprWhite =>
+      const SvgGenImage('assets/images/svg/cpr-white.svg');
+
   /// File path: assets/images/svg/cpr.svg
   SvgGenImage get cpr => const SvgGenImage('assets/images/svg/cpr.svg');
 
@@ -268,6 +272,10 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/ellipse-gradient.svg
   SvgGenImage get ellipseGradient =>
       const SvgGenImage('assets/images/svg/ellipse-gradient.svg');
+
+  /// File path: assets/images/svg/email-white.svg
+  SvgGenImage get emailWhite =>
+      const SvgGenImage('assets/images/svg/email-white.svg');
 
   /// File path: assets/images/svg/email.svg
   SvgGenImage get email => const SvgGenImage('assets/images/svg/email.svg');
@@ -339,6 +347,9 @@ class $AssetsImagesSvgGen {
 
   /// File path: assets/images/svg/money.svg
   SvgGenImage get money => const SvgGenImage('assets/images/svg/money.svg');
+
+  /// File path: assets/images/svg/note.svg
+  SvgGenImage get note => const SvgGenImage('assets/images/svg/note.svg');
 
   /// File path: assets/images/svg/notification.svg
   SvgGenImage get notification =>
@@ -519,6 +530,7 @@ class $AssetsImagesSvgGen {
     checkBoxUnchecked,
     clock18,
     clock,
+    cprWhite,
     cpr,
     doubleArrowRight,
     dropDownArrowWhite,
@@ -528,6 +540,7 @@ class $AssetsImagesSvgGen {
     editPen,
     ellipseDot,
     ellipseGradient,
+    emailWhite,
     email,
     eyeSlash,
     eye,
@@ -549,6 +562,7 @@ class $AssetsImagesSvgGen {
     minus,
     moneyCreditArrow,
     money,
+    note,
     notification,
     numberPlate,
     passwordCheck,

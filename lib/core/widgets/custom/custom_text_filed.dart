@@ -20,6 +20,7 @@ enum CustomTextFieldType {
   START_DATE,
   END_DATE,
   EMAIL_OR_PHONE_NUMBER,
+  CONTACT_US_EMAIL_OR_PHONE_NUMBER,
   EMAIL,
   PHONE_NUMBER,
   PASSWORD,
@@ -33,25 +34,43 @@ enum CustomTextFieldType {
   AMOUNT,
   HOME_PAGE_SEARCH_FIELD,
   ADDRESS_FIELD,
+  BOOKING_ID,
+  SUBJECT,
+  ADDITIONAL_NOTE,
   NONE
 }
 
 // Create extension methods for cleaner type checking
 extension CustomTextFieldTypeExtensions on CustomTextFieldType {
   bool get isReadOnly => [
-    CustomTextFieldType.BUTTON,
-    CustomTextFieldType.NATIONALITY,
-    CustomTextFieldType.AREA,
-    CustomTextFieldType.BOARDING_POINT,
-    CustomTextFieldType.DROPOFF_POINT,
-    CustomTextFieldType.START_TIME,
-    CustomTextFieldType.FREQUENCY,
-    CustomTextFieldType.REPEAT_AFTER,
-    CustomTextFieldType.START_DATE,
-    CustomTextFieldType.END_DATE,
-  ].contains(this);
+        CustomTextFieldType.BUTTON,
+        CustomTextFieldType.NATIONALITY,
+        CustomTextFieldType.AREA,
+        CustomTextFieldType.BOARDING_POINT,
+        CustomTextFieldType.DROPOFF_POINT,
+        CustomTextFieldType.START_TIME,
+        CustomTextFieldType.FREQUENCY,
+        CustomTextFieldType.REPEAT_AFTER,
+        CustomTextFieldType.START_DATE,
+        CustomTextFieldType.END_DATE,
+      ].contains(this);
 
   bool get shouldShowCursor => !isReadOnly;
+
+  bool get requiresExtendedInputFeatures => [
+        CustomTextFieldType.ROUTE_NAME,
+        CustomTextFieldType.BOARDING_POINT,
+        CustomTextFieldType.DROPOFF_POINT,
+        CustomTextFieldType.START_TIME,
+        CustomTextFieldType.FREQUENCY,
+        CustomTextFieldType.REPEAT_AFTER,
+        CustomTextFieldType.START_DATE,
+        CustomTextFieldType.END_DATE,
+        CustomTextFieldType.BOOKING_ID,
+        CustomTextFieldType.CONTACT_US_EMAIL_OR_PHONE_NUMBER,
+        CustomTextFieldType.SUBJECT,
+        CustomTextFieldType.ADDITIONAL_NOTE
+      ].contains(this);
 }
 
 // A customizable text field widget that handles various input types
@@ -127,163 +146,91 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    print("type: ${widget.customTextFieldType}");
-    print("showCursor: ${widget.customTextFieldType != CustomTextFieldType.BUTTON &&
-        widget.customTextFieldType != CustomTextFieldType.NATIONALITY &&
-        widget.customTextFieldType != CustomTextFieldType.AREA &&
-        widget.customTextFieldType != CustomTextFieldType.BOARDING_POINT &&
-        widget.customTextFieldType != CustomTextFieldType.DROPOFF_POINT &&
-        widget.customTextFieldType != CustomTextFieldType.START_TIME &&
-        widget.customTextFieldType != CustomTextFieldType.FREQUENCY &&
-        widget.customTextFieldType != CustomTextFieldType.REPEAT_AFTER &&
-        widget.customTextFieldType != CustomTextFieldType.START_DATE &&
-        widget.customTextFieldType != CustomTextFieldType.END_DATE}");
-    return TextFormField(
-      controller: widget.textEditingController,
-      focusNode: widget.focusNode,
-      keyboardType: widget.keyboardType,
-      textInputAction: widget.textInputAction,
+    return IntrinsicHeight(
+      child: TextFormField(
+        controller: widget.textEditingController,
+        focusNode: widget.focusNode,
+        keyboardType: widget.keyboardType,
+        textInputAction: widget.textInputAction,
 
-      // Behavior customization based on field type
-      readOnly: widget.customTextFieldType.isReadOnly,
-      showCursor: widget.customTextFieldType.shouldShowCursor,
-      cursorColor: AppColors.deepNavy,
-      cursorHeight: widget.customTextFieldType ==
-              CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
-          ? TextStyles.text12Regular.height
-          : widget.customTextFieldType ==
-                  CustomTextFieldType.HOME_PAGE_SEARCH_FIELD
-              ? TextStyles.text14Medium.height
-              : (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME ||
-                      widget.customTextFieldType ==
-                          CustomTextFieldType.BOARDING_POINT ||
-                      widget.customTextFieldType ==
-                          CustomTextFieldType.DROPOFF_POINT ||
-                      widget.customTextFieldType ==
-                          CustomTextFieldType.START_TIME ||
-                      widget.customTextFieldType ==
-                          CustomTextFieldType.FREQUENCY ||
-                      widget.customTextFieldType ==
-                          CustomTextFieldType.REPEAT_AFTER ||
-                      widget.customTextFieldType ==
-                          CustomTextFieldType.START_DATE ||
-                      widget.customTextFieldType ==
-                          CustomTextFieldType.END_DATE)
-                  ? TextStyles.text14Regular.height
-                  : TextStyles.text16Regular.height,
-
-      // Field length constraints
-      maxLength: widget.customTextFieldType == CustomTextFieldType.PHONE_NUMBER
-          ? 11
-          : 35,
-      cursorRadius: const Radius.circular(2),
-
-      // Text styling
-      style: widget.customTextFieldType ==
-              CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
-          ? TextStyles.text12Regular.copyWith(color: AppColors.deepNavy)
-          : widget.customTextFieldType ==
-                  CustomTextFieldType.HOME_PAGE_SEARCH_FIELD
-              ? TextStyles.text14Medium.copyWith(color: AppColors.deepNavy)
-              : (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME ||
-                      widget.customTextFieldType ==
-                          CustomTextFieldType.BOARDING_POINT ||
-                      widget.customTextFieldType ==
-                          CustomTextFieldType.DROPOFF_POINT ||
-                      widget.customTextFieldType ==
-                          CustomTextFieldType.START_TIME ||
-                      widget.customTextFieldType ==
-                          CustomTextFieldType.FREQUENCY ||
-                      widget.customTextFieldType ==
-                          CustomTextFieldType.REPEAT_AFTER ||
-                      widget.customTextFieldType ==
-                          CustomTextFieldType.START_DATE ||
-                      widget.customTextFieldType ==
-                          CustomTextFieldType.END_DATE)
-                  ? TextStyles.text14Regular.copyWith(color: AppColors.deepNavy)
-                  : TextStyles.text16Regular
-                      .copyWith(color: AppColors.deepNavy),
-      obscureText: _obscureText,
-
-      // Input decoration
-      decoration: InputDecoration(
-        contentPadding: widget.customTextFieldType ==
+        // Behavior customization based on field type
+        readOnly: widget.customTextFieldType.isReadOnly,
+        showCursor: widget.customTextFieldType.shouldShowCursor,
+        cursorColor: AppColors.deepNavy,
+        cursorHeight: widget.customTextFieldType ==
                 CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
-            ? const EdgeInsets.only(left: 18, top: 11, bottom: 11)
-            : EdgeInsets.only(
-                left: widget.customTextFieldType != CustomTextFieldType.BUTTON
-                    ? (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME ||
-                            widget.customTextFieldType ==
-                                CustomTextFieldType.BOARDING_POINT ||
-                            widget.customTextFieldType ==
-                                CustomTextFieldType.DROPOFF_POINT ||
-                            widget.customTextFieldType ==
-                                CustomTextFieldType.START_TIME ||
-                            widget.customTextFieldType ==
-                                CustomTextFieldType.FREQUENCY ||
-                            widget.customTextFieldType ==
-                                CustomTextFieldType.REPEAT_AFTER ||
-                            widget.customTextFieldType ==
-                                CustomTextFieldType.START_DATE ||
-                            widget.customTextFieldType ==
-                                CustomTextFieldType.END_DATE)
-                        ? 24
-                        : 22
-                    : 32,
-                top: (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.BOARDING_POINT ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.DROPOFF_POINT ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.START_TIME ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.FREQUENCY ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.REPEAT_AFTER ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.START_DATE ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.END_DATE)
-                    ? 17
-                    : 18,
-                bottom: (widget.customTextFieldType ==
-                            CustomTextFieldType.ROUTE_NAME ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.BOARDING_POINT ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.DROPOFF_POINT ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.START_TIME ||
-                        widget.customTextFieldType == CustomTextFieldType.FREQUENCY ||
-                        widget.customTextFieldType == CustomTextFieldType.REPEAT_AFTER ||
-                        widget.customTextFieldType == CustomTextFieldType.START_DATE ||
-                        widget.customTextFieldType == CustomTextFieldType.END_DATE)
-                    ? 17
-                    : 18),
-        counter: const SizedBox.shrink(),
-        // Hide counter but keep space
-        filled: true,
-        fillColor: _getFillColor(),
-        hintText: widget.hintText,
-        hintStyle: _getHintStyle(),
-        enabledBorder: _getBorder(),
-        focusedBorder: _getBorder(),
-        prefix: _buildPrefix(),
-        suffixIcon: _buildSuffixIcon(),
+            ? TextStyles.text12Regular.height
+            : widget.customTextFieldType ==
+                    CustomTextFieldType.HOME_PAGE_SEARCH_FIELD
+                ? TextStyles.text14Medium.height
+                : (widget.customTextFieldType.requiresExtendedInputFeatures)
+                    ? TextStyles.text14Regular.height
+                    : TextStyles.text16Regular.height,
+
+        // Field length constraints
+        maxLength:
+            widget.customTextFieldType == CustomTextFieldType.PHONE_NUMBER
+                ? 11
+                : 35,
+        cursorRadius: const Radius.circular(2),
+        maxLines:
+            widget.customTextFieldType == CustomTextFieldType.ADDITIONAL_NOTE
+                ? 5
+                : 1,
+
+        // Text styling
+        style: widget.customTextFieldType ==
+                CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
+            ? TextStyles.text12Regular.copyWith(color: AppColors.deepNavy)
+            : widget.customTextFieldType ==
+                    CustomTextFieldType.HOME_PAGE_SEARCH_FIELD
+                ? TextStyles.text14Medium.copyWith(color: AppColors.deepNavy)
+                : (widget.customTextFieldType.requiresExtendedInputFeatures)
+                    ? TextStyles.text14Regular
+                        .copyWith(color: AppColors.deepNavy)
+                    : TextStyles.text16Regular
+                        .copyWith(color: AppColors.deepNavy),
+        obscureText: _obscureText,
+
+        // Input decoration
+        decoration: InputDecoration(
+            contentPadding: widget.customTextFieldType ==
+                    CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
+                ? const EdgeInsets.only(left: 18, top: 11, bottom: 11)
+                : EdgeInsets.only(
+                    left:
+                        widget.customTextFieldType != CustomTextFieldType.BUTTON
+                            ? (widget.customTextFieldType.requiresExtendedInputFeatures)
+                                ? 24
+                                : 22
+                            : 32,
+                    top: (widget.customTextFieldType.requiresExtendedInputFeatures)
+                        ? 17
+                        : 18,
+                    bottom: (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME || widget.customTextFieldType == CustomTextFieldType.BOARDING_POINT || widget.customTextFieldType == CustomTextFieldType.DROPOFF_POINT || widget.customTextFieldType == CustomTextFieldType.START_TIME || widget.customTextFieldType == CustomTextFieldType.FREQUENCY || widget.customTextFieldType == CustomTextFieldType.REPEAT_AFTER || widget.customTextFieldType == CustomTextFieldType.START_DATE || widget.customTextFieldType == CustomTextFieldType.END_DATE || widget.customTextFieldType == CustomTextFieldType.BOOKING_ID || widget.customTextFieldType == CustomTextFieldType.CONTACT_US_EMAIL_OR_PHONE_NUMBER || widget.customTextFieldType == CustomTextFieldType.SUBJECT || widget.customTextFieldType == CustomTextFieldType.ADDITIONAL_NOTE) ? 17 : 18),
+            counter: const SizedBox.shrink(),
+            // Hide counter but keep space
+            filled: true,
+            fillColor: _getFillColor(),
+            hintText: widget.hintText,
+            hintStyle: _getHintStyle(),
+            enabledBorder: _getBorder(),
+            focusedBorder: _getBorder(),
+            prefix: _buildPrefix(),
+            suffixIcon: _buildSuffixIcon()),
+        onTap: widget.customTextFieldType != CustomTextFieldType.PHONE_NUMBER &&
+                widget.customTextFieldType != CustomTextFieldType.EMAIL
+            ? widget.onPressed != null
+                ? () => widget.onPressed!()
+                : null
+            : null,
+        onChanged: (value) {
+          widget.textEditingController.addListener(() {
+            setState(() {});
+          });
+          widget.onTextChanged?.call(value);
+        },
       ),
-      onTap: widget.customTextFieldType != CustomTextFieldType.PHONE_NUMBER &&
-              widget.customTextFieldType != CustomTextFieldType.EMAIL
-          ? widget.onPressed != null
-              ? () => widget.onPressed!()
-              : null
-          : null,
-      onChanged: (value) {
-        widget.textEditingController.addListener(() {
-          setState(() {});
-        });
-        widget.onTextChanged?.call(value);
-      },
     );
   }
 
@@ -293,20 +240,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ? widget.customTextFieldType ==
                 CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
             ? AppColors.lightBlue
-            : (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME ||
-                    widget.customTextFieldType ==
-                        CustomTextFieldType.BOARDING_POINT ||
-                    widget.customTextFieldType ==
-                        CustomTextFieldType.DROPOFF_POINT ||
-                    widget.customTextFieldType ==
-                        CustomTextFieldType.START_TIME ||
-                    widget.customTextFieldType ==
-                        CustomTextFieldType.FREQUENCY ||
-                    widget.customTextFieldType ==
-                        CustomTextFieldType.REPEAT_AFTER ||
-                    widget.customTextFieldType ==
-                        CustomTextFieldType.START_DATE ||
-                    widget.customTextFieldType == CustomTextFieldType.END_DATE)
+            : (widget.customTextFieldType.requiresExtendedInputFeatures)
                 ? AppColors.white
                 : AppColors.secondary.withOpacityPrecise(0.3)
         : AppColors.deepNavy;
@@ -323,22 +257,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     CustomTextFieldType.HOME_PAGE_SEARCH_FIELD
                 ? TextStyles.text14Medium.copyWith(
                     color: AppColors.richBlack.withOpacityPrecise(0.5))
-                : (widget.customTextFieldType ==
-                            CustomTextFieldType.ROUTE_NAME ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.BOARDING_POINT ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.DROPOFF_POINT ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.START_TIME ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.FREQUENCY ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.REPEAT_AFTER ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.START_DATE ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.END_DATE)
+                : (widget.customTextFieldType.requiresExtendedInputFeatures)
                     ? TextStyles.text14Regular.copyWith(
                         color: AppColors.deepNavy.withOpacityPrecise(
                             (widget.customTextFieldType ==
@@ -358,7 +277,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
       borderRadius: widget.customTextFieldType ==
               CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
           ? BorderRadius.circular(40)
-          : BorderRadius.circular(82),
+          : widget.customTextFieldType == CustomTextFieldType.ADDITIONAL_NOTE
+              ? BorderRadius.circular(26)
+              : BorderRadius.circular(82),
       borderSide: BorderSide.none,
     );
   }
@@ -395,68 +316,30 @@ class _CustomTextFieldState extends State<CustomTextField> {
           : 69;
     } else if (widget.customTextFieldType == CustomTextFieldType.EMAIL) {
       width = widget.textEditingController.text.isEmail ? 69 : 52;
-    } else if (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME ||
-        widget.customTextFieldType == CustomTextFieldType.BOARDING_POINT ||
-        widget.customTextFieldType == CustomTextFieldType.DROPOFF_POINT ||
-        widget.customTextFieldType == CustomTextFieldType.START_TIME ||
-        widget.customTextFieldType == CustomTextFieldType.FREQUENCY ||
-        widget.customTextFieldType == CustomTextFieldType.START_DATE ||
-        widget.customTextFieldType == CustomTextFieldType.END_DATE) {
+    } else if (widget.customTextFieldType.requiresExtendedInputFeatures) {
       width = 44;
-    } else if (widget.customTextFieldType == CustomTextFieldType.REPEAT_AFTER){
+    } else if (widget.customTextFieldType == CustomTextFieldType.REPEAT_AFTER) {
       width = 100;
-    }else {
+    } else {
       width = 52;
     }
     // Determine height based on field type
     final height = widget.customTextFieldType ==
             CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
         ? 20
-        : (widget.customTextFieldType == CustomTextFieldType.ROUTE_NAME ||
-                widget.customTextFieldType ==
-                    CustomTextFieldType.BOARDING_POINT ||
-                widget.customTextFieldType ==
-                    CustomTextFieldType.DROPOFF_POINT ||
-                widget.customTextFieldType == CustomTextFieldType.START_TIME ||
-                widget.customTextFieldType == CustomTextFieldType.FREQUENCY ||
-                widget.customTextFieldType ==
-                    CustomTextFieldType.REPEAT_AFTER ||
-                widget.customTextFieldType == CustomTextFieldType.START_DATE ||
-                widget.customTextFieldType == CustomTextFieldType.END_DATE)
+        : (widget.customTextFieldType.requiresExtendedInputFeatures)
             ? 44
             : 52;
 
     // Configure decoration based on field type
     final decoration = (widget.customTextFieldType ==
-                CustomTextFieldType.ROUTE_NAME ||
-            widget.customTextFieldType == CustomTextFieldType.BOARDING_POINT ||
-            widget.customTextFieldType == CustomTextFieldType.DROPOFF_POINT ||
-            widget.customTextFieldType == CustomTextFieldType.START_TIME ||
-            widget.customTextFieldType == CustomTextFieldType.FREQUENCY ||
-            widget.customTextFieldType == CustomTextFieldType.REPEAT_AFTER ||
-            widget.customTextFieldType == CustomTextFieldType.START_DATE ||
-            widget.customTextFieldType == CustomTextFieldType.END_DATE)
+                CustomTextFieldType.ROUTE_NAME.requiresExtendedInputFeatures)
         ? BoxDecoration(color: AppColors.primary, shape: BoxShape.circle)
         : BoxDecoration(
             color: widget.customTextFieldType ==
                     CustomTextFieldType.DROP_DOWN_SHEET_SEARCH_FIELD
                 ? null
-                : (widget.customTextFieldType ==
-                            CustomTextFieldType.ROUTE_NAME ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.BOARDING_POINT ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.DROPOFF_POINT ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.START_TIME ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.FREQUENCY ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.REPEAT_AFTER ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.START_DATE ||
-                        widget.customTextFieldType ==
-                            CustomTextFieldType.END_DATE)
+                : (widget.customTextFieldType.requiresExtendedInputFeatures)
                     ? AppColors.primary
                     : AppColors.white,
             borderRadius: widget.customTextFieldType ==
@@ -465,13 +348,28 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 : BorderRadius.circular(82),
           );
 
-    return Container(
-      margin: EdgeInsets.only(right: marginRight.toDouble()),
-      width: width,
-      height: height.toDouble(),
-      decoration: decoration,
-      child: _getSuffixChild(),
-    );
+    return widget.customTextFieldType == CustomTextFieldType.ADDITIONAL_NOTE
+        ? Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
+                child: Container(
+                  margin: EdgeInsets.only(right: marginRight.toDouble()),
+                  width: width,
+                  height: height.toDouble(),
+                  decoration: decoration,
+                  child: _getSuffixChild(),
+                ),
+              ),
+            ],
+          )
+        : Container(
+            margin: EdgeInsets.only(right: marginRight.toDouble()),
+            width: width,
+            height: height.toDouble(),
+            decoration: decoration,
+            child: _getSuffixChild(),
+          );
   }
 
   // Helper method to determine suffix child widget
@@ -490,36 +388,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
       default:
         return SvgPicture.asset(
           widget.suffixIcon,
-          width: (widget.customTextFieldType ==
-                      CustomTextFieldType.ROUTE_NAME ||
-                  widget.customTextFieldType ==
-                      CustomTextFieldType.BOARDING_POINT ||
-                  widget.customTextFieldType ==
-                      CustomTextFieldType.DROPOFF_POINT ||
-                  widget.customTextFieldType ==
-                      CustomTextFieldType.START_TIME ||
-                  widget.customTextFieldType == CustomTextFieldType.FREQUENCY ||
-                  widget.customTextFieldType ==
-                      CustomTextFieldType.REPEAT_AFTER ||
-                  widget.customTextFieldType ==
-                      CustomTextFieldType.START_DATE ||
-                  widget.customTextFieldType == CustomTextFieldType.END_DATE)
+          width: (widget.customTextFieldType.requiresExtendedInputFeatures)
               ? 18
               : 20,
-          height: (widget.customTextFieldType ==
-                      CustomTextFieldType.ROUTE_NAME ||
-                  widget.customTextFieldType ==
-                      CustomTextFieldType.BOARDING_POINT ||
-                  widget.customTextFieldType ==
-                      CustomTextFieldType.DROPOFF_POINT ||
-                  widget.customTextFieldType ==
-                      CustomTextFieldType.START_TIME ||
-                  widget.customTextFieldType == CustomTextFieldType.FREQUENCY ||
-                  widget.customTextFieldType ==
-                      CustomTextFieldType.REPEAT_AFTER ||
-                  widget.customTextFieldType ==
-                      CustomTextFieldType.START_DATE ||
-                  widget.customTextFieldType == CustomTextFieldType.END_DATE)
+          height: (widget.customTextFieldType.requiresExtendedInputFeatures)
               ? 18
               : 20,
           fit: BoxFit.none,
@@ -611,7 +483,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           );
   }
 
-  Widget _buildRepeatAfterSuffix(){
+  Widget _buildRepeatAfterSuffix() {
     return Container(
       width: 100,
       padding: const EdgeInsets.all(13),

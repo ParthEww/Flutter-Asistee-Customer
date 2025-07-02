@@ -12,6 +12,8 @@ import 'package:project_structure/pages/routesummary/route_summary_bindings.dart
 import '../pages/addnewaddress/add_new_address_page.dart';
 import '../pages/bookingsummary/booking_summary_bindings.dart';
 import '../pages/bookingsummary/booking_summary_page.dart';
+import '../pages/contactus/contact_us_bindings.dart';
+import '../pages/contactus/contact_us_page.dart';
 import '../pages/dashboard/dashboard_page.dart';
 import '../pages/definebookingrule/define_booking_rule_bindings.dart';
 import '../pages/definebookingrule/define_booking_rule_page.dart';
@@ -43,8 +45,8 @@ part 'app_routes.dart';
 
 class AppPages {
   // initial route
-  static String initialRoute = _Path.wallet;
-  static Bindings initialBinding = WalletBindings();
+  static String initialRoute = _Path.contactUs;
+  static Bindings initialBinding = ContactUsBindings();
 
   static final List<GetPage<dynamic>> pages = [
     /// splash page
@@ -178,6 +180,13 @@ class AppPages {
       name: _Path.wallet,
       page: () => const WalletPage(),
       binding: WalletBindings(),
+    ),
+
+    /// contact us page
+    GetPage(
+      name: _Path.contactUs,
+      page: () => const ContactUsPage(),
+      binding: ContactUsBindings(),
     ),
   ];
 }
