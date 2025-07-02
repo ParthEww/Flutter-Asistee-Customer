@@ -21,6 +21,7 @@ abstract class Routes {
   static const String liveTracking = _Path.liveTracking;
   static const String wallet = _Path.wallet;
   static const String contactUs = _Path.contactUs;
+  static const String faqs = _Path.faqs;
 }
 
 abstract class _Path {
@@ -44,4 +45,5 @@ abstract class _Path {
   static const String liveTracking = "/liveTracking";
   static const String wallet = "/wallet";
   static const String contactUs = "/contactUs";
+  static const String faqs = "/faqs";
 }

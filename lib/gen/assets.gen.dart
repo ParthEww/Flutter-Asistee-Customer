@@ -141,6 +141,10 @@ class $AssetsImagesSvgGen {
   SvgGenImage get arrowUp =>
       const SvgGenImage('assets/images/svg/arrow-up.svg');
 
+  /// File path: assets/images/svg/arrow_down-24.svg
+  SvgGenImage get arrowDown24 =>
+      const SvgGenImage('assets/images/svg/arrow_down-24.svg');
+
   /// File path: assets/images/svg/arrow_down.svg
   SvgGenImage get arrowDown =>
       const SvgGenImage('assets/images/svg/arrow_down.svg');
@@ -505,6 +509,7 @@ class $AssetsImagesSvgGen {
     arrowRight24,
     arrowRightGreen,
     arrowUp,
+    arrowDown24,
     arrowDown,
     asisteeLogoWhiteWithText,
     asisteeLogoWithText,

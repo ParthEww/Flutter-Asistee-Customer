@@ -18,6 +18,8 @@ import '../pages/dashboard/dashboard_page.dart';
 import '../pages/definebookingrule/define_booking_rule_bindings.dart';
 import '../pages/definebookingrule/define_booking_rule_page.dart';
 import '../pages/editprofile/edit_profile_page.dart';
+import '../pages/faqs/faqs_bindings.dart';
+import '../pages/faqs/faqs_page.dart';
 import '../pages/forgotpassword/forgot_password_bindings.dart';
 import '../pages/forgotpassword/forgot_password_page.dart';
 import '../pages/livetracking/live_tracking_page.dart';
@@ -45,8 +47,8 @@ part 'app_routes.dart';
 
 class AppPages {
   // initial route
-  static String initialRoute = _Path.defineBookingRule;
-  static Bindings initialBinding = DefineBookingRuleBindings();
+  static String initialRoute = _Path.faqs;
+  static Bindings initialBinding = FaqsBindings();
 
   static final List<GetPage<dynamic>> pages = [
     /// splash page
@@ -187,6 +189,13 @@ class AppPages {
       name: _Path.contactUs,
       page: () => const ContactUsPage(),
       binding: ContactUsBindings(),
+    ),
+
+    /// faqs page
+    GetPage(
+      name: _Path.faqs,
+      page: () => const FaqsPage(),
+      binding: FaqsBindings(),
     ),
   ];
 }
