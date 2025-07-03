@@ -8,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/pages/cms/cms_page.dart';
 import 'package:project_structure/pages/dashboard/bottomscreen/home_page.dart';
 import 'package:project_structure/pages/dashboard/bottomscreen/my_bookings_page.dart';
 import 'package:project_structure/pages/dashboard/bottomscreen/my_routes_page.dart';
@@ -153,6 +154,31 @@ class DashboardController extends GetxController
   /// Navigates to route request screen
   void onGoToRouteRequest() async {
     Get.toNamed(Routes.requestRoute);
+  }
+
+  void onGoToWallet() async {
+    Get.toNamed(Routes.wallet);
+  }
+
+  void onGoToMyAddress() async {
+    Get.toNamed(Routes.myAddress);
+  }
+
+  void onGoToNotifications() async {
+    Get.toNamed(Routes.notifications);
+  }
+
+  void onGoToContactUs() async {
+    Get.toNamed(Routes.contactUs);
+  }
+
+  void onGoToFaqs() async {
+    Get.toNamed(Routes.faqs);
+  }
+
+  void onGoToCms(SettingFieldType cmsType) async {
+    Get.toNamed(Routes.cms,
+        arguments: cmsType);
   }
 }
 

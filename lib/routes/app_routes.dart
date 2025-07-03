@@ -24,6 +24,7 @@ abstract class Routes {
   static const String faqs = _Path.faqs;
   static const String notifications = _Path.notifications;
   static const String myAddress = _Path.myAddress;
+  static const String cms = _Path.cms;
 }
 
 abstract class _Path {
@@ -50,4 +51,5 @@ abstract class _Path {
   static const String faqs = "/faqs";
   static const String notifications = "/notifications";
   static const String myAddress = "/myAddress";
+  static const String cms = "/cms";
 }

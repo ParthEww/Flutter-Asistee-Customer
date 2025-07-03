@@ -18,6 +18,7 @@ import 'package:project_structure/core/widgets/custom/custom_text_filed.dart';
 import 'package:project_structure/core/widgets/price_text.dart';
 import 'package:project_structure/gen/assets.gen.dart';
 import 'package:project_structure/gen/fonts.gen.dart';
+import 'package:project_structure/pages/dashboard/dashboard_controller.dart';
 import 'package:retrofit/http.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -27,11 +28,11 @@ import '../../core/widgets/custom/custom_auth_header_with_back_button.dart';
 import '../../core/widgets/custom/custom_back_button.dart';
 import '../../core/widgets/custom/custom_circle_icon.dart';
 import '../bookingsummary/booking_summary_page.dart';
-import 'faqs_controller.dart';
+import 'cms_controller.dart';
 
 // Main contact us page widget
-class FaqsPage extends GetView<FaqsController> {
-  const FaqsPage({super.key});
+class CmsPage extends GetView<CmsController> {
+  const CmsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +89,7 @@ class FaqsPage extends GetView<FaqsController> {
     return Container(
       color: AppColors.primary,
       child: CustomHeader(
-          title: "Faqs",
+          title: (Get.arguments as SettingFieldType).title,
           isShowSubtitle: false,
           isShowBackButton: true,
           onBackButtonTap: () {
@@ -108,24 +109,7 @@ class FaqsPage extends GetView<FaqsController> {
           borderRadius: BorderRadius.circular(32),
           border: Border.all(color: AppColors.white, width: 6),
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ListView.separated(
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (BuildContext context, int index) {
-                  return _buildFaqItem();
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(height: 14);
-                },
-              )
-            ],
-          ),
-        ),
+        child: SizedBox(),
       ),
     );
   }
@@ -172,7 +156,7 @@ class FaqsPage extends GetView<FaqsController> {
                             angle: isFaqItemExpanded.value ? 0 : pi,
                             child: CustomCircleIcon(
                               iconPath: Assets.images.svg.arrowDown24.path,
-                              padding: const EdgeInsets.all(13),
+                              padding: const EdgeInsets.all(16),
                               backgroundColor: isFaqItemExpanded.value
                                   ? AppColors.deepNavy
                                   : AppColors.primary,

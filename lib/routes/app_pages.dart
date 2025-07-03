@@ -12,6 +12,8 @@ import 'package:project_structure/pages/routesummary/route_summary_bindings.dart
 import '../pages/addnewaddress/add_new_address_page.dart';
 import '../pages/bookingsummary/booking_summary_bindings.dart';
 import '../pages/bookingsummary/booking_summary_page.dart';
+import '../pages/cms/cms_bindings.dart';
+import '../pages/cms/cms_page.dart';
 import '../pages/contactus/contact_us_bindings.dart';
 import '../pages/contactus/contact_us_page.dart';
 import '../pages/dashboard/dashboard_page.dart';
@@ -214,6 +216,13 @@ class AppPages {
       name: _Path.myAddress,
       page: () => const MyAddressPage(),
       binding: MyAddressBindings(),
+    ),
+
+    /// cms page
+    GetPage(
+      name: _Path.cms,
+      page: () => const CmsPage(),
+      binding: CmsBindings(),
     ),
   ];
 }
