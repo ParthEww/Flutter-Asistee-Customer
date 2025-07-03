@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -7,27 +5,20 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:project_structure/core/themes/app_colors.dart';
 import 'package:project_structure/core/themes/text_styles.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
-import 'package:project_structure/core/utils/app_methods.dart';
-import 'package:project_structure/core/widgets/app_button.dart';
-import 'package:project_structure/core/widgets/custom/custom_header.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
 import 'package:project_structure/gen/assets.gen.dart';
-import 'package:project_structure/gen/fonts.gen.dart';
-import 'package:project_structure/pages/dashboard/dashboard_controller.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 import '../../core/widgets/custom/custom_circle_icon.dart';
 import '../../core/widgets/custom/custom_header_with_tab.dart';
 import '../bookingsummary/booking_summary_page.dart';
+import '../dashboard/dashboard_controller.dart';
 import 'live_tracking_controller.dart';
 
-class LiveTrackingPage extends GetView<DashboardController> {
+class LiveTrackingPage extends GetView<LiveTrackingController> {
   const LiveTrackingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    controller.activeTabBarBookingStatus.value =
-        BookingStatusType.LIVE_TRACKING;
-    controller.commonTabList = [BookingStatusType.LIVE_TRACKING];
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: SafeArea(
@@ -36,16 +27,19 @@ class LiveTrackingPage extends GetView<DashboardController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomHeaderWithTab(
-                controller: controller, isBnvHeader: false, onTap: () {}),
+                isBnvHeader: false, onTap: () {}),
             Expanded(
               child: Obx(() {
                 return Stack(
                   alignment: Alignment.center,
                   children: [
-                    GoogleMap(
-                      initialCameraPosition: controller.cameraPosition.value!,
-                      onMapCreated: controller.mapController.call,
-                    ),
+                    if (CommonUtils.cameraPosition.value != null) ...[
+                      GoogleMap(
+                        initialCameraPosition:
+                            CommonUtils.cameraPosition.value!,
+                        onMapCreated: CommonUtils.mapController.call,
+                      )
+                    ],
                     Positioned.fill(
                         child: DraggableScrollableSheet(
                       initialChildSize: 0.84,

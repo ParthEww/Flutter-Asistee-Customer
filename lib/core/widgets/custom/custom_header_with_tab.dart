@@ -4,6 +4,19 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
 import 'package:project_structure/core/widgets/custom/custom_header.dart';
 
 import '../../../gen/assets.gen.dart';
@@ -13,15 +26,12 @@ import '../../themes/text_styles.dart';
 import 'custom_back_button.dart';
 
 class CustomHeaderWithTab extends StatelessWidget {
-  final DashboardController controller;
+  final DashboardController? controller;
   final bool isBnvHeader;
   final VoidCallback? onTap;
 
   const CustomHeaderWithTab(
-      {super.key,
-      required this.controller,
-      required this.isBnvHeader,
-      this.onTap});
+      {super.key, this.controller, required this.isBnvHeader, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +44,7 @@ class CustomHeaderWithTab extends StatelessWidget {
             Positioned(
               right: 0,
               child: SvgPicture.asset(
-                controller.activeBottomNavigationScreenType.value ==
+                controller?.activeBottomNavigationScreenType.value ==
                         BottomNavigationScreenType.MY_BOOKINGS
                     ? Assets.images.svg.bus.path
                     : Assets.images.svg.route.path,
@@ -52,7 +62,8 @@ class CustomHeaderWithTab extends StatelessWidget {
                 // Screen title (changes based on active screen)
                 if (isBnvHeader) ...[
                   Text(
-                    switch (controller.activeBottomNavigationScreenType.value) {
+                    switch (
+                        controller?.activeBottomNavigationScreenType.value) {
                       BottomNavigationScreenType.HOME => "Home",
                       BottomNavigationScreenType.MY_BOOKINGS => "My Bookings",
                       BottomNavigationScreenType.MY_ROUTES => "My Routes",
@@ -98,9 +109,9 @@ class CustomHeaderWithTab extends StatelessWidget {
                     child: Row(
                       children: List.generate(
                         // Generate tabs based on current screen type
-                        controller.commonTabList.length,
+                        CommonUtils.commonTabList.length,
                         (index) =>
-                            buildTabView(controller.commonTabList[index]),
+                            buildTabView(CommonUtils.commonTabList[index]),
                       ),
                     ))
               ],
@@ -121,28 +132,28 @@ class CustomHeaderWithTab extends StatelessWidget {
             // Update active tab only for My Bookings screen
             if (isBnvHeader)
               {
-                if (controller.activeTabBarBookingStatus.value != type &&
-                    controller.activeBottomNavigationScreenType.value ==
+                if (CommonUtils.activeTabBarBookingStatus.value != type &&
+                    controller?.activeBottomNavigationScreenType.value ==
                         BottomNavigationScreenType.MY_BOOKINGS)
-                  {controller.activeTabBarBookingStatus.value = type}
+                  {CommonUtils.activeTabBarBookingStatus.value = type}
               }
             else
               {
-                if (controller.activeTabBarBookingStatus.value != type)
-                  {controller.activeTabBarBookingStatus.value = type}
+                if (CommonUtils.activeTabBarBookingStatus.value != type)
+                  {CommonUtils.activeTabBarBookingStatus.value = type}
               }
           },
           child: Column(
             children: [
               const SizedBox(height: 15),
               Center(
-                child: controller.commonTabList.length > 1
+                child: CommonUtils.commonTabList.length > 1
                     ? // Text-only tab for My Bookings
                     Text(
                         type.title,
                         style: TextStyles.text16SemiBold.copyWith(
                             color: AppColors.deepNavy.withOpacityPrecise(
-                                controller.activeTabBarBookingStatus.value ==
+                                CommonUtils.activeTabBarBookingStatus.value ==
                                         type
                                     ? 1
                                     : 0.6)),
@@ -158,11 +169,11 @@ class CustomHeaderWithTab extends StatelessWidget {
                             type.title,
                             style: TextStyles.text16SemiBold.copyWith(
                                 color: AppColors.deepNavy.withOpacityPrecise(
-                                    controller.activeTabBarBookingStatus
+                                    CommonUtils.activeTabBarBookingStatus
                                                     .value ==
                                                 type ||
                                             controller
-                                                    .activeBottomNavigationScreenType
+                                                    ?.activeBottomNavigationScreenType
                                                     .value ==
                                                 BottomNavigationScreenType
                                                     .MY_ROUTES
@@ -175,12 +186,12 @@ class CustomHeaderWithTab extends StatelessWidget {
               const SizedBox(height: 15),
 
               // Active tab indicator (only for My Bookings screen)
-              if (controller.commonTabList.length > 1 && isBnvHeader) ...[
+              if (CommonUtils.commonTabList.length > 1 && isBnvHeader) ...[
                 Container(
                   height: 3,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(2),
-                    color: controller.activeTabBarBookingStatus.value == type
+                    color: CommonUtils.activeTabBarBookingStatus.value == type
                         ? AppColors.primary
                         : AppColors.transparent,
                   ),

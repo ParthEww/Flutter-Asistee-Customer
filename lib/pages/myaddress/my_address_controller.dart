@@ -16,7 +16,7 @@ import '../../repository/remote_repository/remote_repository.dart';
 import '../../routes/app_pages.dart';
 import '../dashboard/dashboard_controller.dart';
 
-class LiveTrackingController extends GetxController {
+class MyAddressController extends GetxController {
   final _localRepository = Get.find<LocalRepository>();
   final _remoteRepository = Get.find<RemoteRepository>();
 
@@ -25,16 +25,9 @@ class LiveTrackingController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Initialize values before building widgets
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Then check for permission
-      CommonUtils.checkLocationPermission();
-      CommonUtils.activeTabBarBookingStatus.value = BookingStatusType.LIVE_TRACKING;
-      CommonUtils.commonTabList = [BookingStatusType.LIVE_TRACKING];
-    });
   }
 
-  void onGoToPromoCode() async {
-    Get.toNamed(Routes.promoCodes);
+  void onGoToAddNewAddress() async {
+    Get.toNamed(Routes.addNewAddress);
   }
 }

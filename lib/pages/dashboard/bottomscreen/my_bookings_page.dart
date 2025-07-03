@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:project_structure/core/themes/text_styles.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
 import 'package:project_structure/gen/assets.gen.dart';
 
 import '../../../core/themes/app_colors.dart';
@@ -18,8 +20,8 @@ class MyBookingsPage extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.activeTabBarBookingStatus.value = BookingStatusType.ONGOING;
-    controller.commonTabList = [
+    CommonUtils.activeTabBarBookingStatus.value = BookingStatusType.ONGOING;
+    CommonUtils.commonTabList = [
       BookingStatusType.ONGOING,
       BookingStatusType.UPCOMING,
       BookingStatusType.PAST
@@ -37,7 +39,7 @@ class MyBookingsPage extends GetView<DashboardController> {
               color: AppColors.white,
               padding: const EdgeInsets.only(left: 24, top: 24, right: 24),
               child: Obx(() {
-                print(controller.activeTabBarBookingStatus.value.title);
+                print(CommonUtils.activeTabBarBookingStatus.value.title);
                 return CustomScrollView(
                     physics: const BouncingScrollPhysics(),
                     slivers: [
@@ -47,7 +49,7 @@ class MyBookingsPage extends GetView<DashboardController> {
                               contentPadding: EdgeInsets.zero,
                               title: GestureDetector(
                                 onTap: () {},
-                                child: controller
+                                child: CommonUtils
                                             .activeTabBarBookingStatus.value ==
                                         BookingStatusType.ONGOING
                                     ? CustomOngoingRouteCard(

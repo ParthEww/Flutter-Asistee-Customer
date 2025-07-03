@@ -73,8 +73,11 @@ class AddNewAddressController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Then check for permission
-    checkLocationPermission();
+    // Initialize values before building widgets
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Then check for permission
+      checkLocationPermission();
+    });
   }
 
   Future<void> checkLocationPermission() async {

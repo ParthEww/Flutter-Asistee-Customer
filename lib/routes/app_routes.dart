@@ -23,6 +23,7 @@ abstract class Routes {
   static const String contactUs = _Path.contactUs;
   static const String faqs = _Path.faqs;
   static const String notifications = _Path.notifications;
+  static const String myAddress = _Path.myAddress;
 }
 
 abstract class _Path {
@@ -48,4 +49,5 @@ abstract class _Path {
   static const String contactUs = "/contactUs";
   static const String faqs = "/faqs";
   static const String notifications = "/notifications";
+  static const String myAddress = "/myAddress";
 }

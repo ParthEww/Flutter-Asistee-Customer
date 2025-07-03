@@ -11,11 +11,13 @@ import '../../api/api_constant.dart';
 import '../../core/enum/app_status.dart';
 import '../../core/utils/app_logger.dart';
 
+import '../../core/utils/common_utils.dart';
 import '../../core/utils/dialog_utils.dart';
 import '../../localization/app_strings.dart';
 import '../../repository/local_repository/local_repository.dart';
 import '../../repository/remote_repository/remote_repository.dart';
 import '../../routes/app_pages.dart';
+import '../dashboard/dashboard_controller.dart';
 
 class PickupDropOffController extends GetxController {
   final _localRepository = Get.find<LocalRepository>();
@@ -27,10 +29,19 @@ class PickupDropOffController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    // Initialize values before building widgets
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      CommonUtils.activeTabBarBookingStatus.value = BookingStatusType.PICK_UP;
+      CommonUtils.commonTabList = [
+        BookingStatusType.PICK_UP,
+        BookingStatusType.DROP_OFF
+      ];
+    });
   }
 
-  void onGoToOtpVerification() async {
-    Get.toNamed(Routes.otpVerification);
+  /// Navigates to booking summary screen
+  void onGoToBookingSummary() async {
+    Get.toNamed(Routes.bookingSummary);
   }
 
 }

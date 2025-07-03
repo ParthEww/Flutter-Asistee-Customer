@@ -82,6 +82,9 @@ class $AssetsImagesPngGen {
 class $AssetsImagesSvgGen {
   const $AssetsImagesSvgGen();
 
+  /// File path: assets/images/svg/add-18.svg
+  SvgGenImage get add18 => const SvgGenImage('assets/images/svg/add-18.svg');
+
   /// File path: assets/images/svg/add-to-wallet-white.svg
   SvgGenImage get addToWalletWhite =>
       const SvgGenImage('assets/images/svg/add-to-wallet-white.svg');
@@ -247,6 +250,10 @@ class $AssetsImagesSvgGen {
 
   /// File path: assets/images/svg/cpr.svg
   SvgGenImage get cpr => const SvgGenImage('assets/images/svg/cpr.svg');
+
+  /// File path: assets/images/svg/delete-address.svg
+  SvgGenImage get deleteAddress =>
+      const SvgGenImage('assets/images/svg/delete-address.svg');
 
   /// File path: assets/images/svg/double_arrow_right.svg
   SvgGenImage get doubleArrowRight =>
@@ -497,6 +504,7 @@ class $AssetsImagesSvgGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+    add18,
     addToWalletWhite,
     addToWallet,
     add,
@@ -541,6 +549,7 @@ class $AssetsImagesSvgGen {
     clock,
     cprWhite,
     cpr,
+    deleteAddress,
     doubleArrowRight,
     dropDownArrowWhite,
     dropDownArrow,

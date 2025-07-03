@@ -23,6 +23,8 @@ import '../pages/faqs/faqs_page.dart';
 import '../pages/forgotpassword/forgot_password_bindings.dart';
 import '../pages/forgotpassword/forgot_password_page.dart';
 import '../pages/livetracking/live_tracking_page.dart';
+import '../pages/myaddress/my_address_bindings.dart';
+import '../pages/myaddress/my_address_page.dart';
 import '../pages/notifications/notifications_bindings.dart';
 import '../pages/notifications/notifications_page.dart';
 import '../pages/onboarding/onboarding_bindings.dart';
@@ -49,8 +51,8 @@ part 'app_routes.dart';
 
 class AppPages {
   // initial route
-  static String initialRoute = _Path.notifications;
-  static Bindings initialBinding = NotificationsBindings();
+  static String initialRoute = _Path.splash;
+  static Bindings initialBinding = SplashBindings();
 
   static final List<GetPage<dynamic>> pages = [
     /// splash page
@@ -205,6 +207,13 @@ class AppPages {
       name: _Path.notifications,
       page: () => const NotificationsPage(),
       binding: NotificationsBindings(),
+    ),
+
+    /// my address page
+    GetPage(
+      name: _Path.myAddress,
+      page: () => const MyAddressPage(),
+      binding: MyAddressBindings(),
     ),
   ];
 }

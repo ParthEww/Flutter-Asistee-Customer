@@ -6,6 +6,6 @@ import 'pickup_drop_off_controller.dart';
 class PickupDropOffBindings extends Bindings {
   @override
   void dependencies() {
-    Get.put(DashboardController());
+    Get.put(PickupDropOffController());
   }
 }

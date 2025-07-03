@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
 import 'package:project_structure/pages/dashboard/bottomscreen/home_page.dart';
 import 'package:project_structure/pages/dashboard/bottomscreen/my_bookings_page.dart';
 import 'package:project_structure/pages/dashboard/bottomscreen/my_routes_page.dart';
@@ -55,13 +56,6 @@ class DashboardController extends GetxController
     const MyRoutesPage(),
     const SettingsPage()
   ].obs;
-
-  // Booking status tabs
-  late Rx<BookingStatusType> activeTabBarBookingStatus =
-      BookingStatusType.ONGOING.obs;
-
-  // Tab lists
-  late List<BookingStatusType> commonTabList;
 
   // Settings sections
   final List<SettingFieldType> firstSettingsList = [
@@ -132,46 +126,9 @@ class DashboardController extends GetxController
     ),
   ].obs;
 
-  final RxBool hasLocationPermission = false.obs;
-  final Rx<CameraPosition?> cameraPosition = Rx<CameraPosition?>(null);
-  final Rx<LatLng?> currentLocation = Rx<LatLng?>(null);
-  final Rx<GoogleMapController?> mapController = Rx<GoogleMapController?>(null);
-
   @override
   void onInit() {
     super.onInit();
-    // Then check for permission
-    checkLocationPermission();
-  }
-
-  Future<void> checkLocationPermission() async {
-    hasLocationPermission.value = await Permission.location.isGranted;
-    // If not granted, request permission
-    if (!hasLocationPermission.value) {
-      currentLocation.value = LatLng(26.2233381, 50.5849251);
-      cameraPosition.value = CameraPosition(
-        target: currentLocation.value!,
-        zoom: 15,
-      );
-      hasLocationPermission.value = await AppMethods.askPermission(
-        permission: Permission.location,
-        whichPermission: AppStrings.location.tr,
-      );
-    }
-    if (hasLocationPermission.value) {
-      final position = await Geolocator.getCurrentPosition();
-      currentLocation.value = LatLng(position.latitude, position.longitude);
-      cameraPosition.value = CameraPosition(
-        target: currentLocation.value!,
-        zoom: 15,
-      );
-      // If map controller is available, animate to new location
-      if (mapController.value != null) {
-        mapController.value!.animateCamera(
-          CameraUpdate.newLatLng(currentLocation.value!),
-        );
-      }
-    }
   }
 
   /// Navigates to edit profile screen
@@ -191,11 +148,6 @@ class DashboardController extends GetxController
   /// Navigates to live tracking screen
   void onGoToLiveTracking() async {
     Get.toNamed(Routes.liveTracking);
-  }
-
-  /// Navigates to booking summary screen
-  void onGoToBookingSummary() async {
-    Get.toNamed(Routes.bookingSummary);
   }
 
   /// Navigates to route request screen
@@ -269,6 +221,12 @@ class BookingStatusType {
       title: "Trip Started",
       apiStatus: "trip started",
       icon: Assets.images.svg.busPrimary18.path);
+
+  static final MY_ADDRESS = BookingStatusType(
+      id: 1,
+      title: "Add New Address",
+      apiStatus: "my address",
+      icon: Assets.images.svg.add.path);
 
   final int id;
   final String title;

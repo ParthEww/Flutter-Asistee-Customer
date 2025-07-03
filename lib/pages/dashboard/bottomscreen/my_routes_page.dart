@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
 
 import '../../../api/model/static/route_request_type.dart';
 import '../../../core/themes/app_colors.dart';
@@ -16,8 +18,8 @@ class MyRoutesPage extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.activeTabBarBookingStatus.value = BookingStatusType.REQUEST_ROUTE;
-    controller.commonTabList = [
+    CommonUtils.activeTabBarBookingStatus.value = BookingStatusType.REQUEST_ROUTE;
+    CommonUtils.commonTabList = [
       BookingStatusType.REQUEST_ROUTE
     ];
     return Scaffold(

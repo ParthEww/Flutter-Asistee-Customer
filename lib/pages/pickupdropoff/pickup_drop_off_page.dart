@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:project_structure/core/themes/app_colors.dart';
 import 'package:project_structure/core/themes/text_styles.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
 import 'package:project_structure/core/widgets/app_button.dart';
 import 'package:project_structure/core/widgets/app_text_field.dart';
 import 'package:project_structure/core/widgets/app_text_field_label.dart';
@@ -27,22 +29,16 @@ import '../../core/widgets/custom/custom_ongoing_route_card.dart';
 import '../../core/widgets/custom/custom_route_card.dart';
 import 'pickup_drop_off_controller.dart';
 
-class PickupDropOffPage extends GetView<DashboardController> {
+class PickupDropOffPage extends GetView<PickupDropOffController> {
   const PickupDropOffPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    controller.activeTabBarBookingStatus.value = BookingStatusType.PICK_UP;
-    controller.commonTabList = [
-      BookingStatusType.PICK_UP,
-      BookingStatusType.DROP_OFF
-    ];
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: SafeArea(
           child: Column(children: [
         CustomHeaderWithTab(
-          controller: controller,
           isBnvHeader: false,
         ),
         Expanded(
@@ -52,12 +48,12 @@ class PickupDropOffPage extends GetView<DashboardController> {
                 color: AppColors.white,
                 padding: const EdgeInsets.only(left: 24, top: 24, right: 24),
                 child: Obx(() {
-                  print(controller.activeTabBarBookingStatus.value.title);
+                  print(CommonUtils.activeTabBarBookingStatus.value.title);
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        controller.activeTabBarBookingStatus.value ==
+                        CommonUtils.activeTabBarBookingStatus.value ==
                                 BookingStatusType.PICK_UP
                             ? "Select Pick Up Point"
                             : "Select Drop-Off Point",
@@ -96,8 +92,8 @@ class PickupDropOffPage extends GetView<DashboardController> {
             textInputAction: TextInputAction.done,
             suffixIcon: Assets.images.svg.arrowRightGreen.path,
             onPressed: () {
-              if (controller.activeTabBarBookingStatus.value == BookingStatusType.PICK_UP){
-                controller.activeTabBarBookingStatus.value = BookingStatusType.DROP_OFF;
+              if (CommonUtils.activeTabBarBookingStatus.value == BookingStatusType.PICK_UP){
+                CommonUtils.activeTabBarBookingStatus.value = BookingStatusType.DROP_OFF;
                 return;
               }
               controller.onGoToBookingSummary();
