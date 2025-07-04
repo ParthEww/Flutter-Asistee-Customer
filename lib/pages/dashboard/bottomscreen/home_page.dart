@@ -4,6 +4,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:project_structure/core/themes/text_styles.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
+import 'package:project_structure/core/widgets/bottom_sheet/common_conformation_app_bottom_sheet.dart';
 import 'package:project_structure/core/widgets/custom/custom_route_card.dart';
 import 'package:project_structure/gen/assets.gen.dart';
 
@@ -75,7 +76,8 @@ class HomePage extends GetView<DashboardController> {
                                           .activeBottomNavigationScreenType
                                           .value,
                                       onTap: () {
-                                        controller.onGoToTripDetail();
+                                        // controller.onGoToTripDetail();
+                                        CommonAppBottomSheet.showBottomSheet();
                                       }
                                     ),
                                   )),

@@ -362,6 +362,10 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/money.svg
   SvgGenImage get money => const SvgGenImage('assets/images/svg/money.svg');
 
+  /// File path: assets/images/svg/msg-submitted.svg
+  SvgGenImage get msgSubmitted =>
+      const SvgGenImage('assets/images/svg/msg-submitted.svg');
+
   /// File path: assets/images/svg/note.svg
   SvgGenImage get note => const SvgGenImage('assets/images/svg/note.svg');
 
@@ -580,6 +584,7 @@ class $AssetsImagesSvgGen {
     minus,
     moneyCreditArrow,
     money,
+    msgSubmitted,
     note,
     notification,
     numberPlate,
