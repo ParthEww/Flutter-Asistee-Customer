@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as CommonAppBottomSheet;
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
@@ -76,8 +77,7 @@ class HomePage extends GetView<DashboardController> {
                                           .activeBottomNavigationScreenType
                                           .value,
                                       onTap: () {
-                                        // controller.onGoToTripDetail();
-                                        CommonAppBottomSheet.showBottomSheet();
+                                        controller.onGoToTripDetail();
                                       }
                                     ),
                                   )),
