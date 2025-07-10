@@ -15,7 +15,7 @@ abstract class ApiClient {
   /// initialize api client [SHOULD BE CALLED ONCE BEFORE USE `ApiClient`]
   static ApiClient initApiClient({String? baseUrl}) {
     Dio dio = Dio(BaseOptions(
-        baseUrl: (baseUrl ?? ApiConstant.baseUrl) + ApiConstant.api))
+        baseUrl: (baseUrl ?? ApiConstant.baseUrl)))
       ..interceptors.add(ApiInterceptor());
 
     // Pass the Dio instance with the base URL to ApiClient

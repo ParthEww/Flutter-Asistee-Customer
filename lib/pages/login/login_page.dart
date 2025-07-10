@@ -52,7 +52,7 @@ class LoginPage extends GetView<LoginController> {
                       const SizedBox(height: 80), // Spacer
 
                       // Email/Phone input field
-                      /*CustomTextField(
+                      CustomTextField(
                         customTextFieldType: CustomTextFieldType.EMAIL_OR_PHONE_NUMBER,
                         textEditingController: controller.emailOrPhoneNumberController,
                         focusNode: controller.emailOrPhoneNumberFocusNode,
@@ -61,21 +61,6 @@ class LoginPage extends GetView<LoginController> {
                         keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.next,
                         suffixIcon: Assets.images.svg.email.path,
-                      ),*/
-                      AsisteeCustomTextField(
-                        customTextFieldType: AsisteeCustomTextFieldType.PHONE_NUMBER,
-                        textEditingController: controller.emailOrPhoneNumberController,
-                        focusNode: controller.emailOrPhoneNumberFocusNode,
-                        nextFocusNode: controller.passwordFocusNode,
-                        labelText: "Phone Number",
-                        keyboardType: TextInputType.phone,
-                        textInputAction: TextInputAction.next,
-                        suffixIcon: SvgPicture.asset(
-                          Assets.images.svg.call.path,
-                          width: 20,
-                          height: 20,
-                          fit: BoxFit.none,
-                        ),
                       ),
                       const SizedBox(height: 18), // Spacer
 

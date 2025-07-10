@@ -99,7 +99,7 @@ class CommonConformationAppBottomSheet extends StatelessWidget {
   /// Calculates the appropriate height based on dialog type
   double _calculateDialogHeight(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    return screenHeight * 0.45;
+    return screenHeight * 0.47;
   }
 
   /// Shows the bottom sheet dialog

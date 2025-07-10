@@ -11,7 +11,7 @@ class RemoteRepositoryImpl extends RemoteRepository {
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
       return await _apiClient.initApi(
-        device: "",
+        device: "passenger_android",
         version: packageInfo.version,
       );
     } catch (e) {

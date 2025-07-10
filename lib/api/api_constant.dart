@@ -1,12 +1,11 @@
 abstract class ApiConstant {
   static const String appName = "App name";
 
-  static String baseUrl = "https://abcd.ngrok-free.app/";
-  static const api = '/api/';
+  static String baseUrl = "https://dev.fhd-tech.com/api/passenger/";
   static const String init = "init/";
 
   static String lang = "en";
-  static String key = "";
+  static String key = "Gobus@123*";
 
   /// Firebase Token
   static String firebaseToken = "";

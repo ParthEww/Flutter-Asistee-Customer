@@ -3,7 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:project_structure/api/model/response/init/init_data.dart';
+import 'package:project_structure/core/widgets/bottom_sheet/common_conformation_app_bottom_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
 // import 'package:store_redirect/store_redirect.dart';
 
@@ -21,9 +24,10 @@ class SplashController extends GetxController {
   final _localRepository = Get.find<LocalRepository>();
   final _remoteRepository = Get.find<RemoteRepository>();
 
-  AppStatus appStatus = AppStatus.normal;
   late double screenHeight;
   late double screenWidth;
+
+  static Rx<InitData?> initDataModel = Rx<InitData?>(null);
 
   @override
   void onInit() {
@@ -40,9 +44,19 @@ class SplashController extends GetxController {
   /// Init API call
   Future<void> callInitApi() async {
     try {
-      // final response = await _remoteRepository.initApi();
-
-      _checkAndRedirect(redirect: true);
+      final response = await _remoteRepository.initApi();
+      if (response.status) {
+        initDataModel.value = InitData.fromJson(response.jsonData);
+        _checkAndRedirect(redirect: true);
+      } else {
+        print("response.code ${response.code}");
+        CommonConformationAppBottomSheet.showBottomSheet(
+            onTap: (dialogType, index) async {
+          if (!await InternetConnectionChecker.instance.hasConnection) {
+            callInitApi();
+          }
+        });
+      }
     } catch (e) {
       logger.e("callInitApi: $e");
     }
@@ -57,37 +71,42 @@ class SplashController extends GetxController {
     final androidAppID = packageInfo.packageName;
     const iosAppID = Constants.iosAppStoreId;
 
-    switch (appStatus) {
-      case AppStatus.optionalUpdate:
-        _showUpdateDialog(
-          message: "initApiResponse!.message",
-          appName: AppStrings.appName.tr,
-          forceUpdate: false,
-          androidAppID: androidAppID,
-          iosAppID: iosAppID,
-        );
-        break;
+    if (initDataModel.value != null) {
+      switch (initDataModel.value?.appStatus) {
+        case AppStatus.optionalUpdate:
+          _showUpdateDialog(
+            message: "initApiResponse!.message",
+            appName: AppStrings.appName.tr,
+            forceUpdate: false,
+            androidAppID: androidAppID,
+            iosAppID: iosAppID,
+          );
+          break;
 
-      case AppStatus.forceUpdate:
-        _showUpdateDialog(
-          message: "initApiResponse!.message",
-          appName: AppStrings.appName.tr,
-          forceUpdate: true,
-          androidAppID: androidAppID,
-          iosAppID: iosAppID,
-        );
-        break;
+        case AppStatus.forceUpdate:
+          _showUpdateDialog(
+            message: "initApiResponse!.message",
+            appName: AppStrings.appName.tr,
+            forceUpdate: true,
+            androidAppID: androidAppID,
+            iosAppID: iosAppID,
+          );
+          break;
 
-      case AppStatus.maintenance:
-        _showMaintenanceDialog(
-          message: "initApiResponse!.message",
-          appName: AppStrings.appName.tr,
-        );
-        break;
+        case AppStatus.maintenance:
+          _showMaintenanceDialog(
+            message: "initApiResponse!.message",
+            appName: AppStrings.appName.tr,
+          );
+          break;
 
-      case AppStatus.normal:
-        _onRedirectScreen();
-        break;
+        case AppStatus.normal:
+          _onRedirectScreen();
+          break;
+
+        default:
+          break;
+      }
     }
   }
 
@@ -107,7 +126,7 @@ class SplashController extends GetxController {
           int? userModel;
 
           // todo: user not logged in
-                }
+        }
       },
     );
   }
