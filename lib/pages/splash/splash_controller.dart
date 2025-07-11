@@ -3,17 +3,17 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:project_structure/api/collect_resource_stream.dart';
 import 'package:project_structure/api/model/response/init/init_data.dart';
-import 'package:project_structure/core/widgets/bottom_sheet/common_conformation_app_bottom_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 // import 'package:store_redirect/store_redirect.dart';
 
 import '../../api/api_constant.dart';
+import '../../api/api_response.dart';
+import '../../api/resource.dart';
 import '../../core/enum/app_status.dart';
-import '../../core/utils/app_logger.dart';
-
 import '../../core/utils/dialog_utils.dart';
 import '../../localization/app_strings.dart';
 import '../../repository/local_repository/local_repository.dart';
@@ -26,7 +26,7 @@ class SplashController extends GetxController {
 
   late double screenHeight;
   late double screenWidth;
-
+  final Rx<Resource<InitData>> resource = Rx<Resource<InitData>>(const Loading(true));
   static Rx<InitData?> initDataModel = Rx<InitData?>(null);
 
   @override
@@ -42,24 +42,23 @@ class SplashController extends GetxController {
   }
 
   /// Init API call
-  Future<void> callInitApi() async {
-    try {
-      final response = await _remoteRepository.initApi();
-      if (response.status) {
-        initDataModel.value = InitData.fromJson(response.jsonData);
-        _checkAndRedirect(redirect: true);
-      } else {
-        print("response.code ${response.code}");
-        CommonConformationAppBottomSheet.showBottomSheet(
-            onTap: (dialogType, index) async {
-          if (!await InternetConnectionChecker.instance.hasConnection) {
-            callInitApi();
-          }
+  void callInitApi() {
+    collectResourceStream<ApiResponse<InitData>>(
+        stream: _remoteRepository.initApi(),
+        shouldShowLoader: true,
+        onSuccess: (apiResponse) {
+          initDataModel.value = apiResponse.jsonData;
+          _checkAndRedirect(redirect: true);
+        },
+        onError: (message) {
+          print("callInitApi: onError - $message");
+        },
+        onNoInternet: () {
+          callInitApi();
+        },
+        onAuthError: (message) {
+          print("callInitApi: onAuthError - $message");
         });
-      }
-    } catch (e) {
-      logger.e("callInitApi: $e");
-    }
   }
 
   Future<void> _checkAndRedirect({required bool redirect}) async {

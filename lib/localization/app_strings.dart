@@ -12,6 +12,7 @@ class AppStrings {
   static const String cancel = "cancel";
   static const String upgrade = "upgrade";
   static const String later = "later";
+  static const String buttonRetry = "retry";
   static const String noInternetConnection = "no_internet_connection";
   static const String sessionExpiredLoginAgain =
       "session_is_expired_please_login_again";
@@ -50,6 +51,7 @@ class StringConstants {
       AppStrings.cancel: "Cancel",
       AppStrings.upgrade: "Upgrade",
       AppStrings.later: "Later",
+      AppStrings.buttonRetry: "Retry",
       AppStrings.noInternetConnection:
           "No internet found. Check your connection or try again",
       AppStrings.sessionExpiredLoginAgain:

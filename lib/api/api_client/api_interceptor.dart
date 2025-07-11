@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart' as get_x;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:project_structure/api/api_constant.dart';
+import 'package:project_structure/core/utils/common_utils.dart';
 
 import '../../core/utils/app_logger.dart';
 import '../../localization/localization.dart';
@@ -45,6 +46,8 @@ class ApiInterceptor extends InterceptorsWrapper {
 
     options.headers['Accept'] = 'application/json';
     options.headers['KEY'] = ApiConstant.key;
+    options.headers['App-Type'] = ApiConstant.deviceType;
+    options.headers['App-Version'] = CommonUtils.getAppVersion();
     options.headers['Accept-Language'] = lang;
 
     try {
@@ -124,7 +127,7 @@ class ApiInterceptor extends InterceptorsWrapper {
           // todo: navigation after logout
           return handler.resolve(
             Response(
-              data: {'status': false, 'message': message},
+              data: {'status': false, 'message': message, 'code': statusCode},
               statusCode: statusCode,
               requestOptions: err.requestOptions,
             ),
