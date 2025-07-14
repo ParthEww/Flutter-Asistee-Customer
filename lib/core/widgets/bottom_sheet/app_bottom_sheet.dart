@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../themes/app_colors.dart';
 import '../../themes/text_styles.dart';
@@ -57,7 +56,7 @@ class AppBottomSheet extends StatelessWidget {
                     if (showCloseIcon)
                       InkWell(
                         onTap: () {
-                          Get.back();
+                          /*Get.back();*/
                         },
                         borderRadius: BorderRadius.circular(100),
                         child: SizedBox(
@@ -93,7 +92,7 @@ class AppBottomSheet extends StatelessWidget {
     required Widget contentWidget,
     EdgeInsetsGeometry? sheetPadding,
   }) {
-    showModalBottomSheet(
+    /*showModalBottomSheet(
       context: Get.context!,
       builder: (context) {
         return AppBottomSheet(
@@ -111,6 +110,6 @@ class AppBottomSheet extends StatelessWidget {
       isDismissible: isDismissible,
       isScrollControlled: true,
       useSafeArea: true,
-    );
+    );*/
   }
 }

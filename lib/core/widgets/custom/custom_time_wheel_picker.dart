@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:project_structure/core/themes/app_colors.dart';
 import 'package:project_structure/core/themes/text_styles.dart';
 
@@ -24,7 +23,7 @@ class _CustomTimeWheelPickerState extends State<CustomTimeWheelPicker> {
   late FixedExtentScrollController _controller;
 
   // Observable selected item index
-  var selectedItem = 0.obs;
+  /*var selectedItem = 0.obs;*/
 
   // Factor to determine how many times to repeat the base items
   static const int repeatFactor = 1000;
@@ -52,14 +51,14 @@ class _CustomTimeWheelPickerState extends State<CustomTimeWheelPicker> {
       _controller = FixedExtentScrollController(
         initialItem: extendedItems.length ~/ 2,
       );
-      selectedItem.value = _controller.initialItem;
+      /*selectedItem.value = _controller.initialItem;*/
     } else {
       // Initialize scroll controller to start in the middle of the extended list
       // This allows equal scrolling in both directions
       _controller = FixedExtentScrollController(
         initialItem: baseItems.length ~/ 2,
       );
-      selectedItem.value = _controller.initialItem;
+      /*selectedItem.value = _controller.initialItem;*/
     }
   }
 
@@ -79,7 +78,7 @@ class _CustomTimeWheelPickerState extends State<CustomTimeWheelPicker> {
         // Physics for discrete item selection
         onSelectedItemChanged: (index) {
           // Update the selected item when wheel is scrolled
-          selectedItem.value = index;
+          /*selectedItem.value = index;*/
         },
         childDelegate: ListWheelChildBuilderDelegate(
           builder: (context, index) {
@@ -94,18 +93,18 @@ class _CustomTimeWheelPickerState extends State<CustomTimeWheelPicker> {
 
             // Build each item in the wheel
             return Center(
-              child: Obx(() {
-                return Text(
+              child: /*Obx(() {
+                return*/ Text(
                   _getDisplayText(widget.wheelPickerType == WheelPickerType.HOUR
                       ? extendedItems[index]
                       : baseItems[index]),
                   // Apply different styling for selected vs unselected items
-                  style: selectedItem.value == index
+                  style: /*selectedItem.value == index
                       ? TextStyles.text16SemiBold // Selected item style
-                      : TextStyles.text14Regular
+                      :*/ TextStyles.text14Regular
                           .copyWith(color: Colors.grey), // Unselected style
-                );
-              }),
+                /*);
+              }*/),
             );
           },
         ),

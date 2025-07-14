@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'api/api_client/api_client.dart';
 import 'api/api_constant.dart';
-
-import 'localization/app_localization_controller.dart';
+import 'app.dart';
 import 'repository/local_repository/local_repository.dart';
 import 'repository/remote_repository/remote_repository.dart';
-import 'services/internet_service.dart';
-import 'app.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +28,7 @@ void main() {
 /// Initialize dependencies
 Future<void> initDependencies() async {
   /// Local storage
-  Get.put<LocalRepository>(LocalRepositoryImpl());
+  /*Get.put<LocalRepository>(LocalRepositoryImpl());
 
   /// Internet service
   Get.put(InternetService());
@@ -42,5 +38,5 @@ Future<void> initDependencies() async {
     RemoteRepositoryImpl(ApiClient.initApiClient(baseUrl: ApiConstant.baseUrl)),
   );
 
-  Get.put(AppLocalizationController());
+  Get.put(AppLocalizationController());*/
 }

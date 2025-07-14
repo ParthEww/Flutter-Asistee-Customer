@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../utils/loading_dialog.dart';
 
 import '../../services/google_place/google_place_model.dart';
@@ -65,7 +64,7 @@ class AddressSuggestionListView extends StatelessWidget {
                 ),
               ],
             ),
-          ).paddingSymmetric(vertical: 8);
+          )/*.paddingSymmetric(vertical: 8)*/;
         },
         separatorBuilder: (context, index) => const Divider(),
       ),

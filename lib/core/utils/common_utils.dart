@@ -1,6 +1,4 @@
 import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -12,18 +10,18 @@ import 'app_methods.dart';
 class CommonUtils {
 
   // Booking status tabs
-  static Rx<BookingStatusType> activeTabBarBookingStatus =
-      BookingStatusType.ONGOING.obs;
+  /*static Rx<BookingStatusType> activeTabBarBookingStatus =
+      BookingStatusType.ONGOING.obs;*/
 
   // Tab lists
   static late List<BookingStatusType> commonTabList;
 
-  static final RxBool hasLocationPermission = false.obs;
+  /*static final RxBool hasLocationPermission = false.obs;
   static final Rx<CameraPosition?> cameraPosition = Rx<CameraPosition?>(null);
   static final Rx<LatLng?> currentLocation = Rx<LatLng?>(null);
-  static final Rx<GoogleMapController?> mapController = Rx<GoogleMapController?>(null);
+  static final Rx<GoogleMapController?> mapController = Rx<GoogleMapController?>(null);*/
 
-  static Future<void> checkLocationPermission() async {
+  /*static Future<void> checkLocationPermission() async {
     hasLocationPermission.value = await Permission.location.isGranted;
     // If not granted, request permission
     if (!hasLocationPermission.value) {
@@ -51,7 +49,7 @@ class CommonUtils {
         );
       }
     }
-  }
+  }*/
 
   static Future<String> getAppVersion() async {
     final packageInfo = await PackageInfo.fromPlatform();

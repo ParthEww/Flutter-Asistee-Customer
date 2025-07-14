@@ -1,7 +1,6 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
 
 var logger = MyLogger();
 
@@ -34,7 +33,8 @@ class MyLogger {
   void _log(dynamic message, {StackTrace? stackTrace}) {
     if (kDebugMode) {
       developer.log(
-        "$message , currentRoute: ${Get.currentRoute}",
+        // "$message , currentRoute: ${Get.currentRoute}",
+        "$message , currentRoute: ",
         stackTrace: stackTrace,
         time: DateTime.now(),
       );

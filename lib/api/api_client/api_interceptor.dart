@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:get/get.dart' as get_x;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:project_structure/api/api_constant.dart';
 import 'package:project_structure/core/utils/common_utils.dart';
@@ -33,7 +32,7 @@ class ApiInterceptor extends InterceptorsWrapper {
     final uri = options.uri;
     final data = options.data;
 
-    final localRepository = get_x.Get.find<LocalRepository>();
+    /*final localRepository = get_x.Get.find<LocalRepository>();
 
     String? token = await localRepository.getData(LocalStorageKey.bearerToken);
     String? lang =
@@ -42,13 +41,13 @@ class ApiInterceptor extends InterceptorsWrapper {
 
     if (token != null && token.isNotEmpty) {
       options.headers['Authorization'] = "Bearer $token";
-    }
+    }*/
 
     options.headers['Accept'] = 'application/json';
     options.headers['KEY'] = ApiConstant.key;
     options.headers['App-Type'] = ApiConstant.deviceType;
     options.headers['App-Version'] = CommonUtils.getAppVersion();
-    options.headers['Accept-Language'] = lang;
+    // options.headers['Accept-Language'] = lang;
 
     try {
       logger.log(
@@ -123,7 +122,7 @@ class ApiInterceptor extends InterceptorsWrapper {
           break;
         case 401:
         case 403:
-          await get_x.Get.find<LocalRepository>().clearLoginData();
+          /*await get_x.Get.find<LocalRepository>().clearLoginData();*/
 
           // todo: navigation after logout
           return handler.resolve(

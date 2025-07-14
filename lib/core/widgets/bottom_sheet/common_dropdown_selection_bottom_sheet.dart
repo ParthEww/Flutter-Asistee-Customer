@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:project_structure/api/model/dummy/dummy_cancellation_reason.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -29,7 +28,7 @@ enum DaysDatesType {
 }
 
 /// A customizable bottom sheet for dropdown selection with various types
-class CommonDropdownSelectionBottomSheet extends StatelessWidget {
+/*class CommonDropdownSelectionBottomSheet extends StatelessWidget {
   final RxList<dynamic> commonList;
   final CommonDropdownSelectionBottomSheetDialogType dialogType;
   final Function(CommonDropdownSelectionBottomSheetDialogType, int)? onTap;
@@ -800,10 +799,10 @@ class CommonDropdownSelectionBottomSheet extends StatelessWidget {
       useSafeArea: false,
     );
   }
-}
+}*/
 
 /// Enum for different types of dropdown selection dialogs
-class CommonDropdownSelectionBottomSheetDialogType {
+/*class CommonDropdownSelectionBottomSheetDialogType {
   final String type;
   final String dialogTitle;
   final String dialogTitleIcon;
@@ -938,4 +937,4 @@ class CommonDropdownSelectionBottomSheetDialogType {
     searchHint: "Enter Amount",
     buttonText: "Add Funds",
   );
-}
+}*/

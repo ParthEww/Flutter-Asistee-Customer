@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
 
 import '../../../gen/assets.gen.dart';
@@ -319,7 +318,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ? 52
           : 69;
     } else if (widget.customTextFieldType == CustomTextFieldType.EMAIL) {
-      width = widget.textEditingController.text.isEmail ? 69 : 52;
+      width = /*widget.textEditingController.text.isEmail ? 69 :*/  52;
     } else if (widget.customTextFieldType == CustomTextFieldType.REPEAT_AFTER) {
       width = 100;
     } else if (widget.customTextFieldType.requiresExtendedInputFeatures) {
@@ -449,7 +448,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   // Helper method to build email suffix (verify text or icon)
   Widget _buildEmailSuffix() {
-    if (widget.textEditingController.text.isEmail) {
+    /*if (widget.textEditingController.text.isEmail) {*/
       return GestureDetector(
         onTap: widget.onPressed != null ? () => widget.onPressed!() : null,
         child: Center(
@@ -459,14 +458,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ),
         ),
       );
-    } else {
+    /*} else {
       return SvgPicture.asset(
         widget.suffixIcon,
         width: 20,
         height: 20,
         fit: BoxFit.none,
       );
-    }
+    }*/
   }
 
   // Helper method to build search field suffix (icon)

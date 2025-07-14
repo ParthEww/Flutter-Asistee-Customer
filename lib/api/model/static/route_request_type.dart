@@ -1,7 +1,6 @@
 import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 
 class RouteRequestType {
   final int id;
@@ -24,7 +23,7 @@ class RouteRequestType {
   }
 }
 
-final RxList<RouteRequestType> routeRequestTypeList = [
+/*final RxList<RouteRequestType> routeRequestTypeList = [
   RouteRequestType(id: 2, title: "Recurring Booking", isSelected: true),
   RouteRequestType(id: 1, title: "One Time Booking", isSelected: false)
-].obs;
+].obs;*/

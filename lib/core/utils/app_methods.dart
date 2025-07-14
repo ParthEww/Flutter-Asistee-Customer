@@ -4,7 +4,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -119,7 +118,7 @@ class AppMethods {
       return "";
     }
     try {
-      String locale = Get.locale?.languageCode ?? LanguageCode.en.name;
+      String locale = /*Get.locale?.languageCode ??*/ LanguageCode.en.name;
 
       DateTime inputDate = DateFormat(inputDateFormat, locale).parse(date);
 
@@ -172,14 +171,14 @@ class AppMethods {
         logger.e("STATUS == $permissionStatus");
         if (permissionStatus.isPermanentlyDenied) {
           DialogUtils.showAdaptiveAppDialog(
-            titleStr: AppStrings.permission.tr,
+            titleStr: AppStrings.permission/*.tr*/,
             message:
-                '${AppStrings.pleaseAllowThe.tr} $whichPermission ${AppStrings.permissionFromSettings.tr}',
-            positiveText: AppStrings.settings.tr,
+                '${AppStrings.pleaseAllowThe/*.tr*/} $whichPermission ${AppStrings.permissionFromSettings/*.tr*/}',
+            positiveText: AppStrings.settings/*.tr*/,
             onPositiveTap: () {
               openAppSettings();
             },
-            negativeText: AppStrings.cancel.tr,
+            negativeText: AppStrings.cancel/*.tr*/,
             onNegativeTap: () {},
           );
           return false;

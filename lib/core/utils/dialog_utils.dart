@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
 
 import '../../gen/assets.gen.dart';
@@ -29,7 +28,7 @@ class DialogUtils {
       if (negativeText != null) ...[
         TextButton(
           onPressed: () {
-            Get.back();
+            /*Get.back();*/
             onNegativeTap!.call();
           },
           child: Text(
@@ -40,7 +39,7 @@ class DialogUtils {
       ],
       TextButton(
         onPressed: () {
-          Get.back();
+          /*Get.back();*/
           onPositiveTap!.call();
         },
         child: Text(
@@ -49,7 +48,7 @@ class DialogUtils {
         ),
       ),
     ];
-    showDialog(
+    /*showDialog(
       context: Get.overlayContext!,
       barrierDismissible: false,
       builder: (dialogContext) {
@@ -65,11 +64,11 @@ class DialogUtils {
           ),
         );
       },
-    );
+    );*/
   }
 
   /// show error dialog
-  static Future<void> showErrorDialog({
+  /*static Future<void> showErrorDialog({
     bool isDismissible = false,
     bool backgroundBlur = true,
     required String dialogErrorMsg,
@@ -123,7 +122,7 @@ class DialogUtils {
         );
       },
     );
-  }
+  }*/
 
   /// snackbar
   static void showSnackBar(
@@ -132,7 +131,7 @@ class DialogUtils {
     void Function()? onErrorDialogClick,
   }) async {
     // if (!Get.isSnackbarOpen) {
-    if (snackbarType == SnackbarType.errorDialog) {
+    /*if (snackbarType == SnackbarType.errorDialog) {
       showErrorDialog(
         dialogErrorMsg: message,
         onClick: () {
@@ -185,7 +184,7 @@ class DialogUtils {
           },
         ),
       );
-    }
+    }*/
     // }
   }
 

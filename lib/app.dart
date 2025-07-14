@@ -1,13 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'core/themes/app_theme.dart';
 import 'core/utils/app_logger.dart';
 import 'core/widgets/app_annotated_region.dart';
-import 'localization/localization.dart';
 import 'constants/global.dart';
 import 'repository/local_repository/local_repository.dart';
-import 'routes/app_pages.dart';
 
 class MyApp extends StatefulWidget {
   /// Root App View
@@ -18,11 +15,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale appLocale = AppTranslation.fallbackLocale;
 
   @override
   void initState() {
-    getAppLocale();
+    // getAppLocale();
     super.initState();
   }
 
@@ -49,19 +45,5 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
-  }
-
-  Future<void> getAppLocale() async {
-    final localRepository = Get.find<LocalRepository>();
-
-    String? langCode =
-        await localRepository.getData(LocalStorageKey.languageCode);
-
-    if (langCode != null) {
-      appLocale = Locale(langCode);
-      Get.updateLocale(appLocale);
-    }
-
-    logger.i("APP LOCALE -- ${appLocale.languageCode}");
   }
 }

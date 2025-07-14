@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -36,7 +35,7 @@ class ImagePickSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text(
-              AppStrings.selectUploadOption.tr,
+              AppStrings.selectUploadOption,
               style: TextStyles.text12Medium,
             ),
             const SizedBox(height: 24),
@@ -51,7 +50,7 @@ class ImagePickSheet extends StatelessWidget {
                   },
                   child: _imageTypeContainer(
                     context,
-                    title: AppStrings.takeAPhoto.tr,
+                    title: AppStrings.takeAPhoto,
                     icon: Icons.camera_alt_rounded,
                   ),
                 ),
@@ -67,7 +66,7 @@ class ImagePickSheet extends StatelessWidget {
                   },
                   child: _imageTypeContainer(
                     context,
-                    title: AppStrings.chooseFromGallery.tr,
+                    title: AppStrings.chooseFromGallery,
                     icon: Icons.photo,
                   ),
                 ),
@@ -118,22 +117,22 @@ class ImagePickSheet extends StatelessWidget {
       builder: (context) {
         return ImagePickSheet(
           onSelectOption: (imageType) async {
-            Get.back(closeOverlays: true);
+            /*Get.back(closeOverlays: true);*/
 
             bool isEnable = await AppMethods.askPermission(
               permission: await _getPermission(imageType),
-              whichPermission: imageType.name.tr,
+              whichPermission: imageType.name,
             );
 
             if (isEnable) {
-              Get.context!.showLoading();
+              /*Get.context!.showLoading();*/
               final XFile? imageFile = await ImagePicker().pickImage(
                 source: imageType == ImageType.gallery
                     ? ImageSource.gallery
                     : ImageSource.camera,
                 imageQuality: 65,
               );
-              Get.context!.hideLoading();
+              /*Get.context!.hideLoading();*/
               if (imageFile != null) {
                 if (imageFile.path.toLowerCase().endsWith("jpg") ||
                     imageFile.path.toLowerCase().endsWith("png") ||
@@ -145,13 +144,13 @@ class ImagePickSheet extends StatelessWidget {
                     onSelectImage!(imageFile);
                   } else {
                     DialogUtils.showSnackBar(
-                      AppStrings.maximumImageSizeError.tr,
+                      AppStrings.maximumImageSizeError,
                       snackbarType: SnackbarType.failure,
                     );
                   }
                 } else {
                   DialogUtils.showSnackBar(
-                    AppStrings.uploadImageError.tr,
+                    AppStrings.uploadImageError,
                     snackbarType: SnackbarType.failure,
                   );
                 }

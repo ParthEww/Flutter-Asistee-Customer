@@ -27,11 +27,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_riverpod: ^3.0.0-dev.16
+  riverpod_annotation: ^3.0.0-dev.16
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
-  get: ^4.6.6
+#  get: ^4.6.6
   dio: ^5.8.0+1
   retrofit: ^4.4.2
   json_annotation: ^4.9.0
@@ -68,6 +70,9 @@ dev_dependencies:
   flutter_gen_runner: ^5.9.0
   connectivity_plus: ^6.1.4
   http: ^1.4.0
+  custom_lint:
+  riverpod_generator: ^3.0.0-dev.16
+  riverpod_lint: ^3.0.0-dev.16
 
 # The following section is specific to Flutter packages.
 flutter:

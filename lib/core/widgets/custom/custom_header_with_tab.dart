@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
 import 'package:project_structure/core/utils/common_utils.dart';
 import 'package:project_structure/core/utils/common_utils.dart';
@@ -80,7 +77,7 @@ class CustomHeaderWithTab extends StatelessWidget {
                     isShowBackButton: true,
                     isHorizontalPaddingApply: false,
                     onBackButtonTap: () {
-                      Get.back;
+                      /*Get.back;*/
                     },
                   )
                 ],
@@ -124,7 +121,7 @@ class CustomHeaderWithTab extends StatelessWidget {
 
   /// Builds an individual tab view item with interactive styling
   Widget buildTabView(BookingStatusType type) {
-    return Obx(() {
+    return SizedBox(); /*Obx(() {
       return Expanded(
         child: GestureDetector(
           onTap: () => {
@@ -201,6 +198,6 @@ class CustomHeaderWithTab extends StatelessWidget {
           ),
         ),
       );
-    });
+    });*/
   }
 }

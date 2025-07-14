@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:project_structure/gen/assets.gen.dart';
 
@@ -24,7 +23,7 @@ void collectResourceStream<T>({
   VoidCallback? onNoInternet,
 }) {
   stream.listen((resource) {
-    switch (resource) {
+    /*switch (resource) {
       case Loading<T>(isLoadingShow: final isLoading):
         if (shouldShowLoader) {
           if (isLoading == true) {
@@ -78,12 +77,12 @@ void collectResourceStream<T>({
 
       default:
         break;
-    }
+    }*/
   });
 }
 
 //-------Loader dialog-------//
-void showLoaderDialog() {
+/*void showLoaderDialog() {
   Get.dialog(
     Center(child: Lottie.asset(
       Assets.animations.animLoader.path,
@@ -140,4 +139,4 @@ void showNoInternetBottomSheet({VoidCallback? onNoInternet}) {
       ),
       isScrollControlled: true,
       isDismissible: false);
-}
+}*/

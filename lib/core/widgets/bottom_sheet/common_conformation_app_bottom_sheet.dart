@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:project_structure/api/model/dummy/dummy_cancellation_reason.dart';
 import 'package:project_structure/core/utils/app_extension.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -46,7 +45,7 @@ class CommonConformationAppBottomSheet extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Container(
-                  width: Get.width,
+                  /*width: Get.width,*/
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   decoration: BoxDecoration(
                     color: AppColors.lightBlue,
@@ -106,7 +105,7 @@ class CommonConformationAppBottomSheet extends StatelessWidget {
   static void showBottomSheet({
     Function(CommonConformationAppBottomSheetDialogType, int)? onTap,
   }) {
-    showModalBottomSheet(
+    /*showModalBottomSheet(
       context: Get.context!,
       builder: (context) {
         return CommonConformationAppBottomSheet(onTap: onTap);
@@ -120,7 +119,7 @@ class CommonConformationAppBottomSheet extends StatelessWidget {
       isScrollControlled: true,
       enableDrag: false,
       useSafeArea: false,
-    );
+    );*/
   }
 }
 
