@@ -11,6 +11,13 @@ abstract class ApiConstant {
 
   /// Firebase Token
   static String firebaseToken = "";
+
+  // Success status code range
+  static const API_SUCCESS_RANGE = [200, 201, 202];
+  static const API_NO_INTERNET_EXCEPTION = 503;
+  static const API_AUTH_EXCEPTION = 401;
+  static const API_CUSTOM_EXCEPTION = 400;
+  static const API_MAINTENANCE_MODE_EXCEPTION = 503;
 }
 
 abstract class Constants {

@@ -104,6 +104,7 @@ class ApiInterceptor extends InterceptorsWrapper {
           data: {
             'status': false,
             'message': message,
+            'code': 408
           },
           statusCode: 408,
           requestOptions: err.requestOptions,

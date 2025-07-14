@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:project_structure/api/api_constant.dart';
 import 'package:project_structure/api/resource.dart';
 import '../api/api_response.dart';
 import '../core/utils/network_utils.dart';
@@ -18,27 +19,26 @@ abstract class ApiRepository {
     // Emit loading state (start)
     yield const Loading(true);
 
-    try {
-      // Check internet connectivity
-      final isConnected = await NetworkUtils.isConnectedToInternet();
-      if (!isConnected) {
-        // Emit loading false before error
-        yield const Loading(false);
-        yield const NoInternetError("No Internet Connection");
-        return;
-      }
-
-      // Make the actual API call
-      final response = await apiCall();
-
-      // Emit loading state (stop)
+    // Check internet connectivity
+    final isConnected = await NetworkUtils.isConnectedToInternet();
+    if (!isConnected) {
+      // Emit loading false before error
       yield const Loading(false);
+      yield const NoInternetError("No Internet Connection");
+      return;
+    }
 
-      // Handle success case
-      if (response.status) {
+    // Make the actual API call
+    final response = await apiCall();
+
+    // Emit loading state (stop)
+    yield const Loading(false);
+
+    // Handle success case
+    if (response.status) {
+      if (ApiConstant.API_SUCCESS_RANGE.contains(response.code)) {
         yield Success(response);
       } else {
-        // Handle error with data
         if (response.jsonData != null) {
           yield ErrorWithData(response, response.message);
         } else {
@@ -46,27 +46,40 @@ abstract class ApiRepository {
           yield Error(response.message);
         }
       }
-    } on DioException catch (dioError) {
-      // Handle Dio (network) exceptions
-      yield const Loading(false);
-      yield _handleDioException<T>(dioError);
-    } catch (e) {
-      // Handle unknown exceptions
-      yield const Loading(false);
-      yield Error("Unexpected error: $e");
+    } else {
+      switch (response.code) {
+        case ApiConstant.API_NO_INTERNET_EXCEPTION:
+          yield NoInternetError(response.message);
+          break;
+
+        case ApiConstant.API_AUTH_EXCEPTION:
+          yield AuthException(data: response, message: response.message);
+          break;
+
+        default:
+          if (response.jsonData != null) {
+            yield ErrorWithData(response, response.message);
+          } else {
+            // Handle plain error
+            yield Error(response.message);
+          }
+      }
     }
   }
 
   /// Converts Dio-specific errors into custom [Resource] types.
   Resource<ApiResponse<T>> _handleDioException<T>(DioException e) {
     // Handle no internet at the socket level
-    if (e.type == DioExceptionType.connectionError || e.error is SocketException) {
+    if (e.type == DioExceptionType.connectionError ||
+        e.error is SocketException) {
       return const NoInternetError("No Internet Connection");
     }
 
     // Try extracting a useful message from Dio response
     final statusCode = e.response?.statusCode;
-    final message = e.response?.data['message']?.toString() ?? e.message ?? "Something went wrong";
+    final message = e.response?.data['message']?.toString() ??
+        e.message ??
+        "Something went wrong";
 
     // Handle specific error codes
     if (statusCode == 401) {
