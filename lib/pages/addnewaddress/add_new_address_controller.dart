@@ -118,6 +118,9 @@ class AddNewAddressController extends GetxController {
     AddressType(title: 'Home', image_path: Assets.images.svg.addressTypeHome.path),
     AddressType(title: 'Work', image_path: Assets.images.svg.addressTypeWork.path),
     AddressType(title: 'Other', image_path: Assets.images.svg.addressTypeOther.path),
+    AddressType(title: 'Other 1', image_path: Assets.images.svg.addressTypeOther.path),
+    AddressType(title: 'Other 2', image_path: Assets.images.svg.addressTypeOther.path),
+    AddressType(title: 'Other 3', image_path: Assets.images.svg.addressTypeOther.path),
   ].obs;
 
   late final RxList<AddressField> addressFiledList = <AddressField>[

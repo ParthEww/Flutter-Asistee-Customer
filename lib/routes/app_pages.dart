@@ -53,8 +53,8 @@ part 'app_routes.dart';
 
 class AppPages {
   // initial route
-  static String initialRoute = _Path.splash;
-  static Bindings initialBinding = SplashBindings();
+  static String initialRoute = _Path.addNewAddress;
+  static Bindings initialBinding = AddNewAddressBindings();
 
   static final List<GetPage<dynamic>> pages = [
     /// splash page

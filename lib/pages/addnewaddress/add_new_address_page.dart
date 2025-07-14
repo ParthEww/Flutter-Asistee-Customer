@@ -75,24 +75,18 @@ class AddNewAddressPage extends GetView<AddNewAddressController> {
                                   style: TextStyles.text14SemiBold,
                                 ),
                                 SizedBox(height: 14),
-                                SizedBox(
-                                  height: 40,
-                                  child: ListView.separated(
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount:
-                                        controller.addressTypeList.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return _buildAddressType(
-                                          controller.addressTypeList[index],
-                                          index);
-                                    },
-                                    separatorBuilder:
-                                        (BuildContext context, int index) {
-                                      return SizedBox(width: 8);
-                                    },
-                                  ),
+                                Wrap(
+                                  spacing: 10,
+                                  runSpacing: 10,
+                                  children: controller.addressTypeList
+                                      .map(
+                                        (item) =>
+                                        _buildAddressType(
+                                            item,
+                                            controller.addressTypeList
+                                                .indexOf(item)),
+                                  )
+                                      .toList(),
                                 ),
                                 SizedBox(height: 32),
                                 Expanded(
@@ -157,12 +151,12 @@ class AddNewAddressPage extends GetView<AddNewAddressController> {
     return GestureDetector(
       onTap: () {},
       child: Container(
-          padding: EdgeInsets.only(top: 4, right: 14, bottom: 4),
+          padding: EdgeInsets.only(left: 4, top: 4, right: 14, bottom: 4),
           decoration: BoxDecoration(
             color: bean.is_selected ? AppColors.primary : AppColors.lightBlue,
             borderRadius: BorderRadius.circular(66),
           ),
-          child: Row(mainAxisSize: MainAxisSize.max, children: [
+          child: Row(mainAxisSize: MainAxisSize.min, children: [
             CircleAvatar(
               backgroundColor: AppColors.white,
               child: Padding(
