@@ -2,12 +2,11 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:project_structure/api/api_constant.dart';
-import 'package:project_structure/core/utils/common_utils.dart';
 
 import '../../core/utils/app_logger.dart';
-import '../../localization/localization.dart';
+import '../../core/utils/common_utils.dart';
 import '../../repository/local_repository/local_repository.dart';
+import '../api_constant.dart';
 
 class ApiInterceptor extends InterceptorsWrapper {
   @override

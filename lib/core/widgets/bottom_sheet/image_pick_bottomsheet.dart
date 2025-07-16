@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../../../localization/app_strings.dart';
 import '../../themes/app_colors.dart';
+import '../../themes/app_strings.dart';
 import '../../themes/text_styles.dart';
 import '../../utils/app_logger.dart';
 import '../../utils/app_methods.dart';

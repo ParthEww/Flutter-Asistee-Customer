@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:project_structure/api/model/response/userdata/user_data.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../api_constant.dart';
 import '../api_response.dart';
 import '../model/request/loginRequest.dart';
 import '../model/response/init/init_data.dart';
+import '../model/response/userdata/user_data.dart';
 import 'api_interceptor.dart';
 
 part 'api_client.g.dart';

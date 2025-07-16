@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:project_structure/gen/assets.gen.dart';
+import 'package:flutter_yay_rider_driver/gen/assets.gen.dart';
 
 import '../../core/themes/app_colors.dart';
 import '../../core/themes/text_styles.dart';
 import '../../core/widgets/app_button.dart';
-import '../../gen/fonts.gen.dart';
-import '../../localization/app_strings.dart';
 import '../core/utils/network_utils.dart';
 import 'resource.dart'; // Import your updated Resource<T> file
 

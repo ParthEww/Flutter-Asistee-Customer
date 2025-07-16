@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:project_structure/core/themes/app_colors.dart';
-import 'package:project_structure/core/utils/app_extension.dart';
-import 'package:project_structure/pages/dashboard/dashboard_controller.dart';
+import 'package:flutter_yay_rider_driver/core/themes/app_colors.dart';
+import 'package:flutter_yay_rider_driver/core/utils/app_extension.dart';
 
 import '../../../gen/assets.gen.dart';
 import '../../themes/text_styles.dart';
 import 'custom_circle_icon.dart';
 
-class CustomRouteCard extends StatelessWidget {
+/*class CustomRouteCard extends StatelessWidget {
   // Card properties
   final String startLocation;
   final String endLocation;
@@ -271,4 +270,4 @@ class CustomRouteCard extends StatelessWidget {
             ],
           );
   }
-}
+}*/

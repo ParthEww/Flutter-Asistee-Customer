@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import 'api/api_client/api_client.dart';
-import 'api/api_constant.dart';
 import 'app.dart';
-import 'repository/local_repository/local_repository.dart';
-import 'repository/remote_repository/remote_repository.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +17,7 @@ void main() {
 
   initDependencies().whenComplete(
     () {
-      runApp(const MyApp());
+      ProviderScope(child: const MyApp());
     },
   );
 }

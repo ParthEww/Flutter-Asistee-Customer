@@ -3,8 +3,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../../localization/app_strings.dart';
-import '../../pages/dashboard/dashboard_controller.dart';
 import 'app_methods.dart';
 
 class CommonUtils {
@@ -14,7 +12,7 @@ class CommonUtils {
       BookingStatusType.ONGOING.obs;*/
 
   // Tab lists
-  static late List<BookingStatusType> commonTabList;
+  // static late List<BookingStatusType> commonTabList;
 
   /*static final RxBool hasLocationPermission = false.obs;
   static final Rx<CameraPosition?> cameraPosition = Rx<CameraPosition?>(null);

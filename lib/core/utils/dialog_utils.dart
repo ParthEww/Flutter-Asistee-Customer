@@ -2,10 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:project_structure/core/utils/app_extension.dart';
+import 'package:flutter_yay_rider_driver/core/utils/app_extension.dart';
 
 import '../../gen/assets.gen.dart';
-import '../../localization/app_strings.dart';
 import '../themes/app_colors.dart';
 import '../themes/text_styles.dart';
 

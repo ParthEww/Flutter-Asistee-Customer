@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:project_structure/core/utils/app_extension.dart';
+import 'package:flutter_yay_rider_driver/core/utils/app_extension.dart';
 
 import '../../../gen/assets.gen.dart';
 import '../../themes/app_colors.dart';

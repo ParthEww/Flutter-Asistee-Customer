@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_yay_rider_driver/routes/navigation_service.dart';
 import 'core/themes/app_theme.dart';
 import 'core/utils/app_logger.dart';
 import 'core/widgets/app_annotated_region.dart';
@@ -30,18 +31,13 @@ class _MyAppState extends State<MyApp> {
           textScaler: TextScaler
               .noScaling, // keep font size as it is (not as per system fonts)
         ),
-        child: GetMaterialApp(
+        child: MaterialApp(
           title: Global.appName,
-          initialBinding: AppPages.initialBinding,
-          initialRoute: AppPages.initialRoute,
-          getPages: AppPages.pages,
           theme: AppTheme.appTheme,
           debugShowCheckedModeBanner: false,
-          locale: appLocale,
-          fallbackLocale: appLocale,
-          translations: AppTranslation(),
-          defaultTransition:
-              Platform.isAndroid ? Transition.rightToLeft : Transition.native,
+          initialRoute: AppRoutes.splash,
+          onGenerateRoute: AppPages.generateRoute,
+          navigatorKey: NavigationService.navigatorKey,
         ),
       ),
     );

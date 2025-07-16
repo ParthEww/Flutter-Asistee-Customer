@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_structure/core/themes/app_colors.dart';
-import 'package:project_structure/core/themes/text_styles.dart';
+import 'package:flutter_yay_rider_driver/core/themes/app_colors.dart';
+import 'package:flutter_yay_rider_driver/core/themes/text_styles.dart';
 
 // A custom time wheel picker widget that displays numbers in a scrollable wheel
 class CustomTimeWheelPicker extends StatefulWidget {

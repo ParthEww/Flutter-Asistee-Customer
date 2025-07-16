@@ -1,5 +1,5 @@
 
-import 'package:project_structure/api/model/response/route_stop.dart';
+import 'package:flutter_yay_rider_driver/api/model/response/route_stop.dart';
 
 class RouteData {
   final String? adminStatus;

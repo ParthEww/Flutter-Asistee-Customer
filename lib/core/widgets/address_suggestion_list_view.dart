@@ -2,12 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../utils/loading_dialog.dart';
 
-import '../../services/google_place/google_place_model.dart';
-import '../../services/google_place/google_place_service.dart';
 import '../themes/app_colors.dart';
 import '../utils/app_logger.dart';
 
-class AddressSuggestionListView extends StatelessWidget {
+/*class AddressSuggestionListView extends StatelessWidget {
   final double? listHeight;
   final List locationList;
   final CancelToken? cancelToken;
@@ -64,10 +62,10 @@ class AddressSuggestionListView extends StatelessWidget {
                 ),
               ],
             ),
-          )/*.paddingSymmetric(vertical: 8)*/;
+          )*//*.paddingSymmetric(vertical: 8)*//*;
         },
         separatorBuilder: (context, index) => const Divider(),
       ),
     );
   }
-}
+}*/

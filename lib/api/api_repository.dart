@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:project_structure/api/api_constant.dart';
-import 'package:project_structure/api/resource.dart';
+import 'package:flutter_yay_rider_driver/api/api_constant.dart';
+import 'package:flutter_yay_rider_driver/api/resource.dart';
 import '../api/api_response.dart';
 import '../core/utils/network_utils.dart';
 

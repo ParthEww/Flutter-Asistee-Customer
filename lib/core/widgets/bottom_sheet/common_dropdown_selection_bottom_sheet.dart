@@ -3,8 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:project_structure/api/model/dummy/dummy_cancellation_reason.dart';
-import 'package:project_structure/core/utils/app_extension.dart';
+import 'package:flutter_yay_rider_driver/api/model/dummy/dummy_cancellation_reason.dart';
+import 'package:flutter_yay_rider_driver/core/utils/app_extension.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../api/model/static/route_request_type.dart';

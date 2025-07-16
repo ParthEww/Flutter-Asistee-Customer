@@ -83,15 +83,15 @@ class $AssetsImagesPngGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-    asisteeLogoWhiteWithText,
-    busInTripDetail,
-    closeUpBus,
-    dummyProfileImage,
-    mapView,
-    onboardImg1,
-    onboardImg2,
-    onboardImg3,
-  ];
+        asisteeLogoWhiteWithText,
+        busInTripDetail,
+        closeUpBus,
+        dummyProfileImage,
+        mapView,
+        onboardImg1,
+        onboardImg2,
+        onboardImg3
+      ];
 }
 
 class $AssetsImagesSvgGen {
@@ -523,120 +523,120 @@ class $AssetsImagesSvgGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
-    add18,
-    addToWalletWhite,
-    addToWallet,
-    add,
-    addressFieldBlock,
-    addressFieldBuildingName,
-    addressFieldDescription,
-    addressTypeHome,
-    addressTypeOther,
-    addressTypeWork,
-    appLogo,
-    arrowLeft,
-    arrowRight18,
-    arrowRight24,
-    arrowRightGreen,
-    arrowUp,
-    arrowDown24,
-    arrowDown,
-    asisteeLogoWhiteWithText,
-    asisteeLogoWithText,
-    availableSeat16,
-    availableSeat,
-    bd,
-    bnvHome,
-    bnvMyBookings,
-    bnvMyRoutes,
-    bnvSettings,
-    boardingPoint,
-    bus16,
-    bus18,
-    busPrimary18,
-    bus,
-    calendar16,
-    calendar18,
-    calendar,
-    callBlack,
-    call,
-    camera,
-    checkBoxChecked,
-    checkBoxUnchecked,
-    clean,
-    clock18,
-    clock,
-    cprWhite,
-    cpr,
-    deleteAddress,
-    doubleArrowRight,
-    dropDownArrowWhite,
-    dropDownArrow,
-    dropoffPoint,
-    editPenWhite,
-    editPen,
-    ellipseDot,
-    ellipseGradient,
-    emailWhite,
-    email,
-    eyeSlash,
-    eye,
-    file,
-    filterSelected,
-    filterUnselected,
-    flag,
-    fullName,
-    gallery,
-    googleLogin,
-    line1,
-    line2,
-    line3,
-    line4,
-    line5,
-    lineSignInContinueWith,
-    location,
-    map,
-    minus,
-    moneyCreditArrow,
-    money,
-    msgSubmitted,
-    note,
-    notification,
-    numberPlate,
-    passwordCheck,
-    plus,
-    profileSettings,
-    promoCode,
-    radioSelected,
-    radioUnselected,
-    rectangle,
-    repeat22,
-    repeat,
-    reservedSeat,
-    rightArrowBlue,
-    route20,
-    routeName,
-    route,
-    route16,
-    search24,
-    searchCancel,
-    search,
-    settingsAboutUs,
-    settingsAdminChat,
-    settingsContactUs,
-    settingsDeleteAccount,
-    settingsFaqs,
-    settingsLogout,
-    settingsMyAddress,
-    settingsNotifications,
-    settingsPrivacyPolicy,
-    settingsTermsAndConditions,
-    settingsWallet,
-    smiley,
-    uploadImageDialog,
-    uploadImage,
-    wallet,
-  ];
+        add18,
+        addToWalletWhite,
+        addToWallet,
+        add,
+        addressFieldBlock,
+        addressFieldBuildingName,
+        addressFieldDescription,
+        addressTypeHome,
+        addressTypeOther,
+        addressTypeWork,
+        appLogo,
+        arrowLeft,
+        arrowRight18,
+        arrowRight24,
+        arrowRightGreen,
+        arrowUp,
+        arrowDown24,
+        arrowDown,
+        asisteeLogoWhiteWithText,
+        asisteeLogoWithText,
+        availableSeat16,
+        availableSeat,
+        bd,
+        bnvHome,
+        bnvMyBookings,
+        bnvMyRoutes,
+        bnvSettings,
+        boardingPoint,
+        bus16,
+        bus18,
+        busPrimary18,
+        bus,
+        calendar16,
+        calendar18,
+        calendar,
+        callBlack,
+        call,
+        camera,
+        checkBoxChecked,
+        checkBoxUnchecked,
+        clean,
+        clock18,
+        clock,
+        cprWhite,
+        cpr,
+        deleteAddress,
+        doubleArrowRight,
+        dropDownArrowWhite,
+        dropDownArrow,
+        dropoffPoint,
+        editPenWhite,
+        editPen,
+        ellipseDot,
+        ellipseGradient,
+        emailWhite,
+        email,
+        eyeSlash,
+        eye,
+        file,
+        filterSelected,
+        filterUnselected,
+        flag,
+        fullName,
+        gallery,
+        googleLogin,
+        line1,
+        line2,
+        line3,
+        line4,
+        line5,
+        lineSignInContinueWith,
+        location,
+        map,
+        minus,
+        moneyCreditArrow,
+        money,
+        msgSubmitted,
+        note,
+        notification,
+        numberPlate,
+        passwordCheck,
+        plus,
+        profileSettings,
+        promoCode,
+        radioSelected,
+        radioUnselected,
+        rectangle,
+        repeat22,
+        repeat,
+        reservedSeat,
+        rightArrowBlue,
+        route20,
+        routeName,
+        route,
+        route16,
+        search24,
+        searchCancel,
+        search,
+        settingsAboutUs,
+        settingsAdminChat,
+        settingsContactUs,
+        settingsDeleteAccount,
+        settingsFaqs,
+        settingsLogout,
+        settingsMyAddress,
+        settingsNotifications,
+        settingsPrivacyPolicy,
+        settingsTermsAndConditions,
+        settingsWallet,
+        smiley,
+        uploadImageDialog,
+        uploadImage,
+        wallet
+      ];
 }
 
 class $AssetsImagesWebpGen {
@@ -665,7 +665,11 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName, {this.size, this.flavors = const {}});
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
 
   final String _assetName;
 
@@ -725,8 +729,15 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider({AssetBundle? bundle, String? package}) {
-    return AssetImage(_assetName, bundle: bundle, package: package);
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
   }
 
   String get path => _assetName;
@@ -735,11 +746,17 @@ class AssetGenImage {
 }
 
 class SvgGenImage {
-  const SvgGenImage(this._assetName, {this.size, this.flavors = const {}})
-    : _isVecFormat = false;
+  const SvgGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  }) : _isVecFormat = false;
 
-  const SvgGenImage.vec(this._assetName, {this.size, this.flavors = const {}})
-    : _isVecFormat = true;
+  const SvgGenImage.vec(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  }) : _isVecFormat = true;
 
   final String _assetName;
   final Size? size;
@@ -793,8 +810,7 @@ class SvgGenImage {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      colorFilter:
-          colorFilter ??
+      colorFilter: colorFilter ??
           (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
@@ -807,7 +823,10 @@ class SvgGenImage {
 }
 
 class LottieGenImage {
-  const LottieGenImage(this._assetName, {this.flavors = const {}});
+  const LottieGenImage(
+    this._assetName, {
+    this.flavors = const {},
+  });
 
   final String _assetName;
   final Set<String> flavors;
@@ -824,8 +843,11 @@ class LottieGenImage {
     _lottie.LottieImageProviderFactory? imageProviderFactory,
     Key? key,
     AssetBundle? bundle,
-    Widget Function(BuildContext, Widget, _lottie.LottieComposition?)?
-    frameBuilder,
+    Widget Function(
+      BuildContext,
+      Widget,
+      _lottie.LottieComposition?,
+    )? frameBuilder,
     ImageErrorWidgetBuilder? errorBuilder,
     double? width,
     double? height,

@@ -7,9 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_yay_rider_driver/core/themes/app_strings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../localization/app_strings.dart';
 import '../enum/language_code.dart';
 import 'app_logger.dart';
 import 'dialog_utils.dart';
