@@ -133,7 +133,7 @@ enum DaysDatesType {
         // Circular Icon Container
         Container(
           padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
             color: AppColors.deepNavy,
           ),
@@ -346,7 +346,7 @@ enum DaysDatesType {
     return Container(
       width: 44,
       height: 44,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.white,
         shape: BoxShape.circle,
       ),
@@ -801,7 +801,7 @@ enum DaysDatesType {
 }*/
 
 /// Enum for different types of dropdown selection dialogs
-/*class CommonDropdownSelectionBottomSheetDialogType {
+class CommonDropdownSelectionBottomSheetDialogType {
   final String type;
   final String dialogTitle;
   final String dialogTitleIcon;
@@ -936,4 +936,4 @@ enum DaysDatesType {
     searchHint: "Enter Amount",
     buttonText: "Add Funds",
   );
-}*/
+}

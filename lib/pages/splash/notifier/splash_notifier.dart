@@ -32,9 +32,7 @@ class SplashNotifier extends _$SplashNotifier {
   late final RemoteRepository remoteRepository = ref.read(remoteRepositoryProvider);
   @override
   SplashState build() {
-    state = SplashState(
-      // userData: await localRepository.getData(LocalStorageKey.userData)
-    );
+    state = SplashState();
     initApi();
     return state;
   }
@@ -112,7 +110,7 @@ class SplashNotifier extends _$SplashNotifier {
       const Duration(seconds: 2),
       () async {
         UserData? userData =
-            await localRepository?.getData(LocalStorageKey.userData);
+            await localRepository.getData(LocalStorageKey.userData);
         if (userData != null) {
           NavigationService().pushNamed(AppRoutes.dashboard);
         } else {

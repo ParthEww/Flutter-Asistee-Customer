@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_yay_rider_driver/constants/global.dart';
 
 extension ContextUtil on BuildContext {
   /// hide keyboard
@@ -14,6 +15,20 @@ extension StringUtils on String? {
   bool isNotNullOrEmpty() {
     String? value = this;
     if (value != null && value.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
+  bool isEmail(){
+    String? value = this;
+    if (value != null && Global.emailRegex.hasMatch(value)) {
+      return true;
+    }
+    return false;
+  }
+  bool isDigitsOnly(){
+    String? value = this;
+    if (value != null && Global.digitRegex.hasMatch(value)) {
       return true;
     }
     return false;

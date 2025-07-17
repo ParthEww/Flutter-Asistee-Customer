@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_yay_rider_driver/core/themes/app_strings.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -226,5 +227,10 @@ class AppMethods {
         statusBarBrightness: isDark ? Brightness.dark : Brightness.light,
       ),
     );
+  }
+
+  static Future<String> getAppVersion() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.version;
   }
 }

@@ -6,7 +6,9 @@ import '../../../core/themes/text_styles.dart';
 import '../../../core/widgets/app_text_field_label.dart';
 import '../../../core/widgets/custom/custom_auth_header_with_back_button.dart';
 import '../../../core/widgets/custom/custom_text_filed.dart';
+import '../../../di/app_provider.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../routes/navigation_service.dart';
 import '../notifier/auth_notifier.dart';
 
 class LoginPage extends ConsumerWidget {
@@ -14,8 +16,9 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final auth = ref.watch(authNotifierProvider);
-    final notifier = ref.read(authNotifierProvider.notifier);
+    late final NavigationService navigationService = ref.read(navigationServiceProvider);
+    final authState = ref.watch(authNotifierProvider);
+    final authNotifier = ref.read(authNotifierProvider.notifier);
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -54,9 +57,9 @@ class LoginPage extends ConsumerWidget {
                         customTextFieldType:
                             CustomTextFieldType.EMAIL_OR_PHONE_NUMBER,
                         textEditingController:
-                            auth.emailOrPhoneNumberController!,
-                        focusNode: auth.emailOrPhoneNumberFocusNode!,
-                        nextFocusNode: auth.loginPasswordFocusNode,
+                            authState.emailOrPhoneNumberController!,
+                        focusNode: authState.emailOrPhoneNumberFocusNode!,
+                        nextFocusNode: authState.loginPasswordFocusNode,
                         // Moves to password field on next
                         hintText: "Email / Phone",
                         keyboardType: TextInputType.text,
@@ -68,8 +71,8 @@ class LoginPage extends ConsumerWidget {
                       // Password input field
                       CustomTextField(
                         customTextFieldType: CustomTextFieldType.PASSWORD,
-                        textEditingController: auth.loginPasswordController!,
-                        focusNode: auth.loginPasswordFocusNode!,
+                        textEditingController: authState.loginPasswordController!,
+                        focusNode: authState.loginPasswordFocusNode!,
                         hintText: "Password",
                         keyboardType: TextInputType.visiblePassword,
                         textInputAction: TextInputAction.done,
@@ -81,7 +84,10 @@ class LoginPage extends ConsumerWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            authNotifier.resetState(ResetDataType.LOGIN_DATA);
+                            navigationService.pushNamed(AppRoutes.otpVerification);
+                          },
                           child: Text(
                             "Forgot Password?",
                             style: TextStyles.text14Regular.copyWith(
@@ -133,7 +139,10 @@ class LoginPage extends ConsumerWidget {
                         child: AppTextFieldLabel(
                           label: "New to Yay Ride?",
                           clickableLabel: "Register",
-                          onTap: () {},
+                          onTap: () {
+                            authNotifier.resetState(ResetDataType.REGISTER_DATA);
+                            navigationService.pushNamed(AppRoutes.register);
+                          },
                         ),
                       ),
                     ],

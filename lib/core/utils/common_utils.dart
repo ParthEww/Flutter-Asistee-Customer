@@ -1,9 +1,4 @@
-import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:permission_handler/permission_handler.dart';
 
-import 'app_methods.dart';
 
 class CommonUtils {
 
@@ -48,10 +43,5 @@ class CommonUtils {
       }
     }
   }*/
-
-  static Future<String> getAppVersion() async {
-    final packageInfo = await PackageInfo.fromPlatform();
-    return packageInfo.version;
-  }
 
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_yay_rider_driver/core/utils/app_methods.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../core/utils/app_logger.dart';
@@ -47,7 +48,7 @@ class ApiInterceptor extends InterceptorsWrapper {
     options.headers['Accept'] = 'application/json';
     options.headers['KEY'] = ApiConstant.key;
     options.headers['App-Type'] = ApiConstant.deviceType;
-    options.headers['App-Version'] = CommonUtils.getAppVersion();
+    options.headers['App-Version'] = AppMethods.getAppVersion();
     // options.headers['Accept-Language'] = lang;
 
     try {

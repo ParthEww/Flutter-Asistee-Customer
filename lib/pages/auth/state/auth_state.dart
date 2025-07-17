@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../api/model/response/init/init_data.dart';
+
 part 'auth_state.freezed.dart';
 
 @freezed
@@ -34,6 +34,6 @@ class AuthState with _$AuthState {
     TextEditingController? nationalityController,
     FocusNode? areaFocusNode,
     TextEditingController? areaController,
-    bool? isTermsAndConditionChecked,
-}) = _AuthState;
+    @Default(false) bool isTermsAndConditionChecked,
+  }) = _AuthState;
 }
