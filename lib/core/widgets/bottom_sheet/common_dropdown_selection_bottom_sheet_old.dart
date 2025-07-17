@@ -16,7 +16,7 @@ import '../custom/custom_text_filed.dart';
 import '../custom/custom_time_wheel_picker.dart';
 
 // Enum for Days/Dates selection type
-enum DaysDatesType {
+/*enum DaysDatesType {
   DAYS(title: "Repeat on Days", isSelected: true),
   DATES(title: "Repeat on Dates", isSelected: false);
 
@@ -24,15 +24,15 @@ enum DaysDatesType {
   final bool isSelected;
 
   const DaysDatesType({required this.title, required this.isSelected});
-}
+}*/
 
 /// A customizable bottom sheet for dropdown selection with various types
-/*class CommonDropdownSelectionBottomSheet extends StatelessWidget {
+/*class CommonDropdownSelectionBottomSheetOld extends StatelessWidget {
   final RxList<dynamic> commonList;
   final CommonDropdownSelectionBottomSheetDialogType dialogType;
   final Function(CommonDropdownSelectionBottomSheetDialogType, int)? onTap;
 
-  const CommonDropdownSelectionBottomSheet({
+  const CommonDropdownSelectionBottomSheetOld({
     super.key,
     required this.commonList,
     required this.dialogType,
@@ -784,7 +784,7 @@ enum DaysDatesType {
     showModalBottomSheet(
       context: Get.context!,
       builder: (context) {
-        return CommonDropdownSelectionBottomSheet(
+        return CommonDropdownSelectionBottomSheetOld(
             dialogType: dialogType, commonList: commonList, onTap: onTap);
       },
       shape: const RoundedRectangleBorder(
@@ -801,7 +801,7 @@ enum DaysDatesType {
 }*/
 
 /// Enum for different types of dropdown selection dialogs
-class CommonDropdownSelectionBottomSheetDialogType {
+/*class CommonDropdownSelectionBottomSheetDialogType {
   final String type;
   final String dialogTitle;
   final String dialogTitleIcon;
@@ -936,4 +936,4 @@ class CommonDropdownSelectionBottomSheetDialogType {
     searchHint: "Enter Amount",
     buttonText: "Add Funds",
   );
-}
+}*/

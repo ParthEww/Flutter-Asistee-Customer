@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as CommonDropdownSelectionBottomSheet;
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_yay_rider_driver/core/widgets/bottom_sheet/commondropdownselection/common_dropdown_selection_bottom_sheet.dart';
 import 'package:flutter_yay_rider_driver/di/app_provider.dart';
 import 'package:flutter_yay_rider_driver/routes/navigation_service.dart';
 
+import '../../../api/model/dummy/dummy_cancellation_reason.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../core/themes/text_styles.dart';
 import '../../../core/utils/dialog_utils.dart';
@@ -173,11 +176,12 @@ class RegisterPage extends ConsumerWidget {
                       textInputAction: TextInputAction.next,
                       suffixIcon: Assets.images.svg.dropDownArrow.path,
                       onPressed: () {
-                        /*CommonDropdownSelectionBottomSheet.showBottomSheet(
+                        CommonDropdownSheet.showCommonDropdownSheet(
+                          context: context,
                             dialogType:
                             CommonDropdownSelectionBottomSheetDialogType
                                 .SELECT_NATIONALITY,
-                            commonList: authState.nationalityList!);*/
+                            items: nationalityList);
                       },
                     ),
                     const SizedBox(height: 18),
@@ -192,11 +196,12 @@ class RegisterPage extends ConsumerWidget {
                       textInputAction: TextInputAction.done,
                       suffixIcon: Assets.images.svg.dropDownArrow.path,
                       onPressed: () {
-                        /*CommonDropdownSelectionBottomSheet.showBottomSheet(
+                        CommonDropdownSheet.showCommonDropdownSheet(
+                            context: context,
                             dialogType:
                             CommonDropdownSelectionBottomSheetDialogType
                                 .SELECT_AREA,
-                            commonList: authState.areaList!);*/
+                            items: areaList);
                       },
                     ),
                     const SizedBox(height: 36),
