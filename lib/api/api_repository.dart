@@ -36,31 +36,25 @@ abstract class ApiRepository {
 
     // Handle success case
     if (response.status) {
-      if (ApiConstant.API_SUCCESS_RANGE.contains(response.code)) {
-        yield Success(response);
-      } else {
-        if (response.jsonData != null) {
-          yield ErrorWithData(response, response.message);
-        } else {
-          // Handle plain error
-          yield Error(response.message);
-        }
-      }
+      yield Success(response);
     } else {
       switch (response.code) {
         case ApiConstant.API_NO_INTERNET_EXCEPTION:
+          print("else: NoInternetError");
           yield NoInternetError(response.message);
           break;
 
         case ApiConstant.API_AUTH_EXCEPTION:
+          print("else: AuthException");
           yield AuthException(data: response, message: response.message);
           break;
 
         default:
           if (response.jsonData != null) {
+            print("else: ErrorWithData");
             yield ErrorWithData(response, response.message);
           } else {
-            // Handle plain error
+            print("else: Error");
             yield Error(response.message);
           }
       }

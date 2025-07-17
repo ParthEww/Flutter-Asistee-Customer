@@ -9,6 +9,9 @@ import '../../repository/local_repository/local_repository.dart';
 import '../api_constant.dart';
 
 class ApiInterceptor extends InterceptorsWrapper {
+
+  LocalRepository? localRepository;
+
   @override
   void onRequest(
     RequestOptions options,
@@ -18,6 +21,7 @@ class ApiInterceptor extends InterceptorsWrapper {
       final customResponse = {
         'status': false,
         'message': "No internet found",
+        'code': 503
       };
       return handler.resolve(
         Response(
@@ -31,16 +35,14 @@ class ApiInterceptor extends InterceptorsWrapper {
     final uri = options.uri;
     final data = options.data;
 
-    /*final localRepository = get_x.Get.find<LocalRepository>();
-
-    String? token = await localRepository.getData(LocalStorageKey.bearerToken);
-    String? lang =
-        await localRepository.getData(LocalStorageKey.languageCode) ??
-            AppTranslation.fallbackLocale.languageCode;
+    String? token = await localRepository?.getData(LocalStorageKey.bearerToken);
+    /*String? lang =
+        await localRepository?.getData(LocalStorageKey.languageCode) ??
+            AppTranslation.fallbackLocale.languageCode;*/
 
     if (token != null && token.isNotEmpty) {
       options.headers['Authorization'] = "Bearer $token";
-    }*/
+    }
 
     options.headers['Accept'] = 'application/json';
     options.headers['KEY'] = ApiConstant.key;
@@ -72,7 +74,6 @@ class ApiInterceptor extends InterceptorsWrapper {
     logger.log("✅ RESPONSE[$statusCode] => PATH: $uri\n DATA: $data");
 
     // Todo: Handle session expired
-
     super.onResponse(response, handler);
   }
 

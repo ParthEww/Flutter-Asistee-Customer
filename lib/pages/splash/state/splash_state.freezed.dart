@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SplashState {
-  String get path => throw _privateConstructorUsedError;
+  InitData? get initDataModel => throw _privateConstructorUsedError;
+  UserData? get userData => throw _privateConstructorUsedError;
 
   /// Create a copy of SplashState
   /// with the given fields replaced by the non-null parameter values.
@@ -31,7 +32,7 @@ abstract class $SplashStateCopyWith<$Res> {
           SplashState value, $Res Function(SplashState) then) =
       _$SplashStateCopyWithImpl<$Res, SplashState>;
   @useResult
-  $Res call({String path});
+  $Res call({InitData? initDataModel, UserData? userData});
 }
 
 /// @nodoc
@@ -49,13 +50,18 @@ class _$SplashStateCopyWithImpl<$Res, $Val extends SplashState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? path = null,
+    Object? initDataModel = freezed,
+    Object? userData = freezed,
   }) {
     return _then(_value.copyWith(
-      path: null == path
-          ? _value.path
-          : path // ignore: cast_nullable_to_non_nullable
-              as String,
+      initDataModel: freezed == initDataModel
+          ? _value.initDataModel
+          : initDataModel // ignore: cast_nullable_to_non_nullable
+              as InitData?,
+      userData: freezed == userData
+          ? _value.userData
+          : userData // ignore: cast_nullable_to_non_nullable
+              as UserData?,
     ) as $Val);
   }
 }
@@ -68,7 +74,7 @@ abstract class _$$SplashStateImplCopyWith<$Res>
       __$$SplashStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String path});
+  $Res call({InitData? initDataModel, UserData? userData});
 }
 
 /// @nodoc
@@ -84,13 +90,18 @@ class __$$SplashStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? path = null,
+    Object? initDataModel = freezed,
+    Object? userData = freezed,
   }) {
     return _then(_$SplashStateImpl(
-      path: null == path
-          ? _value.path
-          : path // ignore: cast_nullable_to_non_nullable
-              as String,
+      initDataModel: freezed == initDataModel
+          ? _value.initDataModel
+          : initDataModel // ignore: cast_nullable_to_non_nullable
+              as InitData?,
+      userData: freezed == userData
+          ? _value.userData
+          : userData // ignore: cast_nullable_to_non_nullable
+              as UserData?,
     ));
   }
 }
@@ -98,15 +109,16 @@ class __$$SplashStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SplashStateImpl implements _SplashState {
-  _$SplashStateImpl({this.path = ""});
+  _$SplashStateImpl({this.initDataModel, this.userData});
 
   @override
-  @JsonKey()
-  final String path;
+  final InitData? initDataModel;
+  @override
+  final UserData? userData;
 
   @override
   String toString() {
-    return 'SplashState(path: $path)';
+    return 'SplashState(initDataModel: $initDataModel, userData: $userData)';
   }
 
   @override
@@ -114,11 +126,14 @@ class _$SplashStateImpl implements _SplashState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SplashStateImpl &&
-            (identical(other.path, path) || other.path == path));
+            (identical(other.initDataModel, initDataModel) ||
+                other.initDataModel == initDataModel) &&
+            (identical(other.userData, userData) ||
+                other.userData == userData));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, path);
+  int get hashCode => Object.hash(runtimeType, initDataModel, userData);
 
   /// Create a copy of SplashState
   /// with the given fields replaced by the non-null parameter values.
@@ -130,10 +145,14 @@ class _$SplashStateImpl implements _SplashState {
 }
 
 abstract class _SplashState implements SplashState {
-  factory _SplashState({final String path}) = _$SplashStateImpl;
+  factory _SplashState(
+      {final InitData? initDataModel,
+      final UserData? userData}) = _$SplashStateImpl;
 
   @override
-  String get path;
+  InitData? get initDataModel;
+  @override
+  UserData? get userData;
 
   /// Create a copy of SplashState
   /// with the given fields replaced by the non-null parameter values.

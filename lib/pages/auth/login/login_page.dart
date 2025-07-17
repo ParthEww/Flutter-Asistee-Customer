@@ -7,7 +7,7 @@ import '../../../core/widgets/app_text_field_label.dart';
 import '../../../core/widgets/custom/custom_auth_header_with_back_button.dart';
 import '../../../core/widgets/custom/custom_text_filed.dart';
 import '../../../gen/assets.gen.dart';
-import '../auth_notifier.dart';
+import '../notifier/auth_notifier.dart';
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
@@ -42,7 +42,7 @@ class LoginPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Header with back button and titles
-                      CustomAuthHeaderWithBackButton(
+                      const CustomAuthHeaderWithBackButton(
                         title: "Sign In",
                         description:
                             "Please provide us your basic details below\nand get into the system",

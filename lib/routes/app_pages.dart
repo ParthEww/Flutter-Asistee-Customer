@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_yay_rider_driver/pages/auth/splash/splash_page.dart';
 
 import '../pages/auth/login/login_page.dart';
+import '../pages/splash/splash_page.dart';
 
 part 'app_routes.dart';
 

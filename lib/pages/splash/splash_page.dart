@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../gen/assets.gen.dart';
+import '../splash/notifier/splash_notifier.dart';
 
 class SplashPage extends ConsumerWidget {
 
@@ -12,6 +13,7 @@ class SplashPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(splashNotifierProvider);
     return Scaffold(
       body: SafeArea(
         child: Stack(children: [
