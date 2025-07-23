@@ -15,9 +15,9 @@ class CustomTagButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.all(6),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: AppColors.secondary,
-          borderRadius: const BorderRadius.only(
+          borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),
             bottomLeft: Radius.circular(20),
           ),

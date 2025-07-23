@@ -4,7 +4,6 @@ import '../../gen/fonts.gen.dart';
 import '../themes/app_colors.dart';
 import '../themes/text_styles.dart';
 import '../utils/app_extension.dart';
-import 'app_text_field_label.dart';
 
 class AppTextField extends StatefulWidget {
   final TextEditingController textEditingController;
@@ -249,8 +248,8 @@ class _AppTextFieldNewState extends State<AppTextField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (widget.showRequiredMark)
-          Padding(
-            padding: const EdgeInsetsDirectional.only(bottom: 6),
+          const Padding(
+            padding: EdgeInsetsDirectional.only(bottom: 6),
             /*child: AppTextFieldLabel(
               label: widget.labelText.toString(),
               showRequiredMark: widget.showRequiredMark,
@@ -335,7 +334,7 @@ class _AppTextFieldNewState extends State<AppTextField> {
                       context.hideKeyboard();
                       setState(() {});
                     },
-                    icon: Icon(Icons.clear_rounded),
+                    icon: const Icon(Icons.clear_rounded),
                   )
                 : widget.suffixWidget,
           ),

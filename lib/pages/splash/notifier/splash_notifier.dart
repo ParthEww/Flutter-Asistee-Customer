@@ -1,18 +1,13 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_yay_rider_driver/api/api_client/api_client.dart';
-import 'package:flutter_yay_rider_driver/api/api_repository.dart';
 import 'package:flutter_yay_rider_driver/api/api_response.dart';
 import 'package:flutter_yay_rider_driver/api/collect_resource_stream.dart';
 import 'package:flutter_yay_rider_driver/api/model/response/init/init_data.dart';
 import 'package:flutter_yay_rider_driver/api/model/response/userdata/user_data.dart';
-import 'package:flutter_yay_rider_driver/api/resource.dart';
 import 'package:flutter_yay_rider_driver/di/app_provider.dart';
 import 'package:flutter_yay_rider_driver/repository/local_repository/local_repository.dart';
-import 'package:flutter_yay_rider_driver/routes/route_observer.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -28,11 +23,13 @@ part 'splash_notifier.g.dart';
 
 @riverpod
 class SplashNotifier extends _$SplashNotifier {
+  late final NavigationService navigationService = ref.read(navigationServiceProvider);
   late final LocalRepository localRepository = ref.read(localRepositoryProvider);
   late final RemoteRepository remoteRepository = ref.read(remoteRepositoryProvider);
   @override
   SplashState build() {
     state = SplashState();
+    print("object SplashState build()");
     initApi();
     return state;
   }
@@ -112,9 +109,9 @@ class SplashNotifier extends _$SplashNotifier {
         UserData? userData =
             await localRepository.getData(LocalStorageKey.userData);
         if (userData != null) {
-          NavigationService().pushNamed(AppRoutes.dashboard);
+          navigationService.pushNamed(AppRoutes.dashboard);
         } else {
-          NavigationService().pushNamed(AppRoutes.login);
+          navigationService.pushNamed(AppRoutes.login);
         }
       },
     );

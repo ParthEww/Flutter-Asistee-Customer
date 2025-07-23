@@ -34,7 +34,7 @@ void collectResourceStream<T>({
         break;
 
       case Success<T>(data: final data):
-        onSuccess(data!);
+        onSuccess(data as T);
         break;
 
       case Error<T>(message: final message):

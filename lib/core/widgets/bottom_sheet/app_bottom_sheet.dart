@@ -59,7 +59,7 @@ class AppBottomSheet extends StatelessWidget {
                           /*Get.back();*/
                         },
                         borderRadius: BorderRadius.circular(100),
-                        child: SizedBox(
+                        child: const SizedBox(
                           height: 32,
                           width: 32,
                           child: Icon(Icons.close_rounded),

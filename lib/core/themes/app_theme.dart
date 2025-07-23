@@ -14,7 +14,7 @@ class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: AppColors.transparent),
+          side: const BorderSide(color: AppColors.transparent),
           borderRadius: BorderRadius.circular(8),
         ),
         textStyle: const TextStyle(
@@ -31,7 +31,7 @@ class AppTheme {
         minimumSize: const Size(double.infinity, Global.kButtonHeight),
       ),
     ),
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       size: 20, // Icon size for all icons
       color: AppColors.white, // Default icon color
     ),

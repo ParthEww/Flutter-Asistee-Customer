@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_yay_rider_driver/core/widgets/custom/custom_circle_icon.dart';
 
-import '../../../gen/assets.gen.dart';
 import '../../themes/app_colors.dart';
-import '../../themes/text_styles.dart';
 import 'custom_image_with_text.dart';
 
 /// A button widget that displays two images with text in between,

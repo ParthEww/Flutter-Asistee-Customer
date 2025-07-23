@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as CommonDropdownSelectionBottomSheet;
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_yay_rider_driver/core/widgets/bottom_sheet/commondropdownselection/common_dropdown_selection_bottom_sheet.dart';
@@ -211,7 +209,7 @@ class RegisterPage extends ConsumerWidget {
                           onTap: () {
                             authNotifier.toggleTermsAndCondition();
                           },
-                          child: SvgPicture.asset(authState.isTermsAndConditionChecked!
+                          child: SvgPicture.asset(authState.isTermsAndConditionChecked
                               ? Assets.images.svg.checkBoxChecked.path
                               : Assets.images.svg.checkBoxUnchecked.path),
                         ),

@@ -1,19 +1,5 @@
-import 'dart:math';
-import 'dart:ui';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:flutter_yay_rider_driver/api/model/dummy/dummy_cancellation_reason.dart';
-import 'package:flutter_yay_rider_driver/core/utils/app_extension.dart';
 
-import '../../../api/model/static/route_request_type.dart';
-import '../../../gen/assets.gen.dart';
-import '../../themes/app_colors.dart';
-import '../../themes/text_styles.dart';
-import '../../utils/app_methods.dart';
-import '../custom/custom_circle_icon.dart';
-import '../custom/custom_text_filed.dart';
-import '../custom/custom_time_wheel_picker.dart';
 
 // Enum for Days/Dates selection type
 /*enum DaysDatesType {

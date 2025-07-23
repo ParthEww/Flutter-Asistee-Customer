@@ -1,11 +1,8 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_yay_rider_driver/routes/navigation_service.dart';
 import 'core/themes/app_theme.dart';
-import 'core/utils/app_logger.dart';
 import 'core/widgets/app_annotated_region.dart';
 import 'constants/global.dart';
-import 'repository/local_repository/local_repository.dart';
 
 class MyApp extends StatefulWidget {
   /// Root App View
@@ -35,7 +32,7 @@ class _MyAppState extends State<MyApp> {
           title: Global.appName,
           theme: AppTheme.appTheme,
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.splash,
+          initialRoute: AppRoutes.chat,
           onGenerateRoute: AppPages.generateRoute,
           navigatorKey: NavigationService.navigatorKey,
         ),

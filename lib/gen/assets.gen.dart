@@ -460,6 +460,9 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/search.svg
   SvgGenImage get search => const SvgGenImage('assets/images/svg/search.svg');
 
+  /// File path: assets/images/svg/send.svg
+  SvgGenImage get send => const SvgGenImage('assets/images/svg/send.svg');
+
   /// File path: assets/images/svg/settings-about-us.svg
   SvgGenImage get settingsAboutUs =>
       const SvgGenImage('assets/images/svg/settings-about-us.svg');
@@ -621,6 +624,7 @@ class $AssetsImagesSvgGen {
         search24,
         searchCancel,
         search,
+        send,
         settingsAboutUs,
         settingsAdminChat,
         settingsContactUs,

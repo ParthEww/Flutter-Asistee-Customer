@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -134,7 +133,7 @@ class _AsisteeCustomTextFieldState extends State<AsisteeCustomTextField> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: AppColors.secondary,
             width: 1,
           ),

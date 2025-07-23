@@ -202,9 +202,9 @@ class DialogUtils {
         onTap: onTap,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 18),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: AppColors.lightMint,
-            borderRadius: const BorderRadius.all(Radius.circular(24)),
+            borderRadius: BorderRadius.all(Radius.circular(24)),
           ),
           child: Column(
             children: [
@@ -255,7 +255,7 @@ class DialogUtils {
                     // Circular Icon Container
                     Container(
                       padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: AppColors.deepNavy,
                       ),

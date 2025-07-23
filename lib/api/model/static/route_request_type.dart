@@ -1,6 +1,4 @@
-import 'dart:ffi';
 
-import 'package:flutter/cupertino.dart';
 
 class RouteRequestType {
   final int id;

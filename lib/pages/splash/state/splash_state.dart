@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_yay_rider_driver/api/model/response/userdata/user_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

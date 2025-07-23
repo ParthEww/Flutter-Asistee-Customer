@@ -42,15 +42,13 @@ class Error<T> extends Resource<T> {
 /// Represents a 401 Unauthorized response from the API.
 /// You can use this to log out the user and redirect to login.
 class AuthException<T> extends Resource<T> {
-  const AuthException({T? data, String? message})
-      : super(data: data, message: message);
+  const AuthException({super.data, super.message});
 }
 
 /// Represents a 426 Force Update response from the API.
 /// You can use this to show a dialog to update the app.
 class ForceUpdate<T> extends Resource<T> {
-  const ForceUpdate({T? data, String? message})
-      : super(data: data, message: message);
+  const ForceUpdate({super.data, super.message});
 }
 
 /// Represents an error where the API responded with a payload (like validation errors).

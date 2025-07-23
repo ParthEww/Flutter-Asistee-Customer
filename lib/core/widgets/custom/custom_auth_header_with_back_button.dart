@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_yay_rider_driver/core/utils/app_extension.dart';
 
-import '../../../gen/assets.gen.dart';
 import '../../themes/app_colors.dart';
 import '../../themes/text_styles.dart';
 import 'custom_back_button.dart';
@@ -31,13 +29,13 @@ class CustomAuthHeaderWithBackButton extends StatelessWidget {
               onBackButtonTap?.call();
             },
           ),
-          SizedBox(height: 18),
+          const SizedBox(height: 18),
         ],
         Text(
           title,
           style: TextStyles.text32SemiBold,
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         Text(
           description,
           style: TextStyles.text14Regular

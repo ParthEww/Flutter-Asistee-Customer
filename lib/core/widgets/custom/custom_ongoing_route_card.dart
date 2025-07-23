@@ -21,7 +21,7 @@ class CustomOngoingRouteCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const CustomOngoingRouteCard({
-    Key? key,
+    super.key,
     required this.startLocation,
     required this.endLocation,
     required this.viaText,
@@ -33,16 +33,16 @@ class CustomOngoingRouteCard extends StatelessWidget {
     required this.routeNumber,
     required this.isOnboard,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: AppColors.lightMint,
-          borderRadius: const BorderRadius.all(Radius.circular(24)),
+          borderRadius: BorderRadius.all(Radius.circular(24)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,9 +107,9 @@ class CustomOngoingRouteCard extends StatelessWidget {
                         SvgPicture.asset(Assets.images.svg.line3.path),
                         Container(
                           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: AppColors.lightBlue,
-                            borderRadius: const BorderRadius.all(Radius.circular(51)),
+                            borderRadius: BorderRadius.all(Radius.circular(51)),
                           ),
                           child: Text(
                             "$distanceDuration Hrs",
@@ -152,9 +152,9 @@ class CustomOngoingRouteCard extends StatelessWidget {
   Widget _buildFooterRow() {
     return Container(
       padding: const EdgeInsets.only(left: 24, top: 4, right: 4, bottom: 4),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           color: AppColors.primary,
-          borderRadius: const BorderRadius.all(Radius.circular(24))
+          borderRadius: BorderRadius.all(Radius.circular(24))
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -167,9 +167,9 @@ class CustomOngoingRouteCard extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: isOnboard ? 35 : 18),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.white,
-              borderRadius: const BorderRadius.all(Radius.circular(21)),
+              borderRadius: BorderRadius.all(Radius.circular(21)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_yay_rider_driver/core/utils/app_extension.dart';
-import '../themes/app_colors.dart';
-import '../themes/text_styles.dart';
 
 class PriceText extends StatelessWidget {
   final String amount;

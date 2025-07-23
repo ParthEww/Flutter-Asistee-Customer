@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../gen/assets.gen.dart';
 import '../../themes/app_colors.dart';
-import '../../themes/text_styles.dart';
 
 class CustomBackButton extends StatelessWidget {
   final VoidCallback onBackButtonTap;
@@ -21,9 +20,9 @@ class CustomBackButton extends StatelessWidget {
               horizontal: 18, vertical: 4),
           width: 60,
           height: 32,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: AppColors.lightBlue,
-            borderRadius: const BorderRadius.all(Radius.circular(19)),
+            borderRadius: BorderRadius.all(Radius.circular(19)),
           ),
           child: SvgPicture.asset(
             Assets.images.svg.arrowLeft.path,

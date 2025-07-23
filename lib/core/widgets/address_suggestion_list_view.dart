@@ -1,9 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import '../utils/loading_dialog.dart';
 
-import '../themes/app_colors.dart';
-import '../utils/app_logger.dart';
 
 /*class AddressSuggestionListView extends StatelessWidget {
   final double? listHeight;

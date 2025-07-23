@@ -44,7 +44,7 @@ class AppExpansionTile extends StatelessWidget {
           ),
           child: RotatedBox(
             quarterTurns: currentIndex == selectedIndex ? 3 : 1,
-            child: Icon(Icons.chevron_right_outlined),
+            child: const Icon(Icons.chevron_right_outlined),
           ),
         ),
         collapsedBackgroundColor: AppColors.white,

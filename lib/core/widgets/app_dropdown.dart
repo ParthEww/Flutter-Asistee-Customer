@@ -9,7 +9,6 @@ import '../themes/app_colors.dart';
 import '../themes/app_theme.dart';
 import '../themes/text_styles.dart';
 import 'app_text_field.dart';
-import 'app_text_field_label.dart';
 
 class AppDropdownWithSearch<T> extends StatelessWidget {
   final String? labelText, hintText;
@@ -44,8 +43,8 @@ class AppDropdownWithSearch<T> extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (showRequiredMark)
-          Padding(
-            padding: const EdgeInsetsDirectional.only(bottom: 6),
+          const Padding(
+            padding: EdgeInsetsDirectional.only(bottom: 6),
             /*child: AppTextFieldLabel(
               label: labelText.toString(),
               showRequiredMark: showRequiredMark,
@@ -84,7 +83,7 @@ class AppDropdownWithSearch<T> extends StatelessWidget {
                   angle: 90 * math.pi / 180,
                   child: SvgPicture.asset(
                     "Assets.images.svg.arrowRight.path",
-                    colorFilter: ColorFilter.mode(
+                    colorFilter: const ColorFilter.mode(
                       AppColors.black,
                       BlendMode.srcIn,
                     ),

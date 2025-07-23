@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_yay_rider_driver/di/app_provider.dart';
 import 'package:flutter_yay_rider_driver/routes/navigation_service.dart';
 
 import '../../../core/themes/app_colors.dart';
-import '../../../core/themes/text_styles.dart';
-import '../../../core/utils/dialog_utils.dart';
-import '../../../core/widgets/app_text_field_label.dart';
 import '../../../core/widgets/custom/custom_auth_header_with_back_button.dart';
 import '../../../core/widgets/custom/custom_text_filed.dart';
 import '../../../gen/assets.gen.dart';

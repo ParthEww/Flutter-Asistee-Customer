@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_yay_rider_driver/core/themes/app_colors.dart';
 import 'package:flutter_yay_rider_driver/core/themes/text_styles.dart';
 
 // A custom time wheel picker widget that displays numbers in a scrollable wheel
@@ -74,7 +73,7 @@ class _CustomTimeWheelPickerState extends State<CustomTimeWheelPicker> {
         // Controls the curvature of the wheel
         perspective: 0.003,
         // 3D perspective effect
-        physics: FixedExtentScrollPhysics(),
+        physics: const FixedExtentScrollPhysics(),
         // Physics for discrete item selection
         onSelectedItemChanged: (index) {
           // Update the selected item when wheel is scrolled

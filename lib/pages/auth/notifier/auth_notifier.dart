@@ -149,6 +149,6 @@ class AuthNotifier extends _$AuthNotifier {
 
   void toggleTermsAndCondition() {
     state = state.copyWith(
-        isTermsAndConditionChecked: !state.isTermsAndConditionChecked!);
+        isTermsAndConditionChecked: !state.isTermsAndConditionChecked);
   }
 }

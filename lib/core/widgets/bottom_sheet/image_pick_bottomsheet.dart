@@ -11,7 +11,6 @@ import '../../themes/text_styles.dart';
 import '../../utils/app_logger.dart';
 import '../../utils/app_methods.dart';
 import '../../utils/dialog_utils.dart';
-import '../../utils/loading_dialog.dart';
 
 enum ImageType { gallery, camera }
 
@@ -86,8 +85,8 @@ class ImagePickSheet extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(16)),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(16)),
           color: AppColors.white,
         ),
         height: 105,
