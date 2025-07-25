@@ -2,7 +2,7 @@
 
 class CommonUtils {
 
-  static String googleMapKey = 'AIzaSyBzW4KMp35tzxI2w1pA2uu6PRPHbtjDXUs';
+  static String googleMapKey = '';
 
   // Booking status tabs
   /*static Rx<BookingStatusType> activeTabBarBookingStatus =
