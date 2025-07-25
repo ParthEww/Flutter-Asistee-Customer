@@ -3,9 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_yay_rider_driver/core/utils/app_extension.dart';
+import 'package:flutter_yay_rider_driver/routes/navigation_service.dart';
 
 import '../../gen/assets.gen.dart';
 import '../themes/app_colors.dart';
+import '../themes/app_strings.dart';
 import '../themes/text_styles.dart';
 
 class DialogUtils {
@@ -27,7 +29,7 @@ class DialogUtils {
       if (negativeText != null) ...[
         TextButton(
           onPressed: () {
-            /*Get.back();*/
+            NavigationService().pop();
             onNegativeTap!.call();
           },
           child: Text(
@@ -38,7 +40,7 @@ class DialogUtils {
       ],
       TextButton(
         onPressed: () {
-          /*Get.back();*/
+          NavigationService().pop();
           onPositiveTap!.call();
         },
         child: Text(
@@ -47,8 +49,8 @@ class DialogUtils {
         ),
       ),
     ];
-    /*showDialog(
-      context: Get.overlayContext!,
+    showDialog(
+      context: NavigationService.navigatorKey.currentState!.context,
       barrierDismissible: false,
       builder: (dialogContext) {
         return PopScope(
@@ -63,18 +65,18 @@ class DialogUtils {
           ),
         );
       },
-    );*/
+    );
   }
 
   /// show error dialog
-  /*static Future<void> showErrorDialog({
+  static Future<void> showErrorDialog({
     bool isDismissible = false,
     bool backgroundBlur = true,
     required String dialogErrorMsg,
     void Function()? onClick,
   }) {
     return showAdaptiveDialog(
-      context: Get.context!,
+      context: NavigationService.navigatorKey.currentState!.context,
       barrierDismissible: isDismissible,
       builder: (context) {
         return PopScope(
@@ -111,7 +113,7 @@ class DialogUtils {
                     }
                   },
                   child: Text(
-                    AppStrings.okay.tr,
+                    AppStrings.okay,
                     style: TextStyles.text12Medium,
                   ),
                 ),
@@ -121,70 +123,67 @@ class DialogUtils {
         );
       },
     );
-  }*/
+  }
 
-  /// snackbar
-  static void showSnackBar(
-    String message, {
+  static showSnackBar(String message, {
     SnackbarType snackbarType = SnackbarType.success,
     void Function()? onErrorDialogClick,
-  }) async {
-    // if (!Get.isSnackbarOpen) {
-    /*if (snackbarType == SnackbarType.errorDialog) {
-      showErrorDialog(
-        dialogErrorMsg: message,
-        onClick: () {
-          if (onErrorDialogClick != null) {
-            onErrorDialogClick.call();
-          } else {
-            Navigator.pop(Get.context!);
-          }
-        },
-      );
-    } else {
-      if (Get.isSnackbarOpen) {
-        Get.closeCurrentSnackbar();
-      }
+  }) {
+    final overlayState = NavigationService.navigatorKey.currentState!.overlay!;
+    final colors = Theme.of(overlayState.context).colorScheme;
+    final textTheme = Theme.of(overlayState.context).textTheme;
 
-      Get.snackbar(
-        '',
-        '',
-        snackPosition: SnackPosition.TOP,
-        snackStyle: SnackStyle.FLOATING,
-        messageText: Text(
-          message,
-          style: TextStyles.text12Medium.copyWith(color: AppColors.white),
-        ),
-        titleText: Container(),
-        borderWidth: 1,
-        backgroundColor: snackbarType == SnackbarType.success
-            ? AppColors.success
-            : AppColors.warning,
-        colorText: Theme.of(Get.context!).colorScheme.surface,
-        isDismissible: true,
-        animationDuration: const Duration(milliseconds: 500),
-        duration: const Duration(seconds: 3),
-        margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        mainButton: TextButton(
-          child: snackbarType == SnackbarType.success
-              ? const Icon(
-                  Icons.done,
-                  color: Colors.white,
-                )
-              : const Icon(
-                  Icons.close,
-                  color: Colors.white,
+    late final OverlayEntry overlayEntry;
+    overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: MediaQuery.of(context).viewPadding.top + 10,
+        left: 16,
+        right: 16,
+        child: Material(
+          elevation: 6,
+          borderRadius: BorderRadius.circular(8),
+          color: _getBackgroundColor(snackbarType, colors),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    message,
+                    style: textTheme.bodyMedium?.copyWith(color: Colors.white),
+                  ),
                 ),
-          onPressed: () {
-            if (Get.isSnackbarOpen) {
-              Get.closeCurrentSnackbar();
-            }
-          },
+                IconButton(
+                  icon: Icon(
+                    snackbarType == SnackbarType.success ? Icons.done : Icons.close,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                  onPressed: () {
+                    overlayEntry.remove();
+                  },
+                ),
+              ],
+            ),
+          ),
         ),
-      );
-    }*/
-    // }
+      ),
+    );
+
+    overlayState.insert(overlayEntry);
+
+    Future.delayed(const Duration(seconds: 3)).then((_) => overlayEntry.remove());
+  }
+
+  static Color _getBackgroundColor(SnackbarType type, ColorScheme colors) {
+    switch (type) {
+      case SnackbarType.success:
+        return Colors.green;
+      case SnackbarType.failure:
+        return Colors.red;
+      case SnackbarType.errorDialog:
+        return Colors.red;
+    }
   }
 
   /// Shows a customizable bottom sheet for image/ file selection (Camera, Gallery, or Files).
@@ -193,7 +192,6 @@ class DialogUtils {
   /// [imagePickerType] - Determines if only photos (PHOTOS) or photos + files (FILE_AND_PHOTOS) are allowed.
   static void showImagePickerSheet(BuildContext context,
       {ImagePickerType imagePickerType = ImagePickerType.PHOTOS}) {
-
     // ======================
     // Helper Widget: Builds a clickable option card (Camera/Gallery/File)
     // ======================
@@ -228,8 +226,10 @@ class DialogUtils {
     // ======================
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.transparent, // Transparent background for overlay effect
-      isScrollControlled: true, // Allows dynamic height
+      backgroundColor: Colors.transparent,
+      // Transparent background for overlay effect
+      isScrollControlled: true,
+      // Allows dynamic height
       enableDrag: false,
       builder: (context) => BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
@@ -286,7 +286,7 @@ class DialogUtils {
                       child: buildOption(
                         Assets.images.svg.camera.path,
                         "Camera",
-                            () {
+                        () {
                           Navigator.pop(context);
                           // TODO: Handle camera selection logic
                         },
@@ -299,7 +299,7 @@ class DialogUtils {
                       child: buildOption(
                         Assets.images.svg.gallery.path,
                         "Gallery",
-                            () {
+                        () {
                           Navigator.pop(context);
                           // TODO: Handle gallery selection logic
                         },
@@ -313,7 +313,7 @@ class DialogUtils {
                         child: buildOption(
                           Assets.images.svg.file.path,
                           "Files",
-                              () {
+                          () {
                             Navigator.pop(context);
                             // TODO: Handle file selection logic
                           },
@@ -330,7 +330,6 @@ class DialogUtils {
       ),
     );
   }
-
 }
 
 enum SnackbarType {

@@ -8,7 +8,6 @@ import 'package:flutter_yay_rider_driver/core/themes/text_styles.dart';
 import 'package:flutter_yay_rider_driver/core/utils/app_extension.dart';
 import 'package:flutter_yay_rider_driver/core/widgets/custom/custom_circle_icon.dart';
 import 'package:flutter_yay_rider_driver/pages/chat/notifier/chat_notifier.dart';
-import 'package:flutter_yay_rider_driver/pages/chat/state/chat_state.dart';
 import 'package:intl/intl.dart';
 
 import '../../../gen/assets.gen.dart';
@@ -16,7 +15,6 @@ import '../../core/themes/app_colors.dart';
 import '../../core/widgets/custom/custom_header.dart';
 import '../../di/app_provider.dart';
 import '../../routes/navigation_service.dart';
-import '../splash/notifier/splash_notifier.dart';
 
 class ChatPage extends ConsumerWidget {
 

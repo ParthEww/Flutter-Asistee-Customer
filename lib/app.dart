@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
           title: Global.appName,
           theme: AppTheme.appTheme,
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.chat,
+          initialRoute: AppRoutes.preference,
           onGenerateRoute: AppPages.generateRoute,
           navigatorKey: NavigationService.navigatorKey,
         ),

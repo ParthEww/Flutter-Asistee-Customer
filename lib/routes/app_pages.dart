@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_yay_rider_driver/pages/preference/preference_page.dart';
 
 import '../pages/auth/login/login_page.dart';
 import '../pages/auth/otpverification/otp_verification_page.dart';
@@ -24,6 +25,8 @@ class AppPages {
         return MaterialPageRoute(builder: (_) => const ResetPasswordPage());
       case AppRoutes.chat:
         return MaterialPageRoute(builder: (_) => const ChatPage());
+      case AppRoutes.preference:
+        return MaterialPageRoute(builder: (_) => const PreferencePage());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

@@ -26,6 +26,7 @@ abstract class AppRoutes {
   static const String myAddress = _Path.myAddress;
   static const String cms = _Path.cms;
   static const String chat = _Path.chat;
+  static const String preference = _Path.preference;
 }
 
 abstract class _Path {
@@ -54,4 +55,5 @@ abstract class _Path {
   static const String myAddress = "/myaddress";
   static const String cms = "/cms";
   static const String chat = "/chat";
+  static const String preference = "/preference";
 }

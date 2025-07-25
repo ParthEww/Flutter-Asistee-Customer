@@ -2,6 +2,8 @@
 
 class CommonUtils {
 
+  static String googleMapKey = "";
+
   // Booking status tabs
   /*static Rx<BookingStatusType> activeTabBarBookingStatus =
       BookingStatusType.ONGOING.obs;*/
