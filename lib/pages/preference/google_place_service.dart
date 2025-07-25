@@ -36,12 +36,12 @@ class GooglePlaceService with ChangeNotifier {
   }
 
   static Future<GooglePlaceModel> getPlaceDetails({
-    String placeId = '',
+     required GooglePlaceModel googlePlaceModel,
     LatLong? latLng,
     CancelToken? cancelToken,
   }) async {
     var url = latLng == null
-        ? '${Constants.mapApiBaseUrl}/place/details/json?placeid=$placeId&key=${CommonUtils.googleMapKey}'
+        ? '${Constants.mapApiBaseUrl}/place/details/json?placeid=${googlePlaceModel.placeId}&key=${CommonUtils.googleMapKey}'
         : '${Constants.mapApiBaseUrl}/geocode/json?latlng=${latLng.latitude},${latLng.longitude}&key=${CommonUtils.googleMapKey}';
 
     print('URL -- $url');
@@ -50,8 +50,6 @@ class GooglePlaceService with ChangeNotifier {
       final response = await _dio.get(url, cancelToken: cancelToken);
 
       dynamic responseDataResult;
-
-      GooglePlaceModel? googlePlaceModel;
 
       if (latLng == null) {
         responseDataResult = response.data['result'];
@@ -123,19 +121,7 @@ class GooglePlaceService with ChangeNotifier {
         }
       }
 
-      googlePlaceModel = GooglePlaceModel(
-        lat: latitude,
-        lng: longitude,
-        formattedAddress: formattedAddress,
-        shortAddressName: shortAddressName,
-        locationAddressFull: '$shortAddressName, $city, $postalCode, $country',
-        countryName: country,
-        cityName: city.isEmpty ? shortAddressName : city,
-        stateName: state,
-        postalCode: postalCode,
-      );
-
-      return googlePlaceModel;
+      return googlePlaceModel.copyWith(lat: latitude, lng: longitude);
     } else {
       DialogUtils.showSnackBar(
         AppStrings.noInternetConnection,

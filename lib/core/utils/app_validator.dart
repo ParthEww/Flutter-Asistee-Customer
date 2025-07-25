@@ -25,7 +25,7 @@ class AppValidator {
     return false;
   }
 
-  static String? emptyValidator(String? value, String errorString) {
+  static String? emptyValidator({required String? value, required String errorString}) {
     if (value?.isEmpty ?? true) {
       return errorString;
     } else {

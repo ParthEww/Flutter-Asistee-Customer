@@ -21,7 +21,7 @@ abstract class ApiConstant {
 }
 
 abstract class Constants {
-  static const mapApiBaseUrl = ''; // todo: verify before production
+  static const mapApiBaseUrl = 'https://maps.googleapis.com/maps/api'; // todo: verify before production
   static const iosAppStoreId = ''; // todo: verify before production
   static const googleMapKey = ''; // todo: verify before production
 }
