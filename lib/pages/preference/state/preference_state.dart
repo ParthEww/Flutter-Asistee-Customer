@@ -8,6 +8,7 @@ part 'preference_state.freezed.dart';
 class PreferenceState with _$PreferenceState {
   const factory PreferenceState({
     TextEditingController? addressTextController,
+    TextEditingController? nationalityController,
     @Default([])List<GooglePlaceModel> addressSuggestionList
   }) = _PreferenceState;
 }

@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../../api/model/dummy/dummy_cancellation_reason.dart';
 import 'common_dropdown_selection_bottom_sheet.dart';
 import 'common_dropdown_state.dart';
 
@@ -18,8 +19,8 @@ class CommonDropdownNotifier extends _$CommonDropdownNotifier {
 
   @override
   CommonDropdownState build() {
-    state = const CommonDropdownState(
-      items: [],
+    state = CommonDropdownState(
+      items: nationalityList,
       selectedId: null,
       daysDatesType: DaysDatesType.DAYS,
       isLoading: false,

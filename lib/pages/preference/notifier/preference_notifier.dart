@@ -13,6 +13,7 @@ class PreferenceNotifier extends _$PreferenceNotifier {
   PreferenceState build() {
     state = PreferenceState(
       addressTextController: TextEditingController(),
+      nationalityController: TextEditingController(),
       addressSuggestionList: [],
     );
     return state;
