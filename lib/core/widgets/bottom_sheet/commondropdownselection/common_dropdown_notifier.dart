@@ -19,6 +19,7 @@ class CommonDropdownNotifier extends _$CommonDropdownNotifier {
 
   @override
   CommonDropdownState build() {
+    print("CommonDropdownState build");
     state = CommonDropdownState(
       items: nationalityList,
       selectedId: null,
@@ -37,7 +38,10 @@ class CommonDropdownNotifier extends _$CommonDropdownNotifier {
   }
 
   void selectItem(int id) {
+    print("selectItem $id");
+
     state = state.copyWith(selectedId: id);
+    print("selectItem state ${state.selectedId}");
   }
 
   void updateSearchQuery(String query) {
@@ -58,7 +62,7 @@ class CommonDropdownNotifier extends _$CommonDropdownNotifier {
       final newList =
       state.items.map((bean) => bean.copyWith(isSelected: false)).toList();
       newList[position] = newList[position].copyWith(isSelected: true);
-      state = state.copyWith(items: newList);
+      state = state.copyWith(items: newList, selectedId: position);
     }
   }
 }

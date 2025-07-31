@@ -90,7 +90,13 @@ class PreferencePage extends ConsumerWidget {
                       context: context,
                       dialogType: CommonDropdownSelectionBottomSheetDialogType
                           .SELECT_NATIONALITY,
-                      items: nationalityList);
+                      items: nationalityList,
+                      selectedId: nationalityList.where((t)=>t.isSelected).firstOrNull?.id,
+                      onSelected: (selectedId) {
+                        print("onSelected selectedId $selectedId");
+                        nationalityList.map((t) => t.isSelected = false).toList();
+                        nationalityList[selectedId].isSelected = true;
+                      });
                 },
               ),
               Wrap(

@@ -30,12 +30,14 @@ enum DaysDatesType {
 class CommonDropdownSheet extends ConsumerWidget {
   final CommonDropdownSelectionBottomSheetDialogType dialogType;
   final List<dynamic> initialItems;
+  final int? selectedId;
   final Function(int)? onSelected;
 
   const CommonDropdownSheet({
     super.key,
     required this.dialogType,
     required this.initialItems,
+    required this.selectedId,
     this.onSelected,
   });
 
@@ -603,7 +605,7 @@ class CommonDropdownSheet extends ConsumerWidget {
   /// Builds footer buttons (back and proceed)
   Widget _buildFooterButtons(BuildContext context, WidgetRef ref) {
     final state = ref.watch(commonDropdownNotifierProvider);
-
+    final notifier = ref.read(commonDropdownNotifierProvider.notifier);
     if (dialogType ==
         CommonDropdownSelectionBottomSheetDialogType.ADD_FUNDS_TO_WALLET) {
       return CustomTextField(
@@ -647,6 +649,8 @@ class CommonDropdownSheet extends ConsumerWidget {
         Expanded(
           child: GestureDetector(
             onTap: () {
+             // notifier.selectItem(state.items.where((e) => e.isSelected).first.id);
+              print("state.selectedId ${state.selectedId}");
               if (state.selectedId != null) {
                 onSelected?.call(state.selectedId!);
               }
@@ -675,6 +679,7 @@ class CommonDropdownSheet extends ConsumerWidget {
     required BuildContext context,
     required CommonDropdownSelectionBottomSheetDialogType dialogType,
     required List<dynamic> items,
+    required int? selectedId,
     Function(int)? onSelected,
   }) {
     showModalBottomSheet(
@@ -683,6 +688,7 @@ class CommonDropdownSheet extends ConsumerWidget {
         return CommonDropdownSheet(
           dialogType: dialogType,
           initialItems: items,
+          selectedId: selectedId,
           onSelected: onSelected,
         );
       },

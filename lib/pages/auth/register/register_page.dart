@@ -179,7 +179,8 @@ class RegisterPage extends ConsumerWidget {
                             dialogType:
                             CommonDropdownSelectionBottomSheetDialogType
                                 .SELECT_NATIONALITY,
-                            items: nationalityList);
+                            items: nationalityList,
+                            selectedId: nationalityList.where((t)=>t.isSelected).firstOrNull?.id,);
                       },
                     ),
                     const SizedBox(height: 18),
@@ -199,7 +200,8 @@ class RegisterPage extends ConsumerWidget {
                             dialogType:
                             CommonDropdownSelectionBottomSheetDialogType
                                 .SELECT_AREA,
-                            items: areaList);
+                            items: areaList,
+                            selectedId: areaList.where((t)=>t.isSelected).firstOrNull?.id,);
                       },
                     ),
                     const SizedBox(height: 36),
